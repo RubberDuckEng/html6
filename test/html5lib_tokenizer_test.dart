@@ -1,4 +1,4 @@
-import 'package:html6/html6.dart';
+import 'package:html6/src/tokenizer.dart';
 import 'package:test/test.dart';
 import 'package:path/path.dart' as p;
 
