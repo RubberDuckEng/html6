@@ -24,6 +24,7 @@ TokenizerTest _$TokenizerTestFromJson(Map<String, dynamic> json) =>
     TokenizerTest(
       json['description'] as String,
       json['input'] as String,
+      outputFromJson(json['output'] as List),
       (json['errors'] as List<dynamic>?)
               ?.map((e) => TokenizerError.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -34,5 +35,6 @@ Map<String, dynamic> _$TokenizerTestToJson(TokenizerTest instance) =>
     <String, dynamic>{
       'description': instance.description,
       'input': instance.input,
+      'output': instance.output,
       'errors': instance.errors,
     };

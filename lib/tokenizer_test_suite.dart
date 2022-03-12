@@ -34,24 +34,32 @@ class TokenizerError {
       _$TokenizerErrorFromJson(json);
 }
 
-class TokenOutput {
-  final String type;
+class TokenExpectation {
+  final List<dynamic> json;
 
-  TokenOutput.fromJson(List<dynamic> json) : type = json[0];
+  String get name => json[0];
+
+  TokenExpectation.fromJson(this.json);
+
+  List toJson() => json;
+}
+
+//   'output': [['element', 'a', {'href': 'boo'}], ['character']];
+List<TokenExpectation> outputFromJson(List json) {
+  return json.map((item) => TokenExpectation.fromJson(item)).toList();
 }
 
 @JsonSerializable()
 class TokenizerTest {
   final String description;
   final String input;
-  // @JsonKey(
-  //     readValue: (map, key) =>
-  //         map[key].map((output) => TokenOutput.fromJson(output)))
-  // final List<TokenOutput> output;
+
+  @JsonKey(fromJson: outputFromJson)
+  final List<TokenExpectation> output;
   @JsonKey(defaultValue: [])
   final List<TokenizerError> errors;
 
-  TokenizerTest(this.description, this.input, this.errors);
+  TokenizerTest(this.description, this.input, this.output, this.errors);
 
   factory TokenizerTest.fromJson(Map<String, dynamic> json) =>
       _$TokenizerTestFromJson(json);

@@ -37,6 +37,8 @@ void main(List<String> arguments) {
     print(group.name);
     for (var test in group.tests) {
       print("  " + test.description);
+      print(test.output[0].name);
     }
+    return;
   }
 }
