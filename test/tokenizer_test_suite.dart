@@ -22,7 +22,7 @@ class TestGroup {
   }
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class TokenizerError {
   final String code;
   final int line;
@@ -49,7 +49,7 @@ List<TokenExpectation> outputFromJson(List json) {
   return json.map((item) => TokenExpectation.fromJson(item)).toList();
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class TokenizerTest {
   final String description;
   final String input;
@@ -63,4 +63,22 @@ class TokenizerTest {
 
   factory TokenizerTest.fromJson(Map<String, dynamic> json) =>
       _$TokenizerTestFromJson(json);
+}
+
+class TokenizerTestSuite {
+  final List<TestGroup> groups;
+
+  TokenizerTestSuite(this.groups);
+
+  factory TokenizerTestSuite.fromPath(String dirPath) {
+    var dir = Directory(dirPath);
+    var groups = <TestGroup>[];
+    for (var element in dir.listSync()) {
+      if (!element.path.endsWith('.test')) {
+        continue;
+      }
+      groups.add(TestGroup.fromPath(element.path));
+    }
+    return TokenizerTestSuite(groups);
+  }
 }

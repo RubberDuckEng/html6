@@ -13,13 +13,6 @@ TokenizerError _$TokenizerErrorFromJson(Map<String, dynamic> json) =>
       json['col'] as int,
     );
 
-Map<String, dynamic> _$TokenizerErrorToJson(TokenizerError instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'line': instance.line,
-      'col': instance.col,
-    };
-
 TokenizerTest _$TokenizerTestFromJson(Map<String, dynamic> json) =>
     TokenizerTest(
       json['description'] as String,
@@ -30,11 +23,3 @@ TokenizerTest _$TokenizerTestFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
     );
-
-Map<String, dynamic> _$TokenizerTestToJson(TokenizerTest instance) =>
-    <String, dynamic>{
-      'description': instance.description,
-      'input': instance.input,
-      'output': instance.output,
-      'errors': instance.errors,
-    };
