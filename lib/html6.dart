@@ -77,6 +77,8 @@ class Element extends Node {
 
 class Token {}
 
+class CommentToken extends Token {}
+
 class CharacterToken extends Token {
   final String characters;
 
