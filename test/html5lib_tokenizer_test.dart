@@ -1,9 +1,10 @@
 import 'dart:io';
 
-// import 'package:html6/html6.dart';
+import 'package:html6/html6.dart';
+import 'package:test/test.dart';
 import 'package:path/path.dart' as p;
 
-import '../test/tokenizer_test_suite.dart';
+import 'tokenizer_test_suite.dart';
 
 String findHTML5LibTestsDir() {
   return "../html5lib-tests";
@@ -27,19 +28,20 @@ class TokenizerTestSuite {
   }
 }
 
-void main(List<String> arguments) {
+void main() {
   var testsRoot = findHTML5LibTestsDir();
   var tokenizerDir = p.join(testsRoot, 'tokenizer');
   var suite = TokenizerTestSuite.fromPath(tokenizerDir);
   // Tokenizer tests only for now.
   // Tokenizer tests are json.
 
-  for (var group in suite.groups) {
-    print(group.name);
-    for (var test in group.tests) {
-      print("  " + test.description);
-      print(test.output[0].name);
-    }
-    return;
+  for (var groupObj in suite.groups) {
+    group(groupObj.name, () {
+      for (var testObj in groupObj.tests) {
+        test(testObj.description, () {
+          expect(true, isTrue);
+        });
+      }
+    });
   }
 }
