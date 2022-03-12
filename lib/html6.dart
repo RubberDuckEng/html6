@@ -143,6 +143,16 @@ class Tokenizer {
       }
     }
   }
+
+  Iterable<Token> getTokensWithoutEOF() sync* {
+    while (true) {
+      var token = getNextToken();
+      if (token is EofToken) {
+        return;
+      }
+      yield token;
+    }
+  }
 }
 
 Node parse(String data) {
