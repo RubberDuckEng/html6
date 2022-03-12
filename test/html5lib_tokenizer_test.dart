@@ -11,9 +11,9 @@ class _MatchesToken extends Matcher {
 
   bool nameMatchesType(String name, Token token) {
     if (name == "Comment") {
-      return Token is CommentToken;
+      return token is CommentToken;
     } else if (name == "Character") {
-      return Token is CharacterToken;
+      return token is CharacterToken;
     } // else throw error?
     // DOCTYPE, StartTag, EndTag
     return false;
@@ -41,11 +41,23 @@ void main() {
   // Tokenizer tests only for now.
   // Tokenizer tests are json.
 
+  test('matcher', () {
+    var token = CharacterToken('<>');
+    var expected = matchesToken(TokenExpectation.fromJson(["Character", "<>"]));
+    expect(token, expected);
+    expect([token], [expected]);
+  });
+
   for (var groupObj in suite.groups) {
     group(groupObj.name, () {
       for (var testObj in groupObj.tests) {
         test(testObj.description, () {
-          expect(true, isTrue);
+          var input = InputManager(testObj.input);
+          var tokenizer = Tokenizer(input);
+          var tokens = tokenizer.getTokensWithoutEOF();
+          var expectedTokens =
+              testObj.output.map((expectation) => matchesToken(expectation));
+          expect(tokens, expectedTokens);
         });
       }
     });
