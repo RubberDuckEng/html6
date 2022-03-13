@@ -1,7 +1,16 @@
-// import 'package:html6/html6.dart';
+import 'dart:convert';
+
+import 'package:html6/src/tokenizer.dart';
 import 'package:path/path.dart' as p;
 
 import '../test/tokenizer_test_suite.dart';
+import '../test/matchers.dart';
+
+bool matches(Iterable<Token> tokens, Iterable expected) {
+  // Implement?
+  // Walk the expeted iterable.
+  return false;
+}
 
 void main(List<String> arguments) {
   var tokenizerDir = p.join('html5lib-tests', 'tokenizer');
@@ -9,11 +18,25 @@ void main(List<String> arguments) {
   // Tokenizer tests only for now.
   // Tokenizer tests are json.
 
+  // Load test_expectations.txt
+
   for (var group in suite.groups) {
     print(group.name);
     for (var test in group.tests) {
-      print("  " + test.description);
-      print(test.output[0].name);
+      var input = InputManager(test.input);
+      var tokenizer = Tokenizer(input);
+      var tokens = tokenizer.getTokensWithoutEOF();
+      var expectedTokens =
+          test.output.map((expectation) => matchesToken(expectation));
+      var result = matches(tokens, expectedTokens);
+      if (!result) {
+        // FIXME: Hack around incorrect toJson implementation?
+        var actualJson =
+            json.encode(tokens.map((token) => token.toTestJson()).toList());
+        var expectedJson = json.encode(test.output);
+        print(
+            "Fail ${test.description}, got $actualJson expected: $expectedJson");
+      }
     }
     return;
   }

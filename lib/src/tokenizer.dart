@@ -1,14 +1,25 @@
-class Token {}
+abstract class Token {
+  List toTestJson();
+}
 
-class CommentToken extends Token {}
+class CommentToken extends Token {
+  @override
+  List toTestJson() => ['Comment'];
+}
 
 class CharacterToken extends Token {
+  @override
+  List toTestJson() => ['Character', characters];
+
   final String characters;
 
   CharacterToken(this.characters);
 }
 
-class EofToken extends Token {}
+class EofToken extends Token {
+  @override
+  List toTestJson() => ['EOF'];
+}
 
 class InputManager {
   final String data;
