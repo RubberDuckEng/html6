@@ -1,5 +1,11 @@
-// import 'package:html6/html6.dart' as html6;
+import 'dart:convert';
+import 'package:html6/src/tokenizer.dart';
 
 void main(List<String> arguments) {
-  print('Hello world.');
+  var input = InputManager("foo<bar>baz");
+  var tokenizer = Tokenizer(input);
+  var tokens = tokenizer.getTokensWithoutEOF();
+  var actualJson =
+      json.encode(tokens.map((token) => token.toTestJson()).toList());
+  print(actualJson);
 }
