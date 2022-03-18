@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:html6/src/tokenizer.dart';
 import 'package:path/path.dart' as p;
@@ -10,10 +11,11 @@ import '../test/matchers.dart';
 void main(List<String> arguments) {
   var tokenizerDir = p.join('html5lib-tests', 'tokenizer');
   var suite = TokenizerTestSuite.fromPath(tokenizerDir);
+
+  var resultsString = "";
+
   // Tokenizer tests only for now.
   // Tokenizer tests are json.
-
-  // Load test_expectations.txt
 
   for (var group in suite.groups) {
     print(group.name);
@@ -26,14 +28,17 @@ void main(List<String> arguments) {
       var matcher = orderedEquals(expectedTokens);
       var result = matcher.matches(tokens, {});
       if (result) {
-        print("Pass");
+        resultsString += "PASS\n";
       } else {
         // FIXME: Hack around incorrect toJson implementation?
         var actualJson =
             json.encode(tokens.map((token) => token.toTestJson()).toList());
         var expectedJson = json.encode(test.output);
-        print("Fail");
+        resultsString += "FAIL\n";
       }
     }
+
+    var testExpectations = File("test_expectations.txt");
+    testExpectations.writeAsStringSync(resultsString);
   }
 }
