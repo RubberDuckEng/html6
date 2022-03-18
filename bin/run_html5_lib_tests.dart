@@ -2,15 +2,10 @@ import 'dart:convert';
 
 import 'package:html6/src/tokenizer.dart';
 import 'package:path/path.dart' as p;
+import 'package:test/test.dart';
 
 import '../test/tokenizer_test_suite.dart';
 import '../test/matchers.dart';
-
-bool matches(Iterable<Token> tokens, Iterable expected) {
-  // Implement?
-  // Walk the expeted iterable.
-  return false;
-}
 
 void main(List<String> arguments) {
   var tokenizerDir = p.join('html5lib-tests', 'tokenizer');
@@ -28,16 +23,17 @@ void main(List<String> arguments) {
       var tokens = tokenizer.getTokensWithoutEOF();
       var expectedTokens =
           test.output.map((expectation) => matchesToken(expectation));
-      var result = matches(tokens, expectedTokens);
-      if (!result) {
+      var matcher = orderedEquals(expectedTokens);
+      var result = matcher.matches(tokens, {});
+      if (result) {
+        print("Pass");
+      } else {
         // FIXME: Hack around incorrect toJson implementation?
         var actualJson =
             json.encode(tokens.map((token) => token.toTestJson()).toList());
         var expectedJson = json.encode(test.output);
-        print(
-            "Fail ${test.description}, got $actualJson expected: $expectedJson");
+        print("Fail");
       }
     }
-    return;
   }
 }
