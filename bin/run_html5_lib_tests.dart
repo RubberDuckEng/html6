@@ -18,7 +18,6 @@ void main(List<String> arguments) {
   // Tokenizer tests are json.
 
   for (var group in suite.groups) {
-    print(group.name);
     for (var test in group.tests) {
       var input = InputManager(test.input);
       var tokenizer = Tokenizer(input);
@@ -28,13 +27,13 @@ void main(List<String> arguments) {
       var matcher = orderedEquals(expectedTokens);
       var result = matcher.matches(tokens, {});
       if (result) {
-        resultsString += "PASS\n";
+        resultsString += "PASS: ${test.description}\n";
       } else {
         // FIXME: Hack around incorrect toJson implementation?
         var actualJson =
             json.encode(tokens.map((token) => token.toTestJson()).toList());
         var expectedJson = json.encode(test.output);
-        resultsString += "FAIL\n";
+        resultsString += "FAIL: actual: $actualJson expected: $expectedJson\n";
       }
     }
 
