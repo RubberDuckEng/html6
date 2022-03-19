@@ -23,6 +23,9 @@ void main(List<String> arguments) {
   var tokenizerDir = p.join('html5lib-tests', 'tokenizer');
   var suite = TokenizerTestSuite.fromPath(tokenizerDir);
 
+  String? testFilter;
+  // var testFilter = "Uppercase start tag name";
+
   var resultsString = "";
 
   // Tokenizer tests only for now.
@@ -30,9 +33,15 @@ void main(List<String> arguments) {
 
   for (var group in suite.groups) {
     for (var test in group.tests) {
+      // Hacky test filter system.
+      if (testFilter != null && testFilter != test.description) {
+        continue;
+      }
       var input = InputManager(test.input);
       var tokenizer = Tokenizer(input);
-      var tokens = tokenizer.getTokensWithoutEOF();
+      // NOTE: This toList is important or we'll try to iterate
+      // the tokens iterable twice and get confused.
+      var tokens = tokenizer.getTokensWithoutEOF().toList();
       var expectedTokens =
           test.output.map((expectation) => matchesToken(expectation));
       var matcher = orderedEquals(expectedTokens);
