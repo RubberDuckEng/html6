@@ -13,7 +13,10 @@ class _MatchesToken extends Matcher {
       return token is CommentToken;
     } else if (name == "Character") {
       return token is CharacterToken;
-    } // else throw error?
+    } else if (name == "StartTag") {
+      return token is StartTagToken;
+    }
+    // else throw error?
     // DOCTYPE, StartTag, EndTag
     return false;
   }
