@@ -13,6 +13,9 @@ class StartTagToken extends Token {
 
   StartTagToken(this.tagName);
 
+  StartTagToken.fromCodepoint(int codePoint)
+      : tagName = String.fromCharCode(codePoint);
+
   @override
   List toTestJson() {
     // FIXME: Add Attributes
@@ -35,28 +38,30 @@ class EofToken extends Token {
 }
 
 class InputManager {
-  String? pushedChar;
-  final String data;
+  int? pushedChar;
+  final List<int> data;
   int _nextOffset = 0;
 
-  InputManager(this.data);
+  // FIXME: Going through runes here isn't quite correct?
+  // I think HTML5 operates on utf16 chunks which may be invalid runes?
+  InputManager(String input) : data = input.runes.toList();
 
   bool get isEndOfFile => _nextOffset >= data.length;
 
-  // TODO: We probably need to work in terms of runes.
-  String? getNextCharacter() {
+  int? getNextCodePoint() {
     if (isEndOfFile) {
       return null;
     }
-    if (pushedChar != null) {
-      var char = pushedChar;
+    int? maybeChar = pushedChar;
+    if (maybeChar != null) {
       pushedChar = null;
-      return char;
+      return maybeChar;
     }
+    // FIXME: Pre-cache the runes.
     return data[_nextOffset++];
   }
 
-  void push(String char) {
+  void push(int char) {
     assert(pushedChar == null);
     pushedChar = char;
   }
@@ -145,9 +150,7 @@ enum TokenizerState {
 // Numeric character reference end,
 }
 
-bool isAsciiAlpha(String char) {
-  assert(char.length == 1);
-  int codePoint = char.runes.first;
+bool isAsciiAlpha(int codePoint) {
   if (codePoint >= 0x41 && codePoint <= 0x5A) {
     return true;
   }
@@ -157,16 +160,21 @@ bool isAsciiAlpha(String char) {
   return false;
 }
 
-bool isHTMLWhitespace(String char) {
-  assert(char.length == 1);
-  int codePoint = char.runes.first;
+bool isHTMLWhitespace(int codePoint) {
   return codePoint == 0x9 ||
       codePoint == 0xA ||
       codePoint == 0xC ||
       codePoint == 0x20;
 }
 
+// Dart does not have character literals yet:
+// https://github.com/dart-lang/language/issues/886
+// unicodeReplacementCharacterRune
 const String replacementCharacter = "\xFFFD";
+const int nullChar = 0x00;
+const int lessThanSign = 0x3C;
+const int greaterThanSign = 0x3E;
+const int solidus = 0x2F;
 
 // https://html.spec.whatwg.org/multipage/parsing.html#data-state
 
@@ -185,33 +193,34 @@ class Tokenizer {
   }
 
   Token getNextToken() {
+    // FIXME: This shoudl be behind a helper function.
+    // StringBuffer.write takes an object and is a foot-gun.
     StringBuffer textBuffer = StringBuffer();
 
     while (!input.isEndOfFile) {
-      // FIXME: Should use runes.
-      String char = input.getNextCharacter()!;
+      int char = input.getNextCodePoint()!;
       reconsume:
       switch (state) {
         case TokenizerState.data:
 // U+0026 AMPERSAND (&)
 // Set the return state to the data state. Switch to the character reference state.
-          if (char == "<") {
+          if (char == lessThanSign) {
             state = TokenizerState.tagOpen;
             return CharacterToken(textBuffer.toString());
           }
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Emit the current input character as a character token.
-          textBuffer.write(char);
+          textBuffer.writeCharCode(char);
           continue;
         case TokenizerState.tagOpen:
 // U+0021 EXCLAMATION MARK (!)
 // Switch to the markup declaration open state.
-          if (char == "/") {
+          if (char == solidus) {
             state = TokenizerState.endTagOpen;
             continue;
           }
           if (isAsciiAlpha(char)) {
-            currentTag = StartTagToken(char);
+            currentTag = StartTagToken.fromCodepoint(char);
             state = TokenizerState.tagName;
             break reconsume;
           }
@@ -232,23 +241,24 @@ class Tokenizer {
             state = TokenizerState.beforeAttributeName;
             continue;
           }
-          if (char == "/") {
+          if (char == solidus) {
             state = TokenizerState.selfClosingStartTag;
             continue;
           }
-          if (char == ">") {
+          if (char == greaterThanSign) {
             state = TokenizerState.data;
             return emitCurrentTag();
           }
           if (isAsciiAlpha(char)) {
-            currentTag!.tagName += char.toLowerCase();
+            var name = String.fromCharCode(char);
+            currentTag!.tagName += name.toLowerCase();
             continue;
           }
-          if (char == "\u0000") {
+          if (char == nullChar) {
             currentTag!.tagName += replacementCharacter;
             continue;
           }
-          currentTag!.tagName += char;
+          currentTag!.tagName += String.fromCharCode(char);
           continue;
         case TokenizerState.beforeAttributeName:
         case TokenizerState.selfClosingStartTag:

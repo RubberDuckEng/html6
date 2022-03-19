@@ -4947,7 +4947,7 @@ FAIL: </{
  expected: [["Comment","{"]]
 FAIL: </\uDBC0\uDC00
  input: "</􀀀"
- actual:   [["Character","\udc00"]]
+ actual:   []
  expected: [["Comment","􀀀"]]
 FAIL: <0
  input: "<0"
@@ -6337,7 +6337,7 @@ FAIL: <a {>
  expected: [["StartTag","a",{"{":""}]]
 FAIL: <a \uDBC0\uDC00>
  input: "<a 􀀀>"
- actual:   [["Character","\udc00>"]]
+ actual:   [["Character",">"]]
  expected: [["StartTag","a",{"􀀀":""}]]
 FAIL: <a!>
  input: "<a!>"
@@ -6490,7 +6490,7 @@ FAIL: <a/{>
  expected: [["StartTag","a",{"{":""}]]
 FAIL: <a/\uDBC0\uDC00>
  input: "<a/􀀀>"
- actual:   [["Character","\udc00>"]]
+ actual:   [["Character",">"]]
  expected: [["StartTag","a",{"􀀀":""}]]
 FAIL: <a0>
  input: "<a0>"
@@ -6590,7 +6590,7 @@ FAIL: <{
  expected: [["Character","<{"]]
 FAIL: <\uDBC0\uDC00
  input: "<􀀀"
- actual:   [["Character","􀀀"]]
+ actual:   []
  expected: [["Character","<􀀀"]]
 PASS: =
 PASS: =
