@@ -46,7 +46,7 @@ class InputManager {
   // I think HTML5 operates on utf16 chunks which may be invalid runes?
   InputManager(String input) : data = input.runes.toList();
 
-  bool get isEndOfFile => _nextOffset >= data.length;
+  bool get isEndOfFile => pushedChar == null && _nextOffset >= data.length;
 
   int? getNextCodePoint() {
     if (isEndOfFile) {

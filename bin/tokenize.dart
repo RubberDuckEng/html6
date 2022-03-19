@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:html6/src/tokenizer.dart';
 
 void main(List<String> arguments) {
-  var input = InputManager("foo<bar>baz");
+  var input = InputManager("<a/ >");
   var tokenizer = Tokenizer(input);
   var tokens = tokenizer.getTokensWithoutEOF();
   var actualJson =

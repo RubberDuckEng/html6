@@ -12824,7 +12824,7 @@ PASS: Single Start Tag
 PASS: Empty end tag
 FAIL: Empty start tag
  input: "<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["Character","<>"]]
 FAIL: Start Tag w/attribute
  input: "<h a='b'>"
@@ -13037,7 +13037,7 @@ FAIL: Unquoted attribute at end of tag with final character of &, with tag follo
 PASS: plaintext element
 FAIL: Open angled bracket in unquoted attribute value state
  input: "<a a=f<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","a",{"a":"f<"}]]
 FAIL: DOCTYPE without name
  input: "<!DOCTYPE>"
@@ -13175,10 +13175,7 @@ x
 "
  actual:   [["Character","\nx\n&gt;\n"]]
  expected: [["Character","\nx\n>\n"]]
-FAIL: Start tag with no attributes but space before the greater-than sign
- input: "<h >"
- actual:   []
- expected: [["StartTag","h",{}]]
+PASS: Start tag with no attributes but space before the greater-than sign
 FAIL: Empty attribute followed by uppercase attribute
  input: "<h a B=''>"
  actual:   [["Character","a B=''>"]]
@@ -13278,32 +13275,32 @@ FAIL: <
  expected: [["Character","<"]]
 FAIL: <\u0000
  input: "<ý"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","\u0000"]]
  expected: [["Character","<\u0000"]]
 FAIL: <\u0009
  input: "<ý"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","\t"]]
  expected: [["Character","<\t"]]
 FAIL: <\u000A
  input: "<
 "
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","\n"]]
  expected: [["Character","<\n"]]
 FAIL: <\u000B
  input: "<ý"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","\u000b"]]
  expected: [["Character","<\u000b"]]
 FAIL: <\u000C
  input: "<ý"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","\f"]]
  expected: [["Character","<\f"]]
 FAIL: < 
  input: "< "
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character"," "]]
  expected: [["Character","< "]]
 FAIL: <!
  input: "<!"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","!"]]
  expected: [["Comment",""]]
 FAIL: <!\u0000
  input: "<!ý"
@@ -17487,23 +17484,23 @@ FAIL: <!\uDBC0\uDC00
  expected: [["Comment","ô€€€"]]
 FAIL: <"
  input: "<""
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","\""]]
  expected: [["Character","<\""]]
 FAIL: <&
  input: "<&"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","&"]]
  expected: [["Character","<&"]]
 FAIL: <'
  input: "<'"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","'"]]
  expected: [["Character","<'"]]
 FAIL: <-
  input: "<-"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","-"]]
  expected: [["Character","<-"]]
 FAIL: <.
  input: "<."
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","."]]
  expected: [["Character","<."]]
 FAIL: </
  input: "</"
@@ -17641,15 +17638,15 @@ FAIL: </\uDBC0\uDC00
  expected: [["Comment","ô€€€"]]
 FAIL: <0
  input: "<0"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","0"]]
  expected: [["Character","<0"]]
 FAIL: <1
  input: "<1"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","1"]]
  expected: [["Character","<1"]]
 FAIL: <9
  input: "<9"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","9"]]
  expected: [["Character","<9"]]
 FAIL: <<
  input: "<<"
@@ -17657,15 +17654,15 @@ FAIL: <<
  expected: [["Character","<<"]]
 FAIL: <=
  input: "<="
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","="]]
  expected: [["Character","<="]]
 FAIL: <>
  input: "<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["Character","<>"]]
 FAIL: <?
  input: "<?"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","?"]]
  expected: [["Comment","?"]]
 FAIL: <?\u0000
  input: "<?ý"
@@ -17798,7 +17795,7 @@ FAIL: <?\uDBC0\uDC00
  expected: [["Comment","?ô€€€"]]
 FAIL: <@
  input: "<@"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","@"]]
  expected: [["Character","<@"]]
 PASS: <A>
 PASS: <B>
@@ -17806,11 +17803,11 @@ PASS: <Y>
 PASS: <Z>
 FAIL: <[
  input: "<["
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","["]]
  expected: [["Character","<["]]
 FAIL: <`
  input: "<`"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","`"]]
  expected: [["Character","<`"]]
 PASS: <a>
 FAIL: <a\u0000>
@@ -17818,29 +17815,16 @@ FAIL: <a\u0000>
  actual:   [["StartTag","aÃ¿FD",{}]]
  expected: [["StartTag","aï¿½",{}]]
 PASS: <a\u0008>
-FAIL: <a\u0009>
- input: "<aý>"
- actual:   []
- expected: [["StartTag","a",{}]]
-FAIL: <a\u000A>
- input: "<a
->"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a\u0009>
+PASS: <a\u000A>
 PASS: <a\u000B>
-FAIL: <a\u000C>
- input: "<aý>"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a\u000C>
 FAIL: <a\u000D>
  input: "<a>"
  actual:   [["StartTag","a\r",{}]]
  expected: [["StartTag","a",{}]]
 PASS: <a\u001F>
-FAIL: <a >
- input: "<a >"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a >
 FAIL: <a \u0000>
  input: "<a ý>"
  actual:   [["Character","\u0000>"]]
@@ -17849,23 +17833,13 @@ FAIL: <a \u0008>
  input: "<a ý>"
  actual:   [["Character","\b>"]]
  expected: [["StartTag","a",{"\b":""}]]
-FAIL: <a \u0009>
- input: "<a ý>"
- actual:   []
- expected: [["StartTag","a",{}]]
-FAIL: <a \u000A>
- input: "<a 
->"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a \u0009>
+PASS: <a \u000A>
 FAIL: <a \u000B>
  input: "<a ý>"
  actual:   [["Character","\u000b>"]]
  expected: [["StartTag","a",{"\u000b":""}]]
-FAIL: <a \u000C>
- input: "<a ý>"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a \u000C>
 FAIL: <a \u000D>
  input: "<a >"
  actual:   [["Character","\r>"]]
@@ -17874,10 +17848,7 @@ FAIL: <a \u001F>
  input: "<a ý>"
  actual:   [["Character","\u001f>"]]
  expected: [["StartTag","a",{"\u001f":""}]]
-FAIL: <a  >
- input: "<a  >"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a  >
 FAIL: <a !>
  input: "<a !>"
  actual:   [["Character","!>"]]
@@ -17925,16 +17896,13 @@ FAIL: <a 9>
  expected: [["StartTag","a",{"9":""}]]
 FAIL: <a <>
  input: "<a <>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","a",{"<":""}]]
 FAIL: <a =>
  input: "<a =>"
  actual:   [["Character","=>"]]
  expected: [["StartTag","a",{"=":""}]]
-FAIL: <a >
- input: "<a >"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a >
 FAIL: <a ?>
  input: "<a ?>"
  actual:   [["Character","?>"]]
@@ -18095,7 +18063,7 @@ FAIL: <a a 9>
  expected: [["StartTag","a",{"a":"","9":""}]]
 FAIL: <a a <>
  input: "<a a <>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","a",{"a":"","<":""}]]
 FAIL: <a a =>
  input: "<a a =>"
@@ -18211,7 +18179,7 @@ FAIL: <a a9>
  expected: [["StartTag","a",{"a9":""}]]
 FAIL: <a a<>
  input: "<a a<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","a",{"a<":""}]]
 FAIL: <a a=>
  input: "<a a=>"
@@ -18535,7 +18503,7 @@ FAIL: <a a=''9>
  expected: [["StartTag","a",{"a":"","9":""}]]
 FAIL: <a a=''<>
  input: "<a a=''<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","a",{"a":"","<":""}]]
 FAIL: <a a=''=>
  input: "<a a=''=>"
@@ -18711,7 +18679,7 @@ FAIL: <a a=9>
  expected: [["StartTag","a",{"a":"9"}]]
 FAIL: <a a=<>
  input: "<a a=<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","a",{"a":"<"}]]
 FAIL: <a a==>
  input: "<a a==>"
@@ -18840,7 +18808,7 @@ FAIL: <a a=a9>
  expected: [["StartTag","a",{"a":"a9"}]]
 FAIL: <a a=a<>
  input: "<a a=a<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","a",{"a":"a<"}]]
 FAIL: <a a=a=>
  input: "<a a=a=>"
@@ -19013,27 +18981,14 @@ FAIL: <a/\u0000>
  input: "<a/ý>"
  actual:   [["Character","\u0000>"]]
  expected: [["StartTag","a",{"ï¿½":""}]]
-FAIL: <a/\u0009>
- input: "<a/ý>"
- actual:   []
- expected: [["StartTag","a",{}]]
-FAIL: <a/\u000A>
- input: "<a/
->"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a/\u0009>
+PASS: <a/\u000A>
 FAIL: <a/\u000B>
  input: "<a/ý>"
  actual:   [["Character","\u000b>"]]
  expected: [["StartTag","a",{"\u000b":""}]]
-FAIL: <a/\u000C>
- input: "<a/ý>"
- actual:   []
- expected: [["StartTag","a",{}]]
-FAIL: <a/ >
- input: "<a/ >"
- actual:   []
- expected: [["StartTag","a",{}]]
+PASS: <a/\u000C>
+PASS: <a/ >
 FAIL: <a/!>
  input: "<a/!>"
  actual:   [["Character","!>"]]
@@ -19069,7 +19024,7 @@ FAIL: <a/9>
  expected: [["StartTag","a",{"9":""}]]
 FAIL: <a/<>
  input: "<a/<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","a",{"<":""}]]
 FAIL: <a/=>
  input: "<a/=>"
@@ -19153,11 +19108,11 @@ PASS: <y>
 PASS: <z>
 FAIL: <{
  input: "<{"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","{"]]
  expected: [["Character","<{"]]
 FAIL: <\uDBC0\uDC00
  input: "<ô€€€"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","ô€€€"]]
  expected: [["Character","<ô€€€"]]
 PASS: =
 PASS: =
@@ -19191,11 +19146,11 @@ PASS: \uDBC0\uDC00
 PASS: \uDBC0\uDC00
 FAIL: < in attribute name
  input: "<z/0  <>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","z",{"0":"","<":""}]]
 FAIL: < in unquoted attribute value
  input: "<z x=<>"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character",">"]]
  expected: [["StartTag","z",{"x":"<"}]]
 FAIL: = in unquoted attribute value
  input: "<z z=z=z>"
@@ -19464,7 +19419,10 @@ FAIL: Grave accent in unquoted attribute
  expected: [["StartTag","a",{"a":"aa`"}]]
 PASS: EOF in tag name state 
 PASS: EOF in before attribute name state
-PASS: EOF in attribute name state
+FAIL: EOF in attribute name state
+ input: "<a a"
+ actual:   [["Character","a"]]
+ expected: []
 FAIL: EOF in after attribute name state
  input: "<a a "
  actual:   [["Character","a "]]
@@ -19820,4 +19778,4 @@ FAIL: CR followed by U+0000
  input: "ý"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 2485 of 6806 tests
+Passed 2498 of 6806 tests
