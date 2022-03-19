@@ -176,9 +176,10 @@ bool isHTMLWhitespace(int codePoint) {
 // unicodeReplacementCharacterRune
 const String replacementCharacter = "\xFFFD";
 const int nullChar = 0x00;
-const int lessThanSign = 0x3C;
-const int greaterThanSign = 0x3E;
 const int solidus = 0x2F;
+const int lessThanSign = 0x3C;
+const int equalsSign = 0x3D;
+const int greaterThanSign = 0x3E;
 
 // https://html.spec.whatwg.org/multipage/parsing.html#data-state
 
@@ -285,6 +286,65 @@ class Tokenizer {
           continue;
 
         case TokenizerState.beforeAttributeName:
+          if (isHTMLWhitespace(char)) {
+            continue;
+          }
+          if (char == solidus || char == greaterThanSign) {
+            reconsumeIn(char, TokenizerState.afterAttributeName);
+            continue;
+          }
+// U+003D EQUALS SIGN (=)
+// This is an unexpected-equals-sign-before-attribute-name parse error. Start a new attribute in the current tag token. Set that attribute's name to the current input character, and its value to the empty string. Switch to the attribute name state.
+
+// Anything else
+// Start a new attribute in the current tag token. Set that attribute name and value to the empty string. Reconsume in the attribute name state.
+          reconsumeIn(char, TokenizerState.data); // HACK
+          continue;
+
+        case TokenizerState.attributeName:
+          if (isHTMLWhitespace(char) ||
+              char == solidus ||
+              char == greaterThanSign) {
+            reconsumeIn(char, TokenizerState.afterAttributeName);
+            continue;
+          }
+          if (char == equalsSign) {
+            state = TokenizerState.beforeAttributeName;
+            continue;
+          }
+
+// ASCII upper alpha
+// Append the lowercase version of the current input character (add 0x0020 to the character's code point) to the current attribute's name.
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current attribute's name.
+// U+0022 QUOTATION MARK (")
+// U+0027 APOSTROPHE (')
+// U+003C LESS-THAN SIGN (<)
+// This is an unexpected-character-in-attribute-name parse error. Treat it as per the "anything else" entry below.
+// Anything else
+// Append the current input character to the current attribute's name.
+// When the user agent leaves the attribute name state (and before emitting the tag token, if appropriate), the complete attribute's name must be compared to the other attributes on the same token; if there is already an attribute on the token with the exact same name, then this is a duplicate-attribute parse error and the new attribute must be removed from the token.
+          continue;
+
+        case TokenizerState.afterAttributeName:
+          if (isHTMLWhitespace(char)) {
+            continue;
+          }
+          if (char == solidus) {
+            state = TokenizerState.selfClosingStartTag;
+            continue;
+          }
+// U+003D EQUALS SIGN (=)
+// Switch to the before attribute value state.
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitCurrentTag();
+          }
+
+// Anything else
+// Start a new attribute in the current tag token. Set that attribute name and value to the empty string. Reconsume in the attribute name state.
+          continue;
+
         case TokenizerState.endTagOpen:
           // TODO: Implement.
           state = TokenizerState.data;
