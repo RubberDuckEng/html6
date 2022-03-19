@@ -12,7 +12,7 @@ class _MatchesToken extends Matcher {
     if (name == "Comment") {
       return token is CommentToken;
     } else if (name == "Character") {
-      return token is CharacterToken;
+      return token is CharacterToken && token.characters == expectation.json[1];
     } else if (name == "StartTag") {
       return token is StartTagToken;
     }
