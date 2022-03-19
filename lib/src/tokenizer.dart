@@ -196,13 +196,14 @@ class Tokenizer {
     return tag;
   }
 
+  // This shouldn't need to take a char?
   void reconsumeIn(int char, TokenizerState newState) {
     state = newState;
     input.push(char);
   }
 
   Token getNextToken() {
-    // FIXME: This shoudl be behind a helper function.
+    // FIXME: This should be behind a helper function.
     // StringBuffer.write takes an object and is a foot-gun.
     StringBuffer textBuffer = StringBuffer();
 
@@ -246,8 +247,7 @@ class Tokenizer {
 // This is an invalid-first-character-of-tag-name parse error.
 // Emit a U+003C LESS-THAN SIGN character token.
 // Reconsume in the data state.
-          state = TokenizerState.data;
-          input.push(char);
+          reconsumeIn(char, TokenizerState.data);
           return CharacterToken("<");
 
         case TokenizerState.tagName:
