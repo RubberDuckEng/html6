@@ -184,8 +184,20 @@ const int greaterThanSign = 0x3E;
 // https://html.spec.whatwg.org/multipage/parsing.html#data-state
 
 class AttributeBuilder {
-  StringBuffer name = StringBuffer();
-  StringBuffer value = StringBuffer();
+  final StringBuffer _name;
+  final StringBuffer _value;
+
+  AttributeBuilder({String name = "", String value = ""})
+      : _name = StringBuffer(name),
+        _value = StringBuffer(value);
+
+  void appendToName(int charCode) {
+    _name.writeCharCode(charCode);
+  }
+
+  void appendToValue(int charCode) {
+    _value.writeCharCode(charCode);
+  }
 }
 
 class Tokenizer {
@@ -198,9 +210,24 @@ class Tokenizer {
 
   Token emitCurrentTag() {
     assert(currentTag != null);
+    if (currentAttribute != null) {
+      finishAttribute();
+    }
     var tag = currentTag!;
     currentTag = null;
     return tag;
+  }
+
+  void finishAttribute() {
+    AttributeBuilder attribute = currentAttribute!;
+    currentAttribute = null;
+    var tag = currentTag!;
+    var name = attribute._name.toString();
+    if (tag.attributes.containsKey(name)) {
+      return;
+    }
+    var value = attribute._value.toString();
+    tag.attributes[name] = value;
   }
 
   // This shouldn't need to take a char?
@@ -302,8 +329,7 @@ class Tokenizer {
 // U+003D EQUALS SIGN (=)
 // This is an unexpected-equals-sign-before-attribute-name parse error. Start a new attribute in the current tag token. Set that attribute's name to the current input character, and its value to the empty string. Switch to the attribute name state.
 
-// Anything else
-// Start a new attribute in the current tag token. Set that attribute name and value to the empty string. Reconsume in the attribute name state.
+          currentAttribute = AttributeBuilder(name: "");
           reconsumeIn(char, TokenizerState.attributeName);
           continue;
 
@@ -315,21 +341,14 @@ class Tokenizer {
             continue;
           }
           if (char == equalsSign) {
-            state = TokenizerState.beforeAttributeName;
+            state = TokenizerState.beforeAttributeValue;
             continue;
           }
-
 // ASCII upper alpha
 // Append the lowercase version of the current input character (add 0x0020 to the character's code point) to the current attribute's name.
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current attribute's name.
-// U+0022 QUOTATION MARK (")
-// U+0027 APOSTROPHE (')
-// U+003C LESS-THAN SIGN (<)
-// This is an unexpected-character-in-attribute-name parse error. Treat it as per the "anything else" entry below.
-// Anything else
-// Append the current input character to the current attribute's name.
-// When the user agent leaves the attribute name state (and before emitting the tag token, if appropriate), the complete attribute's name must be compared to the other attributes on the same token; if there is already an attribute on the token with the exact same name, then this is a duplicate-attribute parse error and the new attribute must be removed from the token.
+          currentAttribute!.appendToName(char);
           continue;
 
         case TokenizerState.afterAttributeName:
@@ -340,15 +359,47 @@ class Tokenizer {
             state = TokenizerState.selfClosingStartTag;
             continue;
           }
-// U+003D EQUALS SIGN (=)
-// Switch to the before attribute value state.
+          if (char == equalsSign) {
+            state = TokenizerState.beforeAttributeValue;
+            continue;
+          }
           if (char == greaterThanSign) {
             state = TokenizerState.data;
             return emitCurrentTag();
           }
+          currentAttribute = AttributeBuilder(name: "");
+          reconsumeIn(char, TokenizerState.attributeName);
+          continue;
 
-// Anything else
-// Start a new attribute in the current tag token. Set that attribute name and value to the empty string. Reconsume in the attribute name state.
+        case TokenizerState.beforeAttributeValue:
+          if (isHTMLWhitespace(char)) {
+            continue;
+          }
+// U+0022 QUOTATION MARK (")
+// Switch to the attribute value (double-quoted) state.
+// U+0027 APOSTROPHE (')
+// Switch to the attribute value (single-quoted) state.
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitCurrentTag();
+          }
+          reconsumeIn(char, TokenizerState.attributeValueUnquoted);
+          continue;
+
+        case TokenizerState.attributeValueUnquoted:
+          if (isHTMLWhitespace(char)) {
+            state = TokenizerState.beforeAttributeName;
+            continue;
+          }
+//           U+0026 AMPERSAND (&)
+// Set the return state to the attribute value (unquoted) state. Switch to the character reference state.
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitCurrentTag();
+          }
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current attribute's value.
+          currentAttribute!.appendToValue(char);
           continue;
 
         case TokenizerState.endTagOpen:
