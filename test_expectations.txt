@@ -13129,14 +13129,8 @@ FAIL: Unescaped ampersand in attribute value
  actual:   [["Character","='&'>"]]
  expected: [["StartTag","h",{"a":"&"}]]
 PASS: StartTag containing <
-FAIL: Non-void element containing trailing /
- input: "<h/>"
- actual:   []
- expected: [["StartTag","h",{},true]]
-FAIL: Void element with permitted slash
- input: "<br/>"
- actual:   []
- expected: [["StartTag","br",{},true]]
+PASS: Non-void element containing trailing /
+PASS: Void element with permitted slash
 FAIL: Void element with permitted slash (with attribute)
  input: "<br foo='bar'/>"
  actual:   [["Character","oo='bar'/>"]]
@@ -19017,10 +19011,7 @@ PASS: <a&>
 PASS: <a'>
 PASS: <a->
 PASS: <a.>
-FAIL: <a/>
- input: "<a/>"
- actual:   []
- expected: [["StartTag","a",{},true]]
+PASS: <a/>
 FAIL: <a/\u0000>
  input: "<a/ý>"
  actual:   [["Character",">"]]
@@ -19090,10 +19081,7 @@ FAIL: <a/=>
  input: "<a/=>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{"=":""}]]
-FAIL: <a/>
- input: "<a/>"
- actual:   []
- expected: [["StartTag","a",{},true]]
+PASS: <a/>
 FAIL: <a/?>
  input: "<a/?>"
  actual:   [["Character",">"]]
@@ -19386,14 +19374,8 @@ FAIL: Duplicate close tag attributes
  input: "</x x x>"
  actual:   [["Character"," x x>"]]
  expected: [["EndTag","x"]]
-FAIL: Permitted slash
- input: "<br/>"
- actual:   []
- expected: [["StartTag","br",{},true]]
-FAIL: Non-permitted slash
- input: "<xr/>"
- actual:   []
- expected: [["StartTag","xr",{},true]]
+PASS: Permitted slash
+PASS: Non-permitted slash
 FAIL: Permitted slash but in close tag
  input: "</br/>"
  actual:   [["Character","r/>"]]
@@ -19844,4 +19826,4 @@ FAIL: CR followed by U+0000
  input: "ý"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 2477 of 6806 tests
+Passed 2483 of 6806 tests

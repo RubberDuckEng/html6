@@ -9,6 +9,7 @@ class CommentToken extends Token {
 
 class StartTagToken extends Token {
   String tagName;
+  bool selfClosing = false;
   Map<String, String> attributes = {};
 
   StartTagToken(this.tagName);
@@ -195,6 +196,11 @@ class Tokenizer {
     return tag;
   }
 
+  void reconsumeIn(int char, TokenizerState newState) {
+    state = newState;
+    input.push(char);
+  }
+
   Token getNextToken() {
     // FIXME: This shoudl be behind a helper function.
     // StringBuffer.write takes an object and is a foot-gun.
@@ -243,6 +249,7 @@ class Tokenizer {
           state = TokenizerState.data;
           input.push(char);
           return CharacterToken("<");
+
         case TokenizerState.tagName:
           if (isHTMLWhitespace(char)) {
             state = TokenizerState.beforeAttributeName;
@@ -267,8 +274,17 @@ class Tokenizer {
           }
           currentTag!.tagName += String.fromCharCode(char);
           continue;
-        case TokenizerState.beforeAttributeName:
+
         case TokenizerState.selfClosingStartTag:
+          if (char == greaterThanSign) {
+            currentTag!.selfClosing = true;
+            state = TokenizerState.data;
+            return emitCurrentTag();
+          }
+          reconsumeIn(char, TokenizerState.beforeAttributeName);
+          continue;
+
+        case TokenizerState.beforeAttributeName:
         case TokenizerState.endTagOpen:
           // TODO: Implement.
           state = TokenizerState.data;
