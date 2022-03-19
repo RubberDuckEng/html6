@@ -183,10 +183,16 @@ const int greaterThanSign = 0x3E;
 
 // https://html.spec.whatwg.org/multipage/parsing.html#data-state
 
+class AttributeBuilder {
+  StringBuffer name = StringBuffer();
+  StringBuffer value = StringBuffer();
+}
+
 class Tokenizer {
   final InputManager input;
   TokenizerState state = TokenizerState.data;
   StartTagToken? currentTag;
+  AttributeBuilder? currentAttribute;
 
   Tokenizer(this.input);
 
@@ -298,7 +304,7 @@ class Tokenizer {
 
 // Anything else
 // Start a new attribute in the current tag token. Set that attribute name and value to the empty string. Reconsume in the attribute name state.
-          reconsumeIn(char, TokenizerState.data); // HACK
+          reconsumeIn(char, TokenizerState.attributeName);
           continue;
 
         case TokenizerState.attributeName:
