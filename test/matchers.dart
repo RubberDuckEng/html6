@@ -14,10 +14,15 @@ class _MatchesToken extends Matcher {
     } else if (name == "Character") {
       return token is CharacterToken && token.characters == expectation.json[1];
     } else if (name == "StartTag") {
-      return token is StartTagToken;
+      if (token is! StartTagToken || token.tagName != expectation.json[1]) {
+        return false;
+      }
+      var expectedAttributes = expectation.json[2];
+      // FIXME: Actually check attributes contents.
+      return token.attributes.length == expectedAttributes.length;
     }
     // else throw error?
-    // DOCTYPE, StartTag, EndTag
+    // DOCTYPE, EndTag
     return false;
   }
 

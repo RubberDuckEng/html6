@@ -17806,10 +17806,22 @@ FAIL: <@
  input: "<@"
  actual:   [["Character","<"]]
  expected: [["Character","<@"]]
-PASS: <A>
-PASS: <B>
-PASS: <Y>
-PASS: <Z>
+FAIL: <A>
+ input: "<A>"
+ actual:   [["StartTag","A",{}]]
+ expected: [["StartTag","a",{}]]
+FAIL: <B>
+ input: "<B>"
+ actual:   [["StartTag","B",{}]]
+ expected: [["StartTag","b",{}]]
+FAIL: <Y>
+ input: "<Y>"
+ actual:   [["StartTag","Y",{}]]
+ expected: [["StartTag","y",{}]]
+FAIL: <Z>
+ input: "<Z>"
+ actual:   [["StartTag","Z",{}]]
+ expected: [["StartTag","z",{}]]
 FAIL: <[
  input: "<["
  actual:   [["Character","<"]]
@@ -17819,7 +17831,10 @@ FAIL: <`
  actual:   [["Character","<"]]
  expected: [["Character","<`"]]
 PASS: <a>
-PASS: <a\u0000>
+FAIL: <a\u0000>
+ input: "<aý>"
+ actual:   [["StartTag","aÃ¿FD",{}]]
+ expected: [["StartTag","aï¿½",{}]]
 PASS: <a\u0008>
 FAIL: <a\u0009>
  input: "<aý>"
@@ -17835,7 +17850,10 @@ FAIL: <a\u000C>
  input: "<aý>"
  actual:   []
  expected: [["StartTag","a",{}]]
-PASS: <a\u000D>
+FAIL: <a\u000D>
+ input: "<a>"
+ actual:   [["StartTag","a\r",{}]]
+ expected: [["StartTag","a",{}]]
 PASS: <a\u001F>
 FAIL: <a >
  input: "<a >"
@@ -19355,7 +19373,10 @@ FAIL: Surrogate code point edge cases
  input: "&#xD7FF;&#xD800;&#xD801;&#xDFFE;&#xDFFF;&#xE000;"
  actual:   [["Character","&#xD7FF;&#xD800;&#xD801;&#xDFFE;&#xDFFF;&#xE000;"]]
  expected: [["Character","íŸ¿ï¿½ï¿½ï¿½ï¿½î€€"]]
-PASS: Uppercase start tag name
+FAIL: Uppercase start tag name
+ input: "<X>"
+ actual:   [["StartTag","X",{}]]
+ expected: [["StartTag","x",{}]]
 FAIL: Uppercase end tag name
  input: "</X>"
  actual:   [["Character",">"]]
@@ -19838,4 +19859,4 @@ FAIL: CR followed by U+0000
  input: "ý"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 2479 of 6806 tests
+Passed 2472 of 6806 tests
