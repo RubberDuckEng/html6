@@ -27,6 +27,8 @@ void main(List<String> arguments) {
   // var testFilter = "Uppercase start tag name";
 
   var resultsString = "";
+  var testCount = 0;
+  var passCount = 0;
 
   // Tokenizer tests only for now.
   // Tokenizer tests are json.
@@ -46,8 +48,10 @@ void main(List<String> arguments) {
           test.output.map((expectation) => matchesToken(expectation));
       var matcher = orderedEquals(expectedTokens);
       var result = matcher.matches(tokens, {});
+      testCount += 1;
       if (result) {
         resultsString += "PASS: ${test.description}\n";
+        passCount += 1;
       } else {
         // FIXME: Hack around incorrect toJson implementation?
         var actualJson =
@@ -60,11 +64,12 @@ void main(List<String> arguments) {
         resultsString += " expected: $expectedJson\n";
       }
     }
-
-    var testExpectations = File("test_expectations.txt");
-    // Hacky to prevent test_expectations being treated as binary.
-    var bytes = utf8.encode(resultsString);
-    removeBytesGitThinksAreBinary(bytes, unicodeReplacementCharacterRune);
-    testExpectations.writeAsBytesSync(bytes);
   }
+  resultsString += "Passed $passCount of $testCount tests";
+
+  var testExpectations = File("test_expectations.txt");
+  // Hacky to prevent test_expectations being treated as binary.
+  var bytes = utf8.encode(resultsString);
+  removeBytesGitThinksAreBinary(bytes, unicodeReplacementCharacterRune);
+  testExpectations.writeAsBytesSync(bytes);
 }
