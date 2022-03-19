@@ -209,7 +209,7 @@ class Tokenizer {
 // Set the return state to the data state. Switch to the character reference state.
           if (char == lessThanSign) {
             state = TokenizerState.tagOpen;
-            return CharacterToken(textBuffer.toString());
+            continue;
           }
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Emit the current input character as a character token.
