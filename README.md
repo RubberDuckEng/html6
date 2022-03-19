@@ -1,2 +1,7 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+Implementing an HTML parser in Dart.
+
+Next
+* DocTypes
+* Comments
+* EndTags
+* Entities
