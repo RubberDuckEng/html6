@@ -33,7 +33,11 @@ void main(List<String> arguments) {
         var actualJson =
             json.encode(tokens.map((token) => token.toTestJson()).toList());
         var expectedJson = json.encode(test.output);
-        resultsString += "FAIL: actual: $actualJson expected: $expectedJson\n";
+        // Spacing to make actual/expected align.
+        resultsString += "FAIL: ${test.description}\n";
+        resultsString += " input: \"${test.input}\"\n";
+        resultsString += " actual:   $actualJson\n";
+        resultsString += " expected: $expectedJson\n";
       }
     }
 
