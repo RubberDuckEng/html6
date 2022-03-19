@@ -21,7 +21,7 @@ FAIL: NUL in script HTML comment
  expected: [["Character","<!--test\\uFFFD--><!--test-\\uFFFD--><!--test--\\uFFFD-->"]]
 FAIL: NUL in script HTML comment - double escaped
  input: "<!--<script>\u0000--><!--<script>-\u0000--><!--<script>--\u0000-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character","\\u0000-->"],["Character","<"],["Character","!--"],["StartTag","script"],["Character","-\\u0000-->"],["Character","<"],["Character","!--"],["StartTag","script"],["Character","--\\u0000-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","\\u0000-->"],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","-\\u0000-->"],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","--\\u0000-->"]]
  expected: [["Character","<!--<script>\\uFFFD--><!--<script>-\\uFFFD--><!--<script>--\\uFFFD-->"]]
 FAIL: EOF in script HTML comment
  input: "<!--test"
@@ -37,15 +37,15 @@ FAIL: EOF in script HTML comment after dash dash
  expected: [["Character","<!--test--"]]
 FAIL: EOF in script HTML comment double escaped after dash
  input: "<!--<script>-"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character","-"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","-"]]
  expected: [["Character","<!--<script>-"]]
 FAIL: EOF in script HTML comment double escaped after dash dash
  input: "<!--<script>--"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character","--"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","--"]]
  expected: [["Character","<!--<script>--"]]
 FAIL: EOF in script HTML comment - double escaped
  input: "<!--<script>"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}]]
  expected: [["Character","<!--<script>"]]
 FAIL: Dash in script HTML comment
  input: "<!-- - -->"
@@ -65,19 +65,19 @@ FAIL: </script> in script HTML comment
  expected: [["Character","<!-- "],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped
  input: "<!-- <script></script> --></script>"
- actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","script"],["Character",""],["Character","cript> -->"],["Character","cript>"]]
+ actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","script",{}],["Character",""],["Character","cript> -->"],["Character","cript>"]]
  expected: [["Character","<!-- <script></script> -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped with nested <script>
  input: "<!-- <script><script></script></script> --></script>"
- actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","script"],["Character",""],["StartTag","script"],["Character",""],["Character","cript>"],["Character","cript> -->"],["Character","cript>"]]
+ actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","script",{}],["Character",""],["StartTag","script",{}],["Character",""],["Character","cript>"],["Character","cript> -->"],["Character","cript>"]]
  expected: [["Character","<!-- <script><script></script>"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped with abrupt end
  input: "<!-- <script>--></script> --></script>"
- actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","script"],["Character","-->"],["Character","cript> -->"],["Character","cript>"]]
+ actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","script",{}],["Character","-->"],["Character","cript> -->"],["Character","cript>"]]
  expected: [["Character","<!-- <script>-->"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: Incomplete start tag in script HTML comment double escaped
  input: "<!--<scrip></script>-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","scrip"],["Character",""],["Character","cript>-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","scrip",{}],["Character",""],["Character","cript>-->"]]
  expected: [["Character","<!--<scrip>"],["EndTag","script"],["Character","-->"]]
 FAIL: Unclosed start tag in script HTML comment double escaped
  input: "<!--<script</script>-->"
@@ -85,11 +85,11 @@ FAIL: Unclosed start tag in script HTML comment double escaped
  expected: [["Character","<!--<script"],["EndTag","script"],["Character","-->"]]
 FAIL: Incomplete end tag in script HTML comment double escaped
  input: "<!--<script></scrip>-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character",""],["Character","crip>-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character",""],["Character","crip>-->"]]
  expected: [["Character","<!--<script></scrip>-->"]]
 FAIL: Unclosed end tag in script HTML comment double escaped
  input: "<!--<script></script-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character",""],["Character","cript-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character",""],["Character","cript-->"]]
  expected: [["Character","<!--<script></script-->"]]
 PASS: leading U+FEFF must pass through
 PASS: Non BMP-charref in RCDATA
@@ -138,7 +138,7 @@ PASS: CDATA with single bracket ending
 PASS: CDATA with two brackets ending
 FAIL: HTML tag in script data
  input: "<b>hello world</b>"
- actual:   [["Character",""],["StartTag","b"],["Character","hello world"],["Character",">"]]
+ actual:   [["Character",""],["StartTag","b",{}],["Character","hello world"],["Character",">"]]
  expected: [["Character","<b>hello world</b>"]]
 FAIL: Undefined named entity in a double-quoted attribute value ending in semicolon and whose name starts with a known entity name.
  input: "<h a="&noti;">"
@@ -293,11 +293,11 @@ FAIL: " after ampersand in single-quoted attribute value
  expected: [["StartTag","z",{"z":"&\""}]]
 FAIL: Text after bogus character reference
  input: "<z z='&xlink_xmlns;'>bar<z>"
- actual:   [["Character",""],["Character","='&xlink_xmlns;'>bar"],["StartTag","z"]]
+ actual:   [["Character",""],["Character","='&xlink_xmlns;'>bar"],["StartTag","z",{}]]
  expected: [["StartTag","z",{"z":"&xlink_xmlns;"}],["Character","bar"],["StartTag","z",{}]]
 FAIL: Text after hex character reference
  input: "<z z='&#x0020; foo'>bar<z>"
- actual:   [["Character",""],["Character","='&#x0020; foo'>bar"],["StartTag","z"]]
+ actual:   [["Character",""],["Character","='&#x0020; foo'>bar"],["StartTag","z",{}]]
  expected: [["StartTag","z",{"z":"  foo"}],["Character","bar"],["StartTag","z",{}]]
 FAIL: Attribute name starting with "
  input: "<foo "='bar'>"
@@ -370,7 +370,7 @@ PASS: 65-bit decimal numeric entity
 PASS: Surrogate code point edge cases
 FAIL: Uppercase start tag name
  input: "<X>"
- actual:   [["Character",""],["StartTag","X"]]
+ actual:   [["Character",""],["StartTag","X",{}]]
  expected: [["StartTag","x",{}]]
 FAIL: Uppercase end tag name
  input: "</X>"
@@ -5112,19 +5112,19 @@ FAIL: <@
  expected: [["Character","<@"]]
 FAIL: <A>
  input: "<A>"
- actual:   [["Character",""],["StartTag","A"]]
+ actual:   [["Character",""],["StartTag","A",{}]]
  expected: [["StartTag","a",{}]]
 FAIL: <B>
  input: "<B>"
- actual:   [["Character",""],["StartTag","B"]]
+ actual:   [["Character",""],["StartTag","B",{}]]
  expected: [["StartTag","b",{}]]
 FAIL: <Y>
  input: "<Y>"
- actual:   [["Character",""],["StartTag","Y"]]
+ actual:   [["Character",""],["StartTag","Y",{}]]
  expected: [["StartTag","y",{}]]
 FAIL: <Z>
  input: "<Z>"
- actual:   [["Character",""],["StartTag","Z"]]
+ actual:   [["Character",""],["StartTag","Z",{}]]
  expected: [["StartTag","z",{}]]
 FAIL: <[
  input: "<["
@@ -5136,15 +5136,15 @@ FAIL: <`
  expected: [["Character","<`"]]
 FAIL: <a>
  input: "<a>"
- actual:   [["Character",""],["StartTag","a"]]
+ actual:   [["Character",""],["StartTag","a",{}]]
  expected: [["StartTag","a",{}]]
 FAIL: <a\u0000>
  input: "<aý>"
- actual:   [["Character",""],["StartTag","aÃ¿FD"]]
+ actual:   [["Character",""],["StartTag","aÃ¿FD",{}]]
  expected: [["StartTag","aï¿½",{}]]
 FAIL: <a\u0008>
  input: "<aý>"
- actual:   [["Character",""],["StartTag","a\b"]]
+ actual:   [["Character",""],["StartTag","a\b",{}]]
  expected: [["StartTag","a\b",{}]]
 FAIL: <a\u0009>
  input: "<aý>"
@@ -5157,7 +5157,7 @@ FAIL: <a\u000A>
  expected: [["StartTag","a",{}]]
 FAIL: <a\u000B>
  input: "<aý>"
- actual:   [["Character",""],["StartTag","a\u000b"]]
+ actual:   [["Character",""],["StartTag","a\u000b",{}]]
  expected: [["StartTag","a\u000b",{}]]
 FAIL: <a\u000C>
  input: "<aý>"
@@ -5165,11 +5165,11 @@ FAIL: <a\u000C>
  expected: [["StartTag","a",{}]]
 FAIL: <a\u000D>
  input: "<a>"
- actual:   [["Character",""],["StartTag","a\r"]]
+ actual:   [["Character",""],["StartTag","a\r",{}]]
  expected: [["StartTag","a",{}]]
 FAIL: <a\u001F>
  input: "<aý>"
- actual:   [["Character",""],["StartTag","a\u001f"]]
+ actual:   [["Character",""],["StartTag","a\u001f",{}]]
  expected: [["StartTag","a\u001f",{}]]
 FAIL: <a >
  input: "<a >"
@@ -6341,27 +6341,27 @@ FAIL: <a \uDBC0\uDC00>
  expected: [["StartTag","a",{"ô€€€":""}]]
 FAIL: <a!>
  input: "<a!>"
- actual:   [["Character",""],["StartTag","a!"]]
+ actual:   [["Character",""],["StartTag","a!",{}]]
  expected: [["StartTag","a!",{}]]
 FAIL: <a">
  input: "<a">"
- actual:   [["Character",""],["StartTag","a\""]]
+ actual:   [["Character",""],["StartTag","a\"",{}]]
  expected: [["StartTag","a\"",{}]]
 FAIL: <a&>
  input: "<a&>"
- actual:   [["Character",""],["StartTag","a&"]]
+ actual:   [["Character",""],["StartTag","a&",{}]]
  expected: [["StartTag","a&",{}]]
 FAIL: <a'>
  input: "<a'>"
- actual:   [["Character",""],["StartTag","a'"]]
+ actual:   [["Character",""],["StartTag","a'",{}]]
  expected: [["StartTag","a'",{}]]
 FAIL: <a->
  input: "<a->"
- actual:   [["Character",""],["StartTag","a-"]]
+ actual:   [["Character",""],["StartTag","a-",{}]]
  expected: [["StartTag","a-",{}]]
 FAIL: <a.>
  input: "<a.>"
- actual:   [["Character",""],["StartTag","a."]]
+ actual:   [["Character",""],["StartTag","a.",{}]]
  expected: [["StartTag","a.",{}]]
 FAIL: <a/>
  input: "<a/>"
@@ -6494,95 +6494,95 @@ FAIL: <a/\uDBC0\uDC00>
  expected: [["StartTag","a",{"ô€€€":""}]]
 FAIL: <a0>
  input: "<a0>"
- actual:   [["Character",""],["StartTag","a0"]]
+ actual:   [["Character",""],["StartTag","a0",{}]]
  expected: [["StartTag","a0",{}]]
 FAIL: <a1>
  input: "<a1>"
- actual:   [["Character",""],["StartTag","a1"]]
+ actual:   [["Character",""],["StartTag","a1",{}]]
  expected: [["StartTag","a1",{}]]
 FAIL: <a9>
  input: "<a9>"
- actual:   [["Character",""],["StartTag","a9"]]
+ actual:   [["Character",""],["StartTag","a9",{}]]
  expected: [["StartTag","a9",{}]]
 FAIL: <a<>
  input: "<a<>"
- actual:   [["Character",""],["StartTag","a<"]]
+ actual:   [["Character",""],["StartTag","a<",{}]]
  expected: [["StartTag","a<",{}]]
 FAIL: <a=>
  input: "<a=>"
- actual:   [["Character",""],["StartTag","a="]]
+ actual:   [["Character",""],["StartTag","a=",{}]]
  expected: [["StartTag","a=",{}]]
 FAIL: <a>
  input: "<a>"
- actual:   [["Character",""],["StartTag","a"]]
+ actual:   [["Character",""],["StartTag","a",{}]]
  expected: [["StartTag","a",{}]]
 FAIL: <a?>
  input: "<a?>"
- actual:   [["Character",""],["StartTag","a?"]]
+ actual:   [["Character",""],["StartTag","a?",{}]]
  expected: [["StartTag","a?",{}]]
 FAIL: <a@>
  input: "<a@>"
- actual:   [["Character",""],["StartTag","a@"]]
+ actual:   [["Character",""],["StartTag","a@",{}]]
  expected: [["StartTag","a@",{}]]
 FAIL: <aA>
  input: "<aA>"
- actual:   [["Character",""],["StartTag","aa"]]
+ actual:   [["Character",""],["StartTag","aa",{}]]
  expected: [["StartTag","aa",{}]]
 FAIL: <aB>
  input: "<aB>"
- actual:   [["Character",""],["StartTag","ab"]]
+ actual:   [["Character",""],["StartTag","ab",{}]]
  expected: [["StartTag","ab",{}]]
 FAIL: <aY>
  input: "<aY>"
- actual:   [["Character",""],["StartTag","ay"]]
+ actual:   [["Character",""],["StartTag","ay",{}]]
  expected: [["StartTag","ay",{}]]
 FAIL: <aZ>
  input: "<aZ>"
- actual:   [["Character",""],["StartTag","az"]]
+ actual:   [["Character",""],["StartTag","az",{}]]
  expected: [["StartTag","az",{}]]
 FAIL: <a[>
  input: "<a[>"
- actual:   [["Character",""],["StartTag","a["]]
+ actual:   [["Character",""],["StartTag","a[",{}]]
  expected: [["StartTag","a[",{}]]
 FAIL: <a`>
  input: "<a`>"
- actual:   [["Character",""],["StartTag","a`"]]
+ actual:   [["Character",""],["StartTag","a`",{}]]
  expected: [["StartTag","a`",{}]]
 FAIL: <aa>
  input: "<aa>"
- actual:   [["Character",""],["StartTag","aa"]]
+ actual:   [["Character",""],["StartTag","aa",{}]]
  expected: [["StartTag","aa",{}]]
 FAIL: <ab>
  input: "<ab>"
- actual:   [["Character",""],["StartTag","ab"]]
+ actual:   [["Character",""],["StartTag","ab",{}]]
  expected: [["StartTag","ab",{}]]
 FAIL: <ay>
  input: "<ay>"
- actual:   [["Character",""],["StartTag","ay"]]
+ actual:   [["Character",""],["StartTag","ay",{}]]
  expected: [["StartTag","ay",{}]]
 FAIL: <az>
  input: "<az>"
- actual:   [["Character",""],["StartTag","az"]]
+ actual:   [["Character",""],["StartTag","az",{}]]
  expected: [["StartTag","az",{}]]
 FAIL: <a{>
  input: "<a{>"
- actual:   [["Character",""],["StartTag","a{"]]
+ actual:   [["Character",""],["StartTag","a{",{}]]
  expected: [["StartTag","a{",{}]]
 FAIL: <a\uDBC0\uDC00>
  input: "<aô€€€>"
- actual:   [["Character",""],["StartTag","aô€€€"]]
+ actual:   [["Character",""],["StartTag","aô€€€",{}]]
  expected: [["StartTag","aô€€€",{}]]
 FAIL: <b>
  input: "<b>"
- actual:   [["Character",""],["StartTag","b"]]
+ actual:   [["Character",""],["StartTag","b",{}]]
  expected: [["StartTag","b",{}]]
 FAIL: <y>
  input: "<y>"
- actual:   [["Character",""],["StartTag","y"]]
+ actual:   [["Character",""],["StartTag","y",{}]]
  expected: [["StartTag","y",{}]]
 FAIL: <z>
  input: "<z>"
- actual:   [["Character",""],["StartTag","z"]]
+ actual:   [["Character",""],["StartTag","z",{}]]
  expected: [["StartTag","z",{}]]
 FAIL: <{
  input: "<{"
@@ -6624,7 +6624,7 @@ PASS: \uDBC0\uDC00
 PASS: \uDBC0\uDC00
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
- actual:   [["Character",""],["StartTag","head"],["Character","&body;"]]
+ actual:   [["Character",""],["StartTag","head",{}],["Character","&body;"]]
  expected: [["Character","<head>&body;"]]
 FAIL: PLAINTEXT with seeming close tag
  input: "</plaintext>&body;"
@@ -6745,7 +6745,7 @@ FAIL: Unescaped ampersand in attribute value
  expected: [["StartTag","h",{"a":"&"}]]
 FAIL: StartTag containing <
  input: "<a<b>"
- actual:   [["Character",""],["StartTag","a<b"]]
+ actual:   [["Character",""],["StartTag","a<b",{}]]
  expected: [["StartTag","a<b",{}]]
 FAIL: Non-void element containing trailing /
  input: "<h/>"
@@ -6812,7 +6812,7 @@ FAIL: Empty end tag with following characters
  expected: [["Character","abc"]]
 FAIL: Empty end tag with following tag
  input: "a</><b>c"
- actual:   [["Character","a"],["Character",""],["StartTag","b"],["Character","c"]]
+ actual:   [["Character","a"],["Character",""],["StartTag","b",{}],["Character","c"]]
  expected: [["Character","a"],["StartTag","b",{}],["Character","c"]]
 FAIL: Empty end tag with following comment
  input: "a</><!--b-->c"
@@ -7204,7 +7204,7 @@ FAIL: Doctype in error
  expected: [["DOCTYPE","foo",null,null,true]]
 FAIL: Single Start Tag
  input: "<h>"
- actual:   [["Character",""],["StartTag","h"]]
+ actual:   [["Character",""],["StartTag","h",{}]]
  expected: [["StartTag","h",{}]]
 FAIL: Empty end tag
  input: "</>"
@@ -7224,15 +7224,15 @@ FAIL: Start Tag w/attribute no quotes
  expected: [["StartTag","h",{"a":"b"}]]
 FAIL: Start/End Tag
  input: "<h></h>"
- actual:   [["Character",""],["StartTag","h"],["Character",""],["Character",">"]]
+ actual:   [["Character",""],["StartTag","h",{}],["Character",""],["Character",">"]]
  expected: [["StartTag","h",{}],["EndTag","h"]]
 FAIL: Two unclosed start tags
  input: "<p>One<p>Two"
- actual:   [["Character",""],["StartTag","p"],["Character","One"],["StartTag","p"],["Character","Two"]]
+ actual:   [["Character",""],["StartTag","p",{}],["Character","One"],["StartTag","p",{}],["Character","Two"]]
  expected: [["StartTag","p",{}],["Character","One"],["StartTag","p",{}],["Character","Two"]]
 FAIL: End Tag w/attribute
  input: "<h></h a='b'>"
- actual:   [["Character",""],["StartTag","h"],["Character",""],["Character"," a='b'>"]]
+ actual:   [["Character",""],["StartTag","h",{}],["Character",""],["Character"," a='b'>"]]
  expected: [["StartTag","h",{}],["EndTag","h"]]
 FAIL: Multiple atts
  input: "<h a='b' c='d'>"
@@ -7288,7 +7288,7 @@ FAIL: Short comment three
  expected: [["Comment",""]]
 FAIL: < in comment
  input: "<!-- <test-->"
- actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","test--"]]
+ actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","test--",{}]]
  expected: [["Comment"," <test"]]
 FAIL: << in comment
  input: "<!--<<-->"
@@ -7312,7 +7312,7 @@ FAIL: Nested comment with extra <
  expected: [["Comment"," <<!--test"]]
 FAIL: < in script data
  input: "<test-->"
- actual:   [["Character",""],["StartTag","test--"]]
+ actual:   [["Character",""],["StartTag","test--",{}]]
  expected: [["Character","<test-->"]]
 FAIL: <! in script data
  input: "<!test-->"
@@ -7336,7 +7336,7 @@ FAIL: </ in script HTML comment
  expected: [["Character","<!-- </ test -->"]]
 FAIL: Start tag in script HTML comment
  input: "<!-- <test> -->"
- actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","test"],["Character"," -->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!-- "],["StartTag","test",{}],["Character"," -->"]]
  expected: [["Character","<!-- <test> -->"]]
 FAIL: End tag in script HTML comment
  input: "<!-- </test> -->"
@@ -7344,23 +7344,23 @@ FAIL: End tag in script HTML comment
  expected: [["Character","<!-- </test> -->"]]
 FAIL: - in script HTML comment double escaped
  input: "<!--<script>-</script>-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character","-"],["Character","cript>-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","-"],["Character","cript>-->"]]
  expected: [["Character","<!--<script>-</script>-->"]]
 FAIL: -- in script HTML comment double escaped
  input: "<!--<script>--</script>-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character","--"],["Character","cript>-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","--"],["Character","cript>-->"]]
  expected: [["Character","<!--<script>--</script>-->"]]
 FAIL: --- in script HTML comment double escaped
  input: "<!--<script>---</script>-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character","---"],["Character","cript>-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","---"],["Character","cript>-->"]]
  expected: [["Character","<!--<script>---</script>-->"]]
 FAIL: - spaced in script HTML comment double escaped
  input: "<!--<script> - </script>-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character"," - "],["Character","cript>-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character"," - "],["Character","cript>-->"]]
  expected: [["Character","<!--<script> - </script>-->"]]
 FAIL: -- spaced in script HTML comment double escaped
  input: "<!--<script> -- </script>-->"
- actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script"],["Character"," -- "],["Character","cript>-->"]]
+ actual:   [["Character",""],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character"," -- "],["Character","cript>-->"]]
  expected: [["Character","<!--<script> -- </script>-->"]]
 PASS: Ampersand EOF
 PASS: Ampersand ampersand EOF
@@ -7406,7 +7406,7 @@ FAIL: Unquoted attribute at end of tag with final character of &, with tag follo
  expected: [["StartTag","a",{"a":"a&"}],["Character","foo"]]
 FAIL: plaintext element
  input: "<plaintext>foobar"
- actual:   [["Character",""],["StartTag","plaintext"],["Character","foobar"]]
+ actual:   [["Character",""],["StartTag","plaintext",{}],["Character","foobar"]]
  expected: [["StartTag","plaintext",{}],["Character","foobar"]]
 FAIL: Open angled bracket in unquoted attribute value state
  input: "<a a=f<>"

@@ -18,8 +18,7 @@ class StartTagToken extends Token {
 
   @override
   List toTestJson() {
-    // FIXME: Add Attributes
-    return ['StartTag', tagName];
+    return ['StartTag', tagName, attributes];
   }
 }
 
@@ -150,8 +149,12 @@ enum TokenizerState {
 // Numeric character reference end,
 }
 
+bool isAsciiUpperAlpha(int codePoint) {
+  return codePoint >= 0x41 && codePoint <= 0x5A;
+}
+
 bool isAsciiAlpha(int codePoint) {
-  if (codePoint >= 0x41 && codePoint <= 0x5A) {
+  if (isAsciiUpperAlpha(codePoint)) {
     return true;
   }
   if (codePoint >= 0x61 && codePoint <= 0x7A) {
@@ -212,6 +215,7 @@ class Tokenizer {
 // This is an unexpected-null-character parse error. Emit the current input character as a character token.
           textBuffer.writeCharCode(char);
           continue;
+
         case TokenizerState.tagOpen:
 // U+0021 EXCLAMATION MARK (!)
 // Switch to the markup declaration open state.
@@ -220,6 +224,9 @@ class Tokenizer {
             continue;
           }
           if (isAsciiAlpha(char)) {
+            // if (isAsciiUpperAlpha(char)) {
+            //   char += 0x20;
+            // }
             currentTag = StartTagToken.fromCodepoint(char);
             state = TokenizerState.tagName;
             break reconsume;
