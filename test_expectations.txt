@@ -425,11 +425,11 @@ FAIL: Doctype system case-sensitivity (2)
  actual:   [["Character","<"],["Character","!dOcTyPe hTmL sYsTeM \"xYz\">"]]
  expected: [["DOCTYPE","html",null,"xYz",true]]
 FAIL: U+0000 in lookahead region after non-matching character
- input: "<!doc> "
+ input: "<!doc>ý"
  actual:   [["Character","<"],["Character","!doc>\u0000"]]
  expected: [["Comment","doc"],["Character","\u0000"]]
 FAIL: U+0000 in lookahead region
- input: "<!doc "
+ input: "<!docý"
  actual:   [["Character","<"],["Character","!doc\u0000"]]
  expected: [["Comment","docï¿½"]]
 FAIL: U+0080 in lookahead region
@@ -587,11 +587,11 @@ PASS: ;\uDBC0\uDC00
 PASS: ;\uDBC0\uDC00
 PASS: <
 FAIL: <\u0000
- input: "< "
+ input: "<ý"
  actual:   []
  expected: [["Character","<\u0000"]]
 FAIL: <\u0009
- input: "<	"
+ input: "<ý"
  actual:   []
  expected: [["Character","<\t"]]
 FAIL: <\u000A
@@ -600,11 +600,11 @@ FAIL: <\u000A
  actual:   []
  expected: [["Character","<\n"]]
 FAIL: <\u000B
- input: "<"
+ input: "<ý"
  actual:   []
  expected: [["Character","<\u000b"]]
 FAIL: <\u000C
- input: "<"
+ input: "<ý"
  actual:   []
  expected: [["Character","<\f"]]
 FAIL: < 
@@ -616,11 +616,11 @@ FAIL: <!
  actual:   [["Character","<"]]
  expected: [["Comment",""]]
 FAIL: <!\u0000
- input: "<! "
+ input: "<!ý"
  actual:   [["Character","<"],["Character","!\u0000"]]
  expected: [["Comment","ï¿½"]]
 FAIL: <!\u0009
- input: "<!	"
+ input: "<!ý"
  actual:   [["Character","<"],["Character","!\t"]]
  expected: [["Comment","\t"]]
 FAIL: <!\u000A
@@ -629,11 +629,11 @@ FAIL: <!\u000A
  actual:   [["Character","<"],["Character","!\n"]]
  expected: [["Comment","\n"]]
 FAIL: <!\u000B
- input: "<!"
+ input: "<!ý"
  actual:   [["Character","<"],["Character","!\u000b"]]
  expected: [["Comment","\u000b"]]
 FAIL: <!\u000C
- input: "<!"
+ input: "<!ý"
  actual:   [["Character","<"],["Character","!\f"]]
  expected: [["Comment","\f"]]
 FAIL: <! 
@@ -641,7 +641,7 @@ FAIL: <!
  actual:   [["Character","<"],["Character","! "]]
  expected: [["Comment"," "]]
 FAIL: <! \u0000
- input: "<!  "
+ input: "<! ý"
  actual:   [["Character","<"],["Character","! \u0000"]]
  expected: [["Comment"," ï¿½"]]
 FAIL: <!!
@@ -669,11 +669,11 @@ FAIL: <!--
  actual:   [["Character","<"],["Character","!--"]]
  expected: [["Comment",""]]
 FAIL: <!--\u0000
- input: "<!-- "
+ input: "<!--ý"
  actual:   [["Character","<"],["Character","!--\u0000"]]
  expected: [["Comment","ï¿½"]]
 FAIL: <!--\u0009
- input: "<!--	"
+ input: "<!--ý"
  actual:   [["Character","<"],["Character","!--\t"]]
  expected: [["Comment","\t"]]
 FAIL: <!--\u000A
@@ -682,11 +682,11 @@ FAIL: <!--\u000A
  actual:   [["Character","<"],["Character","!--\n"]]
  expected: [["Comment","\n"]]
 FAIL: <!--\u000B
- input: "<!--"
+ input: "<!--ý"
  actual:   [["Character","<"],["Character","!--\u000b"]]
  expected: [["Comment","\u000b"]]
 FAIL: <!--\u000C
- input: "<!--"
+ input: "<!--ý"
  actual:   [["Character","<"],["Character","!--\f"]]
  expected: [["Comment","\f"]]
 FAIL: <!-- 
@@ -694,11 +694,11 @@ FAIL: <!--
  actual:   [["Character","<"],["Character","!-- "]]
  expected: [["Comment"," "]]
 FAIL: <!-- \u0000
- input: "<!--  "
+ input: "<!-- ý"
  actual:   [["Character","<"],["Character","!-- \u0000"]]
  expected: [["Comment"," ï¿½"]]
 FAIL: <!-- \u0009
- input: "<!-- 	"
+ input: "<!-- ý"
  actual:   [["Character","<"],["Character","!-- \t"]]
  expected: [["Comment"," \t"]]
 FAIL: <!-- \u000A
@@ -707,11 +707,11 @@ FAIL: <!-- \u000A
  actual:   [["Character","<"],["Character","!-- \n"]]
  expected: [["Comment"," \n"]]
 FAIL: <!-- \u000B
- input: "<!-- "
+ input: "<!-- ý"
  actual:   [["Character","<"],["Character","!-- \u000b"]]
  expected: [["Comment"," \u000b"]]
 FAIL: <!-- \u000C
- input: "<!-- "
+ input: "<!-- ý"
  actual:   [["Character","<"],["Character","!-- \f"]]
  expected: [["Comment"," \f"]]
 FAIL: <!--  
@@ -743,11 +743,11 @@ FAIL: <!-- -
  actual:   [["Character","<"],["Character","!-- -"]]
  expected: [["Comment"," "]]
 FAIL: <!-- -\u0000
- input: "<!-- - "
+ input: "<!-- -ý"
  actual:   [["Character","<"],["Character","!-- -\u0000"]]
  expected: [["Comment"," -ï¿½"]]
 FAIL: <!-- -\u0009
- input: "<!-- -	"
+ input: "<!-- -ý"
  actual:   [["Character","<"],["Character","!-- -\t"]]
  expected: [["Comment"," -\t"]]
 FAIL: <!-- -\u000A
@@ -756,11 +756,11 @@ FAIL: <!-- -\u000A
  actual:   [["Character","<"],["Character","!-- -\n"]]
  expected: [["Comment"," -\n"]]
 FAIL: <!-- -\u000B
- input: "<!-- -"
+ input: "<!-- -ý"
  actual:   [["Character","<"],["Character","!-- -\u000b"]]
  expected: [["Comment"," -\u000b"]]
 FAIL: <!-- -\u000C
- input: "<!-- -"
+ input: "<!-- -ý"
  actual:   [["Character","<"],["Character","!-- -\f"]]
  expected: [["Comment"," -\f"]]
 FAIL: <!-- - 
@@ -984,11 +984,11 @@ FAIL: <!---
  actual:   [["Character","<"],["Character","!---"]]
  expected: [["Comment",""]]
 FAIL: <!---\u0000
- input: "<!--- "
+ input: "<!---ý"
  actual:   [["Character","<"],["Character","!---\u0000"]]
  expected: [["Comment","-ï¿½"]]
 FAIL: <!---\u0009
- input: "<!---	"
+ input: "<!---ý"
  actual:   [["Character","<"],["Character","!---\t"]]
  expected: [["Comment","-\t"]]
 FAIL: <!---\u000A
@@ -997,11 +997,11 @@ FAIL: <!---\u000A
  actual:   [["Character","<"],["Character","!---\n"]]
  expected: [["Comment","-\n"]]
 FAIL: <!---\u000B
- input: "<!---"
+ input: "<!---ý"
  actual:   [["Character","<"],["Character","!---\u000b"]]
  expected: [["Comment","-\u000b"]]
 FAIL: <!---\u000C
- input: "<!---"
+ input: "<!---ý"
  actual:   [["Character","<"],["Character","!---\f"]]
  expected: [["Comment","-\f"]]
 FAIL: <!--- 
@@ -1033,11 +1033,11 @@ FAIL: <!----
  actual:   [["Character","<"],["Character","!----"]]
  expected: [["Comment",""]]
 FAIL: <!----\u0000
- input: "<!---- "
+ input: "<!----ý"
  actual:   [["Character","<"],["Character","!----\u0000"]]
  expected: [["Comment","--ï¿½"]]
 FAIL: <!----\u0009
- input: "<!----	"
+ input: "<!----ý"
  actual:   [["Character","<"],["Character","!----\t"]]
  expected: [["Comment","--\t"]]
 FAIL: <!----\u000A
@@ -1046,11 +1046,11 @@ FAIL: <!----\u000A
  actual:   [["Character","<"],["Character","!----\n"]]
  expected: [["Comment","--\n"]]
 FAIL: <!----\u000B
- input: "<!----"
+ input: "<!----ý"
  actual:   [["Character","<"],["Character","!----\u000b"]]
  expected: [["Comment","--\u000b"]]
 FAIL: <!----\u000C
- input: "<!----"
+ input: "<!----ý"
  actual:   [["Character","<"],["Character","!----\f"]]
  expected: [["Comment","--\f"]]
 FAIL: <!---- 
@@ -1444,15 +1444,15 @@ FAIL: <!DOCTYPE
  actual:   [["Character","<"],["Character","!DOCTYPE"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE\u0000
- input: "<!DOCTYPE "
+ input: "<!DOCTYPEý"
  actual:   [["Character","<"],["Character","!DOCTYPE\u0000"]]
  expected: [["DOCTYPE","ï¿½",null,null,false]]
 FAIL: <!DOCTYPE\u0008
- input: "<!DOCTYPE"
+ input: "<!DOCTYPEý"
  actual:   [["Character","<"],["Character","!DOCTYPE\b"]]
  expected: [["DOCTYPE","\b",null,null,false]]
 FAIL: <!DOCTYPE\u0009
- input: "<!DOCTYPE	"
+ input: "<!DOCTYPEý"
  actual:   [["Character","<"],["Character","!DOCTYPE\t"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE\u000A
@@ -1461,11 +1461,11 @@ FAIL: <!DOCTYPE\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE\n"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE\u000B
- input: "<!DOCTYPE"
+ input: "<!DOCTYPEý"
  actual:   [["Character","<"],["Character","!DOCTYPE\u000b"]]
  expected: [["DOCTYPE","\u000b",null,null,false]]
 FAIL: <!DOCTYPE\u000C
- input: "<!DOCTYPE"
+ input: "<!DOCTYPEý"
  actual:   [["Character","<"],["Character","!DOCTYPE\f"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE\u000D
@@ -1473,7 +1473,7 @@ FAIL: <!DOCTYPE\u000D
  actual:   [["Character","<"],["Character","!DOCTYPE\r"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE\u001F
- input: "<!DOCTYPE"
+ input: "<!DOCTYPEý"
  actual:   [["Character","<"],["Character","!DOCTYPE\u001f"]]
  expected: [["DOCTYPE","\u001f",null,null,false]]
 FAIL: <!DOCTYPE 
@@ -1481,15 +1481,15 @@ FAIL: <!DOCTYPE
  actual:   [["Character","<"],["Character","!DOCTYPE "]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE \u0000
- input: "<!DOCTYPE  "
+ input: "<!DOCTYPE ý"
  actual:   [["Character","<"],["Character","!DOCTYPE \u0000"]]
  expected: [["DOCTYPE","ï¿½",null,null,false]]
 FAIL: <!DOCTYPE \u0008
- input: "<!DOCTYPE "
+ input: "<!DOCTYPE ý"
  actual:   [["Character","<"],["Character","!DOCTYPE \b"]]
  expected: [["DOCTYPE","\b",null,null,false]]
 FAIL: <!DOCTYPE \u0009
- input: "<!DOCTYPE 	"
+ input: "<!DOCTYPE ý"
  actual:   [["Character","<"],["Character","!DOCTYPE \t"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE \u000A
@@ -1498,11 +1498,11 @@ FAIL: <!DOCTYPE \u000A
  actual:   [["Character","<"],["Character","!DOCTYPE \n"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE \u000B
- input: "<!DOCTYPE "
+ input: "<!DOCTYPE ý"
  actual:   [["Character","<"],["Character","!DOCTYPE \u000b"]]
  expected: [["DOCTYPE","\u000b",null,null,false]]
 FAIL: <!DOCTYPE \u000C
- input: "<!DOCTYPE "
+ input: "<!DOCTYPE ý"
  actual:   [["Character","<"],["Character","!DOCTYPE \f"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE \u000D
@@ -1510,7 +1510,7 @@ FAIL: <!DOCTYPE \u000D
  actual:   [["Character","<"],["Character","!DOCTYPE \r"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE \u001F
- input: "<!DOCTYPE "
+ input: "<!DOCTYPE ý"
  actual:   [["Character","<"],["Character","!DOCTYPE \u001f"]]
  expected: [["DOCTYPE","\u001f",null,null,false]]
 FAIL: <!DOCTYPE  
@@ -1602,15 +1602,15 @@ FAIL: <!DOCTYPE a
  actual:   [["Character","<"],["Character","!DOCTYPE a"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a\u0000
- input: "<!DOCTYPE a "
+ input: "<!DOCTYPE aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a\u0000"]]
  expected: [["DOCTYPE","aï¿½",null,null,false]]
 FAIL: <!DOCTYPE a\u0008
- input: "<!DOCTYPE a"
+ input: "<!DOCTYPE aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a\b"]]
  expected: [["DOCTYPE","a\b",null,null,false]]
 FAIL: <!DOCTYPE a\u0009
- input: "<!DOCTYPE a	"
+ input: "<!DOCTYPE aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a\t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a\u000A
@@ -1619,11 +1619,11 @@ FAIL: <!DOCTYPE a\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a\u000B
- input: "<!DOCTYPE a"
+ input: "<!DOCTYPE aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a\u000b"]]
  expected: [["DOCTYPE","a\u000b",null,null,false]]
 FAIL: <!DOCTYPE a\u000C
- input: "<!DOCTYPE a"
+ input: "<!DOCTYPE aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a\f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a\u000D
@@ -1631,7 +1631,7 @@ FAIL: <!DOCTYPE a\u000D
  actual:   [["Character","<"],["Character","!DOCTYPE a\r"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a\u001F
- input: "<!DOCTYPE a"
+ input: "<!DOCTYPE aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a\u001f"]]
  expected: [["DOCTYPE","a\u001f",null,null,false]]
 FAIL: <!DOCTYPE a 
@@ -1639,15 +1639,15 @@ FAIL: <!DOCTYPE a
  actual:   [["Character","<"],["Character","!DOCTYPE a "]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u0000
- input: "<!DOCTYPE a  "
+ input: "<!DOCTYPE a ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a \u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u0008
- input: "<!DOCTYPE a "
+ input: "<!DOCTYPE a ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a \b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u0009
- input: "<!DOCTYPE a 	"
+ input: "<!DOCTYPE a ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a \t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u000A
@@ -1656,11 +1656,11 @@ FAIL: <!DOCTYPE a \u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a \n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u000B
- input: "<!DOCTYPE a "
+ input: "<!DOCTYPE a ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a \u000b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u000C
- input: "<!DOCTYPE a "
+ input: "<!DOCTYPE a ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a \f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u000D
@@ -1668,7 +1668,7 @@ FAIL: <!DOCTYPE a \u000D
  actual:   [["Character","<"],["Character","!DOCTYPE a \r"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u001F
- input: "<!DOCTYPE a "
+ input: "<!DOCTYPE a ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a \u001f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a  
@@ -1744,15 +1744,15 @@ FAIL: <!DOCTYPE a PUBLIC
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u0000
- input: "<!DOCTYPE a PUBLIC "
+ input: "<!DOCTYPE a PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u0008
- input: "<!DOCTYPE a PUBLIC"
+ input: "<!DOCTYPE a PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u0009
- input: "<!DOCTYPE a PUBLIC	"
+ input: "<!DOCTYPE a PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u000A
@@ -1761,11 +1761,11 @@ FAIL: <!DOCTYPE a PUBLIC\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u000B
- input: "<!DOCTYPE a PUBLIC"
+ input: "<!DOCTYPE a PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\u000b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u000C
- input: "<!DOCTYPE a PUBLIC"
+ input: "<!DOCTYPE a PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u000D
@@ -1773,7 +1773,7 @@ FAIL: <!DOCTYPE a PUBLIC\u000D
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\r"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u001F
- input: "<!DOCTYPE a PUBLIC"
+ input: "<!DOCTYPE a PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\u001f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC 
@@ -1789,11 +1789,11 @@ FAIL: <!DOCTYPE a PUBLIC"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\""]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"\u0000
- input: "<!DOCTYPE a PUBLIC" "
+ input: "<!DOCTYPE a PUBLIC"ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\"\u0000"]]
  expected: [["DOCTYPE","a","ï¿½",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"\u0009
- input: "<!DOCTYPE a PUBLIC"	"
+ input: "<!DOCTYPE a PUBLIC"ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\"\t"]]
  expected: [["DOCTYPE","a","\t",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"\u000A
@@ -1802,11 +1802,11 @@ FAIL: <!DOCTYPE a PUBLIC"\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\"\n"]]
  expected: [["DOCTYPE","a","\n",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"\u000B
- input: "<!DOCTYPE a PUBLIC""
+ input: "<!DOCTYPE a PUBLIC"ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\"\u000b"]]
  expected: [["DOCTYPE","a","\u000b",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"\u000C
- input: "<!DOCTYPE a PUBLIC""
+ input: "<!DOCTYPE a PUBLIC"ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\"\f"]]
  expected: [["DOCTYPE","a","\f",null,false]]
 FAIL: <!DOCTYPE a PUBLIC" 
@@ -1822,11 +1822,11 @@ FAIL: <!DOCTYPE a PUBLIC""
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\"\""]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC""\u0000
- input: "<!DOCTYPE a PUBLIC"" "
+ input: "<!DOCTYPE a PUBLIC""ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\"\"\u0000"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"" \u0000
- input: "<!DOCTYPE a PUBLIC""  "
+ input: "<!DOCTYPE a PUBLIC"" ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC\"\" \u0000"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"#
@@ -1938,11 +1938,11 @@ FAIL: <!DOCTYPE a PUBLIC'
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC'\u0000
- input: "<!DOCTYPE a PUBLIC' "
+ input: "<!DOCTYPE a PUBLIC'ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'\u0000"]]
  expected: [["DOCTYPE","a","ï¿½",null,false]]
 FAIL: <!DOCTYPE a PUBLIC'\u0009
- input: "<!DOCTYPE a PUBLIC'	"
+ input: "<!DOCTYPE a PUBLIC'ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'\t"]]
  expected: [["DOCTYPE","a","\t",null,false]]
 FAIL: <!DOCTYPE a PUBLIC'\u000A
@@ -1951,11 +1951,11 @@ FAIL: <!DOCTYPE a PUBLIC'\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'\n"]]
  expected: [["DOCTYPE","a","\n",null,false]]
 FAIL: <!DOCTYPE a PUBLIC'\u000B
- input: "<!DOCTYPE a PUBLIC'"
+ input: "<!DOCTYPE a PUBLIC'ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'\u000b"]]
  expected: [["DOCTYPE","a","\u000b",null,false]]
 FAIL: <!DOCTYPE a PUBLIC'\u000C
- input: "<!DOCTYPE a PUBLIC'"
+ input: "<!DOCTYPE a PUBLIC'ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'\f"]]
  expected: [["DOCTYPE","a","\f",null,false]]
 FAIL: <!DOCTYPE a PUBLIC' 
@@ -1979,15 +1979,15 @@ FAIL: <!DOCTYPE a PUBLIC''
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u0000
- input: "<!DOCTYPE a PUBLIC'' "
+ input: "<!DOCTYPE a PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''\u0000"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u0008
- input: "<!DOCTYPE a PUBLIC''"
+ input: "<!DOCTYPE a PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''\b"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u0009
- input: "<!DOCTYPE a PUBLIC''	"
+ input: "<!DOCTYPE a PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''\t"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u000A
@@ -1996,11 +1996,11 @@ FAIL: <!DOCTYPE a PUBLIC''\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''\n"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u000B
- input: "<!DOCTYPE a PUBLIC''"
+ input: "<!DOCTYPE a PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''\u000b"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u000C
- input: "<!DOCTYPE a PUBLIC''"
+ input: "<!DOCTYPE a PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''\f"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u000D
@@ -2008,7 +2008,7 @@ FAIL: <!DOCTYPE a PUBLIC''\u000D
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''\r"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u001F
- input: "<!DOCTYPE a PUBLIC''"
+ input: "<!DOCTYPE a PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''\u001f"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC'' 
@@ -2036,19 +2036,19 @@ FAIL: <!DOCTYPE a PUBLIC'''
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'''"]]
  expected: [["DOCTYPE","a","","",false]]
 FAIL: <!DOCTYPE a PUBLIC''''\u0000
- input: "<!DOCTYPE a PUBLIC'''' "
+ input: "<!DOCTYPE a PUBLIC''''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''''\u0000"]]
  expected: [["DOCTYPE","a","","",true]]
 FAIL: <!DOCTYPE a PUBLIC''''x\u0000
- input: "<!DOCTYPE a PUBLIC''''x "
+ input: "<!DOCTYPE a PUBLIC''''xý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC''''x\u0000"]]
  expected: [["DOCTYPE","a","","",true]]
 FAIL: <!DOCTYPE a PUBLIC'''' \u0000
- input: "<!DOCTYPE a PUBLIC''''  "
+ input: "<!DOCTYPE a PUBLIC'''' ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'''' \u0000"]]
  expected: [["DOCTYPE","a","","",true]]
 FAIL: <!DOCTYPE a PUBLIC'''' x\u0000
- input: "<!DOCTYPE a PUBLIC'''' x "
+ input: "<!DOCTYPE a PUBLIC'''' xý"
  actual:   [["Character","<"],["Character","!DOCTYPE a PUBLIC'''' x\u0000"]]
  expected: [["DOCTYPE","a","","",true]]
 FAIL: <!DOCTYPE a PUBLIC''(
@@ -2320,23 +2320,23 @@ FAIL: <!DOCTYPE a SYSTEM
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u0000
- input: "<!DOCTYPE a SYSTEM "
+ input: "<!DOCTYPE a SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM \u0000
- input: "<!DOCTYPE a SYSTEM  "
+ input: "<!DOCTYPE a SYSTEM ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM \u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM x\u0000
- input: "<!DOCTYPE a SYSTEM  "
+ input: "<!DOCTYPE a SYSTEM ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM \u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u0008
- input: "<!DOCTYPE a SYSTEM"
+ input: "<!DOCTYPE a SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u0009
- input: "<!DOCTYPE a SYSTEM	"
+ input: "<!DOCTYPE a SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u000A
@@ -2345,11 +2345,11 @@ FAIL: <!DOCTYPE a SYSTEM\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u000B
- input: "<!DOCTYPE a SYSTEM"
+ input: "<!DOCTYPE a SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\u000b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u000C
- input: "<!DOCTYPE a SYSTEM"
+ input: "<!DOCTYPE a SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u000D
@@ -2357,7 +2357,7 @@ FAIL: <!DOCTYPE a SYSTEM\u000D
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\r"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u001F
- input: "<!DOCTYPE a SYSTEM"
+ input: "<!DOCTYPE a SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\u001f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM 
@@ -2373,11 +2373,11 @@ FAIL: <!DOCTYPE a SYSTEM"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\""]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM"\u0000
- input: "<!DOCTYPE a SYSTEM" "
+ input: "<!DOCTYPE a SYSTEM"ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\"\u0000"]]
  expected: [["DOCTYPE","a",null,"ï¿½",false]]
 FAIL: <!DOCTYPE a SYSTEM"\u0009
- input: "<!DOCTYPE a SYSTEM"	"
+ input: "<!DOCTYPE a SYSTEM"ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\"\t"]]
  expected: [["DOCTYPE","a",null,"\t",false]]
 FAIL: <!DOCTYPE a SYSTEM"\u000A
@@ -2386,11 +2386,11 @@ FAIL: <!DOCTYPE a SYSTEM"\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\"\n"]]
  expected: [["DOCTYPE","a",null,"\n",false]]
 FAIL: <!DOCTYPE a SYSTEM"\u000B
- input: "<!DOCTYPE a SYSTEM""
+ input: "<!DOCTYPE a SYSTEM"ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\"\u000b"]]
  expected: [["DOCTYPE","a",null,"\u000b",false]]
 FAIL: <!DOCTYPE a SYSTEM"\u000C
- input: "<!DOCTYPE a SYSTEM""
+ input: "<!DOCTYPE a SYSTEM"ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM\"\f"]]
  expected: [["DOCTYPE","a",null,"\f",false]]
 FAIL: <!DOCTYPE a SYSTEM" 
@@ -2514,11 +2514,11 @@ FAIL: <!DOCTYPE a SYSTEM'
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM'\u0000
- input: "<!DOCTYPE a SYSTEM' "
+ input: "<!DOCTYPE a SYSTEM'ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'\u0000"]]
  expected: [["DOCTYPE","a",null,"ï¿½",false]]
 FAIL: <!DOCTYPE a SYSTEM'\u0009
- input: "<!DOCTYPE a SYSTEM'	"
+ input: "<!DOCTYPE a SYSTEM'ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'\t"]]
  expected: [["DOCTYPE","a",null,"\t",false]]
 FAIL: <!DOCTYPE a SYSTEM'\u000A
@@ -2527,11 +2527,11 @@ FAIL: <!DOCTYPE a SYSTEM'\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'\n"]]
  expected: [["DOCTYPE","a",null,"\n",false]]
 FAIL: <!DOCTYPE a SYSTEM'\u000B
- input: "<!DOCTYPE a SYSTEM'"
+ input: "<!DOCTYPE a SYSTEM'ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'\u000b"]]
  expected: [["DOCTYPE","a",null,"\u000b",false]]
 FAIL: <!DOCTYPE a SYSTEM'\u000C
- input: "<!DOCTYPE a SYSTEM'"
+ input: "<!DOCTYPE a SYSTEM'ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'\f"]]
  expected: [["DOCTYPE","a",null,"\f",false]]
 FAIL: <!DOCTYPE a SYSTEM' 
@@ -2555,15 +2555,15 @@ FAIL: <!DOCTYPE a SYSTEM''
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM''\u0000
- input: "<!DOCTYPE a SYSTEM'' "
+ input: "<!DOCTYPE a SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''\u0000"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM''\u0008
- input: "<!DOCTYPE a SYSTEM''"
+ input: "<!DOCTYPE a SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''\b"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM''\u0009
- input: "<!DOCTYPE a SYSTEM''	"
+ input: "<!DOCTYPE a SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''\t"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM''\u000A
@@ -2572,11 +2572,11 @@ FAIL: <!DOCTYPE a SYSTEM''\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''\n"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM''\u000B
- input: "<!DOCTYPE a SYSTEM''"
+ input: "<!DOCTYPE a SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''\u000b"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM''\u000C
- input: "<!DOCTYPE a SYSTEM''"
+ input: "<!DOCTYPE a SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''\f"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM''\u000D
@@ -2584,7 +2584,7 @@ FAIL: <!DOCTYPE a SYSTEM''\u000D
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''\r"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM''\u001F
- input: "<!DOCTYPE a SYSTEM''"
+ input: "<!DOCTYPE a SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM''\u001f"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM'' 
@@ -2592,11 +2592,11 @@ FAIL: <!DOCTYPE a SYSTEM''
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'' "]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM'' \u0000
- input: "<!DOCTYPE a SYSTEM''  "
+ input: "<!DOCTYPE a SYSTEM'' ý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'' \u0000"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM'' x\u0000
- input: "<!DOCTYPE a SYSTEM'' x "
+ input: "<!DOCTYPE a SYSTEM'' xý"
  actual:   [["Character","<"],["Character","!DOCTYPE a SYSTEM'' x\u0000"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM''!
@@ -2892,11 +2892,11 @@ FAIL: <!DOCTYPE a a
  actual:   [["Character","<"],["Character","!DOCTYPE a a"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a a\u0000
- input: "<!DOCTYPE a a "
+ input: "<!DOCTYPE a aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a a\u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a a\u0009
- input: "<!DOCTYPE a a	"
+ input: "<!DOCTYPE a aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a a\t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a a\u000A
@@ -2905,11 +2905,11 @@ FAIL: <!DOCTYPE a a\u000A
  actual:   [["Character","<"],["Character","!DOCTYPE a a\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a a\u000B
- input: "<!DOCTYPE a a"
+ input: "<!DOCTYPE a aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a a\u000b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a a\u000C
- input: "<!DOCTYPE a a"
+ input: "<!DOCTYPE a aý"
  actual:   [["Character","<"],["Character","!DOCTYPE a a\f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a a 
@@ -3241,15 +3241,15 @@ FAIL: <!DOCTYPEa
  actual:   [["Character","<"],["Character","!DOCTYPEa"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa\u0000
- input: "<!DOCTYPEa "
+ input: "<!DOCTYPEaý"
  actual:   [["Character","<"],["Character","!DOCTYPEa\u0000"]]
  expected: [["DOCTYPE","aï¿½",null,null,false]]
 FAIL: <!DOCTYPEa\u0008
- input: "<!DOCTYPEa"
+ input: "<!DOCTYPEaý"
  actual:   [["Character","<"],["Character","!DOCTYPEa\b"]]
  expected: [["DOCTYPE","a\b",null,null,false]]
 FAIL: <!DOCTYPEa\u0009
- input: "<!DOCTYPEa	"
+ input: "<!DOCTYPEaý"
  actual:   [["Character","<"],["Character","!DOCTYPEa\t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa\u000A
@@ -3258,11 +3258,11 @@ FAIL: <!DOCTYPEa\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa\u000B
- input: "<!DOCTYPEa"
+ input: "<!DOCTYPEaý"
  actual:   [["Character","<"],["Character","!DOCTYPEa\u000b"]]
  expected: [["DOCTYPE","a\u000b",null,null,false]]
 FAIL: <!DOCTYPEa\u000C
- input: "<!DOCTYPEa"
+ input: "<!DOCTYPEaý"
  actual:   [["Character","<"],["Character","!DOCTYPEa\f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa\u000D
@@ -3270,7 +3270,7 @@ FAIL: <!DOCTYPEa\u000D
  actual:   [["Character","<"],["Character","!DOCTYPEa\r"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa\u001F
- input: "<!DOCTYPEa"
+ input: "<!DOCTYPEaý"
  actual:   [["Character","<"],["Character","!DOCTYPEa\u001f"]]
  expected: [["DOCTYPE","a\u001f",null,null,false]]
 FAIL: <!DOCTYPEa 
@@ -3278,15 +3278,15 @@ FAIL: <!DOCTYPEa
  actual:   [["Character","<"],["Character","!DOCTYPEa "]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u0000
- input: "<!DOCTYPEa  "
+ input: "<!DOCTYPEa ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa \u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u0008
- input: "<!DOCTYPEa "
+ input: "<!DOCTYPEa ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa \b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u0009
- input: "<!DOCTYPEa 	"
+ input: "<!DOCTYPEa ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa \t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u000A
@@ -3295,11 +3295,11 @@ FAIL: <!DOCTYPEa \u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa \n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u000B
- input: "<!DOCTYPEa "
+ input: "<!DOCTYPEa ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa \u000b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u000C
- input: "<!DOCTYPEa "
+ input: "<!DOCTYPEa ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa \f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u000D
@@ -3307,7 +3307,7 @@ FAIL: <!DOCTYPEa \u000D
  actual:   [["Character","<"],["Character","!DOCTYPEa \r"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u001F
- input: "<!DOCTYPEa "
+ input: "<!DOCTYPEa ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa \u001f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa  
@@ -3383,15 +3383,15 @@ FAIL: <!DOCTYPEa PUBLIC
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u0000
- input: "<!DOCTYPEa PUBLIC "
+ input: "<!DOCTYPEa PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u0008
- input: "<!DOCTYPEa PUBLIC"
+ input: "<!DOCTYPEa PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u0009
- input: "<!DOCTYPEa PUBLIC	"
+ input: "<!DOCTYPEa PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u000A
@@ -3400,11 +3400,11 @@ FAIL: <!DOCTYPEa PUBLIC\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u000B
- input: "<!DOCTYPEa PUBLIC"
+ input: "<!DOCTYPEa PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\u000b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u000C
- input: "<!DOCTYPEa PUBLIC"
+ input: "<!DOCTYPEa PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u000D
@@ -3412,7 +3412,7 @@ FAIL: <!DOCTYPEa PUBLIC\u000D
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\r"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u001F
- input: "<!DOCTYPEa PUBLIC"
+ input: "<!DOCTYPEa PUBLICý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\u001f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC 
@@ -3428,11 +3428,11 @@ FAIL: <!DOCTYPEa PUBLIC"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\""]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC"\u0000
- input: "<!DOCTYPEa PUBLIC" "
+ input: "<!DOCTYPEa PUBLIC"ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\"\u0000"]]
  expected: [["DOCTYPE","a","ï¿½",null,false]]
 FAIL: <!DOCTYPEa PUBLIC"\u0009
- input: "<!DOCTYPEa PUBLIC"	"
+ input: "<!DOCTYPEa PUBLIC"ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\"\t"]]
  expected: [["DOCTYPE","a","\t",null,false]]
 FAIL: <!DOCTYPEa PUBLIC"\u000A
@@ -3441,11 +3441,11 @@ FAIL: <!DOCTYPEa PUBLIC"\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\"\n"]]
  expected: [["DOCTYPE","a","\n",null,false]]
 FAIL: <!DOCTYPEa PUBLIC"\u000B
- input: "<!DOCTYPEa PUBLIC""
+ input: "<!DOCTYPEa PUBLIC"ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\"\u000b"]]
  expected: [["DOCTYPE","a","\u000b",null,false]]
 FAIL: <!DOCTYPEa PUBLIC"\u000C
- input: "<!DOCTYPEa PUBLIC""
+ input: "<!DOCTYPEa PUBLIC"ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC\"\f"]]
  expected: [["DOCTYPE","a","\f",null,false]]
 FAIL: <!DOCTYPEa PUBLIC" 
@@ -3569,11 +3569,11 @@ FAIL: <!DOCTYPEa PUBLIC'
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC'"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC'\u0000
- input: "<!DOCTYPEa PUBLIC' "
+ input: "<!DOCTYPEa PUBLIC'ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC'\u0000"]]
  expected: [["DOCTYPE","a","ï¿½",null,false]]
 FAIL: <!DOCTYPEa PUBLIC'\u0009
- input: "<!DOCTYPEa PUBLIC'	"
+ input: "<!DOCTYPEa PUBLIC'ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC'\t"]]
  expected: [["DOCTYPE","a","\t",null,false]]
 FAIL: <!DOCTYPEa PUBLIC'\u000A
@@ -3582,11 +3582,11 @@ FAIL: <!DOCTYPEa PUBLIC'\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC'\n"]]
  expected: [["DOCTYPE","a","\n",null,false]]
 FAIL: <!DOCTYPEa PUBLIC'\u000B
- input: "<!DOCTYPEa PUBLIC'"
+ input: "<!DOCTYPEa PUBLIC'ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC'\u000b"]]
  expected: [["DOCTYPE","a","\u000b",null,false]]
 FAIL: <!DOCTYPEa PUBLIC'\u000C
- input: "<!DOCTYPEa PUBLIC'"
+ input: "<!DOCTYPEa PUBLIC'ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC'\f"]]
  expected: [["DOCTYPE","a","\f",null,false]]
 FAIL: <!DOCTYPEa PUBLIC' 
@@ -3610,15 +3610,15 @@ FAIL: <!DOCTYPEa PUBLIC''
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u0000
- input: "<!DOCTYPEa PUBLIC'' "
+ input: "<!DOCTYPEa PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''\u0000"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u0008
- input: "<!DOCTYPEa PUBLIC''"
+ input: "<!DOCTYPEa PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''\b"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u0009
- input: "<!DOCTYPEa PUBLIC''	"
+ input: "<!DOCTYPEa PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''\t"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u000A
@@ -3627,11 +3627,11 @@ FAIL: <!DOCTYPEa PUBLIC''\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''\n"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u000B
- input: "<!DOCTYPEa PUBLIC''"
+ input: "<!DOCTYPEa PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''\u000b"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u000C
- input: "<!DOCTYPEa PUBLIC''"
+ input: "<!DOCTYPEa PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''\f"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u000D
@@ -3639,7 +3639,7 @@ FAIL: <!DOCTYPEa PUBLIC''\u000D
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''\r"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u001F
- input: "<!DOCTYPEa PUBLIC''"
+ input: "<!DOCTYPEa PUBLIC''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa PUBLIC''\u001f"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC'' 
@@ -3935,15 +3935,15 @@ FAIL: <!DOCTYPEa SYSTEM
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u0000
- input: "<!DOCTYPEa SYSTEM "
+ input: "<!DOCTYPEa SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u0008
- input: "<!DOCTYPEa SYSTEM"
+ input: "<!DOCTYPEa SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u0009
- input: "<!DOCTYPEa SYSTEM	"
+ input: "<!DOCTYPEa SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u000A
@@ -3952,11 +3952,11 @@ FAIL: <!DOCTYPEa SYSTEM\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u000B
- input: "<!DOCTYPEa SYSTEM"
+ input: "<!DOCTYPEa SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\u000b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u000C
- input: "<!DOCTYPEa SYSTEM"
+ input: "<!DOCTYPEa SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u000D
@@ -3964,7 +3964,7 @@ FAIL: <!DOCTYPEa SYSTEM\u000D
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\r"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u001F
- input: "<!DOCTYPEa SYSTEM"
+ input: "<!DOCTYPEa SYSTEMý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\u001f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM 
@@ -3980,11 +3980,11 @@ FAIL: <!DOCTYPEa SYSTEM"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\""]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM"\u0000
- input: "<!DOCTYPEa SYSTEM" "
+ input: "<!DOCTYPEa SYSTEM"ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\"\u0000"]]
  expected: [["DOCTYPE","a",null,"ï¿½",false]]
 FAIL: <!DOCTYPEa SYSTEM"\u0009
- input: "<!DOCTYPEa SYSTEM"	"
+ input: "<!DOCTYPEa SYSTEM"ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\"\t"]]
  expected: [["DOCTYPE","a",null,"\t",false]]
 FAIL: <!DOCTYPEa SYSTEM"\u000A
@@ -3993,11 +3993,11 @@ FAIL: <!DOCTYPEa SYSTEM"\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\"\n"]]
  expected: [["DOCTYPE","a",null,"\n",false]]
 FAIL: <!DOCTYPEa SYSTEM"\u000B
- input: "<!DOCTYPEa SYSTEM""
+ input: "<!DOCTYPEa SYSTEM"ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\"\u000b"]]
  expected: [["DOCTYPE","a",null,"\u000b",false]]
 FAIL: <!DOCTYPEa SYSTEM"\u000C
- input: "<!DOCTYPEa SYSTEM""
+ input: "<!DOCTYPEa SYSTEM"ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM\"\f"]]
  expected: [["DOCTYPE","a",null,"\f",false]]
 FAIL: <!DOCTYPEa SYSTEM" 
@@ -4121,11 +4121,11 @@ FAIL: <!DOCTYPEa SYSTEM'
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM'"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM'\u0000
- input: "<!DOCTYPEa SYSTEM' "
+ input: "<!DOCTYPEa SYSTEM'ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM'\u0000"]]
  expected: [["DOCTYPE","a",null,"ï¿½",false]]
 FAIL: <!DOCTYPEa SYSTEM'\u0009
- input: "<!DOCTYPEa SYSTEM'	"
+ input: "<!DOCTYPEa SYSTEM'ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM'\t"]]
  expected: [["DOCTYPE","a",null,"\t",false]]
 FAIL: <!DOCTYPEa SYSTEM'\u000A
@@ -4134,11 +4134,11 @@ FAIL: <!DOCTYPEa SYSTEM'\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM'\n"]]
  expected: [["DOCTYPE","a",null,"\n",false]]
 FAIL: <!DOCTYPEa SYSTEM'\u000B
- input: "<!DOCTYPEa SYSTEM'"
+ input: "<!DOCTYPEa SYSTEM'ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM'\u000b"]]
  expected: [["DOCTYPE","a",null,"\u000b",false]]
 FAIL: <!DOCTYPEa SYSTEM'\u000C
- input: "<!DOCTYPEa SYSTEM'"
+ input: "<!DOCTYPEa SYSTEM'ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM'\f"]]
  expected: [["DOCTYPE","a",null,"\f",false]]
 FAIL: <!DOCTYPEa SYSTEM' 
@@ -4162,15 +4162,15 @@ FAIL: <!DOCTYPEa SYSTEM''
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM''\u0000
- input: "<!DOCTYPEa SYSTEM'' "
+ input: "<!DOCTYPEa SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''\u0000"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPEa SYSTEM''\u0008
- input: "<!DOCTYPEa SYSTEM''"
+ input: "<!DOCTYPEa SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''\b"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPEa SYSTEM''\u0009
- input: "<!DOCTYPEa SYSTEM''	"
+ input: "<!DOCTYPEa SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''\t"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM''\u000A
@@ -4179,11 +4179,11 @@ FAIL: <!DOCTYPEa SYSTEM''\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''\n"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM''\u000B
- input: "<!DOCTYPEa SYSTEM''"
+ input: "<!DOCTYPEa SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''\u000b"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPEa SYSTEM''\u000C
- input: "<!DOCTYPEa SYSTEM''"
+ input: "<!DOCTYPEa SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''\f"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM''\u000D
@@ -4191,7 +4191,7 @@ FAIL: <!DOCTYPEa SYSTEM''\u000D
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''\r"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM''\u001F
- input: "<!DOCTYPEa SYSTEM''"
+ input: "<!DOCTYPEa SYSTEM''ý"
  actual:   [["Character","<"],["Character","!DOCTYPEa SYSTEM''\u001f"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPEa SYSTEM'' 
@@ -4491,11 +4491,11 @@ FAIL: <!DOCTYPEa a
  actual:   [["Character","<"],["Character","!DOCTYPEa a"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa a\u0000
- input: "<!DOCTYPEa a "
+ input: "<!DOCTYPEa aý"
  actual:   [["Character","<"],["Character","!DOCTYPEa a\u0000"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa a\u0009
- input: "<!DOCTYPEa a	"
+ input: "<!DOCTYPEa aý"
  actual:   [["Character","<"],["Character","!DOCTYPEa a\t"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa a\u000A
@@ -4504,11 +4504,11 @@ FAIL: <!DOCTYPEa a\u000A
  actual:   [["Character","<"],["Character","!DOCTYPEa a\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa a\u000B
- input: "<!DOCTYPEa a"
+ input: "<!DOCTYPEa aý"
  actual:   [["Character","<"],["Character","!DOCTYPEa a\u000b"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa a\u000C
- input: "<!DOCTYPEa a"
+ input: "<!DOCTYPEa aý"
  actual:   [["Character","<"],["Character","!DOCTYPEa a\f"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa a 
@@ -4817,11 +4817,11 @@ FAIL: <.
  expected: [["Character","<."]]
 PASS: </
 FAIL: </\u0000
- input: "</ "
+ input: "</ý"
  actual:   []
  expected: [["Comment","ï¿½"]]
 FAIL: </\u0009
- input: "</	"
+ input: "</ý"
  actual:   []
  expected: [["Comment","\t"]]
 FAIL: </\u000A
@@ -4830,11 +4830,11 @@ FAIL: </\u000A
  actual:   []
  expected: [["Comment","\n"]]
 FAIL: </\u000B
- input: "</"
+ input: "</ý"
  actual:   []
  expected: [["Comment","\u000b"]]
 FAIL: </\u000C
- input: "</"
+ input: "</ý"
  actual:   []
  expected: [["Comment","\f"]]
 FAIL: </ 
@@ -4842,7 +4842,7 @@ FAIL: </
  actual:   []
  expected: [["Comment"," "]]
 FAIL: </ \u0000
- input: "</  "
+ input: "</ ý"
  actual:   [["Character","\u0000"]]
  expected: [["Comment"," ï¿½"]]
 FAIL: </!
@@ -4978,11 +4978,11 @@ FAIL: <?
  actual:   [["Character","<"]]
  expected: [["Comment","?"]]
 FAIL: <?\u0000
- input: "<? "
+ input: "<?ý"
  actual:   [["Character","<"],["Character","?\u0000"]]
  expected: [["Comment","?ï¿½"]]
 FAIL: <?\u0009
- input: "<?	"
+ input: "<?ý"
  actual:   [["Character","<"],["Character","?\t"]]
  expected: [["Comment","?\t"]]
 FAIL: <?\u000A
@@ -4991,11 +4991,11 @@ FAIL: <?\u000A
  actual:   [["Character","<"],["Character","?\n"]]
  expected: [["Comment","?\n"]]
 FAIL: <?\u000B
- input: "<?"
+ input: "<?ý"
  actual:   [["Character","<"],["Character","?\u000b"]]
  expected: [["Comment","?\u000b"]]
 FAIL: <?\u000C
- input: "<?"
+ input: "<?ý"
  actual:   [["Character","<"],["Character","?\f"]]
  expected: [["Comment","?\f"]]
 FAIL: <? 
@@ -5003,7 +5003,7 @@ FAIL: <?
  actual:   [["Character","<"],["Character","? "]]
  expected: [["Comment","? "]]
 FAIL: <? \u0000
- input: "<?  "
+ input: "<? ý"
  actual:   [["Character","<"],["Character","? \u0000"]]
  expected: [["Comment","? ï¿½"]]
 FAIL: <?!
@@ -5139,15 +5139,15 @@ FAIL: <a>
  actual:   [["StartTag","a"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a\u0000>
- input: "<a >"
+ input: "<aý>"
  actual:   [["StartTag","aÃ¿FD"]]
  expected: [["StartTag","aï¿½",{}]]
 FAIL: <a\u0008>
- input: "<a>"
+ input: "<aý>"
  actual:   [["StartTag","a\b"]]
  expected: [["StartTag","a\b",{}]]
 FAIL: <a\u0009>
- input: "<a	>"
+ input: "<aý>"
  actual:   []
  expected: [["StartTag","a",{}]]
 FAIL: <a\u000A>
@@ -5156,11 +5156,11 @@ FAIL: <a\u000A>
  actual:   []
  expected: [["StartTag","a",{}]]
 FAIL: <a\u000B>
- input: "<a>"
+ input: "<aý>"
  actual:   [["StartTag","a\u000b"]]
  expected: [["StartTag","a\u000b",{}]]
 FAIL: <a\u000C>
- input: "<a>"
+ input: "<aý>"
  actual:   []
  expected: [["StartTag","a",{}]]
 FAIL: <a\u000D>
@@ -5168,7 +5168,7 @@ FAIL: <a\u000D>
  actual:   [["StartTag","a\r"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a\u001F>
- input: "<a>"
+ input: "<aý>"
  actual:   [["StartTag","a\u001f"]]
  expected: [["StartTag","a\u001f",{}]]
 FAIL: <a >
@@ -5176,15 +5176,15 @@ FAIL: <a >
  actual:   []
  expected: [["StartTag","a",{}]]
 FAIL: <a \u0000>
- input: "<a  >"
+ input: "<a ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{"ï¿½":""}]]
 FAIL: <a \u0008>
- input: "<a >"
+ input: "<a ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{"\b":""}]]
 FAIL: <a \u0009>
- input: "<a 	>"
+ input: "<a ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a \u000A>
@@ -5193,11 +5193,11 @@ FAIL: <a \u000A>
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a \u000B>
- input: "<a >"
+ input: "<a ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{"\u000b":""}]]
 FAIL: <a \u000C>
- input: "<a >"
+ input: "<a ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a \u000D>
@@ -5205,7 +5205,7 @@ FAIL: <a \u000D>
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a \u001F>
- input: "<a >"
+ input: "<a ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{"\u001f":""}]]
 FAIL: <a  >
@@ -5309,15 +5309,15 @@ FAIL: <a a>
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a\u0000>
- input: "<a a >"
+ input: "<a aý>"
  actual:   [["Character","\u0000>"]]
  expected: [["StartTag","a",{"aï¿½":""}]]
 FAIL: <a a\u0008>
- input: "<a a>"
+ input: "<a aý>"
  actual:   [["Character","\b>"]]
  expected: [["StartTag","a",{"a\b":""}]]
 FAIL: <a a\u0009>
- input: "<a a	>"
+ input: "<a aý>"
  actual:   [["Character","\t>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a\u000A>
@@ -5326,11 +5326,11 @@ FAIL: <a a\u000A>
  actual:   [["Character","\n>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a\u000B>
- input: "<a a>"
+ input: "<a aý>"
  actual:   [["Character","\u000b>"]]
  expected: [["StartTag","a",{"a\u000b":""}]]
 FAIL: <a a\u000C>
- input: "<a a>"
+ input: "<a aý>"
  actual:   [["Character","\f>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a\u000D>
@@ -5338,7 +5338,7 @@ FAIL: <a a\u000D>
  actual:   [["Character","\r>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a\u001F>
- input: "<a a>"
+ input: "<a aý>"
  actual:   [["Character","\u001f>"]]
  expected: [["StartTag","a",{"a\u001f":""}]]
 FAIL: <a a >
@@ -5346,15 +5346,15 @@ FAIL: <a a >
  actual:   [["Character"," >"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a \u0000>
- input: "<a a  >"
+ input: "<a a ý>"
  actual:   [["Character"," \u0000>"]]
  expected: [["StartTag","a",{"a":"","ï¿½":""}]]
 FAIL: <a a \u0008>
- input: "<a a >"
+ input: "<a a ý>"
  actual:   [["Character"," \b>"]]
  expected: [["StartTag","a",{"a":"","\b":""}]]
 FAIL: <a a \u0009>
- input: "<a a 	>"
+ input: "<a a ý>"
  actual:   [["Character"," \t>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a \u000A>
@@ -5363,11 +5363,11 @@ FAIL: <a a \u000A>
  actual:   [["Character"," \n>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a \u000B>
- input: "<a a >"
+ input: "<a a ý>"
  actual:   [["Character"," \u000b>"]]
  expected: [["StartTag","a",{"a":"","\u000b":""}]]
 FAIL: <a a \u000C>
- input: "<a a >"
+ input: "<a a ý>"
  actual:   [["Character"," \f>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a \u000D>
@@ -5375,7 +5375,7 @@ FAIL: <a a \u000D>
  actual:   [["Character"," \r>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a \u001F>
- input: "<a a >"
+ input: "<a a ý>"
  actual:   [["Character"," \u001f>"]]
  expected: [["StartTag","a",{"a":"","\u001f":""}]]
 FAIL: <a a  >
@@ -5555,15 +5555,15 @@ FAIL: <a a=>
  actual:   [["Character","=>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=\u0000>
- input: "<a a= >"
+ input: "<a a=ý>"
  actual:   [["Character","=\u0000>"]]
  expected: [["StartTag","a",{"a":"ï¿½"}]]
 FAIL: <a a=\u0008>
- input: "<a a=>"
+ input: "<a a=ý>"
  actual:   [["Character","=\b>"]]
  expected: [["StartTag","a",{"a":"\b"}]]
 FAIL: <a a=\u0009>
- input: "<a a=	>"
+ input: "<a a=ý>"
  actual:   [["Character","=\t>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=\u000A>
@@ -5572,11 +5572,11 @@ FAIL: <a a=\u000A>
  actual:   [["Character","=\n>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=\u000B>
- input: "<a a=>"
+ input: "<a a=ý>"
  actual:   [["Character","=\u000b>"]]
  expected: [["StartTag","a",{"a":"\u000b"}]]
 FAIL: <a a=\u000C>
- input: "<a a=>"
+ input: "<a a=ý>"
  actual:   [["Character","=\f>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=\u000D>
@@ -5584,7 +5584,7 @@ FAIL: <a a=\u000D>
  actual:   [["Character","=\r>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=\u001F>
- input: "<a a=>"
+ input: "<a a=ý>"
  actual:   [["Character","=\u001f>"]]
  expected: [["StartTag","a",{"a":"\u001f"}]]
 FAIL: <a a= >
@@ -5600,11 +5600,11 @@ FAIL: <a a="">
  actual:   [["Character","=\"\">"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a="\u0000">
- input: "<a a=" ">"
+ input: "<a a="ý">"
  actual:   [["Character","=\"\u0000\">"]]
  expected: [["StartTag","a",{"a":"ï¿½"}]]
 FAIL: <a a="\u0009">
- input: "<a a="	">"
+ input: "<a a="ý">"
  actual:   [["Character","=\"\t\">"]]
  expected: [["StartTag","a",{"a":"\t"}]]
 FAIL: <a a="\u000A">
@@ -5613,11 +5613,11 @@ FAIL: <a a="\u000A">
  actual:   [["Character","=\"\n\">"]]
  expected: [["StartTag","a",{"a":"\n"}]]
 FAIL: <a a="\u000B">
- input: "<a a="">"
+ input: "<a a="ý">"
  actual:   [["Character","=\"\u000b\">"]]
  expected: [["StartTag","a",{"a":"\u000b"}]]
 FAIL: <a a="\u000C">
- input: "<a a="">"
+ input: "<a a="ý">"
  actual:   [["Character","=\"\f\">"]]
  expected: [["StartTag","a",{"a":"\f"}]]
 FAIL: <a a=" ">
@@ -5749,11 +5749,11 @@ FAIL: <a a=''>
  actual:   [["Character","=''>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a='\u0000'>
- input: "<a a=' '>"
+ input: "<a a='ý'>"
  actual:   [["Character","='\u0000'>"]]
  expected: [["StartTag","a",{"a":"ï¿½"}]]
 FAIL: <a a='\u0009'>
- input: "<a a='	'>"
+ input: "<a a='ý'>"
  actual:   [["Character","='\t'>"]]
  expected: [["StartTag","a",{"a":"\t"}]]
 FAIL: <a a='\u000A'>
@@ -5762,11 +5762,11 @@ FAIL: <a a='\u000A'>
  actual:   [["Character","='\n'>"]]
  expected: [["StartTag","a",{"a":"\n"}]]
 FAIL: <a a='\u000B'>
- input: "<a a=''>"
+ input: "<a a='ý'>"
  actual:   [["Character","='\u000b'>"]]
  expected: [["StartTag","a",{"a":"\u000b"}]]
 FAIL: <a a='\u000C'>
- input: "<a a=''>"
+ input: "<a a='ý'>"
  actual:   [["Character","='\f'>"]]
  expected: [["StartTag","a",{"a":"\f"}]]
 FAIL: <a a=' '>
@@ -5794,15 +5794,15 @@ FAIL: <a a=''>
  actual:   [["Character","=''>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=''\u0000>
- input: "<a a='' >"
+ input: "<a a=''ý>"
  actual:   [["Character","=''\u0000>"]]
  expected: [["StartTag","a",{"a":"","ï¿½":""}]]
 FAIL: <a a=''\u0008>
- input: "<a a=''>"
+ input: "<a a=''ý>"
  actual:   [["Character","=''\b>"]]
  expected: [["StartTag","a",{"a":"","\b":""}]]
 FAIL: <a a=''\u0009>
- input: "<a a=''	>"
+ input: "<a a=''ý>"
  actual:   [["Character","=''\t>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=''\u000A>
@@ -5811,11 +5811,11 @@ FAIL: <a a=''\u000A>
  actual:   [["Character","=''\n>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=''\u000B>
- input: "<a a=''>"
+ input: "<a a=''ý>"
  actual:   [["Character","=''\u000b>"]]
  expected: [["StartTag","a",{"a":"","\u000b":""}]]
 FAIL: <a a=''\u000C>
- input: "<a a=''>"
+ input: "<a a=''ý>"
  actual:   [["Character","=''\f>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=''\u000D>
@@ -5823,7 +5823,7 @@ FAIL: <a a=''\u000D>
  actual:   [["Character","=''\r>"]]
  expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a=''\u001F>
- input: "<a a=''>"
+ input: "<a a=''ý>"
  actual:   [["Character","=''\u001f>"]]
  expected: [["StartTag","a",{"a":"","\u001f":""}]]
 FAIL: <a a='' >
@@ -6091,15 +6091,15 @@ FAIL: <a a=a>
  actual:   [["Character","=a>"]]
  expected: [["StartTag","a",{"a":"a"}]]
 FAIL: <a a=a\u0000>
- input: "<a a=a >"
+ input: "<a a=aý>"
  actual:   [["Character","=a\u0000>"]]
  expected: [["StartTag","a",{"a":"aï¿½"}]]
 FAIL: <a a=a\u0008>
- input: "<a a=a>"
+ input: "<a a=aý>"
  actual:   [["Character","=a\b>"]]
  expected: [["StartTag","a",{"a":"a\b"}]]
 FAIL: <a a=a\u0009>
- input: "<a a=a	>"
+ input: "<a a=aý>"
  actual:   [["Character","=a\t>"]]
  expected: [["StartTag","a",{"a":"a"}]]
 FAIL: <a a=a\u000A>
@@ -6108,11 +6108,11 @@ FAIL: <a a=a\u000A>
  actual:   [["Character","=a\n>"]]
  expected: [["StartTag","a",{"a":"a"}]]
 FAIL: <a a=a\u000B>
- input: "<a a=a>"
+ input: "<a a=aý>"
  actual:   [["Character","=a\u000b>"]]
  expected: [["StartTag","a",{"a":"a\u000b"}]]
 FAIL: <a a=a\u000C>
- input: "<a a=a>"
+ input: "<a a=aý>"
  actual:   [["Character","=a\f>"]]
  expected: [["StartTag","a",{"a":"a"}]]
 FAIL: <a a=a\u000D>
@@ -6120,7 +6120,7 @@ FAIL: <a a=a\u000D>
  actual:   [["Character","=a\r>"]]
  expected: [["StartTag","a",{"a":"a"}]]
 FAIL: <a a=a\u001F>
- input: "<a a=a>"
+ input: "<a a=aý>"
  actual:   [["Character","=a\u001f>"]]
  expected: [["StartTag","a",{"a":"a\u001f"}]]
 FAIL: <a a=a >
@@ -6368,11 +6368,11 @@ FAIL: <a/>
  actual:   []
  expected: [["StartTag","a",{},true]]
 FAIL: <a/\u0000>
- input: "<a/ >"
+ input: "<a/ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{"ï¿½":""}]]
 FAIL: <a/\u0009>
- input: "<a/	>"
+ input: "<a/ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a/\u000A>
@@ -6381,11 +6381,11 @@ FAIL: <a/\u000A>
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a/\u000B>
- input: "<a/>"
+ input: "<a/ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{"\u000b":""}]]
 FAIL: <a/\u000C>
- input: "<a/>"
+ input: "<a/ý>"
  actual:   [["Character",">"]]
  expected: [["StartTag","a",{}]]
 FAIL: <a/ >

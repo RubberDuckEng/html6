@@ -8,6 +8,17 @@ import 'package:test/test.dart';
 import '../test/tokenizer_test_suite.dart';
 import '../test/matchers.dart';
 
+// This must exist somewhere in Dart?
+void removeBytesGitThinksAreBinary(List<int> bytes, int replacement) {
+  for (var i = 0; i < bytes.length; i++) {
+    var byte = bytes[i];
+    // Control characters other than \n or \m?
+    if (byte < 0x20 && !(byte == 0xA || byte == 0xD)) {
+      bytes[i] = replacement;
+    }
+  }
+}
+
 void main(List<String> arguments) {
   var tokenizerDir = p.join('html5lib-tests', 'tokenizer');
   var suite = TokenizerTestSuite.fromPath(tokenizerDir);
@@ -42,6 +53,9 @@ void main(List<String> arguments) {
     }
 
     var testExpectations = File("test_expectations.txt");
-    testExpectations.writeAsStringSync(resultsString);
+    // Hacky to prevent test_expectations being treated as binary.
+    var bytes = utf8.encode(resultsString);
+    removeBytesGitThinksAreBinary(bytes, unicodeReplacementCharacterRune);
+    testExpectations.writeAsBytesSync(bytes);
   }
 }
