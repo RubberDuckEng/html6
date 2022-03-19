@@ -224,9 +224,9 @@ class Tokenizer {
             continue;
           }
           if (isAsciiAlpha(char)) {
-            // if (isAsciiUpperAlpha(char)) {
-            //   char += 0x20;
-            // }
+            if (isAsciiUpperAlpha(char)) {
+              char += 0x20;
+            }
             currentTag = StartTagToken.fromCodepoint(char);
             state = TokenizerState.tagName;
             break reconsume;

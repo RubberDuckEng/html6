@@ -8,6 +8,8 @@ class _MatchesToken extends Matcher {
 
   const _MatchesToken(this.expectation);
 
+  // FIXME: This is redundant with toTestJson implementations
+  // Could we just check exepctation.json == token.toTestJson?
   bool nameMatchesType(String name, Token token) {
     if (name == "Comment") {
       return token is CommentToken;
