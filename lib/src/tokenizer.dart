@@ -8,18 +8,27 @@ class CommentToken extends Token {
 }
 
 class StartTagToken extends Token {
-  String tagName;
-  bool selfClosing = false;
-  Map<String, String> attributes = {};
+  final String tagName;
+  final bool isSelfClosing;
+  final Map<String, String> attributes;
 
-  StartTagToken(this.tagName);
-
-  StartTagToken.fromCodepoint(int codePoint)
-      : tagName = String.fromCharCode(codePoint);
+  StartTagToken(this.tagName,
+      {this.attributes = const {}, this.isSelfClosing = false});
 
   @override
   List toTestJson() {
     return ['StartTag', tagName, attributes];
+  }
+}
+
+class EndTagToken extends Token {
+  final String tagName;
+
+  EndTagToken(this.tagName);
+
+  @override
+  List toTestJson() {
+    return ['EndTag', tagName];
   }
 }
 
@@ -200,34 +209,73 @@ class AttributeBuilder {
   }
 }
 
-class Tokenizer {
-  final InputManager input;
-  TokenizerState state = TokenizerState.data;
-  StartTagToken? currentTag;
+enum TagTokenType {
+  startTag,
+  endTag,
+}
+
+class TagTokenBuilder {
+  TagTokenType tagTokenType;
+  bool isSelfClosing;
+  String tagName;
+  // Could just be a list of AttributeBuilders?
+  Map<String, String> attributes;
   AttributeBuilder? currentAttribute;
 
-  Tokenizer(this.input);
+  TagTokenBuilder.startTag({int? firstCodePoint})
+      : tagTokenType = TagTokenType.startTag,
+        isSelfClosing = false,
+        tagName =
+            firstCodePoint == null ? "" : String.fromCharCode(firstCodePoint),
+        attributes = {};
 
-  Token emitCurrentTag() {
-    assert(currentTag != null);
-    if (currentAttribute != null) {
-      finishAttribute();
+  TagTokenBuilder.endTag()
+      : tagTokenType = TagTokenType.endTag,
+        isSelfClosing = false,
+        tagName = "",
+        attributes = {};
+
+  void startAttributeName(String name) {
+    assert(currentAttribute == null);
+    currentAttribute = AttributeBuilder(name: name);
+  }
+
+  Token buildToken() {
+    if (tagTokenType == TagTokenType.startTag) {
+      if (currentAttribute != null) {
+        finishAttribute();
+      }
+      return StartTagToken(tagName,
+          attributes: attributes, isSelfClosing: isSelfClosing);
+    } else {
+      return EndTagToken(tagName);
     }
-    var tag = currentTag!;
-    currentTag = null;
-    return tag;
   }
 
   void finishAttribute() {
     AttributeBuilder attribute = currentAttribute!;
     currentAttribute = null;
-    var tag = currentTag!;
     var name = attribute._name.toString();
-    if (tag.attributes.containsKey(name)) {
+    if (attributes.containsKey(name)) {
       return;
     }
     var value = attribute._value.toString();
-    tag.attributes[name] = value;
+    attributes[name] = value;
+  }
+}
+
+class Tokenizer {
+  final InputManager input;
+  TokenizerState state = TokenizerState.data;
+  TagTokenBuilder? currentTag;
+
+  Tokenizer(this.input);
+
+  Token emitCurrentTag() {
+    assert(currentTag != null);
+    var tag = currentTag!;
+    currentTag = null;
+    return tag.buildToken();
   }
 
   // This shouldn't need to take a char?
@@ -268,7 +316,7 @@ class Tokenizer {
             if (isAsciiUpperAlpha(char)) {
               char += 0x20;
             }
-            currentTag = StartTagToken.fromCodepoint(char);
+            currentTag = TagTokenBuilder.startTag(firstCodePoint: char);
             state = TokenizerState.tagName;
             break reconsume;
           }
@@ -311,7 +359,7 @@ class Tokenizer {
 
         case TokenizerState.selfClosingStartTag:
           if (char == greaterThanSign) {
-            currentTag!.selfClosing = true;
+            currentTag!.isSelfClosing = true;
             state = TokenizerState.data;
             return emitCurrentTag();
           }
@@ -329,7 +377,7 @@ class Tokenizer {
 // U+003D EQUALS SIGN (=)
 // This is an unexpected-equals-sign-before-attribute-name parse error. Start a new attribute in the current tag token. Set that attribute's name to the current input character, and its value to the empty string. Switch to the attribute name state.
 
-          currentAttribute = AttributeBuilder(name: "");
+          currentTag!.startAttributeName("");
           reconsumeIn(char, TokenizerState.attributeName);
           continue;
 
@@ -348,7 +396,7 @@ class Tokenizer {
 // Append the lowercase version of the current input character (add 0x0020 to the character's code point) to the current attribute's name.
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current attribute's name.
-          currentAttribute!.appendToName(char);
+          currentTag!.currentAttribute!.appendToName(char);
           continue;
 
         case TokenizerState.afterAttributeName:
@@ -367,7 +415,7 @@ class Tokenizer {
             state = TokenizerState.data;
             return emitCurrentTag();
           }
-          currentAttribute = AttributeBuilder(name: "");
+          currentTag!.startAttributeName("");
           reconsumeIn(char, TokenizerState.attributeName);
           continue;
 
@@ -399,12 +447,24 @@ class Tokenizer {
           }
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current attribute's value.
-          currentAttribute!.appendToValue(char);
+          currentTag!.currentAttribute!.appendToValue(char);
           continue;
 
         case TokenizerState.endTagOpen:
-          // TODO: Implement.
-          state = TokenizerState.data;
+          if (isAsciiAlpha(char)) {
+            currentTag = TagTokenBuilder.endTag();
+            reconsumeIn(char, TokenizerState.tagName);
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            continue;
+          }
+// EOF
+// This is an eof-before-tag-name parse error. Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS character token and an end-of-file token.
+// Anything else
+// This is an invalid-first-character-of-tag-name parse error. Create a comment token whose data is the empty string. Reconsume in the bogus comment state.
+          state = TokenizerState.data; // Wrong
           continue;
         default:
           throw Exception("Reached invalid tokenizer state: $state");

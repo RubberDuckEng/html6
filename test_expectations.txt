@@ -4,47 +4,41 @@ FAIL: PLAINTEXT content model flag
  expected: [["Character","<head>&body;"]]
 FAIL: PLAINTEXT with seeming close tag
  input: "</plaintext>&body;"
- actual:   [["Character","laintext>&body;"]]
+ actual:   [["EndTag","plaintext"],["Character","&body;"]]
  expected: [["Character","</plaintext>&body;"]]
 FAIL: End tag closing RCDATA or RAWTEXT
  input: "foo</xmp>"
- actual:   [["Character","foomp>"]]
+ actual:   [["EndTag","xmp"]]
  expected: [["Character","foo"],["EndTag","xmp"]]
 FAIL: End tag closing RCDATA or RAWTEXT (case-insensitivity)
  input: "foo</xMp>"
- actual:   [["Character","fooMp>"]]
+ actual:   [["EndTag","xmp"]]
  expected: [["Character","foo"],["EndTag","xmp"]]
-FAIL: End tag closing RCDATA or RAWTEXT (ending with space)
- input: "foo</xmp "
- actual:   [["Character","foomp "]]
- expected: [["Character","foo"]]
+PASS: End tag closing RCDATA or RAWTEXT (ending with space)
 FAIL: End tag closing RCDATA or RAWTEXT (ending with EOF)
  input: "foo</xmp"
- actual:   [["Character","foomp"]]
+ actual:   [["Character","foo"]]
  expected: [["Character","foo</xmp"]]
-FAIL: End tag closing RCDATA or RAWTEXT (ending with slash)
- input: "foo</xmp/"
- actual:   [["Character","foomp/"]]
- expected: [["Character","foo"]]
+PASS: End tag closing RCDATA or RAWTEXT (ending with slash)
 FAIL: End tag not closing RCDATA or RAWTEXT (ending with left-angle-bracket)
  input: "foo</xmp<"
- actual:   [["Character","foomp"]]
+ actual:   [["Character","foo"]]
  expected: [["Character","foo</xmp<"]]
 FAIL: End tag with incorrect name in RCDATA or RAWTEXT
  input: "</foo>bar</xmp>"
- actual:   [["Character","oo>barmp>"]]
+ actual:   [["EndTag","foo"],["EndTag","xmp"]]
  expected: [["Character","</foo>bar"],["EndTag","xmp"]]
 FAIL: Partial end tags leading straight into partial end tags
  input: "</xmp</xmp</xmp>"
- actual:   [["Character","mpmpmp>"]]
+ actual:   [["EndTag","xmp<"]]
  expected: [["Character","</xmp</xmp"],["EndTag","xmp"]]
 FAIL: End tag with incorrect name in RCDATA or RAWTEXT (starting like correct name)
  input: "</foo>bar</xmpaar>"
- actual:   [["Character","oo>barmpaar>"]]
+ actual:   [["EndTag","foo"],["EndTag","xmpaar"]]
  expected: [["Character","</foo>bar</xmpaar>"]]
 FAIL: End tag closing RCDATA or RAWTEXT, switching back to PCDATA
  input: "foo</xmp></baz>"
- actual:   [["Character","foomp>az>"]]
+ actual:   [["EndTag","xmp"],["EndTag","baz"]]
  expected: [["Character","foo"],["EndTag","xmp"],["EndTag","baz"]]
 PASS: RAWTEXT w/ something looking like an entity
 FAIL: RCDATA w/ an entity
@@ -120,23 +114,23 @@ FAIL: Dash at end of script HTML comment
  expected: [["Character","<!--test--->"]]
 FAIL: </script> in script HTML comment
  input: "<!-- </script> --></script>"
- actual:   [["Character","<"],["Character","!-- cript> -->cript>"]]
+ actual:   [["Character","<"],["EndTag","script"],["EndTag","script"]]
  expected: [["Character","<!-- "],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped
  input: "<!-- <script></script> --></script>"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","cript> -->cript>"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["EndTag","script"]]
  expected: [["Character","<!-- <script></script> -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped with nested <script>
  input: "<!-- <script><script></script></script> --></script>"
- actual:   [["Character","<"],["StartTag","script",{}],["StartTag","script",{}],["Character","cript>cript> -->cript>"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["StartTag","script",{}],["EndTag","script"],["EndTag","script"],["EndTag","script"]]
  expected: [["Character","<!-- <script><script></script>"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped with abrupt end
  input: "<!-- <script>--></script> --></script>"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","-->cript> -->cript>"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["EndTag","script"]]
  expected: [["Character","<!-- <script>-->"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: Incomplete start tag in script HTML comment double escaped
  input: "<!--<scrip></script>-->"
- actual:   [["Character","<"],["StartTag","scrip",{}],["Character","cript>-->"]]
+ actual:   [["Character","<"],["StartTag","scrip",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<scrip>"],["EndTag","script"],["Character","-->"]]
 FAIL: Unclosed start tag in script HTML comment double escaped
  input: "<!--<script</script>-->"
@@ -144,11 +138,11 @@ FAIL: Unclosed start tag in script HTML comment double escaped
  expected: [["Character","<!--<script"],["EndTag","script"],["Character","-->"]]
 FAIL: Incomplete end tag in script HTML comment double escaped
  input: "<!--<script></scrip>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","crip>-->"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","scrip"],["Character","-->"]]
  expected: [["Character","<!--<script></scrip>-->"]]
 FAIL: Unclosed end tag in script HTML comment double escaped
  input: "<!--<script></script-->"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","cript-->"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script--"]]
  expected: [["Character","<!--<script></script-->"]]
 PASS: leading U+FEFF must pass through
 FAIL: Non BMP-charref in RCDATA
@@ -156,25 +150,22 @@ FAIL: Non BMP-charref in RCDATA
  actual:   [["Character","&NotEqualTilde;"]]
  expected: [["Character","≂̸"]]
 PASS: Bad charref in RCDATA
-FAIL: lowercase endtags
- input: "</XMP>"
- actual:   [["Character","MP>"]]
- expected: [["EndTag","xmp"]]
+PASS: lowercase endtags
 FAIL: bad endtag (space before name)
  input: "</ XMP>"
  actual:   [["Character","XMP>"]]
  expected: [["Character","</ XMP>"]]
 FAIL: bad endtag (not matching last start tag)
  input: "</xm>"
- actual:   [["Character","m>"]]
+ actual:   [["EndTag","xm"]]
  expected: [["Character","</xm>"]]
 FAIL: bad endtag (without close bracket)
  input: "</xm "
- actual:   [["Character","m "]]
+ actual:   []
  expected: [["Character","</xm "]]
 FAIL: bad endtag (trailing solidus)
  input: "</xm/"
- actual:   [["Character","m/"]]
+ actual:   []
  expected: [["Character","</xm/"]]
 PASS: Non BMP-charref in attribute
 FAIL: --!NUL in comment 
@@ -206,7 +197,7 @@ PASS: CDATA with single bracket ending
 PASS: CDATA with two brackets ending
 FAIL: HTML tag in script data
  input: "<b>hello world</b>"
- actual:   [["StartTag","b",{}],["Character","hello world>"]]
+ actual:   [["StartTag","b",{}],["EndTag","b"]]
  expected: [["Character","<b>hello world</b>"]]
 PASS: Undefined named entity in a double-quoted attribute value ending in semicolon and whose name starts with a known entity name.
 PASS: Entity name requiring semicolon instead followed by the equals sign in a double-quoted attribute value.
@@ -497,23 +488,23 @@ FAIL: Decimal numeric entity followed by hex character A.
  expected: [["Character","aF"]]
 FAIL: Commented close tag in RCDATA or RAWTEXT
  input: "foo<!--</xmp>--></xmp>"
- actual:   [["Character","<"],["Character","!--mp>-->mp>"]]
+ actual:   [["Character","<"],["EndTag","xmp"],["EndTag","xmp"]]
  expected: [["Character","foo<!--"],["EndTag","xmp"],["Character","-->"],["EndTag","xmp"]]
 FAIL: Bogus comment in RCDATA or RAWTEXT
  input: "foo<!-->baz</xmp>"
- actual:   [["Character","<"],["Character","!-->bazmp>"]]
+ actual:   [["Character","<"],["EndTag","xmp"]]
  expected: [["Character","foo<!-->baz"],["EndTag","xmp"]]
 FAIL: End tag surrounded by bogus comment in RCDATA or RAWTEXT
  input: "foo<!--></xmp><!-->baz</xmp>"
- actual:   [["Character","<"],["Character","<"],["Character","!-->bazmp>"]]
+ actual:   [["Character","<"],["EndTag","xmp"],["Character","<"],["EndTag","xmp"]]
  expected: [["Character","foo<!-->"],["EndTag","xmp"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
 FAIL: Commented entities in RCDATA
  input: " &amp; <!-- &amp; --> &amp; </xmp>"
- actual:   [["Character","<"],["Character","!-- &amp; --> &amp; mp>"]]
+ actual:   [["Character","<"],["EndTag","xmp"]]
  expected: [["Character"," & <!-- & --> & "],["EndTag","xmp"]]
 FAIL: Incorrect comment ending sequences in RCDATA or RAWTEXT
  input: "foo<!-- x --x>x-- >x--!>x--<></xmp>"
- actual:   [["Character","<"],["Character","<"],["Character",">mp>"]]
+ actual:   [["Character","<"],["Character","<"],["EndTag","xmp"]]
  expected: [["Character","foo<!-- x --x>x-- >x--!>x--<>"],["EndTag","xmp"]]
 FAIL: Named entity: AElig without a semi-colon
  input: "&AElig"
@@ -12798,18 +12789,12 @@ FAIL: Empty start tag
  expected: [["Character","<>"]]
 PASS: Start Tag w/attribute
 PASS: Start Tag w/attribute no quotes
-FAIL: Start/End Tag
- input: "<h></h>"
- actual:   [["StartTag","h",{}],["Character",">"]]
- expected: [["StartTag","h",{}],["EndTag","h"]]
+PASS: Start/End Tag
 FAIL: Two unclosed start tags
  input: "<p>One<p>Two"
  actual:   [["StartTag","p",{}],["StartTag","p",{}],["Character","Two"]]
  expected: [["StartTag","p",{}],["Character","One"],["StartTag","p",{}],["Character","Two"]]
-FAIL: End Tag w/attribute
- input: "<h></h a='b'>"
- actual:   [["StartTag","h",{}],["Character"," a='b'>"]]
- expected: [["StartTag","h",{}],["EndTag","h"]]
+PASS: End Tag w/attribute
 FAIL: Multiple atts
  input: "<h a='b' c='d'>"
  actual:   [["StartTag","h",{"c":"'d'"}]]
@@ -12913,27 +12898,27 @@ FAIL: Start tag in script HTML comment
  expected: [["Character","<!-- <test> -->"]]
 FAIL: End tag in script HTML comment
  input: "<!-- </test> -->"
- actual:   [["Character","<"],["Character","!-- est> -->"]]
+ actual:   [["Character","<"],["EndTag","test"],["Character"," -->"]]
  expected: [["Character","<!-- </test> -->"]]
 FAIL: - in script HTML comment double escaped
  input: "<!--<script>-</script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","-cript>-->"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script>-</script>-->"]]
 FAIL: -- in script HTML comment double escaped
  input: "<!--<script>--</script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","--cript>-->"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script>--</script>-->"]]
 FAIL: --- in script HTML comment double escaped
  input: "<!--<script>---</script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","---cript>-->"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script>---</script>-->"]]
 FAIL: - spaced in script HTML comment double escaped
  input: "<!--<script> - </script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["Character"," - cript>-->"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script> - </script>-->"]]
 FAIL: -- spaced in script HTML comment double escaped
  input: "<!--<script> -- </script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["Character"," -- cript>-->"]]
+ actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script> -- </script>-->"]]
 PASS: Ampersand EOF
 PASS: Ampersand ampersand EOF
@@ -12967,10 +12952,7 @@ FAIL: ASCII hexadecimal entity
  input: "&#x3f;"
  actual:   [["Character","&#x3f;"]]
  expected: [["Character","?"]]
-FAIL: Hexadecimal entity in attribute
- input: "<h a='&#x3f;'></h>"
- actual:   [["StartTag","h",{"a":"'&#x3f;'"}],["Character",">"]]
- expected: [["StartTag","h",{"a":"?"}],["EndTag","h"]]
+PASS: Hexadecimal entity in attribute
 PASS: Entity in attribute without semicolon ending in x
 PASS: Entity in attribute without semicolon ending in 1
 PASS: Entity in attribute without semicolon ending in i
@@ -13130,7 +13112,7 @@ FAIL: Empty end tag with following comment
  expected: [["Character","a"],["Comment","b"],["Character","c"]]
 FAIL: Empty end tag with following end tag
  input: "a</></b>c"
- actual:   [["Character","a>c"]]
+ actual:   [["EndTag","b"],["Character","c"]]
  expected: [["Character","a"],["EndTag","b"],["Character","c"]]
 PASS: [empty]
 PASS: [empty]
@@ -17519,22 +17501,10 @@ FAIL: </@
  input: "</@"
  actual:   []
  expected: [["Comment","@"]]
-FAIL: </A>
- input: "</A>"
- actual:   [["Character",">"]]
- expected: [["EndTag","a"]]
-FAIL: </B>
- input: "</B>"
- actual:   [["Character",">"]]
- expected: [["EndTag","b"]]
-FAIL: </Y>
- input: "</Y>"
- actual:   [["Character",">"]]
- expected: [["EndTag","y"]]
-FAIL: </Z>
- input: "</Z>"
- actual:   [["Character",">"]]
- expected: [["EndTag","z"]]
+PASS: </A>
+PASS: </B>
+PASS: </Y>
+PASS: </Z>
 FAIL: </[
  input: "</["
  actual:   []
@@ -17543,22 +17513,10 @@ FAIL: </`
  input: "</`"
  actual:   []
  expected: [["Comment","`"]]
-FAIL: </a>
- input: "</a>"
- actual:   [["Character",">"]]
- expected: [["EndTag","a"]]
-FAIL: </b>
- input: "</b>"
- actual:   [["Character",">"]]
- expected: [["EndTag","b"]]
-FAIL: </y>
- input: "</y>"
- actual:   [["Character",">"]]
- expected: [["EndTag","y"]]
-FAIL: </z>
- input: "</z>"
- actual:   [["Character",">"]]
- expected: [["EndTag","z"]]
+PASS: </a>
+PASS: </b>
+PASS: </y>
+PASS: </z>
 FAIL: </{
  input: "</{"
  actual:   []
@@ -18416,27 +18374,15 @@ FAIL: Surrogate code point edge cases
  actual:   [["Character","&#xD7FF;&#xD800;&#xD801;&#xDFFE;&#xDFFF;&#xE000;"]]
  expected: [["Character","퟿����"]]
 PASS: Uppercase start tag name
-FAIL: Uppercase end tag name
- input: "</X>"
- actual:   [["Character",">"]]
- expected: [["EndTag","x"]]
+PASS: Uppercase end tag name
 PASS: Uppercase attribute name
 PASS: Tag/attribute name case edge values
 PASS: Duplicate different-case attributes
-FAIL: Uppercase close tag attributes
- input: "</x X>"
- actual:   [["Character"," X>"]]
- expected: [["EndTag","x"]]
-FAIL: Duplicate close tag attributes
- input: "</x x x>"
- actual:   [["Character"," x x>"]]
- expected: [["EndTag","x"]]
+PASS: Uppercase close tag attributes
+PASS: Duplicate close tag attributes
 PASS: Permitted slash
 PASS: Non-permitted slash
-FAIL: Permitted slash but in close tag
- input: "</br/>"
- actual:   [["Character","r/>"]]
- expected: [["EndTag","br"]]
+PASS: Permitted slash but in close tag
 FAIL: Doctype public case-sensitivity (1)
  input: "<!DoCtYpE HtMl PuBlIc "AbC" "XyZ">"
  actual:   [["Character","<"],["Character","!DoCtYpE HtMl PuBlIc \"AbC\" \"XyZ\">"]]
@@ -18862,4 +18808,4 @@ FAIL: CR followed by U+0000
  input: "�"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 2801 of 6806 tests
+Passed 2819 of 6806 tests

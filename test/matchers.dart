@@ -22,9 +22,11 @@ class _MatchesToken extends Matcher {
       var expectedAttributes = expectation.json[2];
       // FIXME: Actually check attributes contents.
       return token.attributes.length == expectedAttributes.length;
+    } else if (name == "EndTag") {
+      return token is EndTagToken && token.tagName == expectation.json[1];
     }
     // else throw error?
-    // DOCTYPE, EndTag
+    // missing: DOCTYPE
     return false;
   }
 
