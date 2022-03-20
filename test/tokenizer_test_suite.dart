@@ -73,11 +73,16 @@ class TokenizerTestSuite {
   factory TokenizerTestSuite.fromPath(String dirPath) {
     var dir = Directory(dirPath);
     var groups = <TestGroup>[];
-    for (var element in dir.listSync()) {
-      if (!element.path.endsWith('.test')) {
+    // On Mac, listSync returns the items unordered?
+    // https://github.com/dart-lang/sdk/issues/48621
+    var paths = dir.listSync().map((e) => e.path).toList();
+    paths.sort();
+
+    for (var path in paths) {
+      if (!path.endsWith('.test')) {
         continue;
       }
-      groups.add(TestGroup.fromPath(element.path));
+      groups.add(TestGroup.fromPath(path));
     }
     return TokenizerTestSuite(groups);
   }
