@@ -333,8 +333,8 @@ class Tokenizer {
 // Emit a U+003C LESS-THAN SIGN character token.
 // Reconsume in the data state.
           reconsumeIn(char, TokenizerState.data);
-          // FIXME: textBuffer.toString() + maybe?
-          return CharacterToken("<");
+          // Unclear if textBuffer.toString() is needed?
+          return CharacterToken(textBuffer.toString() + "<");
 
         case TokenizerState.tagName:
           if (isHTMLWhitespace(char)) {
