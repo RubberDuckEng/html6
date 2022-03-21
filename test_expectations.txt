@@ -74,7 +74,7 @@ FAIL: NUL in script HTML comment
  expected: [["Character","<!--test\\uFFFD--><!--test-\\uFFFD--><!--test--\\uFFFD-->"]]
 FAIL: NUL in script HTML comment - double escaped
  input: "<!--<script>\u0000--><!--<script>-\u0000--><!--<script>--\u0000-->"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","<"],["StartTag","script",{}],["Character","<"],["StartTag","script",{}],["Character","--\\u0000-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","--\\u0000-->"]]
  expected: [["Character","<!--<script>\\uFFFD--><!--<script>-\\uFFFD--><!--<script>--\\uFFFD-->"]]
 FAIL: EOF in script HTML comment
  input: "<!--test"
@@ -90,15 +90,15 @@ FAIL: EOF in script HTML comment after dash dash
  expected: [["Character","<!--test--"]]
 FAIL: EOF in script HTML comment double escaped after dash
  input: "<!--<script>-"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","-"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","-"]]
  expected: [["Character","<!--<script>-"]]
 FAIL: EOF in script HTML comment double escaped after dash dash
  input: "<!--<script>--"
- actual:   [["Character","<"],["StartTag","script",{}],["Character","--"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["Character","--"]]
  expected: [["Character","<!--<script>--"]]
 FAIL: EOF in script HTML comment - double escaped
  input: "<!--<script>"
- actual:   [["Character","<"],["StartTag","script",{}]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}]]
  expected: [["Character","<!--<script>"]]
 FAIL: Dash in script HTML comment
  input: "<!-- - -->"
@@ -118,31 +118,31 @@ FAIL: </script> in script HTML comment
  expected: [["Character","<!-- "],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped
  input: "<!-- <script></script> --></script>"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["EndTag","script"]]
+ actual:   [["Character","<"],["Character","!-- "],["StartTag","script",{}],["EndTag","script"],["EndTag","script"]]
  expected: [["Character","<!-- <script></script> -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped with nested <script>
  input: "<!-- <script><script></script></script> --></script>"
- actual:   [["Character","<"],["StartTag","script",{}],["StartTag","script",{}],["EndTag","script"],["EndTag","script"],["EndTag","script"]]
+ actual:   [["Character","<"],["Character","!-- "],["StartTag","script",{}],["StartTag","script",{}],["EndTag","script"],["EndTag","script"],["EndTag","script"]]
  expected: [["Character","<!-- <script><script></script>"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped with abrupt end
  input: "<!-- <script>--></script> --></script>"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["EndTag","script"]]
+ actual:   [["Character","<"],["Character","!-- "],["StartTag","script",{}],["EndTag","script"],["EndTag","script"]]
  expected: [["Character","<!-- <script>-->"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: Incomplete start tag in script HTML comment double escaped
  input: "<!--<scrip></script>-->"
- actual:   [["Character","<"],["StartTag","scrip",{}],["EndTag","script"],["Character","-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","scrip",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<scrip>"],["EndTag","script"],["Character","-->"]]
 FAIL: Unclosed start tag in script HTML comment double escaped
  input: "<!--<script</script>-->"
- actual:   [["Character","<"],["StartTag","script<",{"script":""}],["Character","-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script<",{"script":""}],["Character","-->"]]
  expected: [["Character","<!--<script"],["EndTag","script"],["Character","-->"]]
 FAIL: Incomplete end tag in script HTML comment double escaped
  input: "<!--<script></scrip>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","scrip"],["Character","-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["EndTag","scrip"],["Character","-->"]]
  expected: [["Character","<!--<script></scrip>-->"]]
 FAIL: Unclosed end tag in script HTML comment double escaped
  input: "<!--<script></script-->"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script--"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["EndTag","script--"]]
  expected: [["Character","<!--<script></script-->"]]
 PASS: leading U+FEFF must pass through
 FAIL: Non BMP-charref in RCDATA
@@ -12790,10 +12790,7 @@ FAIL: Empty start tag
 PASS: Start Tag w/attribute
 PASS: Start Tag w/attribute no quotes
 PASS: Start/End Tag
-FAIL: Two unclosed start tags
- input: "<p>One<p>Two"
- actual:   [["StartTag","p",{}],["StartTag","p",{}],["Character","Two"]]
- expected: [["StartTag","p",{}],["Character","One"],["StartTag","p",{}],["Character","Two"]]
+PASS: Two unclosed start tags
 PASS: End Tag w/attribute
 FAIL: Multiple atts
  input: "<h a='b' c='d'>"
@@ -12846,7 +12843,7 @@ FAIL: Short comment three
  expected: [["Comment",""]]
 FAIL: < in comment
  input: "<!-- <test-->"
- actual:   [["Character","<"],["StartTag","test--",{}]]
+ actual:   [["Character","<"],["Character","!-- "],["StartTag","test--",{}]]
  expected: [["Comment"," <test"]]
 FAIL: << in comment
  input: "<!--<<-->"
@@ -12894,7 +12891,7 @@ FAIL: </ in script HTML comment
  expected: [["Character","<!-- </ test -->"]]
 FAIL: Start tag in script HTML comment
  input: "<!-- <test> -->"
- actual:   [["Character","<"],["StartTag","test",{}],["Character"," -->"]]
+ actual:   [["Character","<"],["Character","!-- "],["StartTag","test",{}],["Character"," -->"]]
  expected: [["Character","<!-- <test> -->"]]
 FAIL: End tag in script HTML comment
  input: "<!-- </test> -->"
@@ -12902,23 +12899,23 @@ FAIL: End tag in script HTML comment
  expected: [["Character","<!-- </test> -->"]]
 FAIL: - in script HTML comment double escaped
  input: "<!--<script>-</script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script>-</script>-->"]]
 FAIL: -- in script HTML comment double escaped
  input: "<!--<script>--</script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script>--</script>-->"]]
 FAIL: --- in script HTML comment double escaped
  input: "<!--<script>---</script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script>---</script>-->"]]
 FAIL: - spaced in script HTML comment double escaped
  input: "<!--<script> - </script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script> - </script>-->"]]
 FAIL: -- spaced in script HTML comment double escaped
  input: "<!--<script> -- </script>-->"
- actual:   [["Character","<"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
+ actual:   [["Character","<"],["Character","!--"],["StartTag","script",{}],["EndTag","script"],["Character","-->"]]
  expected: [["Character","<!--<script> -- </script>-->"]]
 PASS: Ampersand EOF
 PASS: Ampersand ampersand EOF
@@ -13102,10 +13099,7 @@ FAIL: Single-quote after attribute name
  actual:   [["StartTag","h",{"'":""}]]
  expected: [["StartTag","h",{"a":"","'":""}]]
 PASS: Empty end tag with following characters
-FAIL: Empty end tag with following tag
- input: "a</><b>c"
- actual:   [["StartTag","b",{}],["Character","c"]]
- expected: [["Character","a"],["StartTag","b",{}],["Character","c"]]
+PASS: Empty end tag with following tag
 FAIL: Empty end tag with following comment
  input: "a</><!--b-->c"
  actual:   [["Character","<"],["Character","!--b-->c"]]
@@ -18287,14 +18281,8 @@ PASS: " after ampersand in double-quoted attribute value
 PASS: ' after ampersand in double-quoted attribute value
 PASS: ' after ampersand in single-quoted attribute value
 PASS: " after ampersand in single-quoted attribute value
-FAIL: Text after bogus character reference
- input: "<z z='&xlink_xmlns;'>bar<z>"
- actual:   [["StartTag","z",{"z":"'&xlink_xmlns;'"}],["StartTag","z",{}]]
- expected: [["StartTag","z",{"z":"&xlink_xmlns;"}],["Character","bar"],["StartTag","z",{}]]
-FAIL: Text after hex character reference
- input: "<z z='&#x0020; foo'>bar<z>"
- actual:   [["StartTag","z",{"foo'":""}],["StartTag","z",{}]]
- expected: [["StartTag","z",{"z":"  foo"}],["Character","bar"],["StartTag","z",{}]]
+PASS: Text after bogus character reference
+PASS: Text after hex character reference
 PASS: Attribute name starting with "
 PASS: Attribute name starting with '
 PASS: Attribute name containing "
@@ -18808,4 +18796,4 @@ FAIL: CR followed by U+0000
  input: "ý"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 2819 of 6806 tests
+Passed 2823 of 6806 tests

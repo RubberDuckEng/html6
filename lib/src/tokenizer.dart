@@ -318,6 +318,9 @@ class Tokenizer {
             }
             currentTag = TagTokenBuilder.startTag(firstCodePoint: char);
             state = TokenizerState.tagName;
+            if (textBuffer.isNotEmpty) {
+              return CharacterToken(textBuffer.toString());
+            }
             break reconsume;
           }
 // U+003F QUESTION MARK (?)
@@ -330,6 +333,7 @@ class Tokenizer {
 // Emit a U+003C LESS-THAN SIGN character token.
 // Reconsume in the data state.
           reconsumeIn(char, TokenizerState.data);
+          // FIXME: textBuffer.toString() + maybe?
           return CharacterToken("<");
 
         case TokenizerState.tagName:
