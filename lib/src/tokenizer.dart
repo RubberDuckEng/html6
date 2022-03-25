@@ -3,8 +3,12 @@ abstract class Token {
 }
 
 class CommentToken extends Token {
+  final String data;
+
+  CommentToken(this.data);
+
   @override
-  List toTestJson() => ['Comment'];
+  List toTestJson() => ['Comment', data];
 }
 
 class StartTagToken extends Token {
@@ -68,6 +72,34 @@ class InputManager {
     }
     // FIXME: Pre-cache the runes.
     return data[_nextOffset++];
+  }
+
+// FIXME: This can return EOF once we add EOF codepoints.
+  int? peek(int relativeOffset) {
+    if (pushedChar != null) {
+      if (relativeOffset == 0) {
+        return pushedChar;
+      }
+      relativeOffset -= 1;
+    }
+    final index = _nextOffset + relativeOffset;
+    if (index >= data.length) {
+      return null;
+    }
+    return data[index];
+  }
+
+  bool lookAheadAndConsume(String value) {
+    int offset = 0;
+    for (var codePoint in value.runes) {
+      if (peek(offset++) != codePoint) {
+        return false;
+      }
+    }
+    while (offset-- > 0) {
+      getNextCodePoint();
+    }
+    return true;
   }
 
   void push(int char) {
@@ -185,7 +217,9 @@ bool isHTMLWhitespace(int codePoint) {
 // unicodeReplacementCharacterRune
 const String replacementCharacter = "\xFFFD";
 const int nullChar = 0x00;
+const int exclaimationMark = 0x21;
 const int solidus = 0x2F;
+const int hyphenMinus = 0x2D;
 const int lessThanSign = 0x3C;
 const int equalsSign = 0x3D;
 const int greaterThanSign = 0x3E;
@@ -268,6 +302,10 @@ class Tokenizer {
   final InputManager input;
   TokenizerState state = TokenizerState.data;
   TagTokenBuilder? currentTag;
+  // TODO: Should this be a CommentTokenBuilder or maybe a generalized
+  // TokenBuilder?
+  // TODO: We should reuse the textBuffer, which is a StringBuffer;
+  String? commentData;
 
   Tokenizer(this.input);
 
@@ -276,6 +314,13 @@ class Tokenizer {
     var tag = currentTag!;
     currentTag = null;
     return tag.buildToken();
+  }
+
+  CommentToken emitCommentToken() {
+    assert(commentData != null);
+    var data = commentData!;
+    commentData = null;
+    return CommentToken(data);
   }
 
   // This shouldn't need to take a char?
@@ -306,8 +351,10 @@ class Tokenizer {
           continue;
 
         case TokenizerState.tagOpen:
-// U+0021 EXCLAMATION MARK (!)
-// Switch to the markup declaration open state.
+          if (char == exclaimationMark) {
+            state = TokenizerState.markupDeclarationOpen;
+            continue;
+          }
           if (char == solidus) {
             state = TokenizerState.endTagOpen;
             continue;
@@ -470,12 +517,194 @@ class Tokenizer {
 // This is an invalid-first-character-of-tag-name parse error. Create a comment token whose data is the empty string. Reconsume in the bogus comment state.
           state = TokenizerState.data; // Wrong
           continue;
+
+        case TokenizerState.markupDeclarationOpen:
+          // FIXME: This push isn't quite to spec.
+          input.push(char);
+
+          if (input.lookAheadAndConsume("--")) {
+            assert(commentData == null);
+            commentData = "";
+            state = TokenizerState.commentStart;
+            continue;
+          }
+
+// If the next few characters are:
+
+// ASCII case-insensitive match for the word "DOCTYPE"
+// Consume those characters and switch to the DOCTYPE state.
+// The string "[CDATA[" (the five uppercase letters "CDATA" with a U+005B LEFT SQUARE BRACKET character before and after)
+// Consume those characters. If there is an adjusted current node and it is not an element in the HTML namespace, then switch to the CDATA section state. Otherwise, this is a cdata-in-html-content parse error. Create a comment token whose data is the "[CDATA[" string. Switch to the bogus comment state.
+// Anything else
+// This is an incorrectly-opened-comment parse error. Create a comment token whose data is the empty string. Switch to the bogus comment state (don't
+// consume anything in the current state).
+// TODO: Implement the rest.
+          assert(commentData == null);
+          commentData = "";
+          state = TokenizerState.bogusComment;
+          continue;
+
+        case TokenizerState.commentStart:
+          if (char == hyphenMinus) {
+            state = TokenizerState.commentStartDash;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is an abrupt-closing-of-empty-comment parse error.
+            state = TokenizerState.data;
+            return emitCommentToken();
+          }
+          reconsumeIn(char, TokenizerState.comment);
+          continue;
+
+        case TokenizerState.commentStartDash:
+          if (char == hyphenMinus) {
+            state = TokenizerState.commentEnd;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is an abrupt-closing-of-empty-comment parse error.
+            state = TokenizerState.data;
+            return emitCommentToken();
+          }
+// EOF
+// This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
+          commentData = commentData! + "-";
+          reconsumeIn(char, TokenizerState.comment);
+          continue;
+        case TokenizerState.comment:
+// Consume the next input character:
+          if (char == lessThanSign) {
+            commentData = commentData! + String.fromCharCode(char);
+            state = TokenizerState.commentLessThanSign;
+            continue;
+          }
+          if (char == hyphenMinus) {
+            state = TokenizerState.commentEndDash;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            commentData = commentData! + replacementCharacter;
+            continue;
+          }
+// EOF
+// This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
+          commentData = commentData! + String.fromCharCode(char);
+          continue;
+
+        case TokenizerState.commentLessThanSign:
+          if (char == exclaimationMark) {
+            commentData = commentData! + String.fromCharCode(char);
+            state = TokenizerState.commentLessThanSignBang;
+            continue;
+          }
+          if (char == lessThanSign) {
+            commentData = commentData! + String.fromCharCode(char);
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.comment);
+          continue;
+
+        case TokenizerState.commentLessThanSignBang:
+          if (char == hyphenMinus) {
+            state = TokenizerState.commentLessThanSignBangDash;
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.comment);
+          continue;
+
+        case TokenizerState.commentLessThanSignBangDash:
+          if (char == hyphenMinus) {
+            state = TokenizerState.commentLessThanSignBangDashDash;
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.commentEndDash);
+          continue;
+
+        case TokenizerState.commentLessThanSignBangDashDash:
+          if (char == greaterThanSign) {
+            // EOF
+            reconsumeIn(char, TokenizerState.commentEnd);
+            continue;
+          }
+          // This is a nested-comment parse error.
+          reconsumeIn(char, TokenizerState.commentEnd);
+          continue;
+
+        case TokenizerState.commentEndDash:
+          if (char == hyphenMinus) {
+            state = TokenizerState.commentEnd;
+            continue;
+          }
+
+          // EOF
+          // This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
+          commentData = commentData! + "-";
+          reconsumeIn(char, TokenizerState.comment);
+          continue;
+
+        case TokenizerState.commentEnd:
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitCommentToken();
+          }
+          if (char == exclaimationMark) {
+            state = TokenizerState.commentEndBang;
+            continue;
+          }
+          if (char == hyphenMinus) {
+            commentData = commentData! + "-";
+            continue;
+          }
+          commentData = commentData! + "--";
+          reconsumeIn(char, TokenizerState.comment);
+          continue;
+        // EOF
+
+        case TokenizerState.commentEndBang:
+          if (char == hyphenMinus) {
+            commentData = commentData! + "--!";
+            state = TokenizerState.commentEndDash;
+            continue;
+          }
+          if (char == greaterThanSign) {
+// This is an incorrectly-closed-comment parse error.
+            state = TokenizerState.data;
+            return emitCommentToken();
+          }
+// EOF
+// This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
+          commentData = commentData! + "--!";
+          state = TokenizerState.comment;
+          continue;
+
+        case TokenizerState.bogusComment:
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitCommentToken();
+          }
+
+// EOF
+// Emit the comment. Emit an end-of-file token.
+          if (char == nullChar) {
+// This is an unexpected-null-character parse error.
+            commentData = commentData! + replacementCharacter;
+            continue;
+          }
+          commentData = commentData! + String.fromCharCode(char);
+          continue;
+
         default:
           throw Exception("Reached invalid tokenizer state: $state");
       }
     }
+    // FIXME: move into states.
     if (textBuffer.isNotEmpty) {
       return CharacterToken(textBuffer.toString());
+    }
+    if (commentData != null) {
+      return emitCommentToken();
     }
     return EofToken();
   }
