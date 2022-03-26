@@ -936,6 +936,264 @@ class Tokenizer {
           textBuffer!.writeCharCode(char);
           continue;
 
+        case TokenizerState.doctype:
+          if (_isHTMLWhitespace(char)) {
+            state = TokenizerState.doctypeName;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            reconsumeIn(char, TokenizerState.doctypeName);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            // Create a new DOCTYPE token. Set its force-quirks flag to on. Emit the current token. Emit an end-of-file token.
+          }
+          // This is a missing-whitespace-before-doctype-name parse error.
+          reconsumeIn(char, TokenizerState.doctypeName);
+          continue;
+
+        case TokenizerState.beforeDoctypeName:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Ignore the character.
+// ASCII upper alpha
+// Create a new DOCTYPE token. Set the token's name to the lowercase version of the current input character (add 0x0020 to the character's code point). Switch to the DOCTYPE name state.
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Create a new DOCTYPE token. Set the token's name to a U+FFFD REPLACEMENT CHARACTER character. Switch to the DOCTYPE name state.
+// U+003E GREATER-THAN SIGN (>)
+// This is a missing-doctype-name parse error. Create a new DOCTYPE token. Set its force-quirks flag to on. Switch to the data state. Emit the current token.
+// EOF
+// This is an eof-in-doctype parse error. Create a new DOCTYPE token. Set its force-quirks flag to on. Emit the current token. Emit an end-of-file token.
+// Anything else
+// Create a new DOCTYPE token. Set the token's name to the current input character. Switch to the DOCTYPE name state.
+
+        case TokenizerState.doctypeName:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Switch to the after DOCTYPE name state.
+// U+003E GREATER-THAN SIGN (>)
+// Switch to the data state. Emit the current DOCTYPE token.
+// ASCII upper alpha
+// Append the lowercase version of the current input character (add 0x0020 to the character's code point) to the current DOCTYPE token's name.
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's name.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// Append the current input character to the current DOCTYPE token's name.
+
+        case TokenizerState.afterDoctypeName:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Ignore the character.
+// U+003E GREATER-THAN SIGN (>)
+// Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// If the six characters starting from the current input character are an ASCII case-insensitive match for the word "PUBLIC", then consume those characters and switch to the after DOCTYPE public keyword state.
+
+// Otherwise, if the six characters starting from the current input character are an ASCII case-insensitive match for the word "SYSTEM", then consume those characters and switch to the after DOCTYPE system keyword state.
+
+// Otherwise, this is an invalid-character-sequence-after-doctype-name parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+
+        case TokenizerState.afterDoctypePublicKeyword:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Switch to the before DOCTYPE public identifier state.
+// U+0022 QUOTATION MARK (")
+// This is a missing-whitespace-after-doctype-public-keyword parse error. Set the current DOCTYPE token's public identifier to the empty string (not missing), then switch to the DOCTYPE public identifier (double-quoted) state.
+// U+0027 APOSTROPHE (')
+// This is a missing-whitespace-after-doctype-public-keyword parse error. Set the current DOCTYPE token's public identifier to the empty string (not missing), then switch to the DOCTYPE public identifier (single-quoted) state.
+// U+003E GREATER-THAN SIGN (>)
+// This is a missing-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// This is a missing-quote-before-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+
+        case TokenizerState.beforeDoctypePublicIdentifier:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Ignore the character.
+// U+0022 QUOTATION MARK (")
+// Set the current DOCTYPE token's public identifier to the empty string (not missing), then switch to the DOCTYPE public identifier (double-quoted) state.
+// U+0027 APOSTROPHE (')
+// Set the current DOCTYPE token's public identifier to the empty string (not missing), then switch to the DOCTYPE public identifier (single-quoted) state.
+// U+003E GREATER-THAN SIGN (>)
+// This is a missing-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// This is a missing-quote-before-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+
+        case TokenizerState.doctypePublicIdentifierDoubleQuoted:
+
+// U+0022 QUOTATION MARK (")
+// Switch to the after DOCTYPE public identifier state.
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's public identifier.
+// U+003E GREATER-THAN SIGN (>)
+// This is an abrupt-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// Append the current input character to the current DOCTYPE token's public identifier.
+
+        case TokenizerState.doctypePublicIdentifierSingleQuoted:
+
+// U+0027 APOSTROPHE (')
+// Switch to the after DOCTYPE public identifier state.
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's public identifier.
+// U+003E GREATER-THAN SIGN (>)
+// This is an abrupt-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// Append the current input character to the current DOCTYPE token's public identifier.
+
+        case TokenizerState.afterDoctypePublicIdentifier:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Switch to the between DOCTYPE public and system identifiers state.
+// U+003E GREATER-THAN SIGN (>)
+// Switch to the data state. Emit the current DOCTYPE token.
+// U+0022 QUOTATION MARK (")
+// This is a missing-whitespace-between-doctype-public-and-system-identifiers parse error. Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (double-quoted) state.
+// U+0027 APOSTROPHE (')
+// This is a missing-whitespace-between-doctype-public-and-system-identifiers parse error. Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (single-quoted) state.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// This is a missing-quote-before-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+
+        case TokenizerState.betweenDoctypePublicAndSystemIdentifiers:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Ignore the character.
+// U+003E GREATER-THAN SIGN (>)
+// Switch to the data state. Emit the current DOCTYPE token.
+// U+0022 QUOTATION MARK (")
+// Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (double-quoted) state.
+// U+0027 APOSTROPHE (')
+// Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (single-quoted) state.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// This is a missing-quote-before-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+
+        case TokenizerState.afterDoctypeSystemKeyword:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Switch to the before DOCTYPE system identifier state.
+// U+0022 QUOTATION MARK (")
+// This is a missing-whitespace-after-doctype-system-keyword parse error. Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (double-quoted) state.
+// U+0027 APOSTROPHE (')
+// This is a missing-whitespace-after-doctype-system-keyword parse error. Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (single-quoted) state.
+// U+003E GREATER-THAN SIGN (>)
+// This is a missing-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// This is a missing-quote-before-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+
+        case TokenizerState.beforeDoctypeSystemIdentifier:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Ignore the character.
+// U+0022 QUOTATION MARK (")
+// Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (double-quoted) state.
+// U+0027 APOSTROPHE (')
+// Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (single-quoted) state.
+// U+003E GREATER-THAN SIGN (>)
+// This is a missing-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// This is a missing-quote-before-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+
+        case TokenizerState.doctypeSystemIdentifierDoubleQuoted:
+
+// U+0022 QUOTATION MARK (")
+// Switch to the after DOCTYPE system identifier state.
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's system identifier.
+// U+003E GREATER-THAN SIGN (>)
+// This is an abrupt-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// Append the current input character to the current DOCTYPE token's system identifier.
+
+        case TokenizerState.doctypeSystemIdentifierSingleQuoted:
+
+// U+0027 APOSTROPHE (')
+// Switch to the after DOCTYPE system identifier state.
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's system identifier.
+// U+003E GREATER-THAN SIGN (>)
+// This is an abrupt-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// Append the current input character to the current DOCTYPE token's system identifier.
+
+        case TokenizerState.afterDoctypeSystemIdentifier:
+
+// U+0009 CHARACTER TABULATION (tab)
+// U+000A LINE FEED (LF)
+// U+000C FORM FEED (FF)
+// U+0020 SPACE
+// Ignore the character.
+// U+003E GREATER-THAN SIGN (>)
+// Switch to the data state. Emit the current DOCTYPE token.
+// EOF
+// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// This is an unexpected-character-after-doctype-system-identifier parse error. Reconsume in the bogus DOCTYPE state. (This does not set the current DOCTYPE token's force-quirks flag to on.)
+
+        case TokenizerState.bogusDoctype:
+
+// U+003E GREATER-THAN SIGN (>)
+// Switch to the data state. Emit the DOCTYPE token.
+// U+0000 NULL
+// This is an unexpected-null-character parse error. Ignore the character.
+// EOF
+// Emit the DOCTYPE token. Emit an end-of-file token.
+// Anything else
+// Ignore the character.
+
+          continue;
+
         case TokenizerState.characterReference:
           temporaryBuffer = StringBuffer("");
           temporaryBuffer!.writeCharCode(amperstand);
