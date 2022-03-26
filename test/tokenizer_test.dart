@@ -8,4 +8,11 @@ void main() {
     expect(tokenizer.getNextToken(), isA<CharacterToken>());
     expect(tokenizer.getNextToken(), isA<EofToken>());
   });
+
+  test('normalizeNewlines', () {
+    expect(normalizeNewlines("a"), [97]);
+    expect(normalizeNewlines("\r\n"), [0xA]);
+    expect(normalizeNewlines("\r\n\n"), [0xA, 0xA]);
+    expect(normalizeNewlines("\r\r\n\n"), [0xA, 0xA, 0xA]);
+  });
 }

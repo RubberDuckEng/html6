@@ -52,6 +52,28 @@ class EofToken extends Token {
   List toTestJson() => ['EOF'];
 }
 
+List<int> normalizeNewlines(String input) {
+  var data = List<int>.empty(growable: true);
+  var iterator = input.runes.iterator;
+  while (iterator.moveNext()) {
+    if (iterator.current == 0x0D) {
+      if (!iterator.moveNext()) {
+        data.add(0xA);
+        break;
+      }
+      data.add(0x0A);
+      if (iterator.current == 0x0A) {
+        continue;
+      } else {
+        iterator.movePrevious();
+        continue;
+      }
+    }
+    data.add(iterator.current);
+  }
+  return data;
+}
+
 class InputManager {
   int? pushedChar;
   final List<int> data;
@@ -59,7 +81,7 @@ class InputManager {
 
   // FIXME: Going through runes here isn't quite correct?
   // I think HTML5 operates on utf16 chunks which may be invalid runes?
-  InputManager(String input) : data = input.runes.toList();
+  InputManager(String input) : data = normalizeNewlines(input);
 
   bool get isEndOfFile => pushedChar == null && _nextOffset >= data.length;
 

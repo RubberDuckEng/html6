@@ -1,4 +1,4 @@
-Passed 5742 of 6806 tests
+Passed 5754 of 6806 tests
 
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
@@ -34,18 +34,18 @@ FAIL: RAWTEXT w/ something looking like an entity
  expected: [["Character","&foo;"]]
 FAIL: CR in bogus comment state
  input: "<?"
- actual:   [["Character","<?\r"]]
+ actual:   [["Character","<?\n"]]
  expected: [["Comment","?\n"]]
 FAIL: CRLF in bogus comment state
  input: "<?
 "
- actual:   [["Character","<?\r\n"]]
+ actual:   [["Character","<?\n"]]
  expected: [["Comment","?\n"]]
 FAIL: CRLFLF in bogus comment state
  input: "<?
 
 "
- actual:   [["Character","<?\r\n\n"]]
+ actual:   [["Character","<?\n\n"]]
  expected: [["Comment","?\n\n"]]
 FAIL: Raw NUL replacement
  input: "\u0000"
@@ -607,15 +607,6 @@ FAIL: A bogus comment stops at >, even if preceeded by two dashes
  input: "<?foo-->"
  actual:   [["Character","<?foo-->"]]
  expected: [["Comment","?foo--"]]
-FAIL: <!----!CR>
- input: "<!----!>"
- actual:   [["Comment","--!\r>"]]
- expected: [["Comment","--!\n>"]]
-FAIL: <!----!CRLF>
- input: "<!----!
->"
- actual:   [["Comment","--!\r\n>"]]
- expected: [["Comment","--!\n>"]]
 FAIL: <!DOCTYPE
  input: "<!DOCTYPE"
  actual:   [["Comment","DOCTYPE"]]
@@ -647,7 +638,7 @@ FAIL: <!DOCTYPE\u000C
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE\u000D
  input: "<!DOCTYPE"
- actual:   [["Comment","DOCTYPE\r"]]
+ actual:   [["Comment","DOCTYPE\n"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE\u001F
  input: "<!DOCTYPEý"
@@ -684,7 +675,7 @@ FAIL: <!DOCTYPE \u000C
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE \u000D
  input: "<!DOCTYPE "
- actual:   [["Comment","DOCTYPE \r"]]
+ actual:   [["Comment","DOCTYPE \n"]]
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE \u001F
  input: "<!DOCTYPE ý"
@@ -805,7 +796,7 @@ FAIL: <!DOCTYPE a\u000C
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a\u000D
  input: "<!DOCTYPE a"
- actual:   [["Comment","DOCTYPE a\r"]]
+ actual:   [["Comment","DOCTYPE a\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a\u001F
  input: "<!DOCTYPE aý"
@@ -842,7 +833,7 @@ FAIL: <!DOCTYPE a \u000C
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u000D
  input: "<!DOCTYPE a "
- actual:   [["Comment","DOCTYPE a \r"]]
+ actual:   [["Comment","DOCTYPE a \n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u001F
  input: "<!DOCTYPE a ý"
@@ -947,7 +938,7 @@ FAIL: <!DOCTYPE a PUBLIC\u000C
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u000D
  input: "<!DOCTYPE a PUBLIC"
- actual:   [["Comment","DOCTYPE a PUBLIC\r"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u001F
  input: "<!DOCTYPE a PUBLICý"
@@ -1182,7 +1173,7 @@ FAIL: <!DOCTYPE a PUBLIC''\u000C
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u000D
  input: "<!DOCTYPE a PUBLIC''"
- actual:   [["Comment","DOCTYPE a PUBLIC''\r"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC''\n"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u001F
  input: "<!DOCTYPE a PUBLIC''ý"
@@ -1531,7 +1522,7 @@ FAIL: <!DOCTYPE a SYSTEM\u000C
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u000D
  input: "<!DOCTYPE a SYSTEM"
- actual:   [["Comment","DOCTYPE a SYSTEM\r"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u001F
  input: "<!DOCTYPE a SYSTEMý"
@@ -1758,7 +1749,7 @@ FAIL: <!DOCTYPE a SYSTEM''\u000C
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM''\u000D
  input: "<!DOCTYPE a SYSTEM''"
- actual:   [["Comment","DOCTYPE a SYSTEM''\r"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM''\n"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM''\u001F
  input: "<!DOCTYPE a SYSTEM''ý"
@@ -2444,7 +2435,7 @@ FAIL: <!DOCTYPEa\u000C
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa\u000D
  input: "<!DOCTYPEa"
- actual:   [["Comment","DOCTYPEa\r"]]
+ actual:   [["Comment","DOCTYPEa\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa\u001F
  input: "<!DOCTYPEaý"
@@ -2481,7 +2472,7 @@ FAIL: <!DOCTYPEa \u000C
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u000D
  input: "<!DOCTYPEa "
- actual:   [["Comment","DOCTYPEa \r"]]
+ actual:   [["Comment","DOCTYPEa \n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u001F
  input: "<!DOCTYPEa ý"
@@ -2586,7 +2577,7 @@ FAIL: <!DOCTYPEa PUBLIC\u000C
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u000D
  input: "<!DOCTYPEa PUBLIC"
- actual:   [["Comment","DOCTYPEa PUBLIC\r"]]
+ actual:   [["Comment","DOCTYPEa PUBLIC\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u001F
  input: "<!DOCTYPEa PUBLICý"
@@ -2813,7 +2804,7 @@ FAIL: <!DOCTYPEa PUBLIC''\u000C
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u000D
  input: "<!DOCTYPEa PUBLIC''"
- actual:   [["Comment","DOCTYPEa PUBLIC''\r"]]
+ actual:   [["Comment","DOCTYPEa PUBLIC''\n"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u001F
  input: "<!DOCTYPEa PUBLIC''ý"
@@ -3138,7 +3129,7 @@ FAIL: <!DOCTYPEa SYSTEM\u000C
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u000D
  input: "<!DOCTYPEa SYSTEM"
- actual:   [["Comment","DOCTYPEa SYSTEM\r"]]
+ actual:   [["Comment","DOCTYPEa SYSTEM\n"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u001F
  input: "<!DOCTYPEa SYSTEMý"
@@ -3365,7 +3356,7 @@ FAIL: <!DOCTYPEa SYSTEM''\u000C
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM''\u000D
  input: "<!DOCTYPEa SYSTEM''"
- actual:   [["Comment","DOCTYPEa SYSTEM''\r"]]
+ actual:   [["Comment","DOCTYPEa SYSTEM''\n"]]
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM''\u001F
  input: "<!DOCTYPEa SYSTEM''ý"
@@ -4069,18 +4060,6 @@ FAIL: <?\uDBC0\uDC00
  input: "<?ô€€€"
  actual:   [["Character","<?ô€€€"]]
  expected: [["Comment","?ô€€€"]]
-FAIL: <a\u000D>
- input: "<a>"
- actual:   [["StartTag","a\r",{}]]
- expected: [["StartTag","a",{}]]
-FAIL: <a \u000D>
- input: "<a >"
- actual:   [["StartTag","a",{"\r":""}]]
- expected: [["StartTag","a",{}]]
-FAIL: <a a \u000D>
- input: "<a a >"
- actual:   [["StartTag","a",{"a":"","\r":""}]]
- expected: [["StartTag","a",{"a":""}]]
 FAIL: <a a A>
  input: "<a a A>"
  actual:   [["StartTag","a",{"a":"","A":""}]]
@@ -4207,7 +4186,7 @@ FAIL: Single-quoted attribute value not followed by whitespace
  expected: [["StartTag","foo",{"a":"b","c":""}]]
 FAIL: CR EOF after doctype name
  input: "<!doctype html "
- actual:   [["Comment","doctype html \r"]]
+ actual:   [["Comment","doctype html \n"]]
  expected: [["DOCTYPE","html",null,null,false]]
 FAIL: Maximum non-BMP numeric entity
  input: "&#X10FFFF;"
@@ -4237,32 +4216,6 @@ FAIL: Doctype system case-sensitivity (2)
  input: "<!dOcTyPe hTmL sYsTeM "xYz">"
  actual:   [["Comment","dOcTyPe hTmL sYsTeM \"xYz\""]]
  expected: [["DOCTYPE","html",null,"xYz",true]]
-FAIL: CR followed by non-LF
- input: "?"
- actual:   [["Character","\r?"]]
- expected: [["Character","\n?"]]
-FAIL: CR at EOF
- input: ""
- actual:   [["Character","\r"]]
- expected: [["Character","\n"]]
-FAIL: CR LF
- input: "
-"
- actual:   [["Character","\r\n"]]
- expected: [["Character","\n"]]
-FAIL: CR CR
- input: ""
- actual:   [["Character","\r\r"]]
- expected: [["Character","\n\n"]]
-FAIL: LF CR
- input: "
-"
- actual:   [["Character","\n\r"]]
- expected: [["Character","\n\n"]]
-FAIL: text CR CR CR text
- input: "texttext"
- actual:   [["Character","text\r\r\rtext"]]
- expected: [["Character","text\n\n\ntext"]]
 FAIL: Doctype publik
  input: "<!DOCTYPE html PUBLIK "AbC" "XyZ">"
  actual:   [["Comment","DOCTYPE html PUBLIK \"AbC\" \"XyZ\""]]
@@ -4283,7 +4236,3 @@ FAIL: Doctype html x>text
  input: "<!DOCTYPE html x>text"
  actual:   [["Comment","DOCTYPE html x"],["Character","text"]]
  expected: [["DOCTYPE","html",null,null,false],["Character","text"]]
-FAIL: CR followed by U+0000
- input: "ý"
- actual:   [["Character","\r\u0000"]]
- expected: [["Character","\n\u0000"]]

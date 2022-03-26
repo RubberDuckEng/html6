@@ -17,7 +17,8 @@ void main() {
 
   test('start tag token matcher', () {
     var token = StartTagToken('foo');
-    var expected = matchesToken(TokenExpectation.fromJson(["StartTag", "foo"]));
+    var expected =
+        matchesToken(TokenExpectation.fromJson(["StartTag", "foo", {}]));
     expect(token, expected);
     expect([token], [expected]);
   });
@@ -26,7 +27,7 @@ void main() {
     var tokens = [CharacterToken('a'), StartTagToken('b')];
     var expectedJson = outputFromJson([
       ["Character", "a"],
-      ["StartTag", "b"]
+      ["StartTag", "b", {}]
     ]);
 
     var expectedTokens =
