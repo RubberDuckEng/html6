@@ -560,7 +560,7 @@ class Tokenizer {
 // This is an invalid-first-character-of-tag-name parse error.
           reconsumeIn(char, TokenizerState.data);
           bufferCharCode(lessThanSign);
-          return emitCharacterToken();
+          continue;
 
         case TokenizerState.tagName:
           if (_isHTMLWhitespace(char)) {

@@ -1,4 +1,4 @@
-Passed 5713 of 6806 tests
+Passed 5737 of 6806 tests
 
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
@@ -34,18 +34,18 @@ FAIL: RAWTEXT w/ something looking like an entity
  expected: [["Character","&foo;"]]
 FAIL: CR in bogus comment state
  input: "<?"
- actual:   [["Character","<"],["Character","?\r"]]
+ actual:   [["Character","<?\r"]]
  expected: [["Comment","?\n"]]
 FAIL: CRLF in bogus comment state
  input: "<?
 "
- actual:   [["Character","<"],["Character","?\r\n"]]
+ actual:   [["Character","<?\r\n"]]
  expected: [["Comment","?\n"]]
 FAIL: CRLFLF in bogus comment state
  input: "<?
 
 "
- actual:   [["Character","<"],["Character","?\r\n\n"]]
+ actual:   [["Character","<?\r\n\n"]]
  expected: [["Comment","?\n\n"]]
 FAIL: Raw NUL replacement
  input: "\u0000"
@@ -197,7 +197,7 @@ FAIL: Commented entities in RCDATA
  expected: [["Character"," & <!-- & --> & "],["EndTag","xmp"]]
 FAIL: Incorrect comment ending sequences in RCDATA or RAWTEXT
  input: "foo<!-- x --x>x-- >x--!>x--<></xmp>"
- actual:   [["Character","foo"],["Comment"," x --x>x-- >x"],["Character","x--<"],["Character",">"],["EndTag","xmp"]]
+ actual:   [["Character","foo"],["Comment"," x --x>x-- >x"],["Character","x--<>"],["EndTag","xmp"]]
  expected: [["Character","foo<!-- x --x>x-- >x--!>x--<>"],["EndTag","xmp"]]
 FAIL: Named entity: zwnj; with a semi-colon
  input: "&zwnj;"
@@ -475,10 +475,6 @@ FAIL: Doctype in error
  input: "<!DOCTYPE foo>"
  actual:   [["Comment","DOCTYPE foo"]]
  expected: [["DOCTYPE","foo",null,null,true]]
-FAIL: Empty start tag
- input: "<>"
- actual:   [["Character","<"],["Character",">"]]
- expected: [["Character","<>"]]
 FAIL: Multiple atts
  input: "<h a='b' c='d'>"
  actual:   [["StartTag","h",{"c":"'d'"}]]
@@ -605,41 +601,12 @@ FAIL: Incomplete doctype
  expected: [["DOCTYPE","html",null,null,false]]
 FAIL: Simili processing instruction
  input: "<?namespace>"
- actual:   [["Character","<"],["Character","?namespace>"]]
+ actual:   [["Character","<?namespace>"]]
  expected: [["Comment","?namespace"]]
 FAIL: A bogus comment stops at >, even if preceeded by two dashes
  input: "<?foo-->"
- actual:   [["Character","<"],["Character","?foo-->"]]
+ actual:   [["Character","<?foo-->"]]
  expected: [["Comment","?foo--"]]
-FAIL: Unescaped <
- input: "foo < bar"
- actual:   [["Character","foo <"],["Character"," bar"]]
- expected: [["Character","foo < bar"]]
-FAIL: <\u0000
- input: "<ý"
- actual:   [["Character","<"],["Character","\u0000"]]
- expected: [["Character","<\u0000"]]
-FAIL: <\u0009
- input: "<ý"
- actual:   [["Character","<"],["Character","\t"]]
- expected: [["Character","<\t"]]
-FAIL: <\u000A
- input: "<
-"
- actual:   [["Character","<"],["Character","\n"]]
- expected: [["Character","<\n"]]
-FAIL: <\u000B
- input: "<ý"
- actual:   [["Character","<"],["Character","\u000b"]]
- expected: [["Character","<\u000b"]]
-FAIL: <\u000C
- input: "<ý"
- actual:   [["Character","<"],["Character","\f"]]
- expected: [["Character","<\f"]]
-FAIL: < 
- input: "< "
- actual:   [["Character","<"],["Character"," "]]
- expected: [["Character","< "]]
 FAIL: <!----! >
  input: "<!----! >"
  actual:   [["Comment","--!>"]]
@@ -3989,195 +3956,139 @@ FAIL: <!DOCTYPE\uDBC0\uDC00
  input: "<!DOCTYPEô€€€"
  actual:   [["Comment","DOCTYPEô€€€"]]
  expected: [["DOCTYPE","ô€€€",null,null,false]]
-FAIL: <"
- input: "<""
- actual:   [["Character","<"],["Character","\""]]
- expected: [["Character","<\""]]
-FAIL: <&
- input: "<&"
- actual:   [["Character","<"],["Character","&"]]
- expected: [["Character","<&"]]
-FAIL: <'
- input: "<'"
- actual:   [["Character","<"],["Character","'"]]
- expected: [["Character","<'"]]
-FAIL: <-
- input: "<-"
- actual:   [["Character","<"],["Character","-"]]
- expected: [["Character","<-"]]
-FAIL: <.
- input: "<."
- actual:   [["Character","<"],["Character","."]]
- expected: [["Character","<."]]
-FAIL: <0
- input: "<0"
- actual:   [["Character","<"],["Character","0"]]
- expected: [["Character","<0"]]
-FAIL: <1
- input: "<1"
- actual:   [["Character","<"],["Character","1"]]
- expected: [["Character","<1"]]
-FAIL: <9
- input: "<9"
- actual:   [["Character","<"],["Character","9"]]
- expected: [["Character","<9"]]
-FAIL: <<
- input: "<<"
- actual:   [["Character","<"],["Character","<"]]
- expected: [["Character","<<"]]
-FAIL: <=
- input: "<="
- actual:   [["Character","<"],["Character","="]]
- expected: [["Character","<="]]
-FAIL: <>
- input: "<>"
- actual:   [["Character","<"],["Character",">"]]
- expected: [["Character","<>"]]
 FAIL: <?
  input: "<?"
- actual:   [["Character","<"],["Character","?"]]
+ actual:   [["Character","<?"]]
  expected: [["Comment","?"]]
 FAIL: <?\u0000
  input: "<?ý"
- actual:   [["Character","<"],["Character","?\u0000"]]
+ actual:   [["Character","<?\u0000"]]
  expected: [["Comment","?ï¿½"]]
 FAIL: <?\u0009
  input: "<?ý"
- actual:   [["Character","<"],["Character","?\t"]]
+ actual:   [["Character","<?\t"]]
  expected: [["Comment","?\t"]]
 FAIL: <?\u000A
  input: "<?
 "
- actual:   [["Character","<"],["Character","?\n"]]
+ actual:   [["Character","<?\n"]]
  expected: [["Comment","?\n"]]
 FAIL: <?\u000B
  input: "<?ý"
- actual:   [["Character","<"],["Character","?\u000b"]]
+ actual:   [["Character","<?\u000b"]]
  expected: [["Comment","?\u000b"]]
 FAIL: <?\u000C
  input: "<?ý"
- actual:   [["Character","<"],["Character","?\f"]]
+ actual:   [["Character","<?\f"]]
  expected: [["Comment","?\f"]]
 FAIL: <? 
  input: "<? "
- actual:   [["Character","<"],["Character","? "]]
+ actual:   [["Character","<? "]]
  expected: [["Comment","? "]]
 FAIL: <? \u0000
  input: "<? ý"
- actual:   [["Character","<"],["Character","? \u0000"]]
+ actual:   [["Character","<? \u0000"]]
  expected: [["Comment","? ï¿½"]]
 FAIL: <?!
  input: "<?!"
- actual:   [["Character","<"],["Character","?!"]]
+ actual:   [["Character","<?!"]]
  expected: [["Comment","?!"]]
 FAIL: <?"
  input: "<?""
- actual:   [["Character","<"],["Character","?\""]]
+ actual:   [["Character","<?\""]]
  expected: [["Comment","?\""]]
 FAIL: <?&
  input: "<?&"
- actual:   [["Character","<"],["Character","?&"]]
+ actual:   [["Character","<?&"]]
  expected: [["Comment","?&"]]
 FAIL: <?'
  input: "<?'"
- actual:   [["Character","<"],["Character","?'"]]
+ actual:   [["Character","<?'"]]
  expected: [["Comment","?'"]]
 FAIL: <?-
  input: "<?-"
- actual:   [["Character","<"],["Character","?-"]]
+ actual:   [["Character","<?-"]]
  expected: [["Comment","?-"]]
 FAIL: <?/
  input: "<?/"
- actual:   [["Character","<"],["Character","?/"]]
+ actual:   [["Character","<?/"]]
  expected: [["Comment","?/"]]
 FAIL: <?0
  input: "<?0"
- actual:   [["Character","<"],["Character","?0"]]
+ actual:   [["Character","<?0"]]
  expected: [["Comment","?0"]]
 FAIL: <?1
  input: "<?1"
- actual:   [["Character","<"],["Character","?1"]]
+ actual:   [["Character","<?1"]]
  expected: [["Comment","?1"]]
 FAIL: <?9
  input: "<?9"
- actual:   [["Character","<"],["Character","?9"]]
+ actual:   [["Character","<?9"]]
  expected: [["Comment","?9"]]
 FAIL: <?<
  input: "<?<"
- actual:   [["Character","<"],["Character","?<"]]
+ actual:   [["Character","<?<"]]
  expected: [["Comment","?<"]]
 FAIL: <?=
  input: "<?="
- actual:   [["Character","<"],["Character","?="]]
+ actual:   [["Character","<?="]]
  expected: [["Comment","?="]]
 FAIL: <?>
  input: "<?>"
- actual:   [["Character","<"],["Character","?>"]]
+ actual:   [["Character","<?>"]]
  expected: [["Comment","?"]]
 FAIL: <??
  input: "<??"
- actual:   [["Character","<"],["Character","??"]]
+ actual:   [["Character","<??"]]
  expected: [["Comment","??"]]
 FAIL: <?@
  input: "<?@"
- actual:   [["Character","<"],["Character","?@"]]
+ actual:   [["Character","<?@"]]
  expected: [["Comment","?@"]]
 FAIL: <?A
  input: "<?A"
- actual:   [["Character","<"],["Character","?A"]]
+ actual:   [["Character","<?A"]]
  expected: [["Comment","?A"]]
 FAIL: <?B
  input: "<?B"
- actual:   [["Character","<"],["Character","?B"]]
+ actual:   [["Character","<?B"]]
  expected: [["Comment","?B"]]
 FAIL: <?Y
  input: "<?Y"
- actual:   [["Character","<"],["Character","?Y"]]
+ actual:   [["Character","<?Y"]]
  expected: [["Comment","?Y"]]
 FAIL: <?Z
  input: "<?Z"
- actual:   [["Character","<"],["Character","?Z"]]
+ actual:   [["Character","<?Z"]]
  expected: [["Comment","?Z"]]
 FAIL: <?`
  input: "<?`"
- actual:   [["Character","<"],["Character","?`"]]
+ actual:   [["Character","<?`"]]
  expected: [["Comment","?`"]]
 FAIL: <?a
  input: "<?a"
- actual:   [["Character","<"],["Character","?a"]]
+ actual:   [["Character","<?a"]]
  expected: [["Comment","?a"]]
 FAIL: <?b
  input: "<?b"
- actual:   [["Character","<"],["Character","?b"]]
+ actual:   [["Character","<?b"]]
  expected: [["Comment","?b"]]
 FAIL: <?y
  input: "<?y"
- actual:   [["Character","<"],["Character","?y"]]
+ actual:   [["Character","<?y"]]
  expected: [["Comment","?y"]]
 FAIL: <?z
  input: "<?z"
- actual:   [["Character","<"],["Character","?z"]]
+ actual:   [["Character","<?z"]]
  expected: [["Comment","?z"]]
 FAIL: <?{
  input: "<?{"
- actual:   [["Character","<"],["Character","?{"]]
+ actual:   [["Character","<?{"]]
  expected: [["Comment","?{"]]
 FAIL: <?\uDBC0\uDC00
  input: "<?ô€€€"
- actual:   [["Character","<"],["Character","?ô€€€"]]
+ actual:   [["Character","<?ô€€€"]]
  expected: [["Comment","?ô€€€"]]
-FAIL: <@
- input: "<@"
- actual:   [["Character","<"],["Character","@"]]
- expected: [["Character","<@"]]
-FAIL: <[
- input: "<["
- actual:   [["Character","<"],["Character","["]]
- expected: [["Character","<["]]
-FAIL: <`
- input: "<`"
- actual:   [["Character","<"],["Character","`"]]
- expected: [["Character","<`"]]
 FAIL: <a\u000D>
  input: "<a>"
  actual:   [["StartTag","a\r",{}]]
@@ -4306,14 +4217,6 @@ FAIL: <a a='>'>
  input: "<a a='>'>"
  actual:   [["StartTag","a",{"a":"'"}],["Character","'>"]]
  expected: [["StartTag","a",{"a":">"}]]
-FAIL: <{
- input: "<{"
- actual:   [["Character","<"],["Character","{"]]
- expected: [["Character","<{"]]
-FAIL: <\uDBC0\uDC00
- input: "<ô€€€"
- actual:   [["Character","<"],["Character","ô€€€"]]
- expected: [["Character","<ô€€€"]]
 FAIL: Double-quoted attribute value not followed by whitespace
  input: "<foo a="b"c>"
  actual:   [["StartTag","foo",{"a":"\"b\"c"}]]
