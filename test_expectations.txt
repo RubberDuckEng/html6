@@ -476,23 +476,23 @@ FAIL: Decimal numeric entity followed by hex character A.
  expected: [["Character","aF"]]
 FAIL: Commented close tag in RCDATA or RAWTEXT
  input: "foo<!--</xmp>--></xmp>"
- actual:   [["Comment","</xmp>"],["EndTag","xmp"]]
+ actual:   [["Character","foo"],["Comment","</xmp>"],["EndTag","xmp"]]
  expected: [["Character","foo<!--"],["EndTag","xmp"],["Character","-->"],["EndTag","xmp"]]
 FAIL: Bogus comment in RCDATA or RAWTEXT
  input: "foo<!-->baz</xmp>"
- actual:   [["Comment",""],["Character","baz"],["EndTag","xmp"]]
+ actual:   [["Character","foo"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
  expected: [["Character","foo<!-->baz"],["EndTag","xmp"]]
 FAIL: End tag surrounded by bogus comment in RCDATA or RAWTEXT
  input: "foo<!--></xmp><!-->baz</xmp>"
- actual:   [["Comment",""],["EndTag","xmp"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
+ actual:   [["Character","foo"],["Comment",""],["EndTag","xmp"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
  expected: [["Character","foo<!-->"],["EndTag","xmp"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
 FAIL: Commented entities in RCDATA
  input: " &amp; <!-- &amp; --> &amp; </xmp>"
- actual:   [["Comment"," &amp; "],["Character"," &amp; "],["EndTag","xmp"]]
+ actual:   [["Character"," &amp; "],["Comment"," &amp; "],["Character"," &amp; "],["EndTag","xmp"]]
  expected: [["Character"," & <!-- & --> & "],["EndTag","xmp"]]
 FAIL: Incorrect comment ending sequences in RCDATA or RAWTEXT
  input: "foo<!-- x --x>x-- >x--!>x--<></xmp>"
- actual:   [["Comment"," x --x>x-- >x"],["Character","x--<"],["Character",">"],["EndTag","xmp"]]
+ actual:   [["Character","foo"],["Comment"," x --x>x-- >x"],["Character","x--<"],["Character",">"],["EndTag","xmp"]]
  expected: [["Character","foo<!-- x --x>x-- >x--!>x--<>"],["EndTag","xmp"]]
 FAIL: Named entity: AElig without a semi-colon
  input: "&AElig"
@@ -13011,24 +13011,12 @@ x
  actual:   [["Character","\nx\n&gt;\n"]]
  expected: [["Character","\nx\n>\n"]]
 PASS: Start tag with no attributes but space before the greater-than sign
-FAIL: Empty attribute followed by uppercase attribute
- input: "<h a B=''>"
- actual:   [["StartTag","h",{"B":"''"}]]
- expected: [["StartTag","h",{"a":"","b":""}]]
-FAIL: Double-quote after attribute name
- input: "<h a ">"
- actual:   [["StartTag","h",{"\"":""}]]
- expected: [["StartTag","h",{"a":"","\"":""}]]
-FAIL: Single-quote after attribute name
- input: "<h a '>"
- actual:   [["StartTag","h",{"'":""}]]
- expected: [["StartTag","h",{"a":"","'":""}]]
+PASS: Empty attribute followed by uppercase attribute
+PASS: Double-quote after attribute name
+PASS: Single-quote after attribute name
 PASS: Empty end tag with following characters
 PASS: Empty end tag with following tag
-FAIL: Empty end tag with following comment
- input: "a</><!--b-->c"
- actual:   [["Comment","b"],["Character","c"]]
- expected: [["Character","a"],["Comment","b"],["Character","c"]]
+PASS: Empty end tag with following comment
 PASS: Empty end tag with following end tag
 PASS: [empty]
 PASS: [empty]
@@ -16965,128 +16953,50 @@ PASS: <a a\u000C>
 PASS: <a a\u000D>
 PASS: <a a\u001F>
 PASS: <a a >
-FAIL: <a a \u0000>
- input: "<a a ý>"
- actual:   [["StartTag","a",{"\u0000":""}]]
- expected: [["StartTag","a",{"a":"","ï¿½":""}]]
-FAIL: <a a \u0008>
- input: "<a a ý>"
- actual:   [["StartTag","a",{"\b":""}]]
- expected: [["StartTag","a",{"a":"","\b":""}]]
+PASS: <a a \u0000>
+PASS: <a a \u0008>
 PASS: <a a \u0009>
 PASS: <a a \u000A>
-FAIL: <a a \u000B>
- input: "<a a ý>"
- actual:   [["StartTag","a",{"\u000b":""}]]
- expected: [["StartTag","a",{"a":"","\u000b":""}]]
+PASS: <a a \u000B>
 PASS: <a a \u000C>
-PASS: <a a \u000D>
-FAIL: <a a \u001F>
- input: "<a a ý>"
- actual:   [["StartTag","a",{"\u001f":""}]]
- expected: [["StartTag","a",{"a":"","\u001f":""}]]
+FAIL: <a a \u000D>
+ input: "<a a >"
+ actual:   [["StartTag","a",{"a":"","\r":""}]]
+ expected: [["StartTag","a",{"a":""}]]
+PASS: <a a \u001F>
 PASS: <a a  >
-FAIL: <a a !>
- input: "<a a !>"
- actual:   [["StartTag","a",{"!":""}]]
- expected: [["StartTag","a",{"a":"","!":""}]]
-FAIL: <a a ">
- input: "<a a ">"
- actual:   [["StartTag","a",{"\"":""}]]
- expected: [["StartTag","a",{"a":"","\"":""}]]
-FAIL: <a a #>
- input: "<a a #>"
- actual:   [["StartTag","a",{"#":""}]]
- expected: [["StartTag","a",{"a":"","#":""}]]
-FAIL: <a a &>
- input: "<a a &>"
- actual:   [["StartTag","a",{"&":""}]]
- expected: [["StartTag","a",{"a":"","&":""}]]
-FAIL: <a a '>
- input: "<a a '>"
- actual:   [["StartTag","a",{"'":""}]]
- expected: [["StartTag","a",{"a":"","'":""}]]
-FAIL: <a a (>
- input: "<a a (>"
- actual:   [["StartTag","a",{"(":""}]]
- expected: [["StartTag","a",{"a":"","(":""}]]
-FAIL: <a a ->
- input: "<a a ->"
- actual:   [["StartTag","a",{"-":""}]]
- expected: [["StartTag","a",{"a":"","-":""}]]
-FAIL: <a a .>
- input: "<a a .>"
- actual:   [["StartTag","a",{".":""}]]
- expected: [["StartTag","a",{"a":"",".":""}]]
+PASS: <a a !>
+PASS: <a a ">
+PASS: <a a #>
+PASS: <a a &>
+PASS: <a a '>
+PASS: <a a (>
+PASS: <a a ->
+PASS: <a a .>
 PASS: <a a />
-FAIL: <a a 0>
- input: "<a a 0>"
- actual:   [["StartTag","a",{"0":""}]]
- expected: [["StartTag","a",{"a":"","0":""}]]
-FAIL: <a a 1>
- input: "<a a 1>"
- actual:   [["StartTag","a",{"1":""}]]
- expected: [["StartTag","a",{"a":"","1":""}]]
-FAIL: <a a 9>
- input: "<a a 9>"
- actual:   [["StartTag","a",{"9":""}]]
- expected: [["StartTag","a",{"a":"","9":""}]]
-FAIL: <a a <>
- input: "<a a <>"
- actual:   [["StartTag","a",{"<":""}]]
- expected: [["StartTag","a",{"a":"","<":""}]]
+PASS: <a a 0>
+PASS: <a a 1>
+PASS: <a a 9>
+PASS: <a a <>
 PASS: <a a =>
 PASS: <a a >
-FAIL: <a a ?>
- input: "<a a ?>"
- actual:   [["StartTag","a",{"?":""}]]
- expected: [["StartTag","a",{"a":"","?":""}]]
-FAIL: <a a @>
- input: "<a a @>"
- actual:   [["StartTag","a",{"@":""}]]
- expected: [["StartTag","a",{"a":"","@":""}]]
-PASS: <a a A>
-FAIL: <a a B>
- input: "<a a B>"
- actual:   [["StartTag","a",{"B":""}]]
- expected: [["StartTag","a",{"a":"","b":""}]]
-FAIL: <a a Y>
- input: "<a a Y>"
- actual:   [["StartTag","a",{"Y":""}]]
- expected: [["StartTag","a",{"a":"","y":""}]]
-FAIL: <a a Z>
- input: "<a a Z>"
- actual:   [["StartTag","a",{"Z":""}]]
- expected: [["StartTag","a",{"a":"","z":""}]]
-FAIL: <a a [>
- input: "<a a [>"
- actual:   [["StartTag","a",{"[":""}]]
- expected: [["StartTag","a",{"a":"","[":""}]]
-FAIL: <a a `>
- input: "<a a `>"
- actual:   [["StartTag","a",{"`":""}]]
- expected: [["StartTag","a",{"a":"","`":""}]]
+PASS: <a a ?>
+PASS: <a a @>
+FAIL: <a a A>
+ input: "<a a A>"
+ actual:   [["StartTag","a",{"a":"","A":""}]]
+ expected: [["StartTag","a",{"a":""}]]
+PASS: <a a B>
+PASS: <a a Y>
+PASS: <a a Z>
+PASS: <a a [>
+PASS: <a a `>
 PASS: <a a a>
-FAIL: <a a b>
- input: "<a a b>"
- actual:   [["StartTag","a",{"b":""}]]
- expected: [["StartTag","a",{"a":"","b":""}]]
-FAIL: <a a y>
- input: "<a a y>"
- actual:   [["StartTag","a",{"y":""}]]
- expected: [["StartTag","a",{"a":"","y":""}]]
-FAIL: <a a z>
- input: "<a a z>"
- actual:   [["StartTag","a",{"z":""}]]
- expected: [["StartTag","a",{"a":"","z":""}]]
-FAIL: <a a {>
- input: "<a a {>"
- actual:   [["StartTag","a",{"{":""}]]
- expected: [["StartTag","a",{"a":"","{":""}]]
-FAIL: <a a \uDBC0\uDC00>
- input: "<a a ô€€€>"
- actual:   [["StartTag","a",{"ô€€€":""}]]
- expected: [["StartTag","a",{"a":"","ô€€€":""}]]
+PASS: <a a b>
+PASS: <a a y>
+PASS: <a a z>
+PASS: <a a {>
+PASS: <a a \uDBC0\uDC00>
 PASS: <a a!>
 PASS: <a a">
 PASS: <a a#>
@@ -17479,10 +17389,7 @@ PASS: {
 PASS: {
 PASS: \uDBC0\uDC00
 PASS: \uDBC0\uDC00
-FAIL: < in attribute name
- input: "<z/0  <>"
- actual:   [["StartTag","z",{"<":""}]]
- expected: [["StartTag","z",{"0":"","<":""}]]
+PASS: < in attribute name
 PASS: < in unquoted attribute value
 PASS: = in unquoted attribute value
 PASS: = attribute
@@ -17999,4 +17906,4 @@ FAIL: CR followed by U+0000
  input: "ý"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 3086 of 6806 tests
+Passed 3117 of 6806 tests

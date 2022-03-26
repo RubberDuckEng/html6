@@ -545,6 +545,9 @@ class Tokenizer {
 // U+003D EQUALS SIGN (=)
 // This is an unexpected-equals-sign-before-attribute-name parse error. Start a new attribute in the current tag token. Set that attribute's name to the current input character, and its value to the empty string. Switch to the attribute name state.
 
+          // Would like to be able to assert currentAttribute=null
+          // but </xmp</xmp</xmp> will hit that here.
+          currentTag!.currentAttribute = null;
           currentTag!.startAttributeName("");
           reconsumeIn(char, TokenizerState.attributeName);
           continue;
@@ -590,6 +593,11 @@ class Tokenizer {
           if (char == endOfFile) {
             // This is an eof-in-tag parse error.
             return emitEofToken();
+          }
+          // FIXME: This is wrong, should be handled earlier.
+          // This is hit by "<h a B=''>"
+          if (currentTag!.currentAttribute != null) {
+            currentTag!.finishAttribute();
           }
           currentTag!.startAttributeName("");
           reconsumeIn(char, TokenizerState.attributeName);
@@ -660,9 +668,18 @@ class Tokenizer {
           input.push(char);
 
           if (input.lookAheadAndConsume("--")) {
+            // Something is not quite right here.
+            // Try input: "foo<!--</xmp>--></xmp>"
+            var token;
+            if (hasPendingCharacterToken) {
+              token = emitCharacterToken();
+            }
             assert(textBuffer == null);
             textBuffer = StringBuffer();
             state = TokenizerState.commentStart;
+            if (token != null) {
+              return token;
+            }
             continue;
           }
 

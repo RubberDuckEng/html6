@@ -39,6 +39,7 @@ void main(List<String> arguments) {
       if (testFilter != null && testFilter != test.description) {
         continue;
       }
+      // print(test.description);
       var input = InputManager(test.input);
       var tokenizer = Tokenizer(input);
       // NOTE: This toList is important or we'll try to iterate
