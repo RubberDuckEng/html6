@@ -266,15 +266,11 @@ class TagTokenBuilder {
   Map<String, String> attributes;
   AttributeBuilder? currentAttribute;
 
-  TagTokenBuilder.startTag({int? firstCodePoint})
+  TagTokenBuilder.startTag()
       : tagTokenType = TagTokenType.startTag,
         isSelfClosing = false,
         tagName = StringBuffer(),
-        attributes = {} {
-    if (firstCodePoint != null) {
-      tagName.writeCharCode(firstCodePoint);
-    }
-  }
+        attributes = {};
 
   TagTokenBuilder.endTag()
       : tagTokenType = TagTokenType.endTag,
@@ -360,7 +356,6 @@ class Tokenizer {
   Token getNextToken() {
     while (true) {
       int char = input.getNextCodePoint();
-      reconsume:
       switch (state) {
         case TokenizerState.data:
 // U+0026 AMPERSAND (&)
@@ -390,13 +385,12 @@ class Tokenizer {
             continue;
           }
           if (_isAsciiAlpha(char)) {
-            currentTag =
-                TagTokenBuilder.startTag(firstCodePoint: _toLowerAscii(char));
-            state = TokenizerState.tagName;
+            currentTag = TagTokenBuilder.startTag();
+            reconsumeIn(char, TokenizerState.tagName);
             if (hasPendingCharacterToken) {
               return emitCharacterToken();
             }
-            break reconsume;
+            continue;
           }
 // U+003F QUESTION MARK (?)
 // This is an unexpected-question-mark-instead-of-tag-name parse error. Create a comment token whose data is the empty string. Reconsume in the bogus comment state.
