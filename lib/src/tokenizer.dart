@@ -104,8 +104,11 @@ class InputManager {
 
   bool lookAheadForEntityAndConsume(int char, StringBuffer buffer) {
     push(char);
-    var entity = findMatchingEntity(this, buffer);
+    var entity = peekForMatchingEntity(this);
     if (entity != null) {
+      for (int i = 0; i < entity.nameCodepoints.length; i++) {
+        getNextCodePoint();
+      }
       buffer.clear();
       for (int charCode in entity.values) {
         buffer.writeCharCode(charCode);

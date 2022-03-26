@@ -35,10 +35,7 @@ FAIL: RAWTEXT w/ something looking like an entity
  input: "&foo;"
  actual:   [["Character","⪌"]]
  expected: [["Character","&foo;"]]
-FAIL: RCDATA w/ an entity
- input: "&lt;"
- actual:   [["Character","<"],["Character",";"]]
- expected: [["Character","<"]]
+PASS: RCDATA w/ an entity
 FAIL: CR in bogus comment state
  input: "<?"
  actual:   [["Character","<"],["Character","?\r"]]
@@ -202,7 +199,7 @@ PASS: Valid entity name followed by the equals sign in an unquoted attribute val
 PASS: Ambiguous ampersand.
 FAIL: Semicolonless named entity 'not' followed by 'i;' in body
  input: "&noti;"
- actual:   [["Character","¬"],["Character","i;"]]
+ actual:   [["Character","∦"]]
  expected: [["Character","¬i;"]]
 PASS: Very long undefined named entity in body
 FAIL: CR as numeric entity
@@ -491,43 +488,28 @@ FAIL: End tag surrounded by bogus comment in RCDATA or RAWTEXT
  expected: [["Character","foo<!-->"],["EndTag","xmp"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
 FAIL: Commented entities in RCDATA
  input: " &amp; <!-- &amp; --> &amp; </xmp>"
- actual:   [["Character","&"],["Character"," ; "],["Comment"," &amp; "],["Character","&"],["Character"," ; "],["EndTag","xmp"]]
+ actual:   [["Character","⊴"],["Character","&"],["Character"," --> "],["EndTag","xmp"]]
  expected: [["Character"," & <!-- & --> & "],["EndTag","xmp"]]
 FAIL: Incorrect comment ending sequences in RCDATA or RAWTEXT
  input: "foo<!-- x --x>x-- >x--!>x--<></xmp>"
  actual:   [["Character","foo"],["Comment"," x --x>x-- >x"],["Character","x--<"],["Character",">"],["EndTag","xmp"]]
  expected: [["Character","foo<!-- x --x>x-- >x--!>x--<>"],["EndTag","xmp"]]
 PASS: Named entity: AElig without a semi-colon
-FAIL: Named entity: AElig; with a semi-colon
- input: "&AElig;"
- actual:   [["Character","Æ"],["Character",";"]]
- expected: [["Character","Æ"]]
+PASS: Named entity: AElig; with a semi-colon
 PASS: Named entity: AMP without a semi-colon
-FAIL: Named entity: AMP; with a semi-colon
- input: "&AMP;"
- actual:   [["Character","&"],["Character",";"]]
- expected: [["Character","&"]]
+PASS: Named entity: AMP; with a semi-colon
 PASS: Named entity: Aacute without a semi-colon
-FAIL: Named entity: Aacute; with a semi-colon
- input: "&Aacute;"
- actual:   [["Character","Á"],["Character",";"]]
- expected: [["Character","Á"]]
+PASS: Named entity: Aacute; with a semi-colon
 PASS: Bad named entity: Abreve without a semi-colon
 PASS: Named entity: Abreve; with a semi-colon
 PASS: Named entity: Acirc without a semi-colon
-FAIL: Named entity: Acirc; with a semi-colon
- input: "&Acirc;"
- actual:   [["Character","Â"],["Character",";"]]
- expected: [["Character","Â"]]
+PASS: Named entity: Acirc; with a semi-colon
 PASS: Bad named entity: Acy without a semi-colon
 PASS: Named entity: Acy; with a semi-colon
 PASS: Bad named entity: Afr without a semi-colon
 PASS: Named entity: Afr; with a semi-colon
 PASS: Named entity: Agrave without a semi-colon
-FAIL: Named entity: Agrave; with a semi-colon
- input: "&Agrave;"
- actual:   [["Character","À"],["Character",";"]]
- expected: [["Character","À"]]
+PASS: Named entity: Agrave; with a semi-colon
 PASS: Bad named entity: Alpha without a semi-colon
 PASS: Named entity: Alpha; with a semi-colon
 PASS: Bad named entity: Amacr without a semi-colon
@@ -541,24 +523,15 @@ PASS: Named entity: Aopf; with a semi-colon
 PASS: Bad named entity: ApplyFunction without a semi-colon
 PASS: Named entity: ApplyFunction; with a semi-colon
 PASS: Named entity: Aring without a semi-colon
-FAIL: Named entity: Aring; with a semi-colon
- input: "&Aring;"
- actual:   [["Character","Å"],["Character",";"]]
- expected: [["Character","Å"]]
+PASS: Named entity: Aring; with a semi-colon
 PASS: Bad named entity: Ascr without a semi-colon
 PASS: Named entity: Ascr; with a semi-colon
 PASS: Bad named entity: Assign without a semi-colon
 PASS: Named entity: Assign; with a semi-colon
 PASS: Named entity: Atilde without a semi-colon
-FAIL: Named entity: Atilde; with a semi-colon
- input: "&Atilde;"
- actual:   [["Character","Ã"],["Character",";"]]
- expected: [["Character","Ã"]]
+PASS: Named entity: Atilde; with a semi-colon
 PASS: Named entity: Auml without a semi-colon
-FAIL: Named entity: Auml; with a semi-colon
- input: "&Auml;"
- actual:   [["Character","Ä"],["Character",";"]]
- expected: [["Character","Ä"]]
+PASS: Named entity: Auml; with a semi-colon
 PASS: Bad named entity: Backslash without a semi-colon
 PASS: Named entity: Backslash; with a semi-colon
 PASS: Bad named entity: Barv without a semi-colon
@@ -586,10 +559,7 @@ PASS: Named entity: Bumpeq; with a semi-colon
 PASS: Bad named entity: CHcy without a semi-colon
 PASS: Named entity: CHcy; with a semi-colon
 PASS: Named entity: COPY without a semi-colon
-FAIL: Named entity: COPY; with a semi-colon
- input: "&COPY;"
- actual:   [["Character","©"],["Character",";"]]
- expected: [["Character","©"]]
+PASS: Named entity: COPY; with a semi-colon
 PASS: Bad named entity: Cacute without a semi-colon
 PASS: Named entity: Cacute; with a semi-colon
 PASS: Bad named entity: Cap without a semi-colon
@@ -601,10 +571,7 @@ PASS: Named entity: Cayleys; with a semi-colon
 PASS: Bad named entity: Ccaron without a semi-colon
 PASS: Named entity: Ccaron; with a semi-colon
 PASS: Named entity: Ccedil without a semi-colon
-FAIL: Named entity: Ccedil; with a semi-colon
- input: "&Ccedil;"
- actual:   [["Character","Ç"],["Character",";"]]
- expected: [["Character","Ç"]]
+PASS: Named entity: Ccedil; with a semi-colon
 PASS: Bad named entity: Ccirc without a semi-colon
 PASS: Named entity: Ccirc; with a semi-colon
 PASS: Bad named entity: Cconint without a semi-colon
@@ -768,22 +735,13 @@ PASS: Named entity: Dstrok; with a semi-colon
 PASS: Bad named entity: ENG without a semi-colon
 PASS: Named entity: ENG; with a semi-colon
 PASS: Named entity: ETH without a semi-colon
-FAIL: Named entity: ETH; with a semi-colon
- input: "&ETH;"
- actual:   [["Character","Ð"],["Character",";"]]
- expected: [["Character","Ð"]]
+PASS: Named entity: ETH; with a semi-colon
 PASS: Named entity: Eacute without a semi-colon
-FAIL: Named entity: Eacute; with a semi-colon
- input: "&Eacute;"
- actual:   [["Character","É"],["Character",";"]]
- expected: [["Character","É"]]
+PASS: Named entity: Eacute; with a semi-colon
 PASS: Bad named entity: Ecaron without a semi-colon
 PASS: Named entity: Ecaron; with a semi-colon
 PASS: Named entity: Ecirc without a semi-colon
-FAIL: Named entity: Ecirc; with a semi-colon
- input: "&Ecirc;"
- actual:   [["Character","Ê"],["Character",";"]]
- expected: [["Character","Ê"]]
+PASS: Named entity: Ecirc; with a semi-colon
 PASS: Bad named entity: Ecy without a semi-colon
 PASS: Named entity: Ecy; with a semi-colon
 PASS: Bad named entity: Edot without a semi-colon
@@ -791,10 +749,7 @@ PASS: Named entity: Edot; with a semi-colon
 PASS: Bad named entity: Efr without a semi-colon
 PASS: Named entity: Efr; with a semi-colon
 PASS: Named entity: Egrave without a semi-colon
-FAIL: Named entity: Egrave; with a semi-colon
- input: "&Egrave;"
- actual:   [["Character","È"],["Character",";"]]
- expected: [["Character","È"]]
+PASS: Named entity: Egrave; with a semi-colon
 PASS: Bad named entity: Element without a semi-colon
 PASS: Named entity: Element; with a semi-colon
 PASS: Bad named entity: Emacr without a semi-colon
@@ -822,10 +777,7 @@ PASS: Named entity: Esim; with a semi-colon
 PASS: Bad named entity: Eta without a semi-colon
 PASS: Named entity: Eta; with a semi-colon
 PASS: Named entity: Euml without a semi-colon
-FAIL: Named entity: Euml; with a semi-colon
- input: "&Euml;"
- actual:   [["Character","Ë"],["Character",";"]]
- expected: [["Character","Ë"]]
+PASS: Named entity: Euml; with a semi-colon
 PASS: Bad named entity: Exists without a semi-colon
 PASS: Named entity: Exists; with a semi-colon
 PASS: Bad named entity: ExponentialE without a semi-colon
@@ -849,10 +801,7 @@ PASS: Named entity: Fscr; with a semi-colon
 PASS: Bad named entity: GJcy without a semi-colon
 PASS: Named entity: GJcy; with a semi-colon
 PASS: Named entity: GT without a semi-colon
-FAIL: Named entity: GT; with a semi-colon
- input: "&GT;"
- actual:   [["Character",">"],["Character",";"]]
- expected: [["Character",">"]]
+PASS: Named entity: GT; with a semi-colon
 PASS: Bad named entity: Gamma without a semi-colon
 PASS: Named entity: Gamma; with a semi-colon
 PASS: Bad named entity: Gammad without a semi-colon
@@ -922,15 +871,9 @@ PASS: Named entity: IJlig; with a semi-colon
 PASS: Bad named entity: IOcy without a semi-colon
 PASS: Named entity: IOcy; with a semi-colon
 PASS: Named entity: Iacute without a semi-colon
-FAIL: Named entity: Iacute; with a semi-colon
- input: "&Iacute;"
- actual:   [["Character","Í"],["Character",";"]]
- expected: [["Character","Í"]]
+PASS: Named entity: Iacute; with a semi-colon
 PASS: Named entity: Icirc without a semi-colon
-FAIL: Named entity: Icirc; with a semi-colon
- input: "&Icirc;"
- actual:   [["Character","Î"],["Character",";"]]
- expected: [["Character","Î"]]
+PASS: Named entity: Icirc; with a semi-colon
 PASS: Bad named entity: Icy without a semi-colon
 PASS: Named entity: Icy; with a semi-colon
 PASS: Bad named entity: Idot without a semi-colon
@@ -938,10 +881,7 @@ PASS: Named entity: Idot; with a semi-colon
 PASS: Bad named entity: Ifr without a semi-colon
 PASS: Named entity: Ifr; with a semi-colon
 PASS: Named entity: Igrave without a semi-colon
-FAIL: Named entity: Igrave; with a semi-colon
- input: "&Igrave;"
- actual:   [["Character","Ì"],["Character",";"]]
- expected: [["Character","Ì"]]
+PASS: Named entity: Igrave; with a semi-colon
 PASS: Bad named entity: Im without a semi-colon
 PASS: Named entity: Im; with a semi-colon
 PASS: Bad named entity: Imacr without a semi-colon
@@ -973,10 +913,7 @@ PASS: Named entity: Itilde; with a semi-colon
 PASS: Bad named entity: Iukcy without a semi-colon
 PASS: Named entity: Iukcy; with a semi-colon
 PASS: Named entity: Iuml without a semi-colon
-FAIL: Named entity: Iuml; with a semi-colon
- input: "&Iuml;"
- actual:   [["Character","Ï"],["Character",";"]]
- expected: [["Character","Ï"]]
+PASS: Named entity: Iuml; with a semi-colon
 PASS: Bad named entity: Jcirc without a semi-colon
 PASS: Named entity: Jcirc; with a semi-colon
 PASS: Bad named entity: Jcy without a semi-colon
@@ -1010,10 +947,7 @@ PASS: Named entity: Kscr; with a semi-colon
 PASS: Bad named entity: LJcy without a semi-colon
 PASS: Named entity: LJcy; with a semi-colon
 PASS: Named entity: LT without a semi-colon
-FAIL: Named entity: LT; with a semi-colon
- input: "&LT;"
- actual:   [["Character","<"],["Character",";"]]
- expected: [["Character","<"]]
+PASS: Named entity: LT; with a semi-colon
 PASS: Bad named entity: Lacute without a semi-colon
 PASS: Named entity: Lacute; with a semi-colon
 PASS: Bad named entity: Lambda without a semi-colon
@@ -1285,24 +1219,15 @@ PASS: Named entity: NotVerticalBar; with a semi-colon
 PASS: Bad named entity: Nscr without a semi-colon
 PASS: Named entity: Nscr; with a semi-colon
 PASS: Named entity: Ntilde without a semi-colon
-FAIL: Named entity: Ntilde; with a semi-colon
- input: "&Ntilde;"
- actual:   [["Character","Ñ"],["Character",";"]]
- expected: [["Character","Ñ"]]
+PASS: Named entity: Ntilde; with a semi-colon
 PASS: Bad named entity: Nu without a semi-colon
 PASS: Named entity: Nu; with a semi-colon
 PASS: Bad named entity: OElig without a semi-colon
 PASS: Named entity: OElig; with a semi-colon
 PASS: Named entity: Oacute without a semi-colon
-FAIL: Named entity: Oacute; with a semi-colon
- input: "&Oacute;"
- actual:   [["Character","Ó"],["Character",";"]]
- expected: [["Character","Ó"]]
+PASS: Named entity: Oacute; with a semi-colon
 PASS: Named entity: Ocirc without a semi-colon
-FAIL: Named entity: Ocirc; with a semi-colon
- input: "&Ocirc;"
- actual:   [["Character","Ô"],["Character",";"]]
- expected: [["Character","Ô"]]
+PASS: Named entity: Ocirc; with a semi-colon
 PASS: Bad named entity: Ocy without a semi-colon
 PASS: Named entity: Ocy; with a semi-colon
 PASS: Bad named entity: Odblac without a semi-colon
@@ -1310,10 +1235,7 @@ PASS: Named entity: Odblac; with a semi-colon
 PASS: Bad named entity: Ofr without a semi-colon
 PASS: Named entity: Ofr; with a semi-colon
 PASS: Named entity: Ograve without a semi-colon
-FAIL: Named entity: Ograve; with a semi-colon
- input: "&Ograve;"
- actual:   [["Character","Ò"],["Character",";"]]
- expected: [["Character","Ò"]]
+PASS: Named entity: Ograve; with a semi-colon
 PASS: Bad named entity: Omacr without a semi-colon
 PASS: Named entity: Omacr; with a semi-colon
 PASS: Bad named entity: Omega without a semi-colon
@@ -1331,22 +1253,13 @@ PASS: Named entity: Or; with a semi-colon
 PASS: Bad named entity: Oscr without a semi-colon
 PASS: Named entity: Oscr; with a semi-colon
 PASS: Named entity: Oslash without a semi-colon
-FAIL: Named entity: Oslash; with a semi-colon
- input: "&Oslash;"
- actual:   [["Character","Ø"],["Character",";"]]
- expected: [["Character","Ø"]]
+PASS: Named entity: Oslash; with a semi-colon
 PASS: Named entity: Otilde without a semi-colon
-FAIL: Named entity: Otilde; with a semi-colon
- input: "&Otilde;"
- actual:   [["Character","Õ"],["Character",";"]]
- expected: [["Character","Õ"]]
+PASS: Named entity: Otilde; with a semi-colon
 PASS: Bad named entity: Otimes without a semi-colon
 PASS: Named entity: Otimes; with a semi-colon
 PASS: Named entity: Ouml without a semi-colon
-FAIL: Named entity: Ouml; with a semi-colon
- input: "&Ouml;"
- actual:   [["Character","Ö"],["Character",";"]]
- expected: [["Character","Ö"]]
+PASS: Named entity: Ouml; with a semi-colon
 PASS: Bad named entity: OverBar without a semi-colon
 PASS: Named entity: OverBar; with a semi-colon
 PASS: Bad named entity: OverBrace without a semi-colon
@@ -1394,10 +1307,7 @@ PASS: Named entity: Pscr; with a semi-colon
 PASS: Bad named entity: Psi without a semi-colon
 PASS: Named entity: Psi; with a semi-colon
 PASS: Named entity: QUOT without a semi-colon
-FAIL: Named entity: QUOT; with a semi-colon
- input: "&QUOT;"
- actual:   [["Character","\""],["Character",";"]]
- expected: [["Character","\""]]
+PASS: Named entity: QUOT; with a semi-colon
 PASS: Bad named entity: Qfr without a semi-colon
 PASS: Named entity: Qfr; with a semi-colon
 PASS: Bad named entity: Qopf without a semi-colon
@@ -1407,10 +1317,7 @@ PASS: Named entity: Qscr; with a semi-colon
 PASS: Bad named entity: RBarr without a semi-colon
 PASS: Named entity: RBarr; with a semi-colon
 PASS: Named entity: REG without a semi-colon
-FAIL: Named entity: REG; with a semi-colon
- input: "&REG;"
- actual:   [["Character","®"],["Character",";"]]
- expected: [["Character","®"]]
+PASS: Named entity: REG; with a semi-colon
 PASS: Bad named entity: Racute without a semi-colon
 PASS: Named entity: Racute; with a semi-colon
 PASS: Bad named entity: Rang without a semi-colon
@@ -1576,10 +1483,7 @@ PASS: Named entity: SupersetEqual; with a semi-colon
 PASS: Bad named entity: Supset without a semi-colon
 PASS: Named entity: Supset; with a semi-colon
 PASS: Named entity: THORN without a semi-colon
-FAIL: Named entity: THORN; with a semi-colon
- input: "&THORN;"
- actual:   [["Character","Þ"],["Character",";"]]
- expected: [["Character","Þ"]]
+PASS: Named entity: THORN; with a semi-colon
 PASS: Bad named entity: TRADE without a semi-colon
 PASS: Named entity: TRADE; with a semi-colon
 PASS: Bad named entity: TSHcy without a semi-colon
@@ -1623,10 +1527,7 @@ PASS: Named entity: Tscr; with a semi-colon
 PASS: Bad named entity: Tstrok without a semi-colon
 PASS: Named entity: Tstrok; with a semi-colon
 PASS: Named entity: Uacute without a semi-colon
-FAIL: Named entity: Uacute; with a semi-colon
- input: "&Uacute;"
- actual:   [["Character","Ú"],["Character",";"]]
- expected: [["Character","Ú"]]
+PASS: Named entity: Uacute; with a semi-colon
 PASS: Bad named entity: Uarr without a semi-colon
 PASS: Named entity: Uarr; with a semi-colon
 PASS: Bad named entity: Uarrocir without a semi-colon
@@ -1636,10 +1537,7 @@ PASS: Named entity: Ubrcy; with a semi-colon
 PASS: Bad named entity: Ubreve without a semi-colon
 PASS: Named entity: Ubreve; with a semi-colon
 PASS: Named entity: Ucirc without a semi-colon
-FAIL: Named entity: Ucirc; with a semi-colon
- input: "&Ucirc;"
- actual:   [["Character","Û"],["Character",";"]]
- expected: [["Character","Û"]]
+PASS: Named entity: Ucirc; with a semi-colon
 PASS: Bad named entity: Ucy without a semi-colon
 PASS: Named entity: Ucy; with a semi-colon
 PASS: Bad named entity: Udblac without a semi-colon
@@ -1647,10 +1545,7 @@ PASS: Named entity: Udblac; with a semi-colon
 PASS: Bad named entity: Ufr without a semi-colon
 PASS: Named entity: Ufr; with a semi-colon
 PASS: Named entity: Ugrave without a semi-colon
-FAIL: Named entity: Ugrave; with a semi-colon
- input: "&Ugrave;"
- actual:   [["Character","Ù"],["Character",";"]]
- expected: [["Character","Ù"]]
+PASS: Named entity: Ugrave; with a semi-colon
 PASS: Bad named entity: Umacr without a semi-colon
 PASS: Named entity: Umacr; with a semi-colon
 PASS: Bad named entity: UnderBar without a semi-colon
@@ -1702,10 +1597,7 @@ PASS: Named entity: Uscr; with a semi-colon
 PASS: Bad named entity: Utilde without a semi-colon
 PASS: Named entity: Utilde; with a semi-colon
 PASS: Named entity: Uuml without a semi-colon
-FAIL: Named entity: Uuml; with a semi-colon
- input: "&Uuml;"
- actual:   [["Character","Ü"],["Character",";"]]
- expected: [["Character","Ü"]]
+PASS: Named entity: Uuml; with a semi-colon
 PASS: Bad named entity: VDash without a semi-colon
 PASS: Named entity: VDash; with a semi-colon
 PASS: Bad named entity: Vbar without a semi-colon
@@ -1765,10 +1657,7 @@ PASS: Named entity: YIcy; with a semi-colon
 PASS: Bad named entity: YUcy without a semi-colon
 PASS: Named entity: YUcy; with a semi-colon
 PASS: Named entity: Yacute without a semi-colon
-FAIL: Named entity: Yacute; with a semi-colon
- input: "&Yacute;"
- actual:   [["Character","Ý"],["Character",";"]]
- expected: [["Character","Ý"]]
+PASS: Named entity: Yacute; with a semi-colon
 PASS: Bad named entity: Ycirc without a semi-colon
 PASS: Named entity: Ycirc; with a semi-colon
 PASS: Bad named entity: Ycy without a semi-colon
@@ -1802,10 +1691,7 @@ PASS: Named entity: Zopf; with a semi-colon
 PASS: Bad named entity: Zscr without a semi-colon
 PASS: Named entity: Zscr; with a semi-colon
 PASS: Named entity: aacute without a semi-colon
-FAIL: Named entity: aacute; with a semi-colon
- input: "&aacute;"
- actual:   [["Character","á"],["Character",";"]]
- expected: [["Character","á"]]
+PASS: Named entity: aacute; with a semi-colon
 PASS: Bad named entity: abreve without a semi-colon
 PASS: Named entity: abreve; with a semi-colon
 PASS: Bad named entity: ac without a semi-colon
@@ -1815,31 +1701,19 @@ PASS: Named entity: acE; with a semi-colon
 PASS: Bad named entity: acd without a semi-colon
 PASS: Named entity: acd; with a semi-colon
 PASS: Named entity: acirc without a semi-colon
-FAIL: Named entity: acirc; with a semi-colon
- input: "&acirc;"
- actual:   [["Character","â"],["Character",";"]]
- expected: [["Character","â"]]
+PASS: Named entity: acirc; with a semi-colon
 PASS: Named entity: acute without a semi-colon
-FAIL: Named entity: acute; with a semi-colon
- input: "&acute;"
- actual:   [["Character","´"],["Character",";"]]
- expected: [["Character","´"]]
+PASS: Named entity: acute; with a semi-colon
 PASS: Bad named entity: acy without a semi-colon
 PASS: Named entity: acy; with a semi-colon
 PASS: Named entity: aelig without a semi-colon
-FAIL: Named entity: aelig; with a semi-colon
- input: "&aelig;"
- actual:   [["Character","æ"],["Character",";"]]
- expected: [["Character","æ"]]
+PASS: Named entity: aelig; with a semi-colon
 PASS: Bad named entity: af without a semi-colon
 PASS: Named entity: af; with a semi-colon
 PASS: Bad named entity: afr without a semi-colon
 PASS: Named entity: afr; with a semi-colon
 PASS: Named entity: agrave without a semi-colon
-FAIL: Named entity: agrave; with a semi-colon
- input: "&agrave;"
- actual:   [["Character","à"],["Character",";"]]
- expected: [["Character","à"]]
+PASS: Named entity: agrave; with a semi-colon
 PASS: Bad named entity: alefsym without a semi-colon
 PASS: Named entity: alefsym; with a semi-colon
 PASS: Bad named entity: aleph without a semi-colon
@@ -1851,10 +1725,7 @@ PASS: Named entity: amacr; with a semi-colon
 PASS: Bad named entity: amalg without a semi-colon
 PASS: Named entity: amalg; with a semi-colon
 PASS: Named entity: amp without a semi-colon
-FAIL: Named entity: amp; with a semi-colon
- input: "&amp;"
- actual:   [["Character","&"],["Character",";"]]
- expected: [["Character","&"]]
+PASS: Named entity: amp; with a semi-colon
 PASS: Bad named entity: and without a semi-colon
 PASS: Named entity: and; with a semi-colon
 PASS: Bad named entity: andand without a semi-colon
@@ -1922,10 +1793,7 @@ PASS: Named entity: approx; with a semi-colon
 PASS: Bad named entity: approxeq without a semi-colon
 PASS: Named entity: approxeq; with a semi-colon
 PASS: Named entity: aring without a semi-colon
-FAIL: Named entity: aring; with a semi-colon
- input: "&aring;"
- actual:   [["Character","å"],["Character",";"]]
- expected: [["Character","å"]]
+PASS: Named entity: aring; with a semi-colon
 PASS: Bad named entity: ascr without a semi-colon
 PASS: Named entity: ascr; with a semi-colon
 PASS: Bad named entity: ast without a semi-colon
@@ -1935,15 +1803,9 @@ PASS: Named entity: asymp; with a semi-colon
 PASS: Bad named entity: asympeq without a semi-colon
 PASS: Named entity: asympeq; with a semi-colon
 PASS: Named entity: atilde without a semi-colon
-FAIL: Named entity: atilde; with a semi-colon
- input: "&atilde;"
- actual:   [["Character","ã"],["Character",";"]]
- expected: [["Character","ã"]]
+PASS: Named entity: atilde; with a semi-colon
 PASS: Named entity: auml without a semi-colon
-FAIL: Named entity: auml; with a semi-colon
- input: "&auml;"
- actual:   [["Character","ä"],["Character",";"]]
- expected: [["Character","ä"]]
+PASS: Named entity: auml; with a semi-colon
 PASS: Bad named entity: awconint without a semi-colon
 PASS: Named entity: awconint; with a semi-colon
 PASS: Bad named entity: awint without a semi-colon
@@ -2151,10 +2013,7 @@ PASS: Named entity: bprime; with a semi-colon
 PASS: Bad named entity: breve without a semi-colon
 PASS: Named entity: breve; with a semi-colon
 PASS: Named entity: brvbar without a semi-colon
-FAIL: Named entity: brvbar; with a semi-colon
- input: "&brvbar;"
- actual:   [["Character","¦"],["Character",";"]]
- expected: [["Character","¦"]]
+PASS: Named entity: brvbar; with a semi-colon
 PASS: Bad named entity: bscr without a semi-colon
 PASS: Named entity: bscr; with a semi-colon
 PASS: Bad named entity: bsemi without a semi-colon
@@ -2206,10 +2065,7 @@ PASS: Named entity: ccaps; with a semi-colon
 PASS: Bad named entity: ccaron without a semi-colon
 PASS: Named entity: ccaron; with a semi-colon
 PASS: Named entity: ccedil without a semi-colon
-FAIL: Named entity: ccedil; with a semi-colon
- input: "&ccedil;"
- actual:   [["Character","ç"],["Character",";"]]
- expected: [["Character","ç"]]
+PASS: Named entity: ccedil; with a semi-colon
 PASS: Bad named entity: ccirc without a semi-colon
 PASS: Named entity: ccirc; with a semi-colon
 PASS: Bad named entity: ccups without a semi-colon
@@ -2219,21 +2075,12 @@ PASS: Named entity: ccupssm; with a semi-colon
 PASS: Bad named entity: cdot without a semi-colon
 PASS: Named entity: cdot; with a semi-colon
 PASS: Named entity: cedil without a semi-colon
-FAIL: Named entity: cedil; with a semi-colon
- input: "&cedil;"
- actual:   [["Character","¸"],["Character",";"]]
- expected: [["Character","¸"]]
+PASS: Named entity: cedil; with a semi-colon
 PASS: Bad named entity: cemptyv without a semi-colon
 PASS: Named entity: cemptyv; with a semi-colon
 PASS: Named entity: cent without a semi-colon
-FAIL: Named entity: cent; with a semi-colon
- input: "&cent;"
- actual:   [["Character","¢"],["Character",";"]]
- expected: [["Character","¢"]]
-FAIL: Named entity: centerdot; with a semi-colon
- input: "&centerdot;"
- actual:   [["Character","¢"],["Character","erdot;"]]
- expected: [["Character","·"]]
+PASS: Named entity: cent; with a semi-colon
+PASS: Named entity: centerdot; with a semi-colon
 PASS: Bad named entity: cfr without a semi-colon
 PASS: Named entity: cfr; with a semi-colon
 PASS: Bad named entity: chcy without a semi-colon
@@ -2307,14 +2154,8 @@ PASS: Named entity: copf; with a semi-colon
 PASS: Bad named entity: coprod without a semi-colon
 PASS: Named entity: coprod; with a semi-colon
 PASS: Named entity: copy without a semi-colon
-FAIL: Named entity: copy; with a semi-colon
- input: "&copy;"
- actual:   [["Character","©"],["Character",";"]]
- expected: [["Character","©"]]
-FAIL: Named entity: copysr; with a semi-colon
- input: "&copysr;"
- actual:   [["Character","©"],["Character","sr;"]]
- expected: [["Character","℗"]]
+PASS: Named entity: copy; with a semi-colon
+PASS: Named entity: copysr; with a semi-colon
 PASS: Bad named entity: crarr without a semi-colon
 PASS: Named entity: crarr; with a semi-colon
 PASS: Bad named entity: cross without a semi-colon
@@ -2370,10 +2211,7 @@ PASS: Named entity: curlyvee; with a semi-colon
 PASS: Bad named entity: curlywedge without a semi-colon
 PASS: Named entity: curlywedge; with a semi-colon
 PASS: Named entity: curren without a semi-colon
-FAIL: Named entity: curren; with a semi-colon
- input: "&curren;"
- actual:   [["Character","¤"],["Character",";"]]
- expected: [["Character","¤"]]
+PASS: Named entity: curren; with a semi-colon
 PASS: Bad named entity: curvearrowleft without a semi-colon
 PASS: Named entity: curvearrowleft; with a semi-colon
 PASS: Bad named entity: curvearrowright without a semi-colon
@@ -2419,10 +2257,7 @@ PASS: Named entity: ddarr; with a semi-colon
 PASS: Bad named entity: ddotseq without a semi-colon
 PASS: Named entity: ddotseq; with a semi-colon
 PASS: Named entity: deg without a semi-colon
-FAIL: Named entity: deg; with a semi-colon
- input: "&deg;"
- actual:   [["Character","°"],["Character",";"]]
- expected: [["Character","°"]]
+PASS: Named entity: deg; with a semi-colon
 PASS: Bad named entity: delta without a semi-colon
 PASS: Named entity: delta; with a semi-colon
 PASS: Bad named entity: demptyv without a semi-colon
@@ -2452,14 +2287,8 @@ PASS: Named entity: disin; with a semi-colon
 PASS: Bad named entity: div without a semi-colon
 PASS: Named entity: div; with a semi-colon
 PASS: Named entity: divide without a semi-colon
-FAIL: Named entity: divide; with a semi-colon
- input: "&divide;"
- actual:   [["Character","÷"],["Character",";"]]
- expected: [["Character","÷"]]
-FAIL: Named entity: divideontimes; with a semi-colon
- input: "&divideontimes;"
- actual:   [["Character","÷"],["Character","ontimes;"]]
- expected: [["Character","⋇"]]
+PASS: Named entity: divide; with a semi-colon
+PASS: Named entity: divideontimes; with a semi-colon
 PASS: Bad named entity: divonx without a semi-colon
 PASS: Named entity: divonx; with a semi-colon
 PASS: Bad named entity: djcy without a semi-colon
@@ -2529,10 +2358,7 @@ PASS: Named entity: eDDot; with a semi-colon
 PASS: Bad named entity: eDot without a semi-colon
 PASS: Named entity: eDot; with a semi-colon
 PASS: Named entity: eacute without a semi-colon
-FAIL: Named entity: eacute; with a semi-colon
- input: "&eacute;"
- actual:   [["Character","é"],["Character",";"]]
- expected: [["Character","é"]]
+PASS: Named entity: eacute; with a semi-colon
 PASS: Bad named entity: easter without a semi-colon
 PASS: Named entity: easter; with a semi-colon
 PASS: Bad named entity: ecaron without a semi-colon
@@ -2540,10 +2366,7 @@ PASS: Named entity: ecaron; with a semi-colon
 PASS: Bad named entity: ecir without a semi-colon
 PASS: Named entity: ecir; with a semi-colon
 PASS: Named entity: ecirc without a semi-colon
-FAIL: Named entity: ecirc; with a semi-colon
- input: "&ecirc;"
- actual:   [["Character","ê"],["Character",";"]]
- expected: [["Character","ê"]]
+PASS: Named entity: ecirc; with a semi-colon
 PASS: Bad named entity: ecolon without a semi-colon
 PASS: Named entity: ecolon; with a semi-colon
 PASS: Bad named entity: ecy without a semi-colon
@@ -2559,10 +2382,7 @@ PASS: Named entity: efr; with a semi-colon
 PASS: Bad named entity: eg without a semi-colon
 PASS: Named entity: eg; with a semi-colon
 PASS: Named entity: egrave without a semi-colon
-FAIL: Named entity: egrave; with a semi-colon
- input: "&egrave;"
- actual:   [["Character","è"],["Character",";"]]
- expected: [["Character","è"]]
+PASS: Named entity: egrave; with a semi-colon
 PASS: Bad named entity: egs without a semi-colon
 PASS: Named entity: egs; with a semi-colon
 PASS: Bad named entity: egsdot without a semi-colon
@@ -2644,15 +2464,9 @@ PASS: Named entity: esim; with a semi-colon
 PASS: Bad named entity: eta without a semi-colon
 PASS: Named entity: eta; with a semi-colon
 PASS: Named entity: eth without a semi-colon
-FAIL: Named entity: eth; with a semi-colon
- input: "&eth;"
- actual:   [["Character","ð"],["Character",";"]]
- expected: [["Character","ð"]]
+PASS: Named entity: eth; with a semi-colon
 PASS: Named entity: euml without a semi-colon
-FAIL: Named entity: euml; with a semi-colon
- input: "&euml;"
- actual:   [["Character","ë"],["Character",";"]]
- expected: [["Character","ë"]]
+PASS: Named entity: euml; with a semi-colon
 PASS: Bad named entity: euro without a semi-colon
 PASS: Named entity: euro; with a semi-colon
 PASS: Bad named entity: excl without a semi-colon
@@ -2700,17 +2514,11 @@ PASS: Named entity: forkv; with a semi-colon
 PASS: Bad named entity: fpartint without a semi-colon
 PASS: Named entity: fpartint; with a semi-colon
 PASS: Named entity: frac12 without a semi-colon
-FAIL: Named entity: frac12; with a semi-colon
- input: "&frac12;"
- actual:   [["Character","½"],["Character",";"]]
- expected: [["Character","½"]]
+PASS: Named entity: frac12; with a semi-colon
 PASS: Bad named entity: frac13 without a semi-colon
 PASS: Named entity: frac13; with a semi-colon
 PASS: Named entity: frac14 without a semi-colon
-FAIL: Named entity: frac14; with a semi-colon
- input: "&frac14;"
- actual:   [["Character","¼"],["Character",";"]]
- expected: [["Character","¼"]]
+PASS: Named entity: frac14; with a semi-colon
 PASS: Bad named entity: frac15 without a semi-colon
 PASS: Named entity: frac15; with a semi-colon
 PASS: Bad named entity: frac16 without a semi-colon
@@ -2722,10 +2530,7 @@ PASS: Named entity: frac23; with a semi-colon
 PASS: Bad named entity: frac25 without a semi-colon
 PASS: Named entity: frac25; with a semi-colon
 PASS: Named entity: frac34 without a semi-colon
-FAIL: Named entity: frac34; with a semi-colon
- input: "&frac34;"
- actual:   [["Character","¾"],["Character",";"]]
- expected: [["Character","¾"]]
+PASS: Named entity: frac34; with a semi-colon
 PASS: Bad named entity: frac35 without a semi-colon
 PASS: Named entity: frac35; with a semi-colon
 PASS: Bad named entity: frac38 without a semi-colon
@@ -2833,58 +2638,19 @@ PASS: Named entity: gsime; with a semi-colon
 PASS: Bad named entity: gsiml without a semi-colon
 PASS: Named entity: gsiml; with a semi-colon
 PASS: Named entity: gt without a semi-colon
-FAIL: Named entity: gt; with a semi-colon
- input: "&gt;"
- actual:   [["Character",">"],["Character",";"]]
- expected: [["Character",">"]]
-FAIL: Named entity: gtcc; with a semi-colon
- input: "&gtcc;"
- actual:   [["Character",">"],["Character","cc;"]]
- expected: [["Character","⪧"]]
-FAIL: Named entity: gtcir; with a semi-colon
- input: "&gtcir;"
- actual:   [["Character",">"],["Character","cir;"]]
- expected: [["Character","⩺"]]
-FAIL: Named entity: gtdot; with a semi-colon
- input: "&gtdot;"
- actual:   [["Character",">"],["Character","dot;"]]
- expected: [["Character","⋗"]]
-FAIL: Named entity: gtlPar; with a semi-colon
- input: "&gtlPar;"
- actual:   [["Character",">"],["Character","lPar;"]]
- expected: [["Character","⦕"]]
-FAIL: Named entity: gtquest; with a semi-colon
- input: "&gtquest;"
- actual:   [["Character",">"],["Character","quest;"]]
- expected: [["Character","⩼"]]
-FAIL: Named entity: gtrapprox; with a semi-colon
- input: "&gtrapprox;"
- actual:   [["Character",">"],["Character","rapprox;"]]
- expected: [["Character","⪆"]]
-FAIL: Named entity: gtrarr; with a semi-colon
- input: "&gtrarr;"
- actual:   [["Character",">"],["Character","rarr;"]]
- expected: [["Character","⥸"]]
-FAIL: Named entity: gtrdot; with a semi-colon
- input: "&gtrdot;"
- actual:   [["Character",">"],["Character","rdot;"]]
- expected: [["Character","⋗"]]
-FAIL: Named entity: gtreqless; with a semi-colon
- input: "&gtreqless;"
- actual:   [["Character",">"],["Character","reqless;"]]
- expected: [["Character","⋛"]]
-FAIL: Named entity: gtreqqless; with a semi-colon
- input: "&gtreqqless;"
- actual:   [["Character",">"],["Character","reqqless;"]]
- expected: [["Character","⪌"]]
-FAIL: Named entity: gtrless; with a semi-colon
- input: "&gtrless;"
- actual:   [["Character",">"],["Character","rless;"]]
- expected: [["Character","≷"]]
-FAIL: Named entity: gtrsim; with a semi-colon
- input: "&gtrsim;"
- actual:   [["Character",">"],["Character","rsim;"]]
- expected: [["Character","≳"]]
+PASS: Named entity: gt; with a semi-colon
+PASS: Named entity: gtcc; with a semi-colon
+PASS: Named entity: gtcir; with a semi-colon
+PASS: Named entity: gtdot; with a semi-colon
+PASS: Named entity: gtlPar; with a semi-colon
+PASS: Named entity: gtquest; with a semi-colon
+PASS: Named entity: gtrapprox; with a semi-colon
+PASS: Named entity: gtrarr; with a semi-colon
+PASS: Named entity: gtrdot; with a semi-colon
+PASS: Named entity: gtreqless; with a semi-colon
+PASS: Named entity: gtreqqless; with a semi-colon
+PASS: Named entity: gtrless; with a semi-colon
+PASS: Named entity: gtrsim; with a semi-colon
 PASS: Bad named entity: gvertneqq without a semi-colon
 PASS: Named entity: gvertneqq; with a semi-colon
 PASS: Bad named entity: gvnE without a semi-colon
@@ -2946,35 +2712,23 @@ PASS: Named entity: hybull; with a semi-colon
 PASS: Bad named entity: hyphen without a semi-colon
 PASS: Named entity: hyphen; with a semi-colon
 PASS: Named entity: iacute without a semi-colon
-FAIL: Named entity: iacute; with a semi-colon
- input: "&iacute;"
- actual:   [["Character","í"],["Character",";"]]
- expected: [["Character","í"]]
+PASS: Named entity: iacute; with a semi-colon
 PASS: Bad named entity: ic without a semi-colon
 PASS: Named entity: ic; with a semi-colon
 PASS: Named entity: icirc without a semi-colon
-FAIL: Named entity: icirc; with a semi-colon
- input: "&icirc;"
- actual:   [["Character","î"],["Character",";"]]
- expected: [["Character","î"]]
+PASS: Named entity: icirc; with a semi-colon
 PASS: Bad named entity: icy without a semi-colon
 PASS: Named entity: icy; with a semi-colon
 PASS: Bad named entity: iecy without a semi-colon
 PASS: Named entity: iecy; with a semi-colon
 PASS: Named entity: iexcl without a semi-colon
-FAIL: Named entity: iexcl; with a semi-colon
- input: "&iexcl;"
- actual:   [["Character","¡"],["Character",";"]]
- expected: [["Character","¡"]]
+PASS: Named entity: iexcl; with a semi-colon
 PASS: Bad named entity: iff without a semi-colon
 PASS: Named entity: iff; with a semi-colon
 PASS: Bad named entity: ifr without a semi-colon
 PASS: Named entity: ifr; with a semi-colon
 PASS: Named entity: igrave without a semi-colon
-FAIL: Named entity: igrave; with a semi-colon
- input: "&igrave;"
- actual:   [["Character","ì"],["Character",";"]]
- expected: [["Character","ì"]]
+PASS: Named entity: igrave; with a semi-colon
 PASS: Bad named entity: ii without a semi-colon
 PASS: Named entity: ii; with a semi-colon
 PASS: Bad named entity: iiiint without a semi-colon
@@ -3034,10 +2788,7 @@ PASS: Named entity: iota; with a semi-colon
 PASS: Bad named entity: iprod without a semi-colon
 PASS: Named entity: iprod; with a semi-colon
 PASS: Named entity: iquest without a semi-colon
-FAIL: Named entity: iquest; with a semi-colon
- input: "&iquest;"
- actual:   [["Character","¿"],["Character",";"]]
- expected: [["Character","¿"]]
+PASS: Named entity: iquest; with a semi-colon
 PASS: Bad named entity: iscr without a semi-colon
 PASS: Named entity: iscr; with a semi-colon
 PASS: Bad named entity: isin without a semi-colon
@@ -3059,10 +2810,7 @@ PASS: Named entity: itilde; with a semi-colon
 PASS: Bad named entity: iukcy without a semi-colon
 PASS: Named entity: iukcy; with a semi-colon
 PASS: Named entity: iuml without a semi-colon
-FAIL: Named entity: iuml; with a semi-colon
- input: "&iuml;"
- actual:   [["Character","ï"],["Character",";"]]
- expected: [["Character","ï"]]
+PASS: Named entity: iuml; with a semi-colon
 PASS: Bad named entity: jcirc without a semi-colon
 PASS: Named entity: jcirc; with a semi-colon
 PASS: Bad named entity: jcy without a semi-colon
@@ -3130,10 +2878,7 @@ PASS: Named entity: langle; with a semi-colon
 PASS: Bad named entity: lap without a semi-colon
 PASS: Named entity: lap; with a semi-colon
 PASS: Named entity: laquo without a semi-colon
-FAIL: Named entity: laquo; with a semi-colon
- input: "&laquo;"
- actual:   [["Character","«"],["Character",";"]]
- expected: [["Character","«"]]
+PASS: Named entity: laquo; with a semi-colon
 PASS: Bad named entity: larr without a semi-colon
 PASS: Named entity: larr; with a semi-colon
 PASS: Bad named entity: larrb without a semi-colon
@@ -3375,54 +3120,18 @@ PASS: Named entity: lsquor; with a semi-colon
 PASS: Bad named entity: lstrok without a semi-colon
 PASS: Named entity: lstrok; with a semi-colon
 PASS: Named entity: lt without a semi-colon
-FAIL: Named entity: lt; with a semi-colon
- input: "&lt;"
- actual:   [["Character","<"],["Character",";"]]
- expected: [["Character","<"]]
-FAIL: Named entity: ltcc; with a semi-colon
- input: "&ltcc;"
- actual:   [["Character","<"],["Character","cc;"]]
- expected: [["Character","⪦"]]
-FAIL: Named entity: ltcir; with a semi-colon
- input: "&ltcir;"
- actual:   [["Character","<"],["Character","cir;"]]
- expected: [["Character","⩹"]]
-FAIL: Named entity: ltdot; with a semi-colon
- input: "&ltdot;"
- actual:   [["Character","<"],["Character","dot;"]]
- expected: [["Character","⋖"]]
-FAIL: Named entity: lthree; with a semi-colon
- input: "&lthree;"
- actual:   [["Character","<"],["Character","hree;"]]
- expected: [["Character","⋋"]]
-FAIL: Named entity: ltimes; with a semi-colon
- input: "&ltimes;"
- actual:   [["Character","<"],["Character","imes;"]]
- expected: [["Character","⋉"]]
-FAIL: Named entity: ltlarr; with a semi-colon
- input: "&ltlarr;"
- actual:   [["Character","<"],["Character","larr;"]]
- expected: [["Character","⥶"]]
-FAIL: Named entity: ltquest; with a semi-colon
- input: "&ltquest;"
- actual:   [["Character","<"],["Character","quest;"]]
- expected: [["Character","⩻"]]
-FAIL: Named entity: ltrPar; with a semi-colon
- input: "&ltrPar;"
- actual:   [["Character","<"],["Character","rPar;"]]
- expected: [["Character","⦖"]]
-FAIL: Named entity: ltri; with a semi-colon
- input: "&ltri;"
- actual:   [["Character","<"],["Character","ri;"]]
- expected: [["Character","◃"]]
-FAIL: Named entity: ltrie; with a semi-colon
- input: "&ltrie;"
- actual:   [["Character","<"],["Character","rie;"]]
- expected: [["Character","⊴"]]
-FAIL: Named entity: ltrif; with a semi-colon
- input: "&ltrif;"
- actual:   [["Character","<"],["Character","rif;"]]
- expected: [["Character","◂"]]
+PASS: Named entity: lt; with a semi-colon
+PASS: Named entity: ltcc; with a semi-colon
+PASS: Named entity: ltcir; with a semi-colon
+PASS: Named entity: ltdot; with a semi-colon
+PASS: Named entity: lthree; with a semi-colon
+PASS: Named entity: ltimes; with a semi-colon
+PASS: Named entity: ltlarr; with a semi-colon
+PASS: Named entity: ltquest; with a semi-colon
+PASS: Named entity: ltrPar; with a semi-colon
+PASS: Named entity: ltri; with a semi-colon
+PASS: Named entity: ltrie; with a semi-colon
+PASS: Named entity: ltrif; with a semi-colon
 PASS: Bad named entity: lurdshar without a semi-colon
 PASS: Named entity: lurdshar; with a semi-colon
 PASS: Bad named entity: luruhar without a semi-colon
@@ -3434,10 +3143,7 @@ PASS: Named entity: lvnE; with a semi-colon
 PASS: Bad named entity: mDDot without a semi-colon
 PASS: Named entity: mDDot; with a semi-colon
 PASS: Named entity: macr without a semi-colon
-FAIL: Named entity: macr; with a semi-colon
- input: "&macr;"
- actual:   [["Character","¯"],["Character",";"]]
- expected: [["Character","¯"]]
+PASS: Named entity: macr; with a semi-colon
 PASS: Bad named entity: male without a semi-colon
 PASS: Named entity: male; with a semi-colon
 PASS: Bad named entity: malt without a semi-colon
@@ -3469,10 +3175,7 @@ PASS: Named entity: mfr; with a semi-colon
 PASS: Bad named entity: mho without a semi-colon
 PASS: Named entity: mho; with a semi-colon
 PASS: Named entity: micro without a semi-colon
-FAIL: Named entity: micro; with a semi-colon
- input: "&micro;"
- actual:   [["Character","µ"],["Character",";"]]
- expected: [["Character","µ"]]
+PASS: Named entity: micro; with a semi-colon
 PASS: Bad named entity: mid without a semi-colon
 PASS: Named entity: mid; with a semi-colon
 PASS: Bad named entity: midast without a semi-colon
@@ -3480,10 +3183,7 @@ PASS: Named entity: midast; with a semi-colon
 PASS: Bad named entity: midcir without a semi-colon
 PASS: Named entity: midcir; with a semi-colon
 PASS: Named entity: middot without a semi-colon
-FAIL: Named entity: middot; with a semi-colon
- input: "&middot;"
- actual:   [["Character","·"],["Character",";"]]
- expected: [["Character","·"]]
+PASS: Named entity: middot; with a semi-colon
 PASS: Bad named entity: minus without a semi-colon
 PASS: Named entity: minus; with a semi-colon
 PASS: Bad named entity: minusb without a semi-colon
@@ -3559,10 +3259,7 @@ PASS: Named entity: natural; with a semi-colon
 PASS: Bad named entity: naturals without a semi-colon
 PASS: Named entity: naturals; with a semi-colon
 PASS: Named entity: nbsp without a semi-colon
-FAIL: Named entity: nbsp; with a semi-colon
- input: "&nbsp;"
- actual:   [["Character"," "],["Character",";"]]
- expected: [["Character"," "]]
+PASS: Named entity: nbsp; with a semi-colon
 PASS: Bad named entity: nbump without a semi-colon
 PASS: Named entity: nbump; with a semi-colon
 PASS: Bad named entity: nbumpe without a semi-colon
@@ -3678,50 +3375,17 @@ PASS: Named entity: nmid; with a semi-colon
 PASS: Bad named entity: nopf without a semi-colon
 PASS: Named entity: nopf; with a semi-colon
 PASS: Named entity: not without a semi-colon
-FAIL: Named entity: not; with a semi-colon
- input: "&not;"
- actual:   [["Character","¬"],["Character",";"]]
- expected: [["Character","¬"]]
-FAIL: Named entity: notin; with a semi-colon
- input: "&notin;"
- actual:   [["Character","¬"],["Character","in;"]]
- expected: [["Character","∉"]]
-FAIL: Named entity: notinE; with a semi-colon
- input: "&notinE;"
- actual:   [["Character","¬"],["Character","inE;"]]
- expected: [["Character","⋹̸"]]
-FAIL: Named entity: notindot; with a semi-colon
- input: "&notindot;"
- actual:   [["Character","¬"],["Character","indot;"]]
- expected: [["Character","⋵̸"]]
-FAIL: Named entity: notinva; with a semi-colon
- input: "&notinva;"
- actual:   [["Character","¬"],["Character","inva;"]]
- expected: [["Character","∉"]]
-FAIL: Named entity: notinvb; with a semi-colon
- input: "&notinvb;"
- actual:   [["Character","¬"],["Character","invb;"]]
- expected: [["Character","⋷"]]
-FAIL: Named entity: notinvc; with a semi-colon
- input: "&notinvc;"
- actual:   [["Character","¬"],["Character","invc;"]]
- expected: [["Character","⋶"]]
-FAIL: Named entity: notni; with a semi-colon
- input: "&notni;"
- actual:   [["Character","¬"],["Character","ni;"]]
- expected: [["Character","∌"]]
-FAIL: Named entity: notniva; with a semi-colon
- input: "&notniva;"
- actual:   [["Character","¬"],["Character","niva;"]]
- expected: [["Character","∌"]]
-FAIL: Named entity: notnivb; with a semi-colon
- input: "&notnivb;"
- actual:   [["Character","¬"],["Character","nivb;"]]
- expected: [["Character","⋾"]]
-FAIL: Named entity: notnivc; with a semi-colon
- input: "&notnivc;"
- actual:   [["Character","¬"],["Character","nivc;"]]
- expected: [["Character","⋽"]]
+PASS: Named entity: not; with a semi-colon
+PASS: Named entity: notin; with a semi-colon
+PASS: Named entity: notinE; with a semi-colon
+PASS: Named entity: notindot; with a semi-colon
+PASS: Named entity: notinva; with a semi-colon
+PASS: Named entity: notinvb; with a semi-colon
+PASS: Named entity: notinvc; with a semi-colon
+PASS: Named entity: notni; with a semi-colon
+PASS: Named entity: notniva; with a semi-colon
+PASS: Named entity: notnivb; with a semi-colon
+PASS: Named entity: notnivc; with a semi-colon
 PASS: Bad named entity: npar without a semi-colon
 PASS: Named entity: npar; with a semi-colon
 PASS: Bad named entity: nparallel without a semi-colon
@@ -3813,10 +3477,7 @@ PASS: Named entity: nsupseteqq; with a semi-colon
 PASS: Bad named entity: ntgl without a semi-colon
 PASS: Named entity: ntgl; with a semi-colon
 PASS: Named entity: ntilde without a semi-colon
-FAIL: Named entity: ntilde; with a semi-colon
- input: "&ntilde;"
- actual:   [["Character","ñ"],["Character",";"]]
- expected: [["Character","ñ"]]
+PASS: Named entity: ntilde; with a semi-colon
 PASS: Bad named entity: ntlg without a semi-colon
 PASS: Named entity: ntlg; with a semi-colon
 PASS: Bad named entity: ntriangleleft without a semi-colon
@@ -3876,19 +3537,13 @@ PASS: Named entity: nwnear; with a semi-colon
 PASS: Bad named entity: oS without a semi-colon
 PASS: Named entity: oS; with a semi-colon
 PASS: Named entity: oacute without a semi-colon
-FAIL: Named entity: oacute; with a semi-colon
- input: "&oacute;"
- actual:   [["Character","ó"],["Character",";"]]
- expected: [["Character","ó"]]
+PASS: Named entity: oacute; with a semi-colon
 PASS: Bad named entity: oast without a semi-colon
 PASS: Named entity: oast; with a semi-colon
 PASS: Bad named entity: ocir without a semi-colon
 PASS: Named entity: ocir; with a semi-colon
 PASS: Named entity: ocirc without a semi-colon
-FAIL: Named entity: ocirc; with a semi-colon
- input: "&ocirc;"
- actual:   [["Character","ô"],["Character",";"]]
- expected: [["Character","ô"]]
+PASS: Named entity: ocirc; with a semi-colon
 PASS: Bad named entity: ocy without a semi-colon
 PASS: Named entity: ocy; with a semi-colon
 PASS: Bad named entity: odash without a semi-colon
@@ -3910,10 +3565,7 @@ PASS: Named entity: ofr; with a semi-colon
 PASS: Bad named entity: ogon without a semi-colon
 PASS: Named entity: ogon; with a semi-colon
 PASS: Named entity: ograve without a semi-colon
-FAIL: Named entity: ograve; with a semi-colon
- input: "&ograve;"
- actual:   [["Character","ò"],["Character",";"]]
- expected: [["Character","ò"]]
+PASS: Named entity: ograve; with a semi-colon
 PASS: Bad named entity: ogt without a semi-colon
 PASS: Named entity: ogt; with a semi-colon
 PASS: Bad named entity: ohbar without a semi-colon
@@ -3961,15 +3613,9 @@ PASS: Named entity: order; with a semi-colon
 PASS: Bad named entity: orderof without a semi-colon
 PASS: Named entity: orderof; with a semi-colon
 PASS: Named entity: ordf without a semi-colon
-FAIL: Named entity: ordf; with a semi-colon
- input: "&ordf;"
- actual:   [["Character","ª"],["Character",";"]]
- expected: [["Character","ª"]]
+PASS: Named entity: ordf; with a semi-colon
 PASS: Named entity: ordm without a semi-colon
-FAIL: Named entity: ordm; with a semi-colon
- input: "&ordm;"
- actual:   [["Character","º"],["Character",";"]]
- expected: [["Character","º"]]
+PASS: Named entity: ordm; with a semi-colon
 PASS: Bad named entity: origof without a semi-colon
 PASS: Named entity: origof; with a semi-colon
 PASS: Bad named entity: oror without a semi-colon
@@ -3981,39 +3627,24 @@ PASS: Named entity: orv; with a semi-colon
 PASS: Bad named entity: oscr without a semi-colon
 PASS: Named entity: oscr; with a semi-colon
 PASS: Named entity: oslash without a semi-colon
-FAIL: Named entity: oslash; with a semi-colon
- input: "&oslash;"
- actual:   [["Character","ø"],["Character",";"]]
- expected: [["Character","ø"]]
+PASS: Named entity: oslash; with a semi-colon
 PASS: Bad named entity: osol without a semi-colon
 PASS: Named entity: osol; with a semi-colon
 PASS: Named entity: otilde without a semi-colon
-FAIL: Named entity: otilde; with a semi-colon
- input: "&otilde;"
- actual:   [["Character","õ"],["Character",";"]]
- expected: [["Character","õ"]]
+PASS: Named entity: otilde; with a semi-colon
 PASS: Bad named entity: otimes without a semi-colon
 PASS: Named entity: otimes; with a semi-colon
 PASS: Bad named entity: otimesas without a semi-colon
 PASS: Named entity: otimesas; with a semi-colon
 PASS: Named entity: ouml without a semi-colon
-FAIL: Named entity: ouml; with a semi-colon
- input: "&ouml;"
- actual:   [["Character","ö"],["Character",";"]]
- expected: [["Character","ö"]]
+PASS: Named entity: ouml; with a semi-colon
 PASS: Bad named entity: ovbar without a semi-colon
 PASS: Named entity: ovbar; with a semi-colon
 PASS: Bad named entity: par without a semi-colon
 PASS: Named entity: par; with a semi-colon
 PASS: Named entity: para without a semi-colon
-FAIL: Named entity: para; with a semi-colon
- input: "&para;"
- actual:   [["Character","¶"],["Character",";"]]
- expected: [["Character","¶"]]
-FAIL: Named entity: parallel; with a semi-colon
- input: "&parallel;"
- actual:   [["Character","¶"],["Character","llel;"]]
- expected: [["Character","∥"]]
+PASS: Named entity: para; with a semi-colon
+PASS: Named entity: parallel; with a semi-colon
 PASS: Bad named entity: parsim without a semi-colon
 PASS: Named entity: parsim; with a semi-colon
 PASS: Bad named entity: parsl without a semi-colon
@@ -4069,10 +3700,7 @@ PASS: Named entity: plusdu; with a semi-colon
 PASS: Bad named entity: pluse without a semi-colon
 PASS: Named entity: pluse; with a semi-colon
 PASS: Named entity: plusmn without a semi-colon
-FAIL: Named entity: plusmn; with a semi-colon
- input: "&plusmn;"
- actual:   [["Character","±"],["Character",";"]]
- expected: [["Character","±"]]
+PASS: Named entity: plusmn; with a semi-colon
 PASS: Bad named entity: plussim without a semi-colon
 PASS: Named entity: plussim; with a semi-colon
 PASS: Bad named entity: plustwo without a semi-colon
@@ -4084,10 +3712,7 @@ PASS: Named entity: pointint; with a semi-colon
 PASS: Bad named entity: popf without a semi-colon
 PASS: Named entity: popf; with a semi-colon
 PASS: Named entity: pound without a semi-colon
-FAIL: Named entity: pound; with a semi-colon
- input: "&pound;"
- actual:   [["Character","£"],["Character",";"]]
- expected: [["Character","£"]]
+PASS: Named entity: pound; with a semi-colon
 PASS: Bad named entity: pr without a semi-colon
 PASS: Named entity: pr; with a semi-colon
 PASS: Bad named entity: prE without a semi-colon
@@ -4165,10 +3790,7 @@ PASS: Named entity: quest; with a semi-colon
 PASS: Bad named entity: questeq without a semi-colon
 PASS: Named entity: questeq; with a semi-colon
 PASS: Named entity: quot without a semi-colon
-FAIL: Named entity: quot; with a semi-colon
- input: "&quot;"
- actual:   [["Character","\""],["Character",";"]]
- expected: [["Character","\""]]
+PASS: Named entity: quot; with a semi-colon
 PASS: Bad named entity: rAarr without a semi-colon
 PASS: Named entity: rAarr; with a semi-colon
 PASS: Bad named entity: rArr without a semi-colon
@@ -4196,10 +3818,7 @@ PASS: Named entity: range; with a semi-colon
 PASS: Bad named entity: rangle without a semi-colon
 PASS: Named entity: rangle; with a semi-colon
 PASS: Named entity: raquo without a semi-colon
-FAIL: Named entity: raquo; with a semi-colon
- input: "&raquo;"
- actual:   [["Character","»"],["Character",";"]]
- expected: [["Character","»"]]
+PASS: Named entity: raquo; with a semi-colon
 PASS: Bad named entity: rarr without a semi-colon
 PASS: Named entity: rarr; with a semi-colon
 PASS: Bad named entity: rarrap without a semi-colon
@@ -4275,10 +3894,7 @@ PASS: Named entity: reals; with a semi-colon
 PASS: Bad named entity: rect without a semi-colon
 PASS: Named entity: rect; with a semi-colon
 PASS: Named entity: reg without a semi-colon
-FAIL: Named entity: reg; with a semi-colon
- input: "&reg;"
- actual:   [["Character","®"],["Character",";"]]
- expected: [["Character","®"]]
+PASS: Named entity: reg; with a semi-colon
 PASS: Bad named entity: rfisht without a semi-colon
 PASS: Named entity: rfisht; with a semi-colon
 PASS: Bad named entity: rfloor without a semi-colon
@@ -4426,10 +4042,7 @@ PASS: Named entity: searr; with a semi-colon
 PASS: Bad named entity: searrow without a semi-colon
 PASS: Named entity: searrow; with a semi-colon
 PASS: Named entity: sect without a semi-colon
-FAIL: Named entity: sect; with a semi-colon
- input: "&sect;"
- actual:   [["Character","§"],["Character",";"]]
- expected: [["Character","§"]]
+PASS: Named entity: sect; with a semi-colon
 PASS: Bad named entity: semi without a semi-colon
 PASS: Named entity: semi; with a semi-colon
 PASS: Bad named entity: seswar without a semi-colon
@@ -4455,10 +4068,7 @@ PASS: Named entity: shortmid; with a semi-colon
 PASS: Bad named entity: shortparallel without a semi-colon
 PASS: Named entity: shortparallel; with a semi-colon
 PASS: Named entity: shy without a semi-colon
-FAIL: Named entity: shy; with a semi-colon
- input: "&shy;"
- actual:   [["Character","­"],["Character",";"]]
- expected: [["Character","­"]]
+PASS: Named entity: shy; with a semi-colon
 PASS: Bad named entity: sigma without a semi-colon
 PASS: Named entity: sigma; with a semi-colon
 PASS: Bad named entity: sigmaf without a semi-colon
@@ -4631,20 +4241,11 @@ PASS: Bad named entity: sung without a semi-colon
 PASS: Named entity: sung; with a semi-colon
 PASS: Bad named entity: sup without a semi-colon
 PASS: Named entity: sup1 without a semi-colon
-FAIL: Named entity: sup1; with a semi-colon
- input: "&sup1;"
- actual:   [["Character","¹"],["Character",";"]]
- expected: [["Character","¹"]]
+PASS: Named entity: sup1; with a semi-colon
 PASS: Named entity: sup2 without a semi-colon
-FAIL: Named entity: sup2; with a semi-colon
- input: "&sup2;"
- actual:   [["Character","²"],["Character",";"]]
- expected: [["Character","²"]]
+PASS: Named entity: sup2; with a semi-colon
 PASS: Named entity: sup3 without a semi-colon
-FAIL: Named entity: sup3; with a semi-colon
- input: "&sup3;"
- actual:   [["Character","³"],["Character",";"]]
- expected: [["Character","³"]]
+PASS: Named entity: sup3; with a semi-colon
 PASS: Named entity: sup; with a semi-colon
 PASS: Bad named entity: supE without a semi-colon
 PASS: Named entity: supE; with a semi-colon
@@ -4697,10 +4298,7 @@ PASS: Named entity: swarrow; with a semi-colon
 PASS: Bad named entity: swnwar without a semi-colon
 PASS: Named entity: swnwar; with a semi-colon
 PASS: Named entity: szlig without a semi-colon
-FAIL: Named entity: szlig; with a semi-colon
- input: "&szlig;"
- actual:   [["Character","ß"],["Character",";"]]
- expected: [["Character","ß"]]
+PASS: Named entity: szlig; with a semi-colon
 PASS: Bad named entity: target without a semi-colon
 PASS: Named entity: target; with a semi-colon
 PASS: Bad named entity: tau without a semi-colon
@@ -4740,29 +4338,14 @@ PASS: Named entity: thkap; with a semi-colon
 PASS: Bad named entity: thksim without a semi-colon
 PASS: Named entity: thksim; with a semi-colon
 PASS: Named entity: thorn without a semi-colon
-FAIL: Named entity: thorn; with a semi-colon
- input: "&thorn;"
- actual:   [["Character","þ"],["Character",";"]]
- expected: [["Character","þ"]]
+PASS: Named entity: thorn; with a semi-colon
 PASS: Bad named entity: tilde without a semi-colon
 PASS: Named entity: tilde; with a semi-colon
 PASS: Named entity: times without a semi-colon
-FAIL: Named entity: times; with a semi-colon
- input: "&times;"
- actual:   [["Character","×"],["Character",";"]]
- expected: [["Character","×"]]
-FAIL: Named entity: timesb; with a semi-colon
- input: "&timesb;"
- actual:   [["Character","×"],["Character","b;"]]
- expected: [["Character","⊠"]]
-FAIL: Named entity: timesbar; with a semi-colon
- input: "&timesbar;"
- actual:   [["Character","×"],["Character","bar;"]]
- expected: [["Character","⨱"]]
-FAIL: Named entity: timesd; with a semi-colon
- input: "&timesd;"
- actual:   [["Character","×"],["Character","d;"]]
- expected: [["Character","⨰"]]
+PASS: Named entity: times; with a semi-colon
+PASS: Named entity: timesb; with a semi-colon
+PASS: Named entity: timesbar; with a semi-colon
+PASS: Named entity: timesd; with a semi-colon
 PASS: Bad named entity: tint without a semi-colon
 PASS: Named entity: tint; with a semi-colon
 PASS: Bad named entity: toea without a semi-colon
@@ -4830,10 +4413,7 @@ PASS: Named entity: uArr; with a semi-colon
 PASS: Bad named entity: uHar without a semi-colon
 PASS: Named entity: uHar; with a semi-colon
 PASS: Named entity: uacute without a semi-colon
-FAIL: Named entity: uacute; with a semi-colon
- input: "&uacute;"
- actual:   [["Character","ú"],["Character",";"]]
- expected: [["Character","ú"]]
+PASS: Named entity: uacute; with a semi-colon
 PASS: Bad named entity: uarr without a semi-colon
 PASS: Named entity: uarr; with a semi-colon
 PASS: Bad named entity: ubrcy without a semi-colon
@@ -4841,10 +4421,7 @@ PASS: Named entity: ubrcy; with a semi-colon
 PASS: Bad named entity: ubreve without a semi-colon
 PASS: Named entity: ubreve; with a semi-colon
 PASS: Named entity: ucirc without a semi-colon
-FAIL: Named entity: ucirc; with a semi-colon
- input: "&ucirc;"
- actual:   [["Character","û"],["Character",";"]]
- expected: [["Character","û"]]
+PASS: Named entity: ucirc; with a semi-colon
 PASS: Bad named entity: ucy without a semi-colon
 PASS: Named entity: ucy; with a semi-colon
 PASS: Bad named entity: udarr without a semi-colon
@@ -4858,10 +4435,7 @@ PASS: Named entity: ufisht; with a semi-colon
 PASS: Bad named entity: ufr without a semi-colon
 PASS: Named entity: ufr; with a semi-colon
 PASS: Named entity: ugrave without a semi-colon
-FAIL: Named entity: ugrave; with a semi-colon
- input: "&ugrave;"
- actual:   [["Character","ù"],["Character",";"]]
- expected: [["Character","ù"]]
+PASS: Named entity: ugrave; with a semi-colon
 PASS: Bad named entity: uharl without a semi-colon
 PASS: Named entity: uharl; with a semi-colon
 PASS: Bad named entity: uharr without a semi-colon
@@ -4879,10 +4453,7 @@ PASS: Named entity: ultri; with a semi-colon
 PASS: Bad named entity: umacr without a semi-colon
 PASS: Named entity: umacr; with a semi-colon
 PASS: Named entity: uml without a semi-colon
-FAIL: Named entity: uml; with a semi-colon
- input: "&uml;"
- actual:   [["Character","¨"],["Character",";"]]
- expected: [["Character","¨"]]
+PASS: Named entity: uml; with a semi-colon
 PASS: Bad named entity: uogon without a semi-colon
 PASS: Named entity: uogon; with a semi-colon
 PASS: Bad named entity: uopf without a semi-colon
@@ -4928,10 +4499,7 @@ PASS: Named entity: utrif; with a semi-colon
 PASS: Bad named entity: uuarr without a semi-colon
 PASS: Named entity: uuarr; with a semi-colon
 PASS: Named entity: uuml without a semi-colon
-FAIL: Named entity: uuml; with a semi-colon
- input: "&uuml;"
- actual:   [["Character","ü"],["Character",";"]]
- expected: [["Character","ü"]]
+PASS: Named entity: uuml; with a semi-colon
 PASS: Bad named entity: uwangle without a semi-colon
 PASS: Named entity: uwangle; with a semi-colon
 PASS: Bad named entity: vArr without a semi-colon
@@ -5089,10 +4657,7 @@ PASS: Named entity: xvee; with a semi-colon
 PASS: Bad named entity: xwedge without a semi-colon
 PASS: Named entity: xwedge; with a semi-colon
 PASS: Named entity: yacute without a semi-colon
-FAIL: Named entity: yacute; with a semi-colon
- input: "&yacute;"
- actual:   [["Character","ý"],["Character",";"]]
- expected: [["Character","ý"]]
+PASS: Named entity: yacute; with a semi-colon
 PASS: Bad named entity: yacy without a semi-colon
 PASS: Named entity: yacy; with a semi-colon
 PASS: Bad named entity: ycirc without a semi-colon
@@ -5100,10 +4665,7 @@ PASS: Named entity: ycirc; with a semi-colon
 PASS: Bad named entity: ycy without a semi-colon
 PASS: Named entity: ycy; with a semi-colon
 PASS: Named entity: yen without a semi-colon
-FAIL: Named entity: yen; with a semi-colon
- input: "&yen;"
- actual:   [["Character","¥"],["Character",";"]]
- expected: [["Character","¥"]]
+PASS: Named entity: yen; with a semi-colon
 PASS: Bad named entity: yfr without a semi-colon
 PASS: Named entity: yfr; with a semi-colon
 PASS: Bad named entity: yicy without a semi-colon
@@ -5115,10 +4677,7 @@ PASS: Named entity: yscr; with a semi-colon
 PASS: Bad named entity: yucy without a semi-colon
 PASS: Named entity: yucy; with a semi-colon
 PASS: Named entity: yuml without a semi-colon
-FAIL: Named entity: yuml; with a semi-colon
- input: "&yuml;"
- actual:   [["Character","ÿ"],["Character",";"]]
- expected: [["Character","ÿ"]]
+PASS: Named entity: yuml; with a semi-colon
 PASS: Bad named entity: zacute without a semi-colon
 PASS: Named entity: zacute; with a semi-colon
 PASS: Bad named entity: zcaron without a semi-colon
@@ -6610,19 +6169,19 @@ FAIL: Ampersand, number sign
 PASS: Unfinished numeric entity
 FAIL: Entity with trailing semicolon (1)
  input: "I'm &not;it"
- actual:   [["Character","¬"],["Character","I'm ;it"]]
+ actual:   [["Character","¬"],["Character","I'm t"]]
  expected: [["Character","I'm ¬it"]]
 FAIL: Entity with trailing semicolon (2)
  input: "I'm &notin;"
- actual:   [["Character","¬"],["Character","I'm in;"]]
+ actual:   [["Character","∉"],["Character","I'm "]]
  expected: [["Character","I'm ∉"]]
 FAIL: Entity without trailing semicolon (1)
  input: "I'm &notit"
- actual:   [["Character","¬"],["Character","I'm it"]]
+ actual:   [["Character","¬"],["Character","I'm t"]]
  expected: [["Character","I'm ¬it"]]
 FAIL: Entity without trailing semicolon (2)
  input: "I'm &notin"
- actual:   [["Character","¬"],["Character","I'm in"]]
+ actual:   [["Character","¬"],["Character","I'm n"]]
  expected: [["Character","I'm ¬in"]]
 PASS: Partial entity match at end of file
 PASS: Non-ASCII character reference name
@@ -6759,7 +6318,7 @@ FAIL: Entity + newline
 x
 &gt;
 "
- actual:   [["Character",">"],["Character","\nx\n;\n"]]
+ actual:   [["Character",">"],["Character","\nx\n"]]
  expected: [["Character","\nx\n>\n"]]
 PASS: Start tag with no attributes but space before the greater-than sign
 PASS: Empty attribute followed by uppercase attribute
@@ -11657,4 +11216,4 @@ FAIL: CR followed by U+0000
  input: "�"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 5200 of 6806 tests
+Passed 5347 of 6806 tests

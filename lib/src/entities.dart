@@ -9,21 +9,33 @@ class Entity {
   const Entity(this.name, this.nameCodepoints, this.values);
 }
 
-Entity? findMatchingEntity(InputManager input, StringBuffer consumed) {
+Entity? entityByName(String name) {
+  for (var entity in entities) {
+    if (entity.name == name) {
+      return entity;
+    }
+  }
+  return null;
+}
+
+// This must handle the case of '&cent' and '&centerdot;' without needlessly
+// consuming 'ere' in the case of '&centere'.
+Entity? peekForMatchingEntity(InputManager input) {
   // firstPossible/oneAfterLastPossible limit our search window to
   // entities whose prefix we've already matched.
   var firstPossible = 0;
   var oneAfterLastPossible = entities.length;
 
+  Entity? foundEntity;
+
   for (int codeOffset = 0; codeOffset < maxEntityLength; codeOffset++) {
     // 1 accounts for the amperstand.
     var offsetInEntity = 1 + codeOffset;
     bool foundMatch = false;
-    if (input.isEndOfFile) {
-      return null;
+    var actual = input.peek(codeOffset);
+    if (actual == endOfFile) {
+      return foundEntity;
     }
-    var actual = input.getNextCodePoint();
-    consumed.writeCharCode(actual);
     int entityIndex = firstPossible;
     // Check all possible entities for a match of current 'actual' char.
     while (entityIndex < oneAfterLastPossible) {
@@ -35,9 +47,9 @@ Entity? findMatchingEntity(InputManager input, StringBuffer consumed) {
           firstPossible = entityIndex;
         }
         foundMatch = true;
-        // We found matching entity;
+        // We found a longer entity:
         if (offsetInEntity == entity.nameCodepoints.length - 1) {
-          return entity;
+          foundEntity = entity;
         }
         // Not yet matched all chars, keep looking.
         break;
@@ -53,9 +65,9 @@ Entity? findMatchingEntity(InputManager input, StringBuffer consumed) {
     }
     if (oneAfterLastPossible - firstPossible <= 1) {
       // Ran out of entities to possibly match.
-      return null;
+      return foundEntity;
     }
     // Still have entities matching this prefix, try the next letter.
   }
-  return null;
+  return foundEntity;
 }
