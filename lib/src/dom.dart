@@ -62,9 +62,23 @@ class Text extends Node {
   Text(this.textContent);
 }
 
+const String htmlNamespace = "http://www.w3.org/1999/xhtml";
+const String mthmlNamespace = "http://www.w3.org/1998/Math/MathML";
+const String svgNamespace = "http://www.w3.org/2000/svg";
+const String xlinkNamespace = "http://www.w3.org/1999/xlink";
+const String xmlNamespace = "http://www.w3.org/XML/1998/namespace";
+const String xmlnsNamespace = "http://www.w3.org/2000/xmlns/";
+
+// QualifiedName
+class QName {
+  final String namespace;
+  final String name;
+
+  const QName.html(this.name) : namespace = htmlNamespace;
+}
+
 class Element extends Node {
-  // TODO: Qualified names? o_O
-  String tagName;
+  QName tagName;
   Map<String, String> attributes = {};
 
   Element(this.tagName);
@@ -74,3 +88,5 @@ class Element extends Node {
     attributes[name] = value;
   }
 }
+
+class Document extends Node {}
