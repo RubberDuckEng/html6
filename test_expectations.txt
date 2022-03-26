@@ -1,4 +1,4 @@
-Passed 5709 of 6806 tests
+Passed 5713 of 6806 tests
 
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
@@ -193,7 +193,7 @@ FAIL: End tag surrounded by bogus comment in RCDATA or RAWTEXT
  expected: [["Character","foo<!-->"],["EndTag","xmp"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
 FAIL: Commented entities in RCDATA
  input: " &amp; <!-- &amp; --> &amp; </xmp>"
- actual:   [["Character"," ⊴--> &"],["EndTag","xmp"]]
+ actual:   [["Character"," ⊴ --> & "],["EndTag","xmp"]]
  expected: [["Character"," & <!-- & --> & "],["EndTag","xmp"]]
 FAIL: Incorrect comment ending sequences in RCDATA or RAWTEXT
  input: "foo<!-- x --x>x-- >x--!>x--<></xmp>"
@@ -539,18 +539,6 @@ FAIL: -- spaced in script HTML comment double escaped
  input: "<!--<script> -- </script>-->"
  actual:   [["Comment","<script> -- </script>"]]
  expected: [["Character","<!--<script> -- </script>-->"]]
-FAIL: Entity with trailing semicolon (1)
- input: "I'm &not;it"
- actual:   [["Character","I'm ¬t"]]
- expected: [["Character","I'm ¬it"]]
-FAIL: Entity without trailing semicolon (1)
- input: "I'm &notit"
- actual:   [["Character","I'm ¬t"]]
- expected: [["Character","I'm ¬it"]]
-FAIL: Entity without trailing semicolon (2)
- input: "I'm &notin"
- actual:   [["Character","I'm ¬n"]]
- expected: [["Character","I'm ¬in"]]
 FAIL: Unquoted attribute ending in ampersand
  input: "<s o=& t>"
  actual:   [["StartTag","s",{"t":""}]]
@@ -627,13 +615,6 @@ FAIL: Unescaped <
  input: "foo < bar"
  actual:   [["Character","foo <"],["Character"," bar"]]
  expected: [["Character","foo < bar"]]
-FAIL: Entity + newline
- input: "
-x
-&gt;
-"
- actual:   [["Character","\nx\n>"]]
- expected: [["Character","\nx\n>\n"]]
 FAIL: <\u0000
  input: "<�"
  actual:   [["Character","<"],["Character","\u0000"]]

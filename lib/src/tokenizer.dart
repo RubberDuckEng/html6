@@ -103,10 +103,13 @@ class InputManager {
   }
 
   bool lookAheadForEntityAndConsume(int char, StringBuffer buffer) {
+    // Push the first letter of the entity back into the InputManager.
     push(char);
     var entity = peekForMatchingEntity(this);
     if (entity != null) {
-      for (int i = 0; i < entity.nameCodepoints.length; i++) {
+      // -1 for the amperstand which is in the entity.nameCodepoints
+      // but has already been consumed when entering this.
+      for (int i = 0; i < entity.nameCodepoints.length - 1; i++) {
         getNextCodePoint();
       }
       buffer.clear();
