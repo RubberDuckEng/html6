@@ -1248,7 +1248,7 @@ class Tokenizer {
             state = TokenizerState.hexadecimalCharacterReferenceStart;
             continue;
           }
-          reconsumeIn(char, TokenizerState.decimalCharacterReference);
+          reconsumeIn(char, TokenizerState.decimalCharacterReferenceStart);
           continue;
 
         case TokenizerState.hexadecimalCharacterReferenceStart:

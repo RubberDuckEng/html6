@@ -1,4 +1,4 @@
-Passed 5696 of 6806 tests
+Passed 5699 of 6806 tests
 
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
@@ -567,10 +567,6 @@ FAIL: -- spaced in script HTML comment double escaped
  input: "<!--<script> -- </script>-->"
  actual:   [["Comment","<script> -- </script>"]]
  expected: [["Character","<!--<script> -- </script>-->"]]
-FAIL: Ampersand, number sign
- input: "&#"
- actual:   [["Character","�"]]
- expected: [["Character","&#"]]
 FAIL: Entity with trailing semicolon (1)
  input: "I'm &not;it"
  actual:   [["Character","¬"],["Character","I'm t"]]
@@ -4385,14 +4381,6 @@ FAIL: CR EOF after doctype name
  input: "<!doctype html "
  actual:   [["Comment","doctype html \r"]]
  expected: [["DOCTYPE","html",null,null,false]]
-FAIL: Empty decimal numeric entities
- input: "&# &#; "
- actual:   [["Character","��"]]
- expected: [["Character","&# &#; "]]
-FAIL: Invalid digit in decimal numeric entity
- input: "&#A"
- actual:   [["Character","�"]]
- expected: [["Character","&#A"]]
 FAIL: Maximum non-BMP numeric entity
  input: "&#X10FFFF;"
  actual:   [["Character","�"]]
