@@ -191,12 +191,19 @@ enum TokenizerState {
   numericCharacterReferenceEnd,
 }
 
-bool isAsciiUpperAlpha(int codePoint) {
+bool _isAsciiUpperAlpha(int codePoint) {
   return codePoint >= 0x41 && codePoint <= 0x5A;
 }
 
-bool isAsciiAlpha(int codePoint) {
-  if (isAsciiUpperAlpha(codePoint)) {
+int _toLowerAscii(int codePoint) {
+  if (_isAsciiUpperAlpha(codePoint)) {
+    return codePoint + 0x20;
+  }
+  return codePoint;
+}
+
+bool _isAsciiAlpha(int codePoint) {
+  if (_isAsciiUpperAlpha(codePoint)) {
     return true;
   }
   if (codePoint >= 0x61 && codePoint <= 0x7A) {
@@ -205,7 +212,7 @@ bool isAsciiAlpha(int codePoint) {
   return false;
 }
 
-bool isHTMLWhitespace(int codePoint) {
+bool _isHTMLWhitespace(int codePoint) {
   return codePoint == 0x9 ||
       codePoint == 0xA ||
       codePoint == 0xC ||
@@ -215,7 +222,7 @@ bool isHTMLWhitespace(int codePoint) {
 // Dart does not have character literals yet:
 // https://github.com/dart-lang/language/issues/886
 // unicodeReplacementCharacterRune
-const String replacementCharacter = "\xFFFD";
+const int replacementCharacter = 0xFFFD;
 const int nullChar = 0x00;
 const int exclaimationMark = 0x21;
 const int solidus = 0x2F;
@@ -251,7 +258,7 @@ enum TagTokenType {
 class TagTokenBuilder {
   TagTokenType tagTokenType;
   bool isSelfClosing;
-  String tagName;
+  StringBuffer tagName;
   // Could just be a list of AttributeBuilders?
   Map<String, String> attributes;
   AttributeBuilder? currentAttribute;
@@ -259,14 +266,17 @@ class TagTokenBuilder {
   TagTokenBuilder.startTag({int? firstCodePoint})
       : tagTokenType = TagTokenType.startTag,
         isSelfClosing = false,
-        tagName =
-            firstCodePoint == null ? "" : String.fromCharCode(firstCodePoint),
-        attributes = {};
+        tagName = StringBuffer(),
+        attributes = {} {
+    if (firstCodePoint != null) {
+      tagName.writeCharCode(firstCodePoint);
+    }
+  }
 
   TagTokenBuilder.endTag()
       : tagTokenType = TagTokenType.endTag,
         isSelfClosing = false,
-        tagName = "",
+        tagName = StringBuffer(),
         attributes = {};
 
   void startAttributeName(String name) {
@@ -279,10 +289,10 @@ class TagTokenBuilder {
       if (currentAttribute != null) {
         finishAttribute();
       }
-      return StartTagToken(tagName,
+      return StartTagToken(tagName.toString(),
           attributes: attributes, isSelfClosing: isSelfClosing);
     } else {
-      return EndTagToken(tagName);
+      return EndTagToken(tagName.toString());
     }
   }
 
@@ -304,10 +314,15 @@ class Tokenizer {
   TagTokenBuilder? currentTag;
   // TODO: Should this be a CommentTokenBuilder or maybe a generalized
   // TokenBuilder?
-  // TODO: We should reuse the textBuffer, which is a StringBuffer;
-  String? commentData;
+  StringBuffer? textBuffer;
 
   Tokenizer(this.input);
+
+  CharacterToken emitCharacterToken() {
+    final characters = textBuffer.toString();
+    textBuffer = null;
+    return CharacterToken(characters);
+  }
 
   Token emitCurrentTag() {
     assert(currentTag != null);
@@ -317,9 +332,8 @@ class Tokenizer {
   }
 
   CommentToken emitCommentToken() {
-    assert(commentData != null);
-    var data = commentData!;
-    commentData = null;
+    final data = textBuffer.toString();
+    textBuffer = null;
     return CommentToken(data);
   }
 
@@ -330,10 +344,6 @@ class Tokenizer {
   }
 
   Token getNextToken() {
-    // FIXME: This should be behind a helper function.
-    // StringBuffer.write takes an object and is a foot-gun.
-    StringBuffer textBuffer = StringBuffer();
-
     while (!input.isEndOfFile) {
       int char = input.getNextCodePoint()!;
       reconsume:
@@ -347,7 +357,8 @@ class Tokenizer {
           }
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Emit the current input character as a character token.
-          textBuffer.writeCharCode(char);
+          textBuffer ??= StringBuffer();
+          textBuffer!.writeCharCode(char);
           continue;
 
         case TokenizerState.tagOpen:
@@ -359,14 +370,12 @@ class Tokenizer {
             state = TokenizerState.endTagOpen;
             continue;
           }
-          if (isAsciiAlpha(char)) {
-            if (isAsciiUpperAlpha(char)) {
-              char += 0x20;
-            }
-            currentTag = TagTokenBuilder.startTag(firstCodePoint: char);
+          if (_isAsciiAlpha(char)) {
+            currentTag =
+                TagTokenBuilder.startTag(firstCodePoint: _toLowerAscii(char));
             state = TokenizerState.tagName;
-            if (textBuffer.isNotEmpty) {
-              return CharacterToken(textBuffer.toString());
+            if (textBuffer != null) {
+              return emitCharacterToken();
             }
             break reconsume;
           }
@@ -380,11 +389,12 @@ class Tokenizer {
 // Emit a U+003C LESS-THAN SIGN character token.
 // Reconsume in the data state.
           reconsumeIn(char, TokenizerState.data);
-          // Unclear if textBuffer.toString() is needed?
-          return CharacterToken(textBuffer.toString() + "<");
+          textBuffer ??= StringBuffer();
+          textBuffer!.writeCharCode(lessThanSign);
+          return emitCharacterToken();
 
         case TokenizerState.tagName:
-          if (isHTMLWhitespace(char)) {
+          if (_isHTMLWhitespace(char)) {
             state = TokenizerState.beforeAttributeName;
             continue;
           }
@@ -396,16 +406,15 @@ class Tokenizer {
             state = TokenizerState.data;
             return emitCurrentTag();
           }
-          if (isAsciiAlpha(char)) {
-            var name = String.fromCharCode(char);
-            currentTag!.tagName += name.toLowerCase();
+          if (_isAsciiAlpha(char)) {
+            currentTag!.tagName.writeCharCode(_toLowerAscii(char));
             continue;
           }
           if (char == nullChar) {
-            currentTag!.tagName += replacementCharacter;
+            currentTag!.tagName.writeCharCode(replacementCharacter);
             continue;
           }
-          currentTag!.tagName += String.fromCharCode(char);
+          currentTag!.tagName.writeCharCode(char);
           continue;
 
         case TokenizerState.selfClosingStartTag:
@@ -418,7 +427,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.beforeAttributeName:
-          if (isHTMLWhitespace(char)) {
+          if (_isHTMLWhitespace(char)) {
             continue;
           }
           if (char == solidus || char == greaterThanSign) {
@@ -433,7 +442,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.attributeName:
-          if (isHTMLWhitespace(char) ||
+          if (_isHTMLWhitespace(char) ||
               char == solidus ||
               char == greaterThanSign) {
             reconsumeIn(char, TokenizerState.afterAttributeName);
@@ -451,7 +460,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.afterAttributeName:
-          if (isHTMLWhitespace(char)) {
+          if (_isHTMLWhitespace(char)) {
             continue;
           }
           if (char == solidus) {
@@ -471,7 +480,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.beforeAttributeValue:
-          if (isHTMLWhitespace(char)) {
+          if (_isHTMLWhitespace(char)) {
             continue;
           }
 // U+0022 QUOTATION MARK (")
@@ -486,7 +495,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.attributeValueUnquoted:
-          if (isHTMLWhitespace(char)) {
+          if (_isHTMLWhitespace(char)) {
             state = TokenizerState.beforeAttributeName;
             continue;
           }
@@ -502,9 +511,12 @@ class Tokenizer {
           continue;
 
         case TokenizerState.endTagOpen:
-          if (isAsciiAlpha(char)) {
+          if (_isAsciiAlpha(char)) {
             currentTag = TagTokenBuilder.endTag();
             reconsumeIn(char, TokenizerState.tagName);
+            if (textBuffer != null) {
+              return emitCharacterToken();
+            }
             continue;
           }
           if (char == greaterThanSign) {
@@ -523,8 +535,8 @@ class Tokenizer {
           input.push(char);
 
           if (input.lookAheadAndConsume("--")) {
-            assert(commentData == null);
-            commentData = "";
+            assert(textBuffer == null);
+            textBuffer = StringBuffer();
             state = TokenizerState.commentStart;
             continue;
           }
@@ -539,8 +551,8 @@ class Tokenizer {
 // This is an incorrectly-opened-comment parse error. Create a comment token whose data is the empty string. Switch to the bogus comment state (don't
 // consume anything in the current state).
 // TODO: Implement the rest.
-          assert(commentData == null);
-          commentData = "";
+          assert(textBuffer == null);
+          textBuffer = StringBuffer();
           state = TokenizerState.bogusComment;
           continue;
 
@@ -569,13 +581,13 @@ class Tokenizer {
           }
 // EOF
 // This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
-          commentData = commentData! + "-";
+          textBuffer!.writeCharCode(hyphenMinus);
           reconsumeIn(char, TokenizerState.comment);
           continue;
         case TokenizerState.comment:
 // Consume the next input character:
           if (char == lessThanSign) {
-            commentData = commentData! + String.fromCharCode(char);
+            textBuffer!.writeCharCode(char);
             state = TokenizerState.commentLessThanSign;
             continue;
           }
@@ -585,22 +597,22 @@ class Tokenizer {
           }
           if (char == nullChar) {
             // This is an unexpected-null-character parse error.
-            commentData = commentData! + replacementCharacter;
+            textBuffer!.writeCharCode(replacementCharacter);
             continue;
           }
 // EOF
 // This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
-          commentData = commentData! + String.fromCharCode(char);
+          textBuffer!.writeCharCode(char);
           continue;
 
         case TokenizerState.commentLessThanSign:
           if (char == exclaimationMark) {
-            commentData = commentData! + String.fromCharCode(char);
+            textBuffer!.writeCharCode(char);
             state = TokenizerState.commentLessThanSignBang;
             continue;
           }
           if (char == lessThanSign) {
-            commentData = commentData! + String.fromCharCode(char);
+            textBuffer!.writeCharCode(char);
             continue;
           }
           reconsumeIn(char, TokenizerState.comment);
@@ -640,7 +652,7 @@ class Tokenizer {
 
           // EOF
           // This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
-          commentData = commentData! + "-";
+          textBuffer!.writeCharCode(hyphenMinus);
           reconsumeIn(char, TokenizerState.comment);
           continue;
 
@@ -654,17 +666,20 @@ class Tokenizer {
             continue;
           }
           if (char == hyphenMinus) {
-            commentData = commentData! + "-";
+            textBuffer!.writeCharCode(hyphenMinus);
             continue;
           }
-          commentData = commentData! + "--";
+          textBuffer!.writeCharCode(hyphenMinus);
+          textBuffer!.writeCharCode(hyphenMinus);
           reconsumeIn(char, TokenizerState.comment);
           continue;
         // EOF
 
         case TokenizerState.commentEndBang:
           if (char == hyphenMinus) {
-            commentData = commentData! + "--!";
+            textBuffer!.writeCharCode(hyphenMinus);
+            textBuffer!.writeCharCode(hyphenMinus);
+            textBuffer!.writeCharCode(exclaimationMark);
             state = TokenizerState.commentEndDash;
             continue;
           }
@@ -675,7 +690,9 @@ class Tokenizer {
           }
 // EOF
 // This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
-          commentData = commentData! + "--!";
+          textBuffer!.writeCharCode(hyphenMinus);
+          textBuffer!.writeCharCode(hyphenMinus);
+          textBuffer!.writeCharCode(exclaimationMark);
           state = TokenizerState.comment;
           continue;
 
@@ -689,10 +706,10 @@ class Tokenizer {
 // Emit the comment. Emit an end-of-file token.
           if (char == nullChar) {
 // This is an unexpected-null-character parse error.
-            commentData = commentData! + replacementCharacter;
+            textBuffer!.writeCharCode(replacementCharacter);
             continue;
           }
-          commentData = commentData! + String.fromCharCode(char);
+          textBuffer!.writeCharCode(char);
           continue;
 
         default:
@@ -700,10 +717,10 @@ class Tokenizer {
       }
     }
     // FIXME: move into states.
-    if (textBuffer.isNotEmpty) {
-      return CharacterToken(textBuffer.toString());
-    }
-    if (commentData != null) {
+    if (textBuffer != null) {
+      if (state == TokenizerState.data) {
+        return emitCharacterToken();
+      }
       return emitCommentToken();
     }
     return EofToken();

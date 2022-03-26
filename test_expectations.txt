@@ -6,14 +6,8 @@ FAIL: PLAINTEXT with seeming close tag
  input: "</plaintext>&body;"
  actual:   [["EndTag","plaintext"],["Character","&body;"]]
  expected: [["Character","</plaintext>&body;"]]
-FAIL: End tag closing RCDATA or RAWTEXT
- input: "foo</xmp>"
- actual:   [["EndTag","xmp"]]
- expected: [["Character","foo"],["EndTag","xmp"]]
-FAIL: End tag closing RCDATA or RAWTEXT (case-insensitivity)
- input: "foo</xMp>"
- actual:   [["EndTag","xmp"]]
- expected: [["Character","foo"],["EndTag","xmp"]]
+PASS: End tag closing RCDATA or RAWTEXT
+PASS: End tag closing RCDATA or RAWTEXT (case-insensitivity)
 PASS: End tag closing RCDATA or RAWTEXT (ending with space)
 FAIL: End tag closing RCDATA or RAWTEXT (ending with EOF)
  input: "foo</xmp"
@@ -26,7 +20,7 @@ FAIL: End tag not closing RCDATA or RAWTEXT (ending with left-angle-bracket)
  expected: [["Character","foo</xmp<"]]
 FAIL: End tag with incorrect name in RCDATA or RAWTEXT
  input: "</foo>bar</xmp>"
- actual:   [["EndTag","foo"],["EndTag","xmp"]]
+ actual:   [["EndTag","foo"],["Character","bar"],["EndTag","xmp"]]
  expected: [["Character","</foo>bar"],["EndTag","xmp"]]
 FAIL: Partial end tags leading straight into partial end tags
  input: "</xmp</xmp</xmp>"
@@ -34,12 +28,9 @@ FAIL: Partial end tags leading straight into partial end tags
  expected: [["Character","</xmp</xmp"],["EndTag","xmp"]]
 FAIL: End tag with incorrect name in RCDATA or RAWTEXT (starting like correct name)
  input: "</foo>bar</xmpaar>"
- actual:   [["EndTag","foo"],["EndTag","xmpaar"]]
+ actual:   [["EndTag","foo"],["Character","bar"],["EndTag","xmpaar"]]
  expected: [["Character","</foo>bar</xmpaar>"]]
-FAIL: End tag closing RCDATA or RAWTEXT, switching back to PCDATA
- input: "foo</xmp></baz>"
- actual:   [["EndTag","xmp"],["EndTag","baz"]]
- expected: [["Character","foo"],["EndTag","xmp"],["EndTag","baz"]]
+PASS: End tag closing RCDATA or RAWTEXT, switching back to PCDATA
 PASS: RAWTEXT w/ something looking like an entity
 FAIL: RCDATA w/ an entity
  input: "&lt;"
@@ -126,7 +117,7 @@ FAIL: </script> in script HTML comment - double escaped with nested <script>
  expected: [["Character","<!-- <script><script></script>"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: </script> in script HTML comment - double escaped with abrupt end
  input: "<!-- <script>--></script> --></script>"
- actual:   [["Comment"," <script>"],["EndTag","script"],["EndTag","script"]]
+ actual:   [["Comment"," <script>"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
  expected: [["Character","<!-- <script>-->"],["EndTag","script"],["Character"," -->"],["EndTag","script"]]
 FAIL: Incomplete start tag in script HTML comment double escaped
  input: "<!--<scrip></script>-->"
@@ -194,7 +185,7 @@ PASS: CDATA with single bracket ending
 PASS: CDATA with two brackets ending
 FAIL: HTML tag in script data
  input: "<b>hello world</b>"
- actual:   [["StartTag","b",{}],["EndTag","b"]]
+ actual:   [["StartTag","b",{}],["Character","hello world"],["EndTag","b"]]
  expected: [["Character","<b>hello world</b>"]]
 PASS: Undefined named entity in a double-quoted attribute value ending in semicolon and whose name starts with a known entity name.
 PASS: Entity name requiring semicolon instead followed by the equals sign in a double-quoted attribute value.
@@ -489,19 +480,19 @@ FAIL: Commented close tag in RCDATA or RAWTEXT
  expected: [["Character","foo<!--"],["EndTag","xmp"],["Character","-->"],["EndTag","xmp"]]
 FAIL: Bogus comment in RCDATA or RAWTEXT
  input: "foo<!-->baz</xmp>"
- actual:   [["Comment",""],["EndTag","xmp"]]
+ actual:   [["Comment",""],["Character","baz"],["EndTag","xmp"]]
  expected: [["Character","foo<!-->baz"],["EndTag","xmp"]]
 FAIL: End tag surrounded by bogus comment in RCDATA or RAWTEXT
  input: "foo<!--></xmp><!-->baz</xmp>"
- actual:   [["Comment",""],["EndTag","xmp"],["Comment",""],["EndTag","xmp"]]
+ actual:   [["Comment",""],["EndTag","xmp"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
  expected: [["Character","foo<!-->"],["EndTag","xmp"],["Comment",""],["Character","baz"],["EndTag","xmp"]]
 FAIL: Commented entities in RCDATA
  input: " &amp; <!-- &amp; --> &amp; </xmp>"
- actual:   [["Comment"," &amp; "],["EndTag","xmp"]]
+ actual:   [["Comment"," &amp; "],["Character"," &amp; "],["EndTag","xmp"]]
  expected: [["Character"," & <!-- & --> & "],["EndTag","xmp"]]
 FAIL: Incorrect comment ending sequences in RCDATA or RAWTEXT
  input: "foo<!-- x --x>x-- >x--!>x--<></xmp>"
- actual:   [["Comment"," x --x>x-- >x"],["Character","x--<"],["EndTag","xmp"]]
+ actual:   [["Comment"," x --x>x-- >x"],["Character","x--<"],["Character",">"],["EndTag","xmp"]]
  expected: [["Character","foo<!-- x --x>x-- >x--!>x--<>"],["EndTag","xmp"]]
 FAIL: Named entity: AElig without a semi-colon
  input: "&AElig"
@@ -13044,10 +13035,7 @@ FAIL: Empty end tag with following comment
  input: "a</><!--b-->c"
  actual:   [["Comment","b"],["Character","c"]]
  expected: [["Character","a"],["Comment","b"],["Character","c"]]
-FAIL: Empty end tag with following end tag
- input: "a</></b>c"
- actual:   [["EndTag","b"],["Character","c"]]
- expected: [["Character","a"],["EndTag","b"],["Character","c"]]
+PASS: Empty end tag with following end tag
 PASS: [empty]
 PASS: [empty]
 PASS: \u0009
@@ -13149,38 +13137,26 @@ FAIL: <!
  input: "<!"
  actual:   []
  expected: [["Comment",""]]
-FAIL: <!\u0000
- input: "<!ý"
- actual:   [["Comment","Ã¿FD"]]
- expected: [["Comment","ï¿½"]]
+PASS: <!\u0000
 PASS: <!\u0009
 PASS: <!\u000A
 PASS: <!\u000B
 PASS: <!\u000C
 PASS: <! 
-FAIL: <! \u0000
- input: "<! ý"
- actual:   [["Comment"," Ã¿FD"]]
- expected: [["Comment"," ï¿½"]]
+PASS: <! \u0000
 PASS: <!!
 PASS: <!"
 PASS: <!&
 PASS: <!'
 PASS: <!-
 PASS: <!--
-FAIL: <!--\u0000
- input: "<!--ý"
- actual:   [["Comment","Ã¿FD"]]
- expected: [["Comment","ï¿½"]]
+PASS: <!--\u0000
 PASS: <!--\u0009
 PASS: <!--\u000A
 PASS: <!--\u000B
 PASS: <!--\u000C
 PASS: <!-- 
-FAIL: <!-- \u0000
- input: "<!-- ý"
- actual:   [["Comment"," Ã¿FD"]]
- expected: [["Comment"," ï¿½"]]
+PASS: <!-- \u0000
 PASS: <!-- \u0009
 PASS: <!-- \u000A
 PASS: <!-- \u000B
@@ -13192,10 +13168,7 @@ PASS: <!-- &
 PASS: <!-- '
 PASS: <!-- ,
 PASS: <!-- -
-FAIL: <!-- -\u0000
- input: "<!-- -ý"
- actual:   [["Comment"," -Ã¿FD"]]
- expected: [["Comment"," -ï¿½"]]
+PASS: <!-- -\u0000
 PASS: <!-- -\u0009
 PASS: <!-- -\u000A
 PASS: <!-- -\u000B
@@ -13255,10 +13228,7 @@ PASS: <!--&
 PASS: <!--'
 PASS: <!--,
 PASS: <!---
-FAIL: <!---\u0000
- input: "<!---ý"
- actual:   [["Comment","-Ã¿FD"]]
- expected: [["Comment","-ï¿½"]]
+PASS: <!---\u0000
 PASS: <!---\u0009
 PASS: <!---\u000A
 PASS: <!---\u000B
@@ -13270,10 +13240,7 @@ PASS: <!---&
 PASS: <!---'
 PASS: <!---,
 PASS: <!----
-FAIL: <!----\u0000
- input: "<!----ý"
- actual:   [["Comment","--Ã¿FD"]]
- expected: [["Comment","--ï¿½"]]
+PASS: <!----\u0000
 PASS: <!----\u0009
 PASS: <!----\u000A
 PASS: <!----\u000B
@@ -13402,7 +13369,7 @@ FAIL: <!DOCTYPE
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE\u0000
  input: "<!DOCTYPEý"
- actual:   [["Comment","DOCTYPEÃ¿FD"]]
+ actual:   [["Comment","DOCTYPEï¿½"]]
  expected: [["DOCTYPE","ï¿½",null,null,false]]
 FAIL: <!DOCTYPE\u0008
  input: "<!DOCTYPEý"
@@ -13439,7 +13406,7 @@ FAIL: <!DOCTYPE
  expected: [["DOCTYPE",null,null,null,false]]
 FAIL: <!DOCTYPE \u0000
  input: "<!DOCTYPE ý"
- actual:   [["Comment","DOCTYPE Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE ï¿½"]]
  expected: [["DOCTYPE","ï¿½",null,null,false]]
 FAIL: <!DOCTYPE \u0008
  input: "<!DOCTYPE ý"
@@ -13560,7 +13527,7 @@ FAIL: <!DOCTYPE a
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a\u0000
  input: "<!DOCTYPE aý"
- actual:   [["Comment","DOCTYPE aÃ¿FD"]]
+ actual:   [["Comment","DOCTYPE aï¿½"]]
  expected: [["DOCTYPE","aï¿½",null,null,false]]
 FAIL: <!DOCTYPE a\u0008
  input: "<!DOCTYPE aý"
@@ -13597,7 +13564,7 @@ FAIL: <!DOCTYPE a
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u0000
  input: "<!DOCTYPE a ý"
- actual:   [["Comment","DOCTYPE a Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a ï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a \u0008
  input: "<!DOCTYPE a ý"
@@ -13702,7 +13669,7 @@ FAIL: <!DOCTYPE a PUBLIC
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u0000
  input: "<!DOCTYPE a PUBLICý"
- actual:   [["Comment","DOCTYPE a PUBLICÃ¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLICï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a PUBLIC\u0008
  input: "<!DOCTYPE a PUBLICý"
@@ -13747,7 +13714,7 @@ FAIL: <!DOCTYPE a PUBLIC"
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"\u0000
  input: "<!DOCTYPE a PUBLIC"ý"
- actual:   [["Comment","DOCTYPE a PUBLIC\"Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC\"ï¿½"]]
  expected: [["DOCTYPE","a","ï¿½",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"\u0009
  input: "<!DOCTYPE a PUBLIC"ý"
@@ -13780,11 +13747,11 @@ FAIL: <!DOCTYPE a PUBLIC""
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC""\u0000
  input: "<!DOCTYPE a PUBLIC""ý"
- actual:   [["Comment","DOCTYPE a PUBLIC\"\"Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC\"\"ï¿½"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"" \u0000
  input: "<!DOCTYPE a PUBLIC"" ý"
- actual:   [["Comment","DOCTYPE a PUBLIC\"\" Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC\"\" ï¿½"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC"#
  input: "<!DOCTYPE a PUBLIC"#"
@@ -13896,7 +13863,7 @@ FAIL: <!DOCTYPE a PUBLIC'
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC'\u0000
  input: "<!DOCTYPE a PUBLIC'ý"
- actual:   [["Comment","DOCTYPE a PUBLIC'Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC'ï¿½"]]
  expected: [["DOCTYPE","a","ï¿½",null,false]]
 FAIL: <!DOCTYPE a PUBLIC'\u0009
  input: "<!DOCTYPE a PUBLIC'ý"
@@ -13937,7 +13904,7 @@ FAIL: <!DOCTYPE a PUBLIC''
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u0000
  input: "<!DOCTYPE a PUBLIC''ý"
- actual:   [["Comment","DOCTYPE a PUBLIC''Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC''ï¿½"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPE a PUBLIC''\u0008
  input: "<!DOCTYPE a PUBLIC''ý"
@@ -13994,19 +13961,19 @@ FAIL: <!DOCTYPE a PUBLIC'''
  expected: [["DOCTYPE","a","","",false]]
 FAIL: <!DOCTYPE a PUBLIC''''\u0000
  input: "<!DOCTYPE a PUBLIC''''ý"
- actual:   [["Comment","DOCTYPE a PUBLIC''''Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC''''ï¿½"]]
  expected: [["DOCTYPE","a","","",true]]
 FAIL: <!DOCTYPE a PUBLIC''''x\u0000
  input: "<!DOCTYPE a PUBLIC''''xý"
- actual:   [["Comment","DOCTYPE a PUBLIC''''xÃ¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC''''xï¿½"]]
  expected: [["DOCTYPE","a","","",true]]
 FAIL: <!DOCTYPE a PUBLIC'''' \u0000
  input: "<!DOCTYPE a PUBLIC'''' ý"
- actual:   [["Comment","DOCTYPE a PUBLIC'''' Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC'''' ï¿½"]]
  expected: [["DOCTYPE","a","","",true]]
 FAIL: <!DOCTYPE a PUBLIC'''' x\u0000
  input: "<!DOCTYPE a PUBLIC'''' xý"
- actual:   [["Comment","DOCTYPE a PUBLIC'''' xÃ¿FD"]]
+ actual:   [["Comment","DOCTYPE a PUBLIC'''' xï¿½"]]
  expected: [["DOCTYPE","a","","",true]]
 FAIL: <!DOCTYPE a PUBLIC''(
  input: "<!DOCTYPE a PUBLIC''("
@@ -14278,15 +14245,15 @@ FAIL: <!DOCTYPE a SYSTEM
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u0000
  input: "<!DOCTYPE a SYSTEMý"
- actual:   [["Comment","DOCTYPE a SYSTEMÃ¿FD"]]
+ actual:   [["Comment","DOCTYPE a SYSTEMï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM \u0000
  input: "<!DOCTYPE a SYSTEM ý"
- actual:   [["Comment","DOCTYPE a SYSTEM Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM ï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM x\u0000
  input: "<!DOCTYPE a SYSTEM ý"
- actual:   [["Comment","DOCTYPE a SYSTEM Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM ï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a SYSTEM\u0008
  input: "<!DOCTYPE a SYSTEMý"
@@ -14331,7 +14298,7 @@ FAIL: <!DOCTYPE a SYSTEM"
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM"\u0000
  input: "<!DOCTYPE a SYSTEM"ý"
- actual:   [["Comment","DOCTYPE a SYSTEM\"Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM\"ï¿½"]]
  expected: [["DOCTYPE","a",null,"ï¿½",false]]
 FAIL: <!DOCTYPE a SYSTEM"\u0009
  input: "<!DOCTYPE a SYSTEM"ý"
@@ -14472,7 +14439,7 @@ FAIL: <!DOCTYPE a SYSTEM'
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM'\u0000
  input: "<!DOCTYPE a SYSTEM'ý"
- actual:   [["Comment","DOCTYPE a SYSTEM'Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM'ï¿½"]]
  expected: [["DOCTYPE","a",null,"ï¿½",false]]
 FAIL: <!DOCTYPE a SYSTEM'\u0009
  input: "<!DOCTYPE a SYSTEM'ý"
@@ -14513,7 +14480,7 @@ FAIL: <!DOCTYPE a SYSTEM''
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM''\u0000
  input: "<!DOCTYPE a SYSTEM''ý"
- actual:   [["Comment","DOCTYPE a SYSTEM''Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM''ï¿½"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM''\u0008
  input: "<!DOCTYPE a SYSTEM''ý"
@@ -14550,11 +14517,11 @@ FAIL: <!DOCTYPE a SYSTEM''
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPE a SYSTEM'' \u0000
  input: "<!DOCTYPE a SYSTEM'' ý"
- actual:   [["Comment","DOCTYPE a SYSTEM'' Ã¿FD"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM'' ï¿½"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM'' x\u0000
  input: "<!DOCTYPE a SYSTEM'' xý"
- actual:   [["Comment","DOCTYPE a SYSTEM'' xÃ¿FD"]]
+ actual:   [["Comment","DOCTYPE a SYSTEM'' xï¿½"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPE a SYSTEM''!
  input: "<!DOCTYPE a SYSTEM''!"
@@ -14850,7 +14817,7 @@ FAIL: <!DOCTYPE a a
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a a\u0000
  input: "<!DOCTYPE a aý"
- actual:   [["Comment","DOCTYPE a aÃ¿FD"]]
+ actual:   [["Comment","DOCTYPE a aï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPE a a\u0009
  input: "<!DOCTYPE a aý"
@@ -15199,7 +15166,7 @@ FAIL: <!DOCTYPEa
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa\u0000
  input: "<!DOCTYPEaý"
- actual:   [["Comment","DOCTYPEaÃ¿FD"]]
+ actual:   [["Comment","DOCTYPEaï¿½"]]
  expected: [["DOCTYPE","aï¿½",null,null,false]]
 FAIL: <!DOCTYPEa\u0008
  input: "<!DOCTYPEaý"
@@ -15236,7 +15203,7 @@ FAIL: <!DOCTYPEa
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u0000
  input: "<!DOCTYPEa ý"
- actual:   [["Comment","DOCTYPEa Ã¿FD"]]
+ actual:   [["Comment","DOCTYPEa ï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa \u0008
  input: "<!DOCTYPEa ý"
@@ -15341,7 +15308,7 @@ FAIL: <!DOCTYPEa PUBLIC
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u0000
  input: "<!DOCTYPEa PUBLICý"
- actual:   [["Comment","DOCTYPEa PUBLICÃ¿FD"]]
+ actual:   [["Comment","DOCTYPEa PUBLICï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa PUBLIC\u0008
  input: "<!DOCTYPEa PUBLICý"
@@ -15386,7 +15353,7 @@ FAIL: <!DOCTYPEa PUBLIC"
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC"\u0000
  input: "<!DOCTYPEa PUBLIC"ý"
- actual:   [["Comment","DOCTYPEa PUBLIC\"Ã¿FD"]]
+ actual:   [["Comment","DOCTYPEa PUBLIC\"ï¿½"]]
  expected: [["DOCTYPE","a","ï¿½",null,false]]
 FAIL: <!DOCTYPEa PUBLIC"\u0009
  input: "<!DOCTYPEa PUBLIC"ý"
@@ -15527,7 +15494,7 @@ FAIL: <!DOCTYPEa PUBLIC'
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC'\u0000
  input: "<!DOCTYPEa PUBLIC'ý"
- actual:   [["Comment","DOCTYPEa PUBLIC'Ã¿FD"]]
+ actual:   [["Comment","DOCTYPEa PUBLIC'ï¿½"]]
  expected: [["DOCTYPE","a","ï¿½",null,false]]
 FAIL: <!DOCTYPEa PUBLIC'\u0009
  input: "<!DOCTYPEa PUBLIC'ý"
@@ -15568,7 +15535,7 @@ FAIL: <!DOCTYPEa PUBLIC''
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u0000
  input: "<!DOCTYPEa PUBLIC''ý"
- actual:   [["Comment","DOCTYPEa PUBLIC''Ã¿FD"]]
+ actual:   [["Comment","DOCTYPEa PUBLIC''ï¿½"]]
  expected: [["DOCTYPE","a","",null,false]]
 FAIL: <!DOCTYPEa PUBLIC''\u0008
  input: "<!DOCTYPEa PUBLIC''ý"
@@ -15893,7 +15860,7 @@ FAIL: <!DOCTYPEa SYSTEM
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u0000
  input: "<!DOCTYPEa SYSTEMý"
- actual:   [["Comment","DOCTYPEa SYSTEMÃ¿FD"]]
+ actual:   [["Comment","DOCTYPEa SYSTEMï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa SYSTEM\u0008
  input: "<!DOCTYPEa SYSTEMý"
@@ -15938,7 +15905,7 @@ FAIL: <!DOCTYPEa SYSTEM"
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM"\u0000
  input: "<!DOCTYPEa SYSTEM"ý"
- actual:   [["Comment","DOCTYPEa SYSTEM\"Ã¿FD"]]
+ actual:   [["Comment","DOCTYPEa SYSTEM\"ï¿½"]]
  expected: [["DOCTYPE","a",null,"ï¿½",false]]
 FAIL: <!DOCTYPEa SYSTEM"\u0009
  input: "<!DOCTYPEa SYSTEM"ý"
@@ -16079,7 +16046,7 @@ FAIL: <!DOCTYPEa SYSTEM'
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM'\u0000
  input: "<!DOCTYPEa SYSTEM'ý"
- actual:   [["Comment","DOCTYPEa SYSTEM'Ã¿FD"]]
+ actual:   [["Comment","DOCTYPEa SYSTEM'ï¿½"]]
  expected: [["DOCTYPE","a",null,"ï¿½",false]]
 FAIL: <!DOCTYPEa SYSTEM'\u0009
  input: "<!DOCTYPEa SYSTEM'ý"
@@ -16120,7 +16087,7 @@ FAIL: <!DOCTYPEa SYSTEM''
  expected: [["DOCTYPE","a",null,"",false]]
 FAIL: <!DOCTYPEa SYSTEM''\u0000
  input: "<!DOCTYPEa SYSTEM''ý"
- actual:   [["Comment","DOCTYPEa SYSTEM''Ã¿FD"]]
+ actual:   [["Comment","DOCTYPEa SYSTEM''ï¿½"]]
  expected: [["DOCTYPE","a",null,"",true]]
 FAIL: <!DOCTYPEa SYSTEM''\u0008
  input: "<!DOCTYPEa SYSTEM''ý"
@@ -16449,7 +16416,7 @@ FAIL: <!DOCTYPEa a
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa a\u0000
  input: "<!DOCTYPEa aý"
- actual:   [["Comment","DOCTYPEa aÃ¿FD"]]
+ actual:   [["Comment","DOCTYPEa aï¿½"]]
  expected: [["DOCTYPE","a",null,null,false]]
 FAIL: <!DOCTYPEa a\u0009
  input: "<!DOCTYPEa aý"
@@ -16950,7 +16917,7 @@ FAIL: <?9
  expected: [["Comment","?9"]]
 FAIL: <?<
  input: "<?<"
- actual:   [["Character","<"],["Character","?"]]
+ actual:   [["Character","<"],["Comment","?"]]
  expected: [["Comment","?<"]]
 FAIL: <?=
  input: "<?="
@@ -17029,10 +16996,7 @@ FAIL: <`
  actual:   [["Character","<"],["Character","`"]]
  expected: [["Character","<`"]]
 PASS: <a>
-FAIL: <a\u0000>
- input: "<aý>"
- actual:   [["StartTag","aÃ¿FD",{}]]
- expected: [["StartTag","aï¿½",{}]]
+PASS: <a\u0000>
 PASS: <a\u0008>
 PASS: <a\u0009>
 PASS: <a\u000A>
@@ -17724,10 +17688,7 @@ FAIL: Doctype system case-sensitivity (2)
  actual:   [["Comment","dOcTyPe hTmL sYsTeM \"xYz\""]]
  expected: [["DOCTYPE","html",null,"xYz",true]]
 PASS: U+0000 in lookahead region after non-matching character
-FAIL: U+0000 in lookahead region
- input: "<!docý"
- actual:   [["Comment","docÃ¿FD"]]
- expected: [["Comment","docï¿½"]]
+PASS: U+0000 in lookahead region
 PASS: U+0080 in lookahead region
 PASS: U+FDD1 in lookahead region
 PASS: U+1FFFF in lookahead region
@@ -18120,4 +18081,4 @@ FAIL: CR followed by U+0000
  input: "ý"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 3046 of 6806 tests
+Passed 3059 of 6806 tests
