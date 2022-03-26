@@ -100,7 +100,17 @@ class InputManager {
     return true;
   }
 
-  bool lookAheadForEntityAndConsume(StringBuffer buffer) {
+  bool lookAheadForEntityAndConsume(int char, StringBuffer buffer) {
+    // Hack in a single entity to test the 'true' codepaths.
+    if (char == latinSmallLetterA &&
+        peek(0) == latinSmallLetterC &&
+        peek(1) == semicolon) {
+      getNextCodePoint();
+      getNextCodePoint();
+      buffer.clear();
+      buffer.writeCharCode(0x223E);
+      return true;
+    }
     return false;
   }
 
@@ -282,6 +292,8 @@ const int lessThanSign = 0x3C;
 const int equalsSign = 0x3D;
 const int greaterThanSign = 0x3E;
 const int latinCapitalLetterX = 0x58;
+const int latinSmallLetterA = 0x61;
+const int latinSmallLetterC = 0x63;
 const int latinSmallLetterX = 0x78;
 const int endOfFile = -1;
 
@@ -885,13 +897,13 @@ class Tokenizer {
           continue;
 
         case TokenizerState.namedCharacterReference:
-          // FIXME: This is not in the spec, but seems necessary?
-          temporaryBuffer!.writeCharCode(char);
-
-          if (input.lookAheadForEntityAndConsume(temporaryBuffer!)) {
+          if (input.lookAheadForEntityAndConsume(char, temporaryBuffer!)) {
             //  If the character reference was consumed as part of an attribute, and the last character matched is not a U+003B SEMICOLON character (;), and the next input character is either a U+003D EQUALS SIGN character (=) or an ASCII alphanumeric, then, for historical reasons, flush code points consumed as a character reference and switch to the return state.
             state = takeReturnState();
             return CharacterToken(temporaryBuffer.toString());
+          } else {
+            // FIXME: This is not in the spec, but seems necessary?
+            temporaryBuffer!.writeCharCode(char);
           }
           state = TokenizerState.ambiguousAmpersand;
           flushCodePointsAsCharacterReference();

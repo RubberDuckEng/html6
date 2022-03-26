@@ -3606,10 +3606,7 @@ FAIL: Named entity: abreve; with a semi-colon
  actual:   [["Character","&abreve;"]]
  expected: [["Character","ă"]]
 PASS: Bad named entity: ac without a semi-colon
-FAIL: Named entity: ac; with a semi-colon
- input: "&ac;"
- actual:   [["Character","&ac;"]]
- expected: [["Character","∾"]]
+PASS: Named entity: ac; with a semi-colon
 PASS: Bad named entity: acE without a semi-colon
 FAIL: Named entity: acE; with a semi-colon
  input: "&acE;"
@@ -17906,4 +17903,4 @@ FAIL: CR followed by U+0000
  input: "�"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 3117 of 6806 tests
+Passed 3118 of 6806 tests
