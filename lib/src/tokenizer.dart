@@ -975,6 +975,7 @@ class Tokenizer {
             // This is a character-reference-outside-unicode-range parse error.
             refCode = replacementCharacter;
           }
+          state = returnState!;
           continue;
 
         default:
