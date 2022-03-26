@@ -241,11 +241,11 @@ bool _isAsciiAlphanumeric(int codePoint) {
 }
 
 bool _isAsciiUpperHexDigit(int codePoint) {
-  return codePoint >= 0x41 && codePoint <= 0x46;
+  return _isAsciiDigit(codePoint) || (codePoint >= 0x41 && codePoint <= 0x46);
 }
 
 bool _isAsciiLowerHexDigit(int codePoint) {
-  return codePoint >= 0x61 && codePoint <= 0x66;
+  return _isAsciiDigit(codePoint) || (codePoint >= 0x61 && codePoint <= 0x66);
 }
 
 bool _isAsciiHexDigit(int codePoint) {
@@ -254,6 +254,55 @@ bool _isAsciiHexDigit(int codePoint) {
 
 bool _isSurogate(int codePoint) {
   return codePoint >= 0xD800 && codePoint <= 0xDFFF;
+}
+
+bool _isNoncharacter(int codePoint) {
+  return (codePoint >= 0xD800 && codePoint <= 0xDFFF ||
+      [
+        0xFFFE,
+        0xFFFF,
+        0x1FFFE,
+        0x1FFFF,
+        0x2FFFE,
+        0x2FFFF,
+        0x3FFFE,
+        0x3FFFF,
+        0x4FFFE,
+        0x4FFFF,
+        0x5FFFE,
+        0x5FFFF,
+        0x6FFFE,
+        0x6FFFF,
+        0x7FFFE,
+        0x7FFFF,
+        0x8FFFE,
+        0x8FFFF,
+        0x9FFFE,
+        0x9FFFF,
+        0xAFFFE,
+        0xAFFFF,
+        0xBFFFE,
+        0xBFFFF,
+        0xCFFFE,
+        0xCFFFF,
+        0xDFFFE,
+        0xDFFFF,
+        0xEFFFE,
+        0xEFFFF,
+        0xFFFFE,
+        0xFFFFF,
+        0x10FFFE,
+        0x10FFFF
+      ].contains(codePoint));
+}
+
+bool _isC0Control(int codePoint) {
+  return codePoint >= 0x0000 && codePoint <= 0x001F;
+}
+
+bool _isControl(int codePoint) {
+  return _isC0Control(codePoint) ||
+      (codePoint >= 0x007F && codePoint <= 0x009F);
 }
 
 bool _isScalarValue(int codePoint) => !_isSurogate(codePoint);
@@ -946,7 +995,7 @@ class Tokenizer {
 
         case TokenizerState.hexadecimalCharacterReferenceStart:
           if (_isAsciiHexDigit(char)) {
-            reconsumeIn(char, TokenizerState.decimalCharacterReference);
+            reconsumeIn(char, TokenizerState.hexadecimalCharacterReference);
             continue;
           }
           // This is an absence-of-digits-in-numeric-character-reference parse error.
@@ -1012,6 +1061,51 @@ class Tokenizer {
             // This is a character-reference-outside-unicode-range parse error.
             refCode = replacementCharacter;
           }
+          if (_isSurogate(refCode)) {
+            //  this is a surrogate-character-reference parse error.
+            refCode = replacementCharacter;
+          }
+          if (_isNoncharacter(refCode)) {
+            // then this is a noncharacter-character-reference parse error.
+          }
+          if (refCode == 0x0D ||
+              (_isControl(refCode) && !_isAsciiWhitespace(refCode))) {
+            // this is a control-character-reference parse error.
+            refCode = const <int, int>{
+                  0x80: 0x20AC, // EURO SIGN (€)
+                  0x82: 0x201A, // SINGLE LOW-9 QUOTATION MARK (‚)
+                  0x83: 0x0192, // LATIN SMALL LETTER F WITH HOOK (ƒ)
+                  0x84: 0x201E, // DOUBLE LOW-9 QUOTATION MARK („)
+                  0x85: 0x2026, // HORIZONTAL ELLIPSIS (…)
+                  0x86: 0x2020, // DAGGER (†)
+                  0x87: 0x2021, // DOUBLE DAGGER (‡)
+                  0x88: 0x02C6, // MODIFIER LETTER CIRCUMFLEX ACCENT (ˆ)
+                  0x89: 0x2030, // PER MILLE SIGN (‰)
+                  0x8A: 0x0160, // LATIN CAPITAL LETTER S WITH CARON (Š)
+                  0x8B: 0x2039, // SINGLE LEFT-POINTING ANGLE QUOTATION MARK (‹)
+                  0x8C: 0x0152, // LATIN CAPITAL LIGATURE OE (Œ)
+                  0x8E: 0x017D, // LATIN CAPITAL LETTER Z WITH CARON (Ž)
+                  0x91: 0x2018, // LEFT SINGLE QUOTATION MARK (‘)
+                  0x92: 0x2019, // RIGHT SINGLE QUOTATION MARK (’)
+                  0x93: 0x201C, // LEFT DOUBLE QUOTATION MARK (“)
+                  0x94: 0x201D, // RIGHT DOUBLE QUOTATION MARK (”)
+                  0x95: 0x2022, // BULLET (•)
+                  0x96: 0x2013, // EN DASH (–)
+                  0x97: 0x2014, // EM DASH (—)
+                  0x98: 0x02DC, // SMALL TILDE (˜)
+                  0x99: 0x2122, // TRADE MARK SIGN (™)
+                  0x9A: 0x0161, // LATIN SMALL LETTER S WITH CARON (š)
+                  0x9B:
+                      0x203A, // SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (›)
+                  0x9C: 0x0153, // LATIN SMALL LIGATURE OE (œ)
+                  0x9E: 0x017E, // LATIN SMALL LETTER Z WITH CARON (ž)
+                  0x9F: 0x0178, // LATIN CAPITAL LETTER Y WITH DIAERESIS (Ÿ)
+                }[refCode] ??
+                refCode;
+          }
+          temporaryBuffer = StringBuffer("");
+          temporaryBuffer!.writeCharCode(refCode);
+          flushCodePointsAsCharacterReference();
           state = returnState!;
           continue;
 
