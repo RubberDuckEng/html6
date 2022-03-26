@@ -924,7 +924,7 @@ class Tokenizer {
           textBuffer!.writeCharCode(hyphenMinus);
           textBuffer!.writeCharCode(hyphenMinus);
           textBuffer!.writeCharCode(exclaimationMark);
-          state = TokenizerState.comment;
+          reconsumeIn(char, TokenizerState.comment);
           continue;
 
         case TokenizerState.bogusComment:

@@ -1,4 +1,4 @@
-Passed 5737 of 6806 tests
+Passed 5742 of 6806 tests
 
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
@@ -153,7 +153,7 @@ FAIL: bad endtag (trailing solidus)
  expected: [["Character","</xm/"]]
 FAIL: --!NUL in comment 
  input: "<!----!\u0000-->"
- actual:   [["Comment","--!u0000"]]
+ actual:   [["Comment","--!\\u0000"]]
  expected: [["Comment","--!\\uFFFD"]]
 FAIL: space EOF after doctype 
  input: "<!DOCTYPE html "
@@ -607,35 +607,15 @@ FAIL: A bogus comment stops at >, even if preceeded by two dashes
  input: "<?foo-->"
  actual:   [["Character","<?foo-->"]]
  expected: [["Comment","?foo--"]]
-FAIL: <!----! >
- input: "<!----! >"
- actual:   [["Comment","--!>"]]
- expected: [["Comment","--! >"]]
-FAIL: <!----!LF>
- input: "<!----!
->"
- actual:   [["Comment","--!>"]]
- expected: [["Comment","--!\n>"]]
 FAIL: <!----!CR>
  input: "<!----!>"
- actual:   [["Comment","--!>"]]
+ actual:   [["Comment","--!\r>"]]
  expected: [["Comment","--!\n>"]]
-FAIL: <!----!a
- input: "<!----!a"
- actual:   [["Comment","--!"]]
- expected: [["Comment","--!a"]]
-FAIL: <!----!a-
- input: "<!----!a-"
- actual:   [["Comment","--!"]]
- expected: [["Comment","--!a"]]
-FAIL: <!----!a--
- input: "<!----!a--"
- actual:   [["Comment","--!"]]
- expected: [["Comment","--!a"]]
-FAIL: <!----!a-->
- input: "<!----!a-->"
- actual:   [["Comment","--!"]]
- expected: [["Comment","--!a"]]
+FAIL: <!----!CRLF>
+ input: "<!----!
+>"
+ actual:   [["Comment","--!\r\n>"]]
+ expected: [["Comment","--!\n>"]]
 FAIL: <!DOCTYPE
  input: "<!DOCTYPE"
  actual:   [["Comment","DOCTYPE"]]
