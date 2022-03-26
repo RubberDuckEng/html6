@@ -170,11 +170,11 @@ FAIL: space EOF after doctype
 PASS: CDATA in HTML content
 FAIL: CDATA content
  input: "foo&#32;]]>"
- actual:   [["Character","foo&#32;]]>"]]
+ actual:   [["Character","foo]>"]]
  expected: [["Character","foo&#32;"]]
 FAIL: CDATA followed by HTML content
  input: "foo&#32;]]>&#32;"
- actual:   [["Character","foo&#32;]]>&#32;"]]
+ actual:   [["Character","foo]>"]]
  expected: [["Character","foo&#32; "]]
 FAIL: CDATA with extra bracket
  input: "foo]]]>"
@@ -204,275 +204,275 @@ FAIL: Semicolonless named entity 'not' followed by 'i;' in body
 PASS: Very long undefined named entity in body
 FAIL: CR as numeric entity
  input: "&#013;"
- actual:   [["Character","&#013;"]]
+ actual:   []
  expected: [["Character","\r"]]
 FAIL: CR as hexadecimal numeric entity
  input: "&#x00D;"
- actual:   [["Character","&#x00D;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\r"]]
 FAIL: Windows-1252 EURO SIGN numeric entity.
  input: "&#0128;"
- actual:   [["Character","&#0128;"]]
+ actual:   []
  expected: [["Character","€"]]
 FAIL: Windows-1252 REPLACEMENT CHAR numeric entity.
  input: "&#0129;"
- actual:   [["Character","&#0129;"]]
+ actual:   []
  expected: [["Character",""]]
 FAIL: Windows-1252 SINGLE LOW-9 QUOTATION MARK numeric entity.
  input: "&#0130;"
- actual:   [["Character","&#0130;"]]
+ actual:   []
  expected: [["Character","‚"]]
 FAIL: Windows-1252 LATIN SMALL LETTER F WITH HOOK numeric entity.
  input: "&#0131;"
- actual:   [["Character","&#0131;"]]
+ actual:   []
  expected: [["Character","ƒ"]]
 FAIL: Windows-1252 DOUBLE LOW-9 QUOTATION MARK numeric entity.
  input: "&#0132;"
- actual:   [["Character","&#0132;"]]
+ actual:   []
  expected: [["Character","„"]]
 FAIL: Windows-1252 HORIZONTAL ELLIPSIS numeric entity.
  input: "&#0133;"
- actual:   [["Character","&#0133;"]]
+ actual:   []
  expected: [["Character","…"]]
 FAIL: Windows-1252 DAGGER numeric entity.
  input: "&#0134;"
- actual:   [["Character","&#0134;"]]
+ actual:   []
  expected: [["Character","†"]]
 FAIL: Windows-1252 DOUBLE DAGGER numeric entity.
  input: "&#0135;"
- actual:   [["Character","&#0135;"]]
+ actual:   []
  expected: [["Character","‡"]]
 FAIL: Windows-1252 MODIFIER LETTER CIRCUMFLEX ACCENT numeric entity.
  input: "&#0136;"
- actual:   [["Character","&#0136;"]]
+ actual:   []
  expected: [["Character","ˆ"]]
 FAIL: Windows-1252 PER MILLE SIGN numeric entity.
  input: "&#0137;"
- actual:   [["Character","&#0137;"]]
+ actual:   []
  expected: [["Character","‰"]]
 FAIL: Windows-1252 LATIN CAPITAL LETTER S WITH CARON numeric entity.
  input: "&#0138;"
- actual:   [["Character","&#0138;"]]
+ actual:   []
  expected: [["Character","Š"]]
 FAIL: Windows-1252 SINGLE LEFT-POINTING ANGLE QUOTATION MARK numeric entity.
  input: "&#0139;"
- actual:   [["Character","&#0139;"]]
+ actual:   []
  expected: [["Character","‹"]]
 FAIL: Windows-1252 LATIN CAPITAL LIGATURE OE numeric entity.
  input: "&#0140;"
- actual:   [["Character","&#0140;"]]
+ actual:   []
  expected: [["Character","Œ"]]
 FAIL: Windows-1252 REPLACEMENT CHAR numeric entity.
  input: "&#0141;"
- actual:   [["Character","&#0141;"]]
+ actual:   []
  expected: [["Character",""]]
 FAIL: Windows-1252 LATIN CAPITAL LETTER Z WITH CARON numeric entity.
  input: "&#0142;"
- actual:   [["Character","&#0142;"]]
+ actual:   []
  expected: [["Character","Ž"]]
 FAIL: Windows-1252 REPLACEMENT CHAR numeric entity.
  input: "&#0143;"
- actual:   [["Character","&#0143;"]]
+ actual:   []
  expected: [["Character",""]]
 FAIL: Windows-1252 REPLACEMENT CHAR numeric entity.
  input: "&#0144;"
- actual:   [["Character","&#0144;"]]
+ actual:   []
  expected: [["Character",""]]
 FAIL: Windows-1252 LEFT SINGLE QUOTATION MARK numeric entity.
  input: "&#0145;"
- actual:   [["Character","&#0145;"]]
+ actual:   []
  expected: [["Character","‘"]]
 FAIL: Windows-1252 RIGHT SINGLE QUOTATION MARK numeric entity.
  input: "&#0146;"
- actual:   [["Character","&#0146;"]]
+ actual:   []
  expected: [["Character","’"]]
 FAIL: Windows-1252 LEFT DOUBLE QUOTATION MARK numeric entity.
  input: "&#0147;"
- actual:   [["Character","&#0147;"]]
+ actual:   []
  expected: [["Character","“"]]
 FAIL: Windows-1252 RIGHT DOUBLE QUOTATION MARK numeric entity.
  input: "&#0148;"
- actual:   [["Character","&#0148;"]]
+ actual:   []
  expected: [["Character","”"]]
 FAIL: Windows-1252 BULLET numeric entity.
  input: "&#0149;"
- actual:   [["Character","&#0149;"]]
+ actual:   []
  expected: [["Character","•"]]
 FAIL: Windows-1252 EN DASH numeric entity.
  input: "&#0150;"
- actual:   [["Character","&#0150;"]]
+ actual:   []
  expected: [["Character","–"]]
 FAIL: Windows-1252 EM DASH numeric entity.
  input: "&#0151;"
- actual:   [["Character","&#0151;"]]
+ actual:   []
  expected: [["Character","—"]]
 FAIL: Windows-1252 SMALL TILDE numeric entity.
  input: "&#0152;"
- actual:   [["Character","&#0152;"]]
+ actual:   []
  expected: [["Character","˜"]]
 FAIL: Windows-1252 TRADE MARK SIGN numeric entity.
  input: "&#0153;"
- actual:   [["Character","&#0153;"]]
+ actual:   []
  expected: [["Character","™"]]
 FAIL: Windows-1252 LATIN SMALL LETTER S WITH CARON numeric entity.
  input: "&#0154;"
- actual:   [["Character","&#0154;"]]
+ actual:   []
  expected: [["Character","š"]]
 FAIL: Windows-1252 SINGLE RIGHT-POINTING ANGLE QUOTATION MARK numeric entity.
  input: "&#0155;"
- actual:   [["Character","&#0155;"]]
+ actual:   []
  expected: [["Character","›"]]
 FAIL: Windows-1252 LATIN SMALL LIGATURE OE numeric entity.
  input: "&#0156;"
- actual:   [["Character","&#0156;"]]
+ actual:   []
  expected: [["Character","œ"]]
 FAIL: Windows-1252 REPLACEMENT CHAR numeric entity.
  input: "&#0157;"
- actual:   [["Character","&#0157;"]]
+ actual:   []
  expected: [["Character",""]]
 FAIL: Windows-1252 EURO SIGN hexadecimal numeric entity.
  input: "&#x080;"
- actual:   [["Character","&#x080;"]]
+ actual:   []
  expected: [["Character","€"]]
 FAIL: Windows-1252 REPLACEMENT CHAR hexadecimal numeric entity.
  input: "&#x081;"
- actual:   [["Character","&#x081;"]]
+ actual:   []
  expected: [["Character",""]]
 FAIL: Windows-1252 SINGLE LOW-9 QUOTATION MARK hexadecimal numeric entity.
  input: "&#x082;"
- actual:   [["Character","&#x082;"]]
+ actual:   []
  expected: [["Character","‚"]]
 FAIL: Windows-1252 LATIN SMALL LETTER F WITH HOOK hexadecimal numeric entity.
  input: "&#x083;"
- actual:   [["Character","&#x083;"]]
+ actual:   []
  expected: [["Character","ƒ"]]
 FAIL: Windows-1252 DOUBLE LOW-9 QUOTATION MARK hexadecimal numeric entity.
  input: "&#x084;"
- actual:   [["Character","&#x084;"]]
+ actual:   []
  expected: [["Character","„"]]
 FAIL: Windows-1252 HORIZONTAL ELLIPSIS hexadecimal numeric entity.
  input: "&#x085;"
- actual:   [["Character","&#x085;"]]
+ actual:   []
  expected: [["Character","…"]]
 FAIL: Windows-1252 DAGGER hexadecimal numeric entity.
  input: "&#x086;"
- actual:   [["Character","&#x086;"]]
+ actual:   []
  expected: [["Character","†"]]
 FAIL: Windows-1252 DOUBLE DAGGER hexadecimal numeric entity.
  input: "&#x087;"
- actual:   [["Character","&#x087;"]]
+ actual:   []
  expected: [["Character","‡"]]
 FAIL: Windows-1252 MODIFIER LETTER CIRCUMFLEX ACCENT hexadecimal numeric entity.
  input: "&#x088;"
- actual:   [["Character","&#x088;"]]
+ actual:   []
  expected: [["Character","ˆ"]]
 FAIL: Windows-1252 PER MILLE SIGN hexadecimal numeric entity.
  input: "&#x089;"
- actual:   [["Character","&#x089;"]]
+ actual:   []
  expected: [["Character","‰"]]
 FAIL: Windows-1252 LATIN CAPITAL LETTER S WITH CARON hexadecimal numeric entity.
  input: "&#x08A;"
- actual:   [["Character","&#x08A;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","Š"]]
 FAIL: Windows-1252 SINGLE LEFT-POINTING ANGLE QUOTATION MARK hexadecimal numeric entity.
  input: "&#x08B;"
- actual:   [["Character","&#x08B;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","‹"]]
 FAIL: Windows-1252 LATIN CAPITAL LIGATURE OE hexadecimal numeric entity.
  input: "&#x08C;"
- actual:   [["Character","&#x08C;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","Œ"]]
 FAIL: Windows-1252 REPLACEMENT CHAR hexadecimal numeric entity.
  input: "&#x08D;"
- actual:   [["Character","&#x08D;"]]
+ actual:   [["Character",";"]]
  expected: [["Character",""]]
 FAIL: Windows-1252 LATIN CAPITAL LETTER Z WITH CARON hexadecimal numeric entity.
  input: "&#x08E;"
- actual:   [["Character","&#x08E;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","Ž"]]
 FAIL: Windows-1252 REPLACEMENT CHAR hexadecimal numeric entity.
  input: "&#x08F;"
- actual:   [["Character","&#x08F;"]]
+ actual:   [["Character",";"]]
  expected: [["Character",""]]
 FAIL: Windows-1252 REPLACEMENT CHAR hexadecimal numeric entity.
  input: "&#x090;"
- actual:   [["Character","&#x090;"]]
+ actual:   []
  expected: [["Character",""]]
 FAIL: Windows-1252 LEFT SINGLE QUOTATION MARK hexadecimal numeric entity.
  input: "&#x091;"
- actual:   [["Character","&#x091;"]]
+ actual:   []
  expected: [["Character","‘"]]
 FAIL: Windows-1252 RIGHT SINGLE QUOTATION MARK hexadecimal numeric entity.
  input: "&#x092;"
- actual:   [["Character","&#x092;"]]
+ actual:   []
  expected: [["Character","’"]]
 FAIL: Windows-1252 LEFT DOUBLE QUOTATION MARK hexadecimal numeric entity.
  input: "&#x093;"
- actual:   [["Character","&#x093;"]]
+ actual:   []
  expected: [["Character","“"]]
 FAIL: Windows-1252 RIGHT DOUBLE QUOTATION MARK hexadecimal numeric entity.
  input: "&#x094;"
- actual:   [["Character","&#x094;"]]
+ actual:   []
  expected: [["Character","”"]]
 FAIL: Windows-1252 BULLET hexadecimal numeric entity.
  input: "&#x095;"
- actual:   [["Character","&#x095;"]]
+ actual:   []
  expected: [["Character","•"]]
 FAIL: Windows-1252 EN DASH hexadecimal numeric entity.
  input: "&#x096;"
- actual:   [["Character","&#x096;"]]
+ actual:   []
  expected: [["Character","–"]]
 FAIL: Windows-1252 EM DASH hexadecimal numeric entity.
  input: "&#x097;"
- actual:   [["Character","&#x097;"]]
+ actual:   []
  expected: [["Character","—"]]
 FAIL: Windows-1252 SMALL TILDE hexadecimal numeric entity.
  input: "&#x098;"
- actual:   [["Character","&#x098;"]]
+ actual:   []
  expected: [["Character","˜"]]
 FAIL: Windows-1252 TRADE MARK SIGN hexadecimal numeric entity.
  input: "&#x099;"
- actual:   [["Character","&#x099;"]]
+ actual:   []
  expected: [["Character","™"]]
 FAIL: Windows-1252 LATIN SMALL LETTER S WITH CARON hexadecimal numeric entity.
  input: "&#x09A;"
- actual:   [["Character","&#x09A;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","š"]]
 FAIL: Windows-1252 SINGLE RIGHT-POINTING ANGLE QUOTATION MARK hexadecimal numeric entity.
  input: "&#x09B;"
- actual:   [["Character","&#x09B;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","›"]]
 FAIL: Windows-1252 LATIN SMALL LIGATURE OE hexadecimal numeric entity.
  input: "&#x09C;"
- actual:   [["Character","&#x09C;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","œ"]]
 FAIL: Windows-1252 REPLACEMENT CHAR hexadecimal numeric entity.
  input: "&#x09D;"
- actual:   [["Character","&#x09D;"]]
+ actual:   [["Character",";"]]
  expected: [["Character",""]]
 FAIL: Windows-1252 LATIN SMALL LETTER Z WITH CARON hexadecimal numeric entity.
  input: "&#x09E;"
- actual:   [["Character","&#x09E;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","ž"]]
 FAIL: Windows-1252 LATIN CAPITAL LETTER Y WITH DIAERESIS hexadecimal numeric entity.
  input: "&#x09F;"
- actual:   [["Character","&#x09F;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","Ÿ"]]
 FAIL: Decimal numeric entity followed by hex character a.
  input: "&#97a"
- actual:   [["Character","&#97a"]]
+ actual:   []
  expected: [["Character","aa"]]
 FAIL: Decimal numeric entity followed by hex character A.
  input: "&#97A"
- actual:   [["Character","&#97A"]]
+ actual:   []
  expected: [["Character","aA"]]
 FAIL: Decimal numeric entity followed by hex character f.
  input: "&#97f"
- actual:   [["Character","&#97f"]]
+ actual:   []
  expected: [["Character","af"]]
 FAIL: Decimal numeric entity followed by hex character A.
  input: "&#97F"
- actual:   [["Character","&#97F"]]
+ actual:   []
  expected: [["Character","aF"]]
 FAIL: Commented close tag in RCDATA or RAWTEXT
  input: "foo<!--</xmp>--></xmp>"
@@ -11399,155 +11399,155 @@ FAIL: Named entity: zwnj; with a semi-colon
  expected: [["Character","‌"]]
 FAIL: Invalid unterminated numeric entity character overflow before EOF
  input: "&#11111111111"
- actual:   [["Character","&#11111111111"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Invalid unterminated numeric entity character overflow before EOF
  input: "&#1111111111"
- actual:   [["Character","&#1111111111"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Invalid unterminated numeric entity character overflow before EOF
  input: "&#111111111111"
- actual:   [["Character","&#111111111111"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Invalid unterminated numeric entity character overflow
  input: "&#11111111111x"
- actual:   [["Character","&#11111111111x"]]
+ actual:   []
  expected: [["Character","�x"]]
 FAIL: Invalid unterminated numeric entity character overflow
  input: "&#1111111111x"
- actual:   [["Character","&#1111111111x"]]
+ actual:   []
  expected: [["Character","�x"]]
 FAIL: Invalid unterminated numeric entity character overflow
  input: "&#111111111111x"
- actual:   [["Character","&#111111111111x"]]
+ actual:   []
  expected: [["Character","�x"]]
 FAIL: Invalid numeric entity character overflow
  input: "&#11111111111;"
- actual:   [["Character","&#11111111111;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Invalid numeric entity character overflow
  input: "&#1111111111;"
- actual:   [["Character","&#1111111111;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Invalid numeric entity character overflow
  input: "&#111111111111;"
- actual:   [["Character","&#111111111111;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Invalid numeric entity character U+0000
  input: "&#x0000;"
- actual:   [["Character","&#x0000;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Invalid numeric entity character U+0001
  input: "&#x0001;"
- actual:   [["Character","&#x0001;"]]
+ actual:   []
  expected: [["Character","\u0001"]]
 FAIL: Invalid numeric entity character U+0002
  input: "&#x0002;"
- actual:   [["Character","&#x0002;"]]
+ actual:   []
  expected: [["Character","\u0002"]]
 FAIL: Invalid numeric entity character U+0003
  input: "&#x0003;"
- actual:   [["Character","&#x0003;"]]
+ actual:   []
  expected: [["Character","\u0003"]]
 FAIL: Invalid numeric entity character U+0004
  input: "&#x0004;"
- actual:   [["Character","&#x0004;"]]
+ actual:   []
  expected: [["Character","\u0004"]]
 FAIL: Invalid numeric entity character U+0005
  input: "&#x0005;"
- actual:   [["Character","&#x0005;"]]
+ actual:   []
  expected: [["Character","\u0005"]]
 FAIL: Invalid numeric entity character U+0006
  input: "&#x0006;"
- actual:   [["Character","&#x0006;"]]
+ actual:   []
  expected: [["Character","\u0006"]]
 FAIL: Invalid numeric entity character U+0007
  input: "&#x0007;"
- actual:   [["Character","&#x0007;"]]
+ actual:   []
  expected: [["Character","\u0007"]]
 FAIL: Invalid numeric entity character U+0008
  input: "&#x0008;"
- actual:   [["Character","&#x0008;"]]
+ actual:   []
  expected: [["Character","\b"]]
 FAIL: Invalid numeric entity character U+000B
  input: "&#x000b;"
- actual:   [["Character","&#x000b;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u000b"]]
 FAIL: Invalid numeric entity character U+000E
  input: "&#x000e;"
- actual:   [["Character","&#x000e;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u000e"]]
 FAIL: Invalid numeric entity character U+000F
  input: "&#x000f;"
- actual:   [["Character","&#x000f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u000f"]]
 FAIL: Invalid numeric entity character U+0010
  input: "&#x0010;"
- actual:   [["Character","&#x0010;"]]
+ actual:   []
  expected: [["Character","\u0010"]]
 FAIL: Invalid numeric entity character U+0011
  input: "&#x0011;"
- actual:   [["Character","&#x0011;"]]
+ actual:   []
  expected: [["Character","\u0011"]]
 FAIL: Invalid numeric entity character U+0012
  input: "&#x0012;"
- actual:   [["Character","&#x0012;"]]
+ actual:   []
  expected: [["Character","\u0012"]]
 FAIL: Invalid numeric entity character U+0013
  input: "&#x0013;"
- actual:   [["Character","&#x0013;"]]
+ actual:   []
  expected: [["Character","\u0013"]]
 FAIL: Invalid numeric entity character U+0014
  input: "&#x0014;"
- actual:   [["Character","&#x0014;"]]
+ actual:   []
  expected: [["Character","\u0014"]]
 FAIL: Invalid numeric entity character U+0015
  input: "&#x0015;"
- actual:   [["Character","&#x0015;"]]
+ actual:   []
  expected: [["Character","\u0015"]]
 FAIL: Invalid numeric entity character U+0016
  input: "&#x0016;"
- actual:   [["Character","&#x0016;"]]
+ actual:   []
  expected: [["Character","\u0016"]]
 FAIL: Invalid numeric entity character U+0017
  input: "&#x0017;"
- actual:   [["Character","&#x0017;"]]
+ actual:   []
  expected: [["Character","\u0017"]]
 FAIL: Invalid numeric entity character U+0018
  input: "&#x0018;"
- actual:   [["Character","&#x0018;"]]
+ actual:   []
  expected: [["Character","\u0018"]]
 FAIL: Invalid numeric entity character U+0019
  input: "&#x0019;"
- actual:   [["Character","&#x0019;"]]
+ actual:   []
  expected: [["Character","\u0019"]]
 FAIL: Invalid numeric entity character U+001A
  input: "&#x001a;"
- actual:   [["Character","&#x001a;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u001a"]]
 FAIL: Invalid numeric entity character U+001B
  input: "&#x001b;"
- actual:   [["Character","&#x001b;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u001b"]]
 FAIL: Invalid numeric entity character U+001C
  input: "&#x001c;"
- actual:   [["Character","&#x001c;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u001c"]]
 FAIL: Invalid numeric entity character U+001D
  input: "&#x001d;"
- actual:   [["Character","&#x001d;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u001d"]]
 FAIL: Invalid numeric entity character U+001E
  input: "&#x001e;"
- actual:   [["Character","&#x001e;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u001e"]]
 FAIL: Invalid numeric entity character U+001F
  input: "&#x001f;"
- actual:   [["Character","&#x001f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\u001f"]]
 FAIL: Invalid numeric entity character U+007F
  input: "&#x007f;"
- actual:   [["Character","&#x007f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character",""]]
 FAIL: Invalid numeric entity character U+D800
  input: "&#xd800;"
@@ -11695,75 +11695,75 @@ FAIL: Invalid numeric entity character U+FFFF
  expected: [["Character","￿"]]
 FAIL: Invalid numeric entity character U+1FFFE
  input: "&#x1fffe;"
- actual:   [["Character","&#x1fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","🿾"]]
 FAIL: Invalid numeric entity character U+1FFFF
  input: "&#x1ffff;"
- actual:   [["Character","&#x1ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","🿿"]]
 FAIL: Invalid numeric entity character U+2FFFE
  input: "&#x2fffe;"
- actual:   [["Character","&#x2fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","𯿾"]]
 FAIL: Invalid numeric entity character U+2FFFF
  input: "&#x2ffff;"
- actual:   [["Character","&#x2ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","𯿿"]]
 FAIL: Invalid numeric entity character U+3FFFE
  input: "&#x3fffe;"
- actual:   [["Character","&#x3fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","𿿾"]]
 FAIL: Invalid numeric entity character U+3FFFF
  input: "&#x3ffff;"
- actual:   [["Character","&#x3ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","𿿿"]]
 FAIL: Invalid numeric entity character U+4FFFE
  input: "&#x4fffe;"
- actual:   [["Character","&#x4fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","񏿾"]]
 FAIL: Invalid numeric entity character U+4FFFF
  input: "&#x4ffff;"
- actual:   [["Character","&#x4ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","񏿿"]]
 FAIL: Invalid numeric entity character U+5FFFE
  input: "&#x5fffe;"
- actual:   [["Character","&#x5fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","񟿾"]]
 FAIL: Invalid numeric entity character U+5FFFF
  input: "&#x5ffff;"
- actual:   [["Character","&#x5ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","񟿿"]]
 FAIL: Invalid numeric entity character U+6FFFE
  input: "&#x6fffe;"
- actual:   [["Character","&#x6fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","񯿾"]]
 FAIL: Invalid numeric entity character U+6FFFF
  input: "&#x6ffff;"
- actual:   [["Character","&#x6ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","񯿿"]]
 FAIL: Invalid numeric entity character U+7FFFE
  input: "&#x7fffe;"
- actual:   [["Character","&#x7fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","񿿾"]]
 FAIL: Invalid numeric entity character U+7FFFF
  input: "&#x7ffff;"
- actual:   [["Character","&#x7ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","񿿿"]]
 FAIL: Invalid numeric entity character U+8FFFE
  input: "&#x8fffe;"
- actual:   [["Character","&#x8fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","򏿾"]]
 FAIL: Invalid numeric entity character U+8FFFF
  input: "&#x8ffff;"
- actual:   [["Character","&#x8ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","򏿿"]]
 FAIL: Invalid numeric entity character U+9FFFE
  input: "&#x9fffe;"
- actual:   [["Character","&#x9fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","򟿾"]]
 FAIL: Invalid numeric entity character U+9FFFF
  input: "&#x9ffff;"
- actual:   [["Character","&#x9ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","򟿿"]]
 FAIL: Invalid numeric entity character U+AFFFE
  input: "&#xafffe;"
@@ -11815,783 +11815,780 @@ FAIL: Invalid numeric entity character U+FFFFF
  expected: [["Character","󿿿"]]
 FAIL: Invalid numeric entity character U+10FFFE
  input: "&#x10fffe;"
- actual:   [["Character","&#x10fffe;"]]
+ actual:   [["Character","ffe;"]]
  expected: [["Character","􏿾"]]
 FAIL: Invalid numeric entity character U+10FFFF
  input: "&#x10ffff;"
- actual:   [["Character","&#x10ffff;"]]
+ actual:   [["Character","fff;"]]
  expected: [["Character","􏿿"]]
 FAIL: Valid numeric entity character U+0009
  input: "&#x0009;"
- actual:   [["Character","&#x0009;"]]
+ actual:   []
  expected: [["Character","\t"]]
 FAIL: Valid numeric entity character U+000A
  input: "&#x000a;"
- actual:   [["Character","&#x000a;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\n"]]
 FAIL: Valid numeric entity character U+0020
  input: "&#x0020;"
- actual:   [["Character","&#x0020;"]]
+ actual:   []
  expected: [["Character"," "]]
 FAIL: Valid numeric entity character U+0021
  input: "&#x0021;"
- actual:   [["Character","&#x0021;"]]
+ actual:   []
  expected: [["Character","!"]]
 FAIL: Valid numeric entity character U+0022
  input: "&#x0022;"
- actual:   [["Character","&#x0022;"]]
+ actual:   []
  expected: [["Character","\""]]
 FAIL: Valid numeric entity character U+0023
  input: "&#x0023;"
- actual:   [["Character","&#x0023;"]]
+ actual:   []
  expected: [["Character","#"]]
 FAIL: Valid numeric entity character U+0024
  input: "&#x0024;"
- actual:   [["Character","&#x0024;"]]
+ actual:   []
  expected: [["Character","$"]]
 FAIL: Valid numeric entity character U+0025
  input: "&#x0025;"
- actual:   [["Character","&#x0025;"]]
+ actual:   []
  expected: [["Character","%"]]
 FAIL: Valid numeric entity character U+0026
  input: "&#x0026;"
- actual:   [["Character","&#x0026;"]]
+ actual:   []
  expected: [["Character","&"]]
 FAIL: Valid numeric entity character U+0027
  input: "&#x0027;"
- actual:   [["Character","&#x0027;"]]
+ actual:   []
  expected: [["Character","'"]]
 FAIL: Valid numeric entity character U+0028
  input: "&#x0028;"
- actual:   [["Character","&#x0028;"]]
+ actual:   []
  expected: [["Character","("]]
 FAIL: Valid numeric entity character U+0029
  input: "&#x0029;"
- actual:   [["Character","&#x0029;"]]
+ actual:   []
  expected: [["Character",")"]]
 FAIL: Valid numeric entity character U+002A
  input: "&#x002a;"
- actual:   [["Character","&#x002a;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","*"]]
 FAIL: Valid numeric entity character U+002B
  input: "&#x002b;"
- actual:   [["Character","&#x002b;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","+"]]
 FAIL: Valid numeric entity character U+002C
  input: "&#x002c;"
- actual:   [["Character","&#x002c;"]]
+ actual:   [["Character",";"]]
  expected: [["Character",","]]
 FAIL: Valid numeric entity character U+002D
  input: "&#x002d;"
- actual:   [["Character","&#x002d;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","-"]]
 FAIL: Valid numeric entity character U+002E
  input: "&#x002e;"
- actual:   [["Character","&#x002e;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","."]]
 FAIL: Valid numeric entity character U+002F
  input: "&#x002f;"
- actual:   [["Character","&#x002f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","/"]]
 FAIL: Valid numeric entity character U+0030
  input: "&#x0030;"
- actual:   [["Character","&#x0030;"]]
+ actual:   []
  expected: [["Character","0"]]
 FAIL: Valid numeric entity character U+0031
  input: "&#x0031;"
- actual:   [["Character","&#x0031;"]]
+ actual:   []
  expected: [["Character","1"]]
 FAIL: Valid numeric entity character U+0032
  input: "&#x0032;"
- actual:   [["Character","&#x0032;"]]
+ actual:   []
  expected: [["Character","2"]]
 FAIL: Valid numeric entity character U+0033
  input: "&#x0033;"
- actual:   [["Character","&#x0033;"]]
+ actual:   []
  expected: [["Character","3"]]
 FAIL: Valid numeric entity character U+0034
  input: "&#x0034;"
- actual:   [["Character","&#x0034;"]]
+ actual:   []
  expected: [["Character","4"]]
 FAIL: Valid numeric entity character U+0035
  input: "&#x0035;"
- actual:   [["Character","&#x0035;"]]
+ actual:   []
  expected: [["Character","5"]]
 FAIL: Valid numeric entity character U+0036
  input: "&#x0036;"
- actual:   [["Character","&#x0036;"]]
+ actual:   []
  expected: [["Character","6"]]
 FAIL: Valid numeric entity character U+0037
  input: "&#x0037;"
- actual:   [["Character","&#x0037;"]]
+ actual:   []
  expected: [["Character","7"]]
 FAIL: Valid numeric entity character U+0038
  input: "&#x0038;"
- actual:   [["Character","&#x0038;"]]
+ actual:   []
  expected: [["Character","8"]]
 FAIL: Valid numeric entity character U+0039
  input: "&#x0039;"
- actual:   [["Character","&#x0039;"]]
+ actual:   []
  expected: [["Character","9"]]
 FAIL: Valid numeric entity character U+003A
  input: "&#x003a;"
- actual:   [["Character","&#x003a;"]]
+ actual:   [["Character",";"]]
  expected: [["Character",":"]]
-FAIL: Valid numeric entity character U+003B
- input: "&#x003b;"
- actual:   [["Character","&#x003b;"]]
- expected: [["Character",";"]]
+PASS: Valid numeric entity character U+003B
 FAIL: Valid numeric entity character U+003C
  input: "&#x003c;"
- actual:   [["Character","&#x003c;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","<"]]
 FAIL: Valid numeric entity character U+003D
  input: "&#x003d;"
- actual:   [["Character","&#x003d;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","="]]
 FAIL: Valid numeric entity character U+003E
  input: "&#x003e;"
- actual:   [["Character","&#x003e;"]]
+ actual:   [["Character",";"]]
  expected: [["Character",">"]]
 FAIL: Valid numeric entity character U+003F
  input: "&#x003f;"
- actual:   [["Character","&#x003f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","?"]]
 FAIL: Valid numeric entity character U+0040
  input: "&#x0040;"
- actual:   [["Character","&#x0040;"]]
+ actual:   []
  expected: [["Character","@"]]
 FAIL: Valid numeric entity character U+0041
  input: "&#x0041;"
- actual:   [["Character","&#x0041;"]]
+ actual:   []
  expected: [["Character","A"]]
 FAIL: Valid numeric entity character U+0042
  input: "&#x0042;"
- actual:   [["Character","&#x0042;"]]
+ actual:   []
  expected: [["Character","B"]]
 FAIL: Valid numeric entity character U+0043
  input: "&#x0043;"
- actual:   [["Character","&#x0043;"]]
+ actual:   []
  expected: [["Character","C"]]
 FAIL: Valid numeric entity character U+0044
  input: "&#x0044;"
- actual:   [["Character","&#x0044;"]]
+ actual:   []
  expected: [["Character","D"]]
 FAIL: Valid numeric entity character U+0045
  input: "&#x0045;"
- actual:   [["Character","&#x0045;"]]
+ actual:   []
  expected: [["Character","E"]]
 FAIL: Valid numeric entity character U+0046
  input: "&#x0046;"
- actual:   [["Character","&#x0046;"]]
+ actual:   []
  expected: [["Character","F"]]
 FAIL: Valid numeric entity character U+0047
  input: "&#x0047;"
- actual:   [["Character","&#x0047;"]]
+ actual:   []
  expected: [["Character","G"]]
 FAIL: Valid numeric entity character U+0048
  input: "&#x0048;"
- actual:   [["Character","&#x0048;"]]
+ actual:   []
  expected: [["Character","H"]]
 FAIL: Valid numeric entity character U+0049
  input: "&#x0049;"
- actual:   [["Character","&#x0049;"]]
+ actual:   []
  expected: [["Character","I"]]
 FAIL: Valid numeric entity character U+004A
  input: "&#x004a;"
- actual:   [["Character","&#x004a;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","J"]]
 FAIL: Valid numeric entity character U+004B
  input: "&#x004b;"
- actual:   [["Character","&#x004b;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","K"]]
 FAIL: Valid numeric entity character U+004C
  input: "&#x004c;"
- actual:   [["Character","&#x004c;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","L"]]
 FAIL: Valid numeric entity character U+004D
  input: "&#x004d;"
- actual:   [["Character","&#x004d;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","M"]]
 FAIL: Valid numeric entity character U+004E
  input: "&#x004e;"
- actual:   [["Character","&#x004e;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","N"]]
 FAIL: Valid numeric entity character U+004F
  input: "&#x004f;"
- actual:   [["Character","&#x004f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","O"]]
 FAIL: Valid numeric entity character U+0050
  input: "&#x0050;"
- actual:   [["Character","&#x0050;"]]
+ actual:   []
  expected: [["Character","P"]]
 FAIL: Valid numeric entity character U+0051
  input: "&#x0051;"
- actual:   [["Character","&#x0051;"]]
+ actual:   []
  expected: [["Character","Q"]]
 FAIL: Valid numeric entity character U+0052
  input: "&#x0052;"
- actual:   [["Character","&#x0052;"]]
+ actual:   []
  expected: [["Character","R"]]
 FAIL: Valid numeric entity character U+0053
  input: "&#x0053;"
- actual:   [["Character","&#x0053;"]]
+ actual:   []
  expected: [["Character","S"]]
 FAIL: Valid numeric entity character U+0054
  input: "&#x0054;"
- actual:   [["Character","&#x0054;"]]
+ actual:   []
  expected: [["Character","T"]]
 FAIL: Valid numeric entity character U+0055
  input: "&#x0055;"
- actual:   [["Character","&#x0055;"]]
+ actual:   []
  expected: [["Character","U"]]
 FAIL: Valid numeric entity character U+0056
  input: "&#x0056;"
- actual:   [["Character","&#x0056;"]]
+ actual:   []
  expected: [["Character","V"]]
 FAIL: Valid numeric entity character U+0057
  input: "&#x0057;"
- actual:   [["Character","&#x0057;"]]
+ actual:   []
  expected: [["Character","W"]]
 FAIL: Valid numeric entity character U+0058
  input: "&#x0058;"
- actual:   [["Character","&#x0058;"]]
+ actual:   []
  expected: [["Character","X"]]
 FAIL: Valid numeric entity character U+0059
  input: "&#x0059;"
- actual:   [["Character","&#x0059;"]]
+ actual:   []
  expected: [["Character","Y"]]
 FAIL: Valid numeric entity character U+005A
  input: "&#x005a;"
- actual:   [["Character","&#x005a;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","Z"]]
 FAIL: Valid numeric entity character U+005B
  input: "&#x005b;"
- actual:   [["Character","&#x005b;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","["]]
 FAIL: Valid numeric entity character U+005C
  input: "&#x005c;"
- actual:   [["Character","&#x005c;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","\\"]]
 FAIL: Valid numeric entity character U+005D
  input: "&#x005d;"
- actual:   [["Character","&#x005d;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","]"]]
 FAIL: Valid numeric entity character U+005E
  input: "&#x005e;"
- actual:   [["Character","&#x005e;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","^"]]
 FAIL: Valid numeric entity character U+005F
  input: "&#x005f;"
- actual:   [["Character","&#x005f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","_"]]
 FAIL: Valid numeric entity character U+0060
  input: "&#x0060;"
- actual:   [["Character","&#x0060;"]]
+ actual:   []
  expected: [["Character","`"]]
 FAIL: Valid numeric entity character U+0061
  input: "&#x0061;"
- actual:   [["Character","&#x0061;"]]
+ actual:   []
  expected: [["Character","a"]]
 FAIL: Valid numeric entity character U+0062
  input: "&#x0062;"
- actual:   [["Character","&#x0062;"]]
+ actual:   []
  expected: [["Character","b"]]
 FAIL: Valid numeric entity character U+0063
  input: "&#x0063;"
- actual:   [["Character","&#x0063;"]]
+ actual:   []
  expected: [["Character","c"]]
 FAIL: Valid numeric entity character U+0064
  input: "&#x0064;"
- actual:   [["Character","&#x0064;"]]
+ actual:   []
  expected: [["Character","d"]]
 FAIL: Valid numeric entity character U+0065
  input: "&#x0065;"
- actual:   [["Character","&#x0065;"]]
+ actual:   []
  expected: [["Character","e"]]
 FAIL: Valid numeric entity character U+0066
  input: "&#x0066;"
- actual:   [["Character","&#x0066;"]]
+ actual:   []
  expected: [["Character","f"]]
 FAIL: Valid numeric entity character U+0067
  input: "&#x0067;"
- actual:   [["Character","&#x0067;"]]
+ actual:   []
  expected: [["Character","g"]]
 FAIL: Valid numeric entity character U+0068
  input: "&#x0068;"
- actual:   [["Character","&#x0068;"]]
+ actual:   []
  expected: [["Character","h"]]
 FAIL: Valid numeric entity character U+0069
  input: "&#x0069;"
- actual:   [["Character","&#x0069;"]]
+ actual:   []
  expected: [["Character","i"]]
 FAIL: Valid numeric entity character U+006A
  input: "&#x006a;"
- actual:   [["Character","&#x006a;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","j"]]
 FAIL: Valid numeric entity character U+006B
  input: "&#x006b;"
- actual:   [["Character","&#x006b;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","k"]]
 FAIL: Valid numeric entity character U+006C
  input: "&#x006c;"
- actual:   [["Character","&#x006c;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","l"]]
 FAIL: Valid numeric entity character U+006D
  input: "&#x006d;"
- actual:   [["Character","&#x006d;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","m"]]
 FAIL: Valid numeric entity character U+006E
  input: "&#x006e;"
- actual:   [["Character","&#x006e;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","n"]]
 FAIL: Valid numeric entity character U+006F
  input: "&#x006f;"
- actual:   [["Character","&#x006f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","o"]]
 FAIL: Valid numeric entity character U+0070
  input: "&#x0070;"
- actual:   [["Character","&#x0070;"]]
+ actual:   []
  expected: [["Character","p"]]
 FAIL: Valid numeric entity character U+0071
  input: "&#x0071;"
- actual:   [["Character","&#x0071;"]]
+ actual:   []
  expected: [["Character","q"]]
 FAIL: Valid numeric entity character U+0072
  input: "&#x0072;"
- actual:   [["Character","&#x0072;"]]
+ actual:   []
  expected: [["Character","r"]]
 FAIL: Valid numeric entity character U+0073
  input: "&#x0073;"
- actual:   [["Character","&#x0073;"]]
+ actual:   []
  expected: [["Character","s"]]
 FAIL: Valid numeric entity character U+0074
  input: "&#x0074;"
- actual:   [["Character","&#x0074;"]]
+ actual:   []
  expected: [["Character","t"]]
 FAIL: Valid numeric entity character U+0075
  input: "&#x0075;"
- actual:   [["Character","&#x0075;"]]
+ actual:   []
  expected: [["Character","u"]]
 FAIL: Valid numeric entity character U+0076
  input: "&#x0076;"
- actual:   [["Character","&#x0076;"]]
+ actual:   []
  expected: [["Character","v"]]
 FAIL: Valid numeric entity character U+0077
  input: "&#x0077;"
- actual:   [["Character","&#x0077;"]]
+ actual:   []
  expected: [["Character","w"]]
 FAIL: Valid numeric entity character U+0078
  input: "&#x0078;"
- actual:   [["Character","&#x0078;"]]
+ actual:   []
  expected: [["Character","x"]]
 FAIL: Valid numeric entity character U+0079
  input: "&#x0079;"
- actual:   [["Character","&#x0079;"]]
+ actual:   []
  expected: [["Character","y"]]
 FAIL: Valid numeric entity character U+007A
  input: "&#x007a;"
- actual:   [["Character","&#x007a;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","z"]]
 FAIL: Valid numeric entity character U+007B
  input: "&#x007b;"
- actual:   [["Character","&#x007b;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","{"]]
 FAIL: Valid numeric entity character U+007C
  input: "&#x007c;"
- actual:   [["Character","&#x007c;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","|"]]
 FAIL: Valid numeric entity character U+007D
  input: "&#x007d;"
- actual:   [["Character","&#x007d;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","}"]]
 FAIL: Valid numeric entity character U+007E
  input: "&#x007e;"
- actual:   [["Character","&#x007e;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","~"]]
 FAIL: Valid numeric entity character U+00A0
  input: "&#x00a0;"
- actual:   [["Character","&#x00a0;"]]
+ actual:   [["Character","0;"]]
  expected: [["Character"," "]]
 FAIL: Valid numeric entity character U+00A1
  input: "&#x00a1;"
- actual:   [["Character","&#x00a1;"]]
+ actual:   [["Character","1;"]]
  expected: [["Character","¡"]]
 FAIL: Valid numeric entity character U+00A2
  input: "&#x00a2;"
- actual:   [["Character","&#x00a2;"]]
+ actual:   [["Character","2;"]]
  expected: [["Character","¢"]]
 FAIL: Valid numeric entity character U+00A3
  input: "&#x00a3;"
- actual:   [["Character","&#x00a3;"]]
+ actual:   [["Character","3;"]]
  expected: [["Character","£"]]
 FAIL: Valid numeric entity character U+00A4
  input: "&#x00a4;"
- actual:   [["Character","&#x00a4;"]]
+ actual:   [["Character","4;"]]
  expected: [["Character","¤"]]
 FAIL: Valid numeric entity character U+00A5
  input: "&#x00a5;"
- actual:   [["Character","&#x00a5;"]]
+ actual:   [["Character","5;"]]
  expected: [["Character","¥"]]
 FAIL: Valid numeric entity character U+00A6
  input: "&#x00a6;"
- actual:   [["Character","&#x00a6;"]]
+ actual:   [["Character","6;"]]
  expected: [["Character","¦"]]
 FAIL: Valid numeric entity character U+00A7
  input: "&#x00a7;"
- actual:   [["Character","&#x00a7;"]]
+ actual:   [["Character","7;"]]
  expected: [["Character","§"]]
 FAIL: Valid numeric entity character U+00A8
  input: "&#x00a8;"
- actual:   [["Character","&#x00a8;"]]
+ actual:   [["Character","8;"]]
  expected: [["Character","¨"]]
 FAIL: Valid numeric entity character U+00A9
  input: "&#x00a9;"
- actual:   [["Character","&#x00a9;"]]
+ actual:   [["Character","9;"]]
  expected: [["Character","©"]]
 FAIL: Valid numeric entity character U+00AA
  input: "&#x00aa;"
- actual:   [["Character","&#x00aa;"]]
+ actual:   [["Character","a;"]]
  expected: [["Character","ª"]]
 FAIL: Valid numeric entity character U+00AB
  input: "&#x00ab;"
- actual:   [["Character","&#x00ab;"]]
+ actual:   [["Character","b;"]]
  expected: [["Character","«"]]
 FAIL: Valid numeric entity character U+00AC
  input: "&#x00ac;"
- actual:   [["Character","&#x00ac;"]]
+ actual:   [["Character","c;"]]
  expected: [["Character","¬"]]
 FAIL: Valid numeric entity character U+00AD
  input: "&#x00ad;"
- actual:   [["Character","&#x00ad;"]]
+ actual:   [["Character","d;"]]
  expected: [["Character","­"]]
 FAIL: Valid numeric entity character U+00AE
  input: "&#x00ae;"
- actual:   [["Character","&#x00ae;"]]
+ actual:   [["Character","e;"]]
  expected: [["Character","®"]]
 FAIL: Valid numeric entity character U+00AF
  input: "&#x00af;"
- actual:   [["Character","&#x00af;"]]
+ actual:   [["Character","f;"]]
  expected: [["Character","¯"]]
 FAIL: Valid numeric entity character U+00B0
  input: "&#x00b0;"
- actual:   [["Character","&#x00b0;"]]
+ actual:   [["Character","0;"]]
  expected: [["Character","°"]]
 FAIL: Valid numeric entity character U+00B1
  input: "&#x00b1;"
- actual:   [["Character","&#x00b1;"]]
+ actual:   [["Character","1;"]]
  expected: [["Character","±"]]
 FAIL: Valid numeric entity character U+00B2
  input: "&#x00b2;"
- actual:   [["Character","&#x00b2;"]]
+ actual:   [["Character","2;"]]
  expected: [["Character","²"]]
 FAIL: Valid numeric entity character U+00B3
  input: "&#x00b3;"
- actual:   [["Character","&#x00b3;"]]
+ actual:   [["Character","3;"]]
  expected: [["Character","³"]]
 FAIL: Valid numeric entity character U+00B4
  input: "&#x00b4;"
- actual:   [["Character","&#x00b4;"]]
+ actual:   [["Character","4;"]]
  expected: [["Character","´"]]
 FAIL: Valid numeric entity character U+00B5
  input: "&#x00b5;"
- actual:   [["Character","&#x00b5;"]]
+ actual:   [["Character","5;"]]
  expected: [["Character","µ"]]
 FAIL: Valid numeric entity character U+00B6
  input: "&#x00b6;"
- actual:   [["Character","&#x00b6;"]]
+ actual:   [["Character","6;"]]
  expected: [["Character","¶"]]
 FAIL: Valid numeric entity character U+00B7
  input: "&#x00b7;"
- actual:   [["Character","&#x00b7;"]]
+ actual:   [["Character","7;"]]
  expected: [["Character","·"]]
 FAIL: Valid numeric entity character U+00B8
  input: "&#x00b8;"
- actual:   [["Character","&#x00b8;"]]
+ actual:   [["Character","8;"]]
  expected: [["Character","¸"]]
 FAIL: Valid numeric entity character U+00B9
  input: "&#x00b9;"
- actual:   [["Character","&#x00b9;"]]
+ actual:   [["Character","9;"]]
  expected: [["Character","¹"]]
 FAIL: Valid numeric entity character U+00BA
  input: "&#x00ba;"
- actual:   [["Character","&#x00ba;"]]
+ actual:   [["Character","a;"]]
  expected: [["Character","º"]]
 FAIL: Valid numeric entity character U+00BB
  input: "&#x00bb;"
- actual:   [["Character","&#x00bb;"]]
+ actual:   [["Character","b;"]]
  expected: [["Character","»"]]
 FAIL: Valid numeric entity character U+00BC
  input: "&#x00bc;"
- actual:   [["Character","&#x00bc;"]]
+ actual:   [["Character","c;"]]
  expected: [["Character","¼"]]
 FAIL: Valid numeric entity character U+00BD
  input: "&#x00bd;"
- actual:   [["Character","&#x00bd;"]]
+ actual:   [["Character","d;"]]
  expected: [["Character","½"]]
 FAIL: Valid numeric entity character U+00BE
  input: "&#x00be;"
- actual:   [["Character","&#x00be;"]]
+ actual:   [["Character","e;"]]
  expected: [["Character","¾"]]
 FAIL: Valid numeric entity character U+00BF
  input: "&#x00bf;"
- actual:   [["Character","&#x00bf;"]]
+ actual:   [["Character","f;"]]
  expected: [["Character","¿"]]
 FAIL: Valid numeric entity character U+00C0
  input: "&#x00c0;"
- actual:   [["Character","&#x00c0;"]]
+ actual:   [["Character","0;"]]
  expected: [["Character","À"]]
 FAIL: Valid numeric entity character U+00C1
  input: "&#x00c1;"
- actual:   [["Character","&#x00c1;"]]
+ actual:   [["Character","1;"]]
  expected: [["Character","Á"]]
 FAIL: Valid numeric entity character U+00C2
  input: "&#x00c2;"
- actual:   [["Character","&#x00c2;"]]
+ actual:   [["Character","2;"]]
  expected: [["Character","Â"]]
 FAIL: Valid numeric entity character U+00C3
  input: "&#x00c3;"
- actual:   [["Character","&#x00c3;"]]
+ actual:   [["Character","3;"]]
  expected: [["Character","Ã"]]
 FAIL: Valid numeric entity character U+00C4
  input: "&#x00c4;"
- actual:   [["Character","&#x00c4;"]]
+ actual:   [["Character","4;"]]
  expected: [["Character","Ä"]]
 FAIL: Valid numeric entity character U+00C5
  input: "&#x00c5;"
- actual:   [["Character","&#x00c5;"]]
+ actual:   [["Character","5;"]]
  expected: [["Character","Å"]]
 FAIL: Valid numeric entity character U+00C6
  input: "&#x00c6;"
- actual:   [["Character","&#x00c6;"]]
+ actual:   [["Character","6;"]]
  expected: [["Character","Æ"]]
 FAIL: Valid numeric entity character U+00C7
  input: "&#x00c7;"
- actual:   [["Character","&#x00c7;"]]
+ actual:   [["Character","7;"]]
  expected: [["Character","Ç"]]
 FAIL: Valid numeric entity character U+00C8
  input: "&#x00c8;"
- actual:   [["Character","&#x00c8;"]]
+ actual:   [["Character","8;"]]
  expected: [["Character","È"]]
 FAIL: Valid numeric entity character U+00C9
  input: "&#x00c9;"
- actual:   [["Character","&#x00c9;"]]
+ actual:   [["Character","9;"]]
  expected: [["Character","É"]]
 FAIL: Valid numeric entity character U+00CA
  input: "&#x00ca;"
- actual:   [["Character","&#x00ca;"]]
+ actual:   [["Character","a;"]]
  expected: [["Character","Ê"]]
 FAIL: Valid numeric entity character U+00CB
  input: "&#x00cb;"
- actual:   [["Character","&#x00cb;"]]
+ actual:   [["Character","b;"]]
  expected: [["Character","Ë"]]
 FAIL: Valid numeric entity character U+00CC
  input: "&#x00cc;"
- actual:   [["Character","&#x00cc;"]]
+ actual:   [["Character","c;"]]
  expected: [["Character","Ì"]]
 FAIL: Valid numeric entity character U+00CD
  input: "&#x00cd;"
- actual:   [["Character","&#x00cd;"]]
+ actual:   [["Character","d;"]]
  expected: [["Character","Í"]]
 FAIL: Valid numeric entity character U+00CE
  input: "&#x00ce;"
- actual:   [["Character","&#x00ce;"]]
+ actual:   [["Character","e;"]]
  expected: [["Character","Î"]]
 FAIL: Valid numeric entity character U+00CF
  input: "&#x00cf;"
- actual:   [["Character","&#x00cf;"]]
+ actual:   [["Character","f;"]]
  expected: [["Character","Ï"]]
 FAIL: Valid numeric entity character U+00D0
  input: "&#x00d0;"
- actual:   [["Character","&#x00d0;"]]
+ actual:   [["Character","0;"]]
  expected: [["Character","Ð"]]
 FAIL: Valid numeric entity character U+00D1
  input: "&#x00d1;"
- actual:   [["Character","&#x00d1;"]]
+ actual:   [["Character","1;"]]
  expected: [["Character","Ñ"]]
 FAIL: Valid numeric entity character U+00D2
  input: "&#x00d2;"
- actual:   [["Character","&#x00d2;"]]
+ actual:   [["Character","2;"]]
  expected: [["Character","Ò"]]
 FAIL: Valid numeric entity character U+00D3
  input: "&#x00d3;"
- actual:   [["Character","&#x00d3;"]]
+ actual:   [["Character","3;"]]
  expected: [["Character","Ó"]]
 FAIL: Valid numeric entity character U+00D4
  input: "&#x00d4;"
- actual:   [["Character","&#x00d4;"]]
+ actual:   [["Character","4;"]]
  expected: [["Character","Ô"]]
 FAIL: Valid numeric entity character U+00D5
  input: "&#x00d5;"
- actual:   [["Character","&#x00d5;"]]
+ actual:   [["Character","5;"]]
  expected: [["Character","Õ"]]
 FAIL: Valid numeric entity character U+00D6
  input: "&#x00d6;"
- actual:   [["Character","&#x00d6;"]]
+ actual:   [["Character","6;"]]
  expected: [["Character","Ö"]]
 FAIL: Valid numeric entity character U+00D7
  input: "&#x00d7;"
- actual:   [["Character","&#x00d7;"]]
+ actual:   [["Character","7;"]]
  expected: [["Character","×"]]
 FAIL: Valid numeric entity character U+00D8
  input: "&#x00d8;"
- actual:   [["Character","&#x00d8;"]]
+ actual:   [["Character","8;"]]
  expected: [["Character","Ø"]]
 FAIL: Valid numeric entity character U+00D9
  input: "&#x00d9;"
- actual:   [["Character","&#x00d9;"]]
+ actual:   [["Character","9;"]]
  expected: [["Character","Ù"]]
 FAIL: Valid numeric entity character U+00DA
  input: "&#x00da;"
- actual:   [["Character","&#x00da;"]]
+ actual:   [["Character","a;"]]
  expected: [["Character","Ú"]]
 FAIL: Valid numeric entity character U+00DB
  input: "&#x00db;"
- actual:   [["Character","&#x00db;"]]
+ actual:   [["Character","b;"]]
  expected: [["Character","Û"]]
 FAIL: Valid numeric entity character U+00DC
  input: "&#x00dc;"
- actual:   [["Character","&#x00dc;"]]
+ actual:   [["Character","c;"]]
  expected: [["Character","Ü"]]
 FAIL: Valid numeric entity character U+00DD
  input: "&#x00dd;"
- actual:   [["Character","&#x00dd;"]]
+ actual:   [["Character","d;"]]
  expected: [["Character","Ý"]]
 FAIL: Valid numeric entity character U+00DE
  input: "&#x00de;"
- actual:   [["Character","&#x00de;"]]
+ actual:   [["Character","e;"]]
  expected: [["Character","Þ"]]
 FAIL: Valid numeric entity character U+00DF
  input: "&#x00df;"
- actual:   [["Character","&#x00df;"]]
+ actual:   [["Character","f;"]]
  expected: [["Character","ß"]]
 FAIL: Valid numeric entity character U+00E0
  input: "&#x00e0;"
- actual:   [["Character","&#x00e0;"]]
+ actual:   [["Character","0;"]]
  expected: [["Character","à"]]
 FAIL: Valid numeric entity character U+00E1
  input: "&#x00e1;"
- actual:   [["Character","&#x00e1;"]]
+ actual:   [["Character","1;"]]
  expected: [["Character","á"]]
 FAIL: Valid numeric entity character U+00E2
  input: "&#x00e2;"
- actual:   [["Character","&#x00e2;"]]
+ actual:   [["Character","2;"]]
  expected: [["Character","â"]]
 FAIL: Valid numeric entity character U+00E3
  input: "&#x00e3;"
- actual:   [["Character","&#x00e3;"]]
+ actual:   [["Character","3;"]]
  expected: [["Character","ã"]]
 FAIL: Valid numeric entity character U+00E4
  input: "&#x00e4;"
- actual:   [["Character","&#x00e4;"]]
+ actual:   [["Character","4;"]]
  expected: [["Character","ä"]]
 FAIL: Valid numeric entity character U+00E5
  input: "&#x00e5;"
- actual:   [["Character","&#x00e5;"]]
+ actual:   [["Character","5;"]]
  expected: [["Character","å"]]
 FAIL: Valid numeric entity character U+00E6
  input: "&#x00e6;"
- actual:   [["Character","&#x00e6;"]]
+ actual:   [["Character","6;"]]
  expected: [["Character","æ"]]
 FAIL: Valid numeric entity character U+00E7
  input: "&#x00e7;"
- actual:   [["Character","&#x00e7;"]]
+ actual:   [["Character","7;"]]
  expected: [["Character","ç"]]
 FAIL: Valid numeric entity character U+00E8
  input: "&#x00e8;"
- actual:   [["Character","&#x00e8;"]]
+ actual:   [["Character","8;"]]
  expected: [["Character","è"]]
 FAIL: Valid numeric entity character U+00E9
  input: "&#x00e9;"
- actual:   [["Character","&#x00e9;"]]
+ actual:   [["Character","9;"]]
  expected: [["Character","é"]]
 FAIL: Valid numeric entity character U+00EA
  input: "&#x00ea;"
- actual:   [["Character","&#x00ea;"]]
+ actual:   [["Character","a;"]]
  expected: [["Character","ê"]]
 FAIL: Valid numeric entity character U+00EB
  input: "&#x00eb;"
- actual:   [["Character","&#x00eb;"]]
+ actual:   [["Character","b;"]]
  expected: [["Character","ë"]]
 FAIL: Valid numeric entity character U+00EC
  input: "&#x00ec;"
- actual:   [["Character","&#x00ec;"]]
+ actual:   [["Character","c;"]]
  expected: [["Character","ì"]]
 FAIL: Valid numeric entity character U+00ED
  input: "&#x00ed;"
- actual:   [["Character","&#x00ed;"]]
+ actual:   [["Character","d;"]]
  expected: [["Character","í"]]
 FAIL: Valid numeric entity character U+00EE
  input: "&#x00ee;"
- actual:   [["Character","&#x00ee;"]]
+ actual:   [["Character","e;"]]
  expected: [["Character","î"]]
 FAIL: Valid numeric entity character U+00EF
  input: "&#x00ef;"
- actual:   [["Character","&#x00ef;"]]
+ actual:   [["Character","f;"]]
  expected: [["Character","ï"]]
 FAIL: Valid numeric entity character U+00F0
  input: "&#x00f0;"
- actual:   [["Character","&#x00f0;"]]
+ actual:   [["Character","0;"]]
  expected: [["Character","ð"]]
 FAIL: Valid numeric entity character U+00F1
  input: "&#x00f1;"
- actual:   [["Character","&#x00f1;"]]
+ actual:   [["Character","1;"]]
  expected: [["Character","ñ"]]
 FAIL: Valid numeric entity character U+00F2
  input: "&#x00f2;"
- actual:   [["Character","&#x00f2;"]]
+ actual:   [["Character","2;"]]
  expected: [["Character","ò"]]
 FAIL: Valid numeric entity character U+00F3
  input: "&#x00f3;"
- actual:   [["Character","&#x00f3;"]]
+ actual:   [["Character","3;"]]
  expected: [["Character","ó"]]
 FAIL: Valid numeric entity character U+00F4
  input: "&#x00f4;"
- actual:   [["Character","&#x00f4;"]]
+ actual:   [["Character","4;"]]
  expected: [["Character","ô"]]
 FAIL: Valid numeric entity character U+00F5
  input: "&#x00f5;"
- actual:   [["Character","&#x00f5;"]]
+ actual:   [["Character","5;"]]
  expected: [["Character","õ"]]
 FAIL: Valid numeric entity character U+00F6
  input: "&#x00f6;"
- actual:   [["Character","&#x00f6;"]]
+ actual:   [["Character","6;"]]
  expected: [["Character","ö"]]
 FAIL: Valid numeric entity character U+00F7
  input: "&#x00f7;"
- actual:   [["Character","&#x00f7;"]]
+ actual:   [["Character","7;"]]
  expected: [["Character","÷"]]
 FAIL: Valid numeric entity character U+00F8
  input: "&#x00f8;"
- actual:   [["Character","&#x00f8;"]]
+ actual:   [["Character","8;"]]
  expected: [["Character","ø"]]
 FAIL: Valid numeric entity character U+00F9
  input: "&#x00f9;"
- actual:   [["Character","&#x00f9;"]]
+ actual:   [["Character","9;"]]
  expected: [["Character","ù"]]
 FAIL: Valid numeric entity character U+00FA
  input: "&#x00fa;"
- actual:   [["Character","&#x00fa;"]]
+ actual:   [["Character","a;"]]
  expected: [["Character","ú"]]
 FAIL: Valid numeric entity character U+00FB
  input: "&#x00fb;"
- actual:   [["Character","&#x00fb;"]]
+ actual:   [["Character","b;"]]
  expected: [["Character","û"]]
 FAIL: Valid numeric entity character U+00FC
  input: "&#x00fc;"
- actual:   [["Character","&#x00fc;"]]
+ actual:   [["Character","c;"]]
  expected: [["Character","ü"]]
 FAIL: Valid numeric entity character U+00FD
  input: "&#x00fd;"
- actual:   [["Character","&#x00fd;"]]
+ actual:   [["Character","d;"]]
  expected: [["Character","ý"]]
 FAIL: Valid numeric entity character U+00FE
  input: "&#x00fe;"
- actual:   [["Character","&#x00fe;"]]
+ actual:   [["Character","e;"]]
  expected: [["Character","þ"]]
 FAIL: Valid numeric entity character U+00FF
  input: "&#x00ff;"
- actual:   [["Character","&#x00ff;"]]
+ actual:   [["Character","f;"]]
  expected: [["Character","ÿ"]]
 FAIL: Valid numeric entity character U+D7FF
  input: "&#xd7ff;"
@@ -12615,75 +12612,75 @@ FAIL: Valid numeric entity character U+FFFD
  expected: [["Character","�"]]
 FAIL: Valid numeric entity character U+10000
  input: "&#x10000;"
- actual:   [["Character","&#x10000;"]]
+ actual:   []
  expected: [["Character","𐀀"]]
 FAIL: Valid numeric entity character U+1FFFD
  input: "&#x1fffd;"
- actual:   [["Character","&#x1fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","🿽"]]
 FAIL: Valid numeric entity character U+20000
  input: "&#x20000;"
- actual:   [["Character","&#x20000;"]]
+ actual:   []
  expected: [["Character","𠀀"]]
 FAIL: Valid numeric entity character U+2FFFD
  input: "&#x2fffd;"
- actual:   [["Character","&#x2fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","𯿽"]]
 FAIL: Valid numeric entity character U+30000
  input: "&#x30000;"
- actual:   [["Character","&#x30000;"]]
+ actual:   []
  expected: [["Character","𰀀"]]
 FAIL: Valid numeric entity character U+3FFFD
  input: "&#x3fffd;"
- actual:   [["Character","&#x3fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","𿿽"]]
 FAIL: Valid numeric entity character U+40000
  input: "&#x40000;"
- actual:   [["Character","&#x40000;"]]
+ actual:   []
  expected: [["Character","񀀀"]]
 FAIL: Valid numeric entity character U+4FFFD
  input: "&#x4fffd;"
- actual:   [["Character","&#x4fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","񏿽"]]
 FAIL: Valid numeric entity character U+50000
  input: "&#x50000;"
- actual:   [["Character","&#x50000;"]]
+ actual:   []
  expected: [["Character","񐀀"]]
 FAIL: Valid numeric entity character U+5FFFD
  input: "&#x5fffd;"
- actual:   [["Character","&#x5fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","񟿽"]]
 FAIL: Valid numeric entity character U+60000
  input: "&#x60000;"
- actual:   [["Character","&#x60000;"]]
+ actual:   []
  expected: [["Character","񠀀"]]
 FAIL: Valid numeric entity character U+6FFFD
  input: "&#x6fffd;"
- actual:   [["Character","&#x6fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","񯿽"]]
 FAIL: Valid numeric entity character U+70000
  input: "&#x70000;"
- actual:   [["Character","&#x70000;"]]
+ actual:   []
  expected: [["Character","񰀀"]]
 FAIL: Valid numeric entity character U+7FFFD
  input: "&#x7fffd;"
- actual:   [["Character","&#x7fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","񿿽"]]
 FAIL: Valid numeric entity character U+80000
  input: "&#x80000;"
- actual:   [["Character","&#x80000;"]]
+ actual:   []
  expected: [["Character","򀀀"]]
 FAIL: Valid numeric entity character U+8FFFD
  input: "&#x8fffd;"
- actual:   [["Character","&#x8fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","򏿽"]]
 FAIL: Valid numeric entity character U+90000
  input: "&#x90000;"
- actual:   [["Character","&#x90000;"]]
+ actual:   []
  expected: [["Character","򐀀"]]
 FAIL: Valid numeric entity character U+9FFFD
  input: "&#x9fffd;"
- actual:   [["Character","&#x9fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","򟿽"]]
 FAIL: Valid numeric entity character U+A0000
  input: "&#xa0000;"
@@ -12735,11 +12732,11 @@ FAIL: Valid numeric entity character U+FFFFD
  expected: [["Character","󿿽"]]
 FAIL: Valid numeric entity character U+100000
  input: "&#x100000;"
- actual:   [["Character","&#x100000;"]]
+ actual:   []
  expected: [["Character","􀀀"]]
 FAIL: Valid numeric entity character U+10FFFD
  input: "&#x10fffd;"
- actual:   [["Character","&#x10fffd;"]]
+ actual:   [["Character","ffd;"]]
  expected: [["Character","􏿽"]]
 PASS: <!---- >
 FAIL: Correct Doctype lowercase
@@ -12855,7 +12852,10 @@ PASS: Ampersand EOF
 PASS: Ampersand ampersand EOF
 PASS: Ampersand space EOF
 PASS: Unfinished entity
-PASS: Ampersand, number sign
+FAIL: Ampersand, number sign
+ input: "&#"
+ actual:   []
+ expected: [["Character","&#"]]
 PASS: Unfinished numeric entity
 FAIL: Entity with trailing semicolon (1)
  input: "I'm &not;it"
@@ -12877,11 +12877,11 @@ PASS: Partial entity match at end of file
 PASS: Non-ASCII character reference name
 FAIL: ASCII decimal entity
  input: "&#0036;"
- actual:   [["Character","&#0036;"]]
+ actual:   []
  expected: [["Character","$"]]
 FAIL: ASCII hexadecimal entity
  input: "&#x3f;"
- actual:   [["Character","&#x3f;"]]
+ actual:   [["Character",";"]]
  expected: [["Character","?"]]
 PASS: Hexadecimal entity in attribute
 PASS: Entity in attribute without semicolon ending in x
@@ -12957,19 +12957,19 @@ FAIL: Incomplete doctype
  expected: [["DOCTYPE","html",null,null,false]]
 FAIL: Numeric entity representing the NUL character
  input: "&#0000;"
- actual:   [["Character","&#0000;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Hexadecimal entity representing the NUL character
  input: "&#x0000;"
- actual:   [["Character","&#x0000;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Numeric entity representing a codepoint after 1114111 (U+10FFFF)
  input: "&#2225222;"
- actual:   [["Character","&#2225222;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Hexadecimal entity representing a codepoint after 1114111 (U+10FFFF)
  input: "&#x1010FFFF;"
- actual:   [["Character","&#x1010FFFF;"]]
+ actual:   [["Character","FFF;"]]
  expected: [["Character","�"]]
 FAIL: Hexadecimal entity pair representing a surrogate pair
  input: "&#xD869;&#xDED6;"
@@ -17519,55 +17519,61 @@ PASS: CR EOF in tag name
 PASS: Slash EOF in tag name
 FAIL: Zero hex numeric entity
  input: "&#x0"
- actual:   [["Character","&#x0"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Zero decimal numeric entity
  input: "&#0"
- actual:   [["Character","&#0"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Zero-prefixed hex numeric entity
  input: "&#x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000041;"
- actual:   [["Character","&#x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000041;"]]
+ actual:   []
  expected: [["Character","A"]]
 FAIL: Zero-prefixed decimal numeric entity
  input: "&#000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000065;"
- actual:   [["Character","&#000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000065;"]]
+ actual:   []
  expected: [["Character","A"]]
 PASS: Empty hex numeric entities
 PASS: Invalid digit in hex numeric entity
-PASS: Empty decimal numeric entities
-PASS: Invalid digit in decimal numeric entity
+FAIL: Empty decimal numeric entities
+ input: "&# &#; "
+ actual:   []
+ expected: [["Character","&# &#; "]]
+FAIL: Invalid digit in decimal numeric entity
+ input: "&#A"
+ actual:   []
+ expected: [["Character","&#A"]]
 FAIL: Non-BMP numeric entity
  input: "&#x10000;"
- actual:   [["Character","&#x10000;"]]
+ actual:   []
  expected: [["Character","𐀀"]]
 FAIL: Maximum non-BMP numeric entity
  input: "&#X10FFFF;"
- actual:   [["Character","&#X10FFFF;"]]
+ actual:   [["Character","FFF;"]]
  expected: [["Character","􏿿"]]
 FAIL: Above maximum numeric entity
  input: "&#x110000;"
- actual:   [["Character","&#x110000;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: 32-bit hex numeric entity
  input: "&#x80000041;"
- actual:   [["Character","&#x80000041;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: 33-bit hex numeric entity
  input: "&#x100000041;"
- actual:   [["Character","&#x100000041;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: 33-bit decimal numeric entity
  input: "&#4294967361;"
- actual:   [["Character","&#4294967361;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: 65-bit hex numeric entity
  input: "&#x10000000000000041;"
- actual:   [["Character","&#x10000000000000041;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: 65-bit decimal numeric entity
  input: "&#18446744073709551681;"
- actual:   [["Character","&#18446744073709551681;"]]
+ actual:   []
  expected: [["Character","�"]]
 FAIL: Surrogate code point edge cases
  input: "&#xD7FF;&#xD800;&#xD801;&#xDFFE;&#xDFFF;&#xE000;"
@@ -17993,4 +17999,4 @@ FAIL: CR followed by U+0000
  input: "�"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 3088 of 6806 tests
+Passed 3086 of 6806 tests

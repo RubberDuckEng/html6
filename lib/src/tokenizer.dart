@@ -100,6 +100,10 @@ class InputManager {
     return true;
   }
 
+  bool lookAheadForEntityAndConsume(StringBuffer buffer) {
+    return false;
+  }
+
   void push(int char) {
     assert(pushedChar == null);
     if (char == endOfFile) {
@@ -214,6 +218,48 @@ bool _isAsciiAlpha(int codePoint) {
   return false;
 }
 
+bool _isAsciiDigit(int codePoint) {
+  return codePoint >= 0x30 && codePoint <= 0x39;
+}
+
+bool _isAsciiAlphanumeric(int codePoint) {
+  return _isAsciiDigit(codePoint) || _isAsciiAlpha(codePoint);
+}
+
+bool _isAsciiUpperHexDigit(int codePoint) {
+  return codePoint >= 0x41 && codePoint <= 0x46;
+}
+
+bool _isAsciiLowerHexDigit(int codePoint) {
+  return codePoint >= 0x61 && codePoint <= 0x66;
+}
+
+bool _isAsciiHexDigit(int codePoint) {
+  return _isAsciiUpperHexDigit(codePoint) || _isAsciiLowerHexDigit(codePoint);
+}
+
+bool _isSurogate(int codePoint) {
+  return codePoint >= 0xD800 && codePoint <= 0xDFFF;
+}
+
+bool _isScalarValue(int codePoint) => !_isSurogate(codePoint);
+
+bool _isAsciiCodePoint(int codePoint) {
+  return codePoint >= 0x0000 && codePoint <= 0x007F;
+}
+
+bool _isAsciiTabOrNewline(int codePoint) {
+  return codePoint == 0x9 || codePoint == 0xA || codePoint == 0xD;
+}
+
+bool _isAsciiWhitespace(int codePoint) {
+  return codePoint == 0x9 ||
+      codePoint == 0xA ||
+      codePoint == 0xC ||
+      codePoint == 0xD ||
+      codePoint == 0x20;
+}
+
 bool _isHTMLWhitespace(int codePoint) {
   return codePoint == 0x9 ||
       codePoint == 0xA ||
@@ -227,11 +273,16 @@ bool _isHTMLWhitespace(int codePoint) {
 const int replacementCharacter = 0xFFFD;
 const int nullChar = 0x00;
 const int exclaimationMark = 0x21;
+const int numberSign = 0x23;
+const int amperstand = 0x26;
 const int solidus = 0x2F;
 const int hyphenMinus = 0x2D;
+const int semicolon = 0x3B;
 const int lessThanSign = 0x3C;
 const int equalsSign = 0x3D;
 const int greaterThanSign = 0x3E;
+const int latinCapitalLetterX = 0x58;
+const int latinSmallLetterX = 0x78;
 const int endOfFile = -1;
 
 // https://html.spec.whatwg.org/multipage/parsing.html#data-state
@@ -310,19 +361,26 @@ class TagTokenBuilder {
 class Tokenizer {
   final InputManager input;
   TokenizerState state = TokenizerState.data;
+  TokenizerState? returnState;
   TagTokenBuilder? currentTag;
   // TODO: Should this be a CommentTokenBuilder or maybe a generalized
   // TokenBuilder?
   StringBuffer? textBuffer;
+  StringBuffer? temporaryBuffer;
+  int? characterReferenceCode;
 
   Tokenizer(this.input);
 
   bool get hasPendingCharacterToken => textBuffer != null;
 
+// FIXME: the implicit StringBuffer creation seems dangerous?
   void bufferCharCode(int codePoint) {
     textBuffer ??= StringBuffer();
     textBuffer!.writeCharCode(codePoint);
   }
+
+  // Alias to match spec language.
+  int consumeNextInputCharacter() => input.getNextCodePoint();
 
   CharacterToken emitCharacterToken() {
     final characters = textBuffer.toString();
@@ -353,13 +411,40 @@ class Tokenizer {
     input.push(char);
   }
 
+  TokenizerState takeReturnState() {
+    var state = returnState!;
+    returnState = null;
+    return state;
+  }
+
+  void reconsumeInReturnState(int char) {
+    state = takeReturnState();
+    input.push(char);
+  }
+
+  void flushCodePointsAsCharacterReference() {
+    textBuffer ??= StringBuffer(); // FIXME: Is this needed?
+    textBuffer!.write(temporaryBuffer!.toString());
+    temporaryBuffer = null;
+  }
+
+  bool referenceIsPartOfAnAttribute() {
+    assert(returnState != null);
+    return returnState == TokenizerState.attributeValueDoubleQuoted ||
+        returnState == TokenizerState.attributeValueSingleQuoted ||
+        returnState == TokenizerState.attributeValueUnquoted;
+  }
+
   Token getNextToken() {
     while (true) {
-      int char = input.getNextCodePoint();
+      int char = consumeNextInputCharacter();
       switch (state) {
         case TokenizerState.data:
-// U+0026 AMPERSAND (&)
-// Set the return state to the data state. Switch to the character reference state.
+          if (char == amperstand) {
+            returnState = TokenizerState.data;
+            state = TokenizerState.characterReference;
+            continue;
+          }
           if (char == lessThanSign) {
             state = TokenizerState.tagOpen;
             continue;
@@ -764,6 +849,133 @@ class Tokenizer {
             continue;
           }
           textBuffer!.writeCharCode(char);
+          continue;
+
+        case TokenizerState.characterReference:
+          temporaryBuffer = StringBuffer("");
+          temporaryBuffer!.writeCharCode(amperstand);
+          if (_isAsciiAlphanumeric(char)) {
+            reconsumeIn(char, TokenizerState.namedCharacterReference);
+            continue;
+          }
+          if (char == numberSign) {
+            temporaryBuffer!.writeCharCode(char);
+            state = TokenizerState.numericCharacterReference;
+            continue;
+          }
+          flushCodePointsAsCharacterReference();
+          reconsumeInReturnState(char);
+          continue;
+
+        case TokenizerState.namedCharacterReference:
+          // FIXME: This is not in the spec, but seems necessary?
+          temporaryBuffer!.writeCharCode(char);
+
+          if (input.lookAheadForEntityAndConsume(temporaryBuffer!)) {
+            //  If the character reference was consumed as part of an attribute, and the last character matched is not a U+003B SEMICOLON character (;), and the next input character is either a U+003D EQUALS SIGN character (=) or an ASCII alphanumeric, then, for historical reasons, flush code points consumed as a character reference and switch to the return state.
+            state = takeReturnState();
+            return CharacterToken(temporaryBuffer.toString());
+          }
+          state = TokenizerState.ambiguousAmpersand;
+          flushCodePointsAsCharacterReference();
+          continue;
+
+        case TokenizerState.ambiguousAmpersand:
+          if (_isAsciiAlphanumeric(char)) {
+            if (referenceIsPartOfAnAttribute()) {
+              currentTag!.currentAttribute!.appendToValue(char);
+            } else {
+              bufferCharCode(char);
+            }
+            continue;
+          }
+          if (char == semicolon) {
+            // This is an unknown-named-character-reference parse error.
+            reconsumeInReturnState(char);
+            continue;
+          }
+          reconsumeInReturnState(char);
+          continue;
+
+        case TokenizerState.numericCharacterReference:
+          characterReferenceCode = 0;
+          if (char == latinSmallLetterX || char == latinCapitalLetterX) {
+            temporaryBuffer!.writeCharCode(char);
+            state = TokenizerState.hexadecimalCharacterReferenceStart;
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.decimalCharacterReference);
+          continue;
+
+        case TokenizerState.hexadecimalCharacterReferenceStart:
+          if (_isAsciiDigit(char)) {
+            reconsumeIn(char, TokenizerState.decimalCharacterReference);
+            continue;
+          }
+          // This is an absence-of-digits-in-numeric-character-reference parse error.
+          flushCodePointsAsCharacterReference();
+          reconsumeInReturnState(char);
+          continue;
+
+        case TokenizerState.decimalCharacterReferenceStart:
+          if (_isAsciiDigit(char)) {
+            reconsumeIn(char, TokenizerState.decimalCharacterReference);
+            continue;
+          }
+          // This is an absence-of-digits-in-numeric-character-reference parse error.
+          flushCodePointsAsCharacterReference();
+          reconsumeInReturnState(char);
+          continue;
+
+        case TokenizerState.hexadecimalCharacterReference:
+          if (_isAsciiDigit(char)) {
+            int numeric = char - 0x30;
+            characterReferenceCode = characterReferenceCode! * 16 + numeric;
+            continue;
+          }
+          if (_isAsciiUpperHexDigit(char)) {
+            int numeric = char - 0x37;
+            characterReferenceCode = characterReferenceCode! * 16 + numeric;
+            continue;
+          }
+          if (_isAsciiLowerHexDigit(char)) {
+            int numeric = char - 0x57;
+            characterReferenceCode = characterReferenceCode! * 16 + numeric;
+            continue;
+          }
+          if (char == semicolon) {
+            state = TokenizerState.numericCharacterReferenceEnd;
+            continue;
+          }
+          // This is a missing-semicolon-after-character-reference parse error.
+          reconsumeIn(char, TokenizerState.numericCharacterReferenceEnd);
+          continue;
+
+        case TokenizerState.decimalCharacterReference:
+          if (_isAsciiDigit(char)) {
+            int numeric = char - 0x30;
+            characterReferenceCode = characterReferenceCode! * 10 + numeric;
+            continue;
+          }
+          if (char == semicolon) {
+            state = TokenizerState.numericCharacterReferenceEnd;
+            continue;
+          }
+          // This is a missing-semicolon-after-character-reference parse error.
+          reconsumeIn(char, TokenizerState.numericCharacterReferenceEnd);
+          continue;
+
+        case TokenizerState.numericCharacterReferenceEnd:
+          int refCode = characterReferenceCode!;
+          if (refCode == 0x00) {
+            // This is a null-character-reference parse error.
+            refCode = replacementCharacter;
+          }
+          if (refCode > 0x10FFF) {
+            // This is a character-reference-outside-unicode-range parse error.
+            refCode = replacementCharacter;
+          }
+          state = returnState!;
           continue;
 
         default:
