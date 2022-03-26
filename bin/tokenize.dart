@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:html6/src/tokenizer.dart';
 
 void main(List<String> arguments) {
-  var inputText = "&Amacr";
+  var inputText = "&#x09B;";
   var input = InputManager(inputText);
   var tokenizer = Tokenizer(input);
   var tokens = tokenizer.getTokensWithoutEOF();

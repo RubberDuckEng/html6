@@ -115,17 +115,6 @@ class InputManager {
       }
       return true;
     }
-
-    // // Hack in a single entity to test the 'true' codepaths.
-    // if (char == latinSmallLetterA &&
-    //     peek(0) == latinSmallLetterC &&
-    //     peek(1) == semicolon) {
-    //   getNextCodePoint();
-    //   getNextCodePoint();
-    //   buffer.clear();
-    //   buffer.writeCharCode(0x223E);
-    //   return true;
-    // }
     return false;
   }
 
@@ -956,7 +945,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.hexadecimalCharacterReferenceStart:
-          if (_isAsciiDigit(char)) {
+          if (_isAsciiHexDigit(char)) {
             reconsumeIn(char, TokenizerState.decimalCharacterReference);
             continue;
           }
