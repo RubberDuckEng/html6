@@ -1,3 +1,5 @@
+import 'entities.dart';
+
 abstract class Token {
   List toTestJson();
 }
@@ -50,18 +52,6 @@ class EofToken extends Token {
   List toTestJson() => ['EOF'];
 }
 
-class Entity {
-  final String name;
-  final List<int> nameCodepoints;
-  final int value;
-  const Entity(this.name, this.nameCodepoints, this.value);
-}
-
-var entities = const [
-  Entity("&ac;", [amperstand, latinSmallLetterA, latinSmallLetterC, semicolon],
-      0x223E),
-];
-
 class InputManager {
   int? pushedChar;
   final List<int> data;
@@ -113,30 +103,24 @@ class InputManager {
   }
 
   bool lookAheadForEntityAndConsume(int char, StringBuffer buffer) {
-    // var maxEntityLength = 10;
-    // var firstPossible = 0;
-    // var lastPossible = entities.length;
-    // var
-    // for (int codeOffset = 0; codeOffset < maxEntityLength; codeOffset++) {
-    //     var actual = getNextCodePoint();
-    //     // FIXME: Handle EOF?
-    //     buffer.writeCharCode(actual);
-    //   for (int entityIndex = firstPossible; entityIndex < lastPossible; entityIndex++) {
-    //     var entity = entities[entityIndex];
-    //     var expected = entity.nameCodepoints[codeOffset];
-    //   }
-    // }
-
-    // Hack in a single entity to test the 'true' codepaths.
-    if (char == latinSmallLetterA &&
-        peek(0) == latinSmallLetterC &&
-        peek(1) == semicolon) {
-      getNextCodePoint();
-      getNextCodePoint();
+    push(char);
+    var entity = findMatchingEntity(this, buffer);
+    if (entity != null) {
       buffer.clear();
-      buffer.writeCharCode(0x223E);
+      buffer.writeCharCode(entity.value);
       return true;
     }
+
+    // // Hack in a single entity to test the 'true' codepaths.
+    // if (char == latinSmallLetterA &&
+    //     peek(0) == latinSmallLetterC &&
+    //     peek(1) == semicolon) {
+    //   getNextCodePoint();
+    //   getNextCodePoint();
+    //   buffer.clear();
+    //   buffer.writeCharCode(0x223E);
+    //   return true;
+    // }
     return false;
   }
 
@@ -581,7 +565,10 @@ class Tokenizer {
             continue;
           }
 // U+003D EQUALS SIGN (=)
-// This is an unexpected-equals-sign-before-attribute-name parse error. Start a new attribute in the current tag token. Set that attribute's name to the current input character, and its value to the empty string. Switch to the attribute name state.
+// This is an unexpected-equals-sign-before-attribute-name parse error.
+// Start a new attribute in the current tag token.
+// Set that attribute's name to the current input character, and its value to the empty string.
+// Switch to the attribute name state.
 
           // Would like to be able to assert currentAttribute=null
           // but </xmp</xmp</xmp> will hit that here.
@@ -923,13 +910,14 @@ class Tokenizer {
           continue;
 
         case TokenizerState.namedCharacterReference:
-          if (input.lookAheadForEntityAndConsume(char, temporaryBuffer!)) {
+          // Has the side-effect of consuming and filling temporary buffer
+          // with consumed codepoints or entity value.
+          bool foundEntity =
+              input.lookAheadForEntityAndConsume(char, temporaryBuffer!);
+          if (foundEntity) {
             //  If the character reference was consumed as part of an attribute, and the last character matched is not a U+003B SEMICOLON character (;), and the next input character is either a U+003D EQUALS SIGN character (=) or an ASCII alphanumeric, then, for historical reasons, flush code points consumed as a character reference and switch to the return state.
             state = takeReturnState();
             return CharacterToken(temporaryBuffer.toString());
-          } else {
-            // FIXME: This is not in the spec, but seems necessary?
-            temporaryBuffer!.writeCharCode(char);
           }
           state = TokenizerState.ambiguousAmpersand;
           flushCodePointsAsCharacterReference();
