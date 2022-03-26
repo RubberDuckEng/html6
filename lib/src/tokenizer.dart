@@ -47,6 +47,24 @@ class CharacterToken extends Token {
   CharacterToken(this.characters);
 }
 
+class DoctypeToken extends Token {
+  @override
+  List toTestJson() =>
+      ['DOCTYPE', name, publicIdentifier, systemIdentifier, !forceQuirks];
+
+  final String? name;
+  final String? publicIdentifier;
+  final String? systemIdentifier;
+  final bool forceQuirks;
+
+  DoctypeToken({
+    this.name,
+    this.publicIdentifier,
+    this.systemIdentifier,
+    required this.forceQuirks,
+  });
+}
+
 class EofToken extends Token {
   @override
   List toTestJson() => ['EOF'];
@@ -115,6 +133,19 @@ class InputManager {
     int offset = 0;
     for (var codePoint in value.runes) {
       if (peek(offset++) != codePoint) {
+        return false;
+      }
+    }
+    while (offset-- > 0) {
+      getNextCodePoint();
+    }
+    return true;
+  }
+
+  bool lookAheadAndConsumeCaseInsensitive(String value) {
+    int offset = 0;
+    for (var codePoint in value.runes) {
+      if (_toLowerAscii(peek(offset++)) != _toLowerAscii(codePoint)) {
         return false;
       }
     }
@@ -360,11 +391,13 @@ bool _isHTMLWhitespace(int codePoint) {
 // unicodeReplacementCharacterRune
 const int replacementCharacter = 0xFFFD;
 const int nullChar = 0x00;
+const int quotationMark = 0x22;
 const int exclaimationMark = 0x21;
 const int numberSign = 0x23;
 const int amperstand = 0x26;
-const int solidus = 0x2F;
+const int apostrophe = 0x27;
 const int hyphenMinus = 0x2D;
+const int solidus = 0x2F;
 const int semicolon = 0x3B;
 const int lessThanSign = 0x3C;
 const int equalsSign = 0x3D;
@@ -448,11 +481,28 @@ class TagTokenBuilder {
   }
 }
 
+class DoctypeTokenBuilder {
+  StringBuffer? name;
+  StringBuffer? publicIdentifier;
+  StringBuffer? systemIdentifier;
+  bool forceQuirks = false;
+
+  DoctypeToken buildToken() {
+    return DoctypeToken(
+      name: name?.toString(),
+      publicIdentifier: publicIdentifier?.toString(),
+      systemIdentifier: systemIdentifier?.toString(),
+      forceQuirks: forceQuirks,
+    );
+  }
+}
+
 class Tokenizer {
   final InputManager input;
   TokenizerState state = TokenizerState.data;
   TokenizerState? returnState;
   TagTokenBuilder? currentTag;
+  DoctypeTokenBuilder? currentDoctype;
   // TODO: Should this be a CommentTokenBuilder or maybe a generalized
   // TokenBuilder?
   StringBuffer? textBuffer;
@@ -485,9 +535,21 @@ class Tokenizer {
 
   Token emitCurrentTag() {
     assert(currentTag != null);
-    var tag = currentTag!;
+    final tag = currentTag!;
     currentTag = null;
     return tag.buildToken();
+  }
+
+  void beginDoctypeToken() {
+    assert(currentDoctype == null);
+    currentDoctype = DoctypeTokenBuilder();
+  }
+
+  DoctypeToken emitDoctypeToken() {
+    assert(currentDoctype != null);
+    final doctype = currentDoctype!;
+    currentDoctype = null;
+    return doctype.buildToken();
   }
 
   CommentToken emitCommentToken() {
@@ -780,11 +842,16 @@ class Tokenizer {
             }
             continue;
           }
+          if (input.lookAheadAndConsumeCaseInsensitive("doctype")) {
+            state = TokenizerState.doctype;
+            if (hasPendingCharacterToken) {
+              return emitCharacterToken();
+            }
+            continue;
+          }
 
 // If the next few characters are:
 
-// ASCII case-insensitive match for the word "DOCTYPE"
-// Consume those characters and switch to the DOCTYPE state.
 // The string "[CDATA[" (the five uppercase letters "CDATA" with a U+005B LEFT SQUARE BRACKET character before and after)
 // Consume those characters. If there is an adjusted current node and it is not an element in the HTML namespace, then switch to the CDATA section state. Otherwise, this is a cdata-in-html-content parse error. Create a comment token whose data is the "[CDATA[" string. Switch to the bogus comment state.
 // Anything else
@@ -968,260 +1035,446 @@ class Tokenizer {
 
         case TokenizerState.doctype:
           if (_isHTMLWhitespace(char)) {
-            state = TokenizerState.doctypeName;
+            state = TokenizerState.beforeDoctypeName;
             continue;
           }
           if (char == greaterThanSign) {
-            reconsumeIn(char, TokenizerState.doctypeName);
+            reconsumeIn(char, TokenizerState.beforeDoctypeName);
             continue;
           }
           if (char == endOfFile) {
             // This is an eof-in-doctype parse error.
-            // Create a new DOCTYPE token. Set its force-quirks flag to on. Emit the current token. Emit an end-of-file token.
+            beginDoctypeToken();
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
           }
           // This is a missing-whitespace-before-doctype-name parse error.
-          reconsumeIn(char, TokenizerState.doctypeName);
+          reconsumeIn(char, TokenizerState.beforeDoctypeName);
           continue;
 
         case TokenizerState.beforeDoctypeName:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Ignore the character.
-// ASCII upper alpha
-// Create a new DOCTYPE token. Set the token's name to the lowercase version of the current input character (add 0x0020 to the character's code point). Switch to the DOCTYPE name state.
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Create a new DOCTYPE token. Set the token's name to a U+FFFD REPLACEMENT CHARACTER character. Switch to the DOCTYPE name state.
-// U+003E GREATER-THAN SIGN (>)
-// This is a missing-doctype-name parse error. Create a new DOCTYPE token. Set its force-quirks flag to on. Switch to the data state. Emit the current token.
-// EOF
-// This is an eof-in-doctype parse error. Create a new DOCTYPE token. Set its force-quirks flag to on. Emit the current token. Emit an end-of-file token.
-// Anything else
-// Create a new DOCTYPE token. Set the token's name to the current input character. Switch to the DOCTYPE name state.
+          if (_isHTMLWhitespace(char)) {
+            continue;
+          }
+          if (_isAsciiUpperAlpha(char)) {
+            beginDoctypeToken();
+            currentDoctype!.name = StringBuffer();
+            currentDoctype!.name!.writeCharCode(_toLowerAscii(char));
+            state = TokenizerState.doctypeName;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            beginDoctypeToken();
+            currentDoctype!.name = StringBuffer();
+            currentDoctype!.name!.writeCharCode(replacementCharacter);
+            state = TokenizerState.doctypeName;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is a missing-doctype-name parse error.
+            beginDoctypeToken();
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            beginDoctypeToken();
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          beginDoctypeToken();
+          currentDoctype!.name = StringBuffer();
+          currentDoctype!.name!.writeCharCode(_toLowerAscii(char));
+          state = TokenizerState.doctypeName;
+          continue;
 
         case TokenizerState.doctypeName:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Switch to the after DOCTYPE name state.
-// U+003E GREATER-THAN SIGN (>)
-// Switch to the data state. Emit the current DOCTYPE token.
-// ASCII upper alpha
-// Append the lowercase version of the current input character (add 0x0020 to the character's code point) to the current DOCTYPE token's name.
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's name.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// Append the current input character to the current DOCTYPE token's name.
+          if (_isHTMLWhitespace(char)) {
+            state = TokenizerState.afterDoctypeName;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (_isAsciiUpperAlpha(char)) {
+            currentDoctype!.name!.writeCharCode(_toLowerAscii(char));
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            currentDoctype!.name!.writeCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          currentDoctype!.name!.writeCharCode(char);
+          continue;
 
         case TokenizerState.afterDoctypeName:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Ignore the character.
-// U+003E GREATER-THAN SIGN (>)
-// Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// If the six characters starting from the current input character are an ASCII case-insensitive match for the word "PUBLIC", then consume those characters and switch to the after DOCTYPE public keyword state.
-
-// Otherwise, if the six characters starting from the current input character are an ASCII case-insensitive match for the word "SYSTEM", then consume those characters and switch to the after DOCTYPE system keyword state.
-
-// Otherwise, this is an invalid-character-sequence-after-doctype-name parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+          if (_isHTMLWhitespace(char)) {
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          input.push(char);
+          if (input.lookAheadAndConsumeCaseInsensitive('public')) {
+            state = TokenizerState.afterDoctypePublicKeyword;
+            continue;
+          }
+          if (input.lookAheadAndConsumeCaseInsensitive('system')) {
+            state = TokenizerState.afterDoctypeSystemKeyword;
+            continue;
+          }
+          // This is an invalid-character-sequence-after-doctype-name parse error.
+          currentDoctype!.forceQuirks = true;
+          state = TokenizerState.bogusDoctype;
+          continue;
 
         case TokenizerState.afterDoctypePublicKeyword:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Switch to the before DOCTYPE public identifier state.
-// U+0022 QUOTATION MARK (")
-// This is a missing-whitespace-after-doctype-public-keyword parse error. Set the current DOCTYPE token's public identifier to the empty string (not missing), then switch to the DOCTYPE public identifier (double-quoted) state.
-// U+0027 APOSTROPHE (')
-// This is a missing-whitespace-after-doctype-public-keyword parse error. Set the current DOCTYPE token's public identifier to the empty string (not missing), then switch to the DOCTYPE public identifier (single-quoted) state.
-// U+003E GREATER-THAN SIGN (>)
-// This is a missing-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// This is a missing-quote-before-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+          if (_isHTMLWhitespace(char)) {
+            state = TokenizerState.beforeDoctypePublicIdentifier;
+            continue;
+          }
+          if (char == quotationMark) {
+            // This is a missing-whitespace-after-doctype-public-keyword parse error.
+            currentDoctype!.publicIdentifier = StringBuffer();
+            state = TokenizerState.doctypePublicIdentifierDoubleQuoted;
+            continue;
+          }
+          if (char == apostrophe) {
+            // This is a missing-whitespace-after-doctype-public-keyword parse error.
+            currentDoctype!.publicIdentifier = StringBuffer();
+            state = TokenizerState.doctypePublicIdentifierSingleQuoted;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is a missing-doctype-public-identifier parse error.
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          // This is a missing-quote-before-doctype-public-identifier parse error.
+          currentDoctype!.forceQuirks = true;
+          reconsumeIn(char, TokenizerState.bogusDoctype);
+          continue;
 
         case TokenizerState.beforeDoctypePublicIdentifier:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Ignore the character.
-// U+0022 QUOTATION MARK (")
-// Set the current DOCTYPE token's public identifier to the empty string (not missing), then switch to the DOCTYPE public identifier (double-quoted) state.
-// U+0027 APOSTROPHE (')
-// Set the current DOCTYPE token's public identifier to the empty string (not missing), then switch to the DOCTYPE public identifier (single-quoted) state.
-// U+003E GREATER-THAN SIGN (>)
-// This is a missing-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// This is a missing-quote-before-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+          if (_isHTMLWhitespace(char)) {
+            continue;
+          }
+          if (char == quotationMark) {
+            currentDoctype!.publicIdentifier = StringBuffer();
+            state = TokenizerState.doctypePublicIdentifierDoubleQuoted;
+            continue;
+          }
+          if (char == apostrophe) {
+            currentDoctype!.publicIdentifier = StringBuffer();
+            state = TokenizerState.doctypePublicIdentifierSingleQuoted;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is a missing-doctype-public-identifier parse error.
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          // This is a missing-quote-before-doctype-public-identifier parse error.
+          currentDoctype!.forceQuirks = true;
+          reconsumeIn(char, TokenizerState.bogusDoctype);
+          continue;
 
         case TokenizerState.doctypePublicIdentifierDoubleQuoted:
-
-// U+0022 QUOTATION MARK (")
-// Switch to the after DOCTYPE public identifier state.
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's public identifier.
-// U+003E GREATER-THAN SIGN (>)
-// This is an abrupt-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// Append the current input character to the current DOCTYPE token's public identifier.
+          if (char == quotationMark) {
+            state = TokenizerState.afterDoctypePublicIdentifier;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            currentDoctype!.publicIdentifier!
+                .writeCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is an abrupt-doctype-public-identifier parse error.
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          currentDoctype!.publicIdentifier!.writeCharCode(char);
+          continue;
 
         case TokenizerState.doctypePublicIdentifierSingleQuoted:
-
-// U+0027 APOSTROPHE (')
-// Switch to the after DOCTYPE public identifier state.
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's public identifier.
-// U+003E GREATER-THAN SIGN (>)
-// This is an abrupt-doctype-public-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// Append the current input character to the current DOCTYPE token's public identifier.
+          if (char == apostrophe) {
+            state = TokenizerState.afterDoctypePublicIdentifier;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            currentDoctype!.publicIdentifier!
+                .writeCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is an abrupt-doctype-public-identifier parse error.
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          currentDoctype!.publicIdentifier!.writeCharCode(char);
+          continue;
 
         case TokenizerState.afterDoctypePublicIdentifier:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Switch to the between DOCTYPE public and system identifiers state.
-// U+003E GREATER-THAN SIGN (>)
-// Switch to the data state. Emit the current DOCTYPE token.
-// U+0022 QUOTATION MARK (")
-// This is a missing-whitespace-between-doctype-public-and-system-identifiers parse error. Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (double-quoted) state.
-// U+0027 APOSTROPHE (')
-// This is a missing-whitespace-between-doctype-public-and-system-identifiers parse error. Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (single-quoted) state.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// This is a missing-quote-before-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+          if (_isHTMLWhitespace(char)) {
+            state = TokenizerState.betweenDoctypePublicAndSystemIdentifiers;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == quotationMark) {
+            // This is a missing-whitespace-between-doctype-public-and-system-identifiers parse error.
+            currentDoctype!.systemIdentifier = StringBuffer();
+            state = TokenizerState.doctypeSystemIdentifierDoubleQuoted;
+            continue;
+          }
+          if (char == apostrophe) {
+            // This is a missing-whitespace-between-doctype-public-and-system-identifiers parse error.
+            currentDoctype!.systemIdentifier = StringBuffer();
+            state = TokenizerState.doctypeSystemIdentifierSingleQuoted;
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          // This is a missing-quote-before-doctype-system-identifier parse error.
+          currentDoctype!.forceQuirks = true;
+          reconsumeIn(char, TokenizerState.bogusDoctype);
+          continue;
 
         case TokenizerState.betweenDoctypePublicAndSystemIdentifiers:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Ignore the character.
-// U+003E GREATER-THAN SIGN (>)
-// Switch to the data state. Emit the current DOCTYPE token.
-// U+0022 QUOTATION MARK (")
-// Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (double-quoted) state.
-// U+0027 APOSTROPHE (')
-// Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (single-quoted) state.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// This is a missing-quote-before-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+          if (_isHTMLWhitespace(char)) {
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == quotationMark) {
+            currentDoctype!.systemIdentifier = StringBuffer();
+            state = TokenizerState.doctypeSystemIdentifierDoubleQuoted;
+            continue;
+          }
+          if (char == apostrophe) {
+            currentDoctype!.systemIdentifier = StringBuffer();
+            state = TokenizerState.doctypeSystemIdentifierSingleQuoted;
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          // This is a missing-quote-before-doctype-system-identifier parse error.
+          currentDoctype!.forceQuirks = true;
+          reconsumeIn(char, TokenizerState.bogusDoctype);
+          continue;
 
         case TokenizerState.afterDoctypeSystemKeyword:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Switch to the before DOCTYPE system identifier state.
-// U+0022 QUOTATION MARK (")
-// This is a missing-whitespace-after-doctype-system-keyword parse error. Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (double-quoted) state.
-// U+0027 APOSTROPHE (')
-// This is a missing-whitespace-after-doctype-system-keyword parse error. Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (single-quoted) state.
-// U+003E GREATER-THAN SIGN (>)
-// This is a missing-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// This is a missing-quote-before-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+          if (_isHTMLWhitespace(char)) {
+            state = TokenizerState.beforeDoctypeSystemIdentifier;
+            continue;
+          }
+          if (char == quotationMark) {
+            // This is a missing-whitespace-after-doctype-system-keyword parse error.
+            currentDoctype!.systemIdentifier = StringBuffer();
+            state = TokenizerState.doctypeSystemIdentifierDoubleQuoted;
+            continue;
+          }
+          if (char == apostrophe) {
+            // This is a missing-whitespace-after-doctype-system-keyword parse error.
+            currentDoctype!.systemIdentifier = StringBuffer();
+            state = TokenizerState.doctypeSystemIdentifierSingleQuoted;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is a missing-doctype-system-identifier parse error.
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          // This is a missing-quote-before-doctype-system-identifier parse error.
+          currentDoctype!.forceQuirks = true;
+          reconsumeIn(char, TokenizerState.bogusDoctype);
+          continue;
 
         case TokenizerState.beforeDoctypeSystemIdentifier:
+          if (_isHTMLWhitespace(char)) {
+            continue;
+          }
+          if (char == quotationMark) {
+            currentDoctype!.systemIdentifier = StringBuffer();
+            state = TokenizerState.doctypeSystemIdentifierDoubleQuoted;
+            continue;
+          }
+          if (char == apostrophe) {
+            currentDoctype!.systemIdentifier = StringBuffer();
+            state = TokenizerState.doctypeSystemIdentifierSingleQuoted;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is a missing-doctype-system-identifier parse error.
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
 
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Ignore the character.
-// U+0022 QUOTATION MARK (")
-// Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (double-quoted) state.
-// U+0027 APOSTROPHE (')
-// Set the current DOCTYPE token's system identifier to the empty string (not missing), then switch to the DOCTYPE system identifier (single-quoted) state.
-// U+003E GREATER-THAN SIGN (>)
-// This is a missing-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// This is a missing-quote-before-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Reconsume in the bogus DOCTYPE state.
+          // This is a missing-quote-before-doctype-system-identifier parse error.
+          currentDoctype!.forceQuirks = true;
+          reconsumeIn(char, TokenizerState.bogusDoctype);
+          continue;
 
         case TokenizerState.doctypeSystemIdentifierDoubleQuoted:
-
-// U+0022 QUOTATION MARK (")
-// Switch to the after DOCTYPE system identifier state.
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's system identifier.
-// U+003E GREATER-THAN SIGN (>)
-// This is an abrupt-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// Append the current input character to the current DOCTYPE token's system identifier.
+          if (char == quotationMark) {
+            state = TokenizerState.afterDoctypeSystemIdentifier;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            currentDoctype!.systemIdentifier!
+                .writeCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is an abrupt-doctype-system-identifier parse error.
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          currentDoctype!.systemIdentifier!.writeCharCode(char);
+          continue;
 
         case TokenizerState.doctypeSystemIdentifierSingleQuoted:
-
-// U+0027 APOSTROPHE (')
-// Switch to the after DOCTYPE system identifier state.
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current DOCTYPE token's system identifier.
-// U+003E GREATER-THAN SIGN (>)
-// This is an abrupt-doctype-system-identifier parse error. Set the current DOCTYPE token's force-quirks flag to on. Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// Append the current input character to the current DOCTYPE token's system identifier.
+          if (char == apostrophe) {
+            state = TokenizerState.afterDoctypeSystemIdentifier;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            currentDoctype!.systemIdentifier!
+                .writeCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == greaterThanSign) {
+            // This is an abrupt-doctype-system-identifier parse error.
+            currentDoctype!.forceQuirks = true;
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          currentDoctype!.systemIdentifier!.writeCharCode(char);
+          continue;
 
         case TokenizerState.afterDoctypeSystemIdentifier:
-
-// U+0009 CHARACTER TABULATION (tab)
-// U+000A LINE FEED (LF)
-// U+000C FORM FEED (FF)
-// U+0020 SPACE
-// Ignore the character.
-// U+003E GREATER-THAN SIGN (>)
-// Switch to the data state. Emit the current DOCTYPE token.
-// EOF
-// This is an eof-in-doctype parse error. Set the current DOCTYPE token's force-quirks flag to on. Emit the current DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// This is an unexpected-character-after-doctype-system-identifier parse error. Reconsume in the bogus DOCTYPE state. (This does not set the current DOCTYPE token's force-quirks flag to on.)
+          if (_isHTMLWhitespace(char)) {
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-doctype parse error.
+            currentDoctype!.forceQuirks = true;
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
+          // This is an unexpected-character-after-doctype-system-identifier parse error.
+          // (This does not set the current DOCTYPE token's force-quirks flag to on.)
+          reconsumeIn(char, TokenizerState.bogusDoctype);
+          continue;
 
         case TokenizerState.bogusDoctype:
-
-// U+003E GREATER-THAN SIGN (>)
-// Switch to the data state. Emit the DOCTYPE token.
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Ignore the character.
-// EOF
-// Emit the DOCTYPE token. Emit an end-of-file token.
-// Anything else
-// Ignore the character.
-
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitDoctypeToken();
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            continue;
+          }
+          if (char == endOfFile) {
+            reconsumeIn(char, TokenizerState.data);
+            return emitDoctypeToken();
+          }
           continue;
 
         case TokenizerState.characterReference:
