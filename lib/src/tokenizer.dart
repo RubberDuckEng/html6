@@ -444,6 +444,11 @@ class Tokenizer {
     textBuffer!.writeCharCode(codePoint);
   }
 
+  void bufferCharacters(String characters) {
+    textBuffer ??= StringBuffer();
+    textBuffer!.write(characters);
+  }
+
   // Alias to match spec language.
   int consumeNextInputCharacter() => input.getNextCodePoint();
 
@@ -1218,7 +1223,8 @@ class Tokenizer {
           if (foundEntity) {
             //  If the character reference was consumed as part of an attribute, and the last character matched is not a U+003B SEMICOLON character (;), and the next input character is either a U+003D EQUALS SIGN character (=) or an ASCII alphanumeric, then, for historical reasons, flush code points consumed as a character reference and switch to the return state.
             state = takeReturnState();
-            return CharacterToken(temporaryBuffer.toString());
+            bufferCharacters(temporaryBuffer.toString());
+            continue;
           }
           state = TokenizerState.ambiguousAmpersand;
           flushCodePointsAsCharacterReference();
