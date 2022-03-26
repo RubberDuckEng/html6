@@ -144,7 +144,7 @@ PASS: Bad charref in RCDATA
 PASS: lowercase endtags
 FAIL: bad endtag (space before name)
  input: "</ XMP>"
- actual:   [["Character","XMP>"]]
+ actual:   [["Comment"," XMP"]]
  expected: [["Character","</ XMP>"]]
 FAIL: bad endtag (not matching last start tag)
  input: "</xm>"
@@ -12987,14 +12987,8 @@ PASS: Void element with permitted slash
 PASS: Void element with permitted slash (with attribute)
 PASS: StartTag containing /
 PASS: Double-quoted attribute value
-FAIL: Unescaped </
- input: "</"
- actual:   []
- expected: [["Character","</"]]
-FAIL: Illegal end tag name
- input: "</1>"
- actual:   [["Character",">"]]
- expected: [["Comment","1"]]
+PASS: Unescaped </
+PASS: Illegal end tag name
 FAIL: Simili processing instruction
  input: "<?namespace>"
  actual:   [["Character","<"],["Character","?namespace>"]]
@@ -13104,10 +13098,7 @@ PASS: ;{
 PASS: ;{
 PASS: ;\uDBC0\uDC00
 PASS: ;\uDBC0\uDC00
-FAIL: <
- input: "<"
- actual:   []
- expected: [["Character","<"]]
+PASS: <
 FAIL: <\u0000
  input: "<ý"
  actual:   [["Character","<"],["Character","\u0000"]]
@@ -13133,10 +13124,7 @@ FAIL: <
  input: "< "
  actual:   [["Character","<"],["Character"," "]]
  expected: [["Character","< "]]
-FAIL: <!
- input: "<!"
- actual:   []
- expected: [["Comment",""]]
+PASS: <!
 PASS: <!\u0000
 PASS: <!\u0009
 PASS: <!\u000A
@@ -16712,116 +16700,40 @@ FAIL: <.
  input: "<."
  actual:   [["Character","<"],["Character","."]]
  expected: [["Character","<."]]
-FAIL: </
- input: "</"
- actual:   []
- expected: [["Character","</"]]
-FAIL: </\u0000
- input: "</ý"
- actual:   []
- expected: [["Comment","ï¿½"]]
-FAIL: </\u0009
- input: "</ý"
- actual:   []
- expected: [["Comment","\t"]]
-FAIL: </\u000A
- input: "</
-"
- actual:   []
- expected: [["Comment","\n"]]
-FAIL: </\u000B
- input: "</ý"
- actual:   []
- expected: [["Comment","\u000b"]]
-FAIL: </\u000C
- input: "</ý"
- actual:   []
- expected: [["Comment","\f"]]
-FAIL: </ 
- input: "</ "
- actual:   []
- expected: [["Comment"," "]]
-FAIL: </ \u0000
- input: "</ ý"
- actual:   [["Character","\u0000"]]
- expected: [["Comment"," ï¿½"]]
-FAIL: </!
- input: "</!"
- actual:   []
- expected: [["Comment","!"]]
-FAIL: </"
- input: "</""
- actual:   []
- expected: [["Comment","\""]]
-FAIL: </&
- input: "</&"
- actual:   []
- expected: [["Comment","&"]]
-FAIL: </'
- input: "</'"
- actual:   []
- expected: [["Comment","'"]]
-FAIL: </-
- input: "</-"
- actual:   []
- expected: [["Comment","-"]]
-FAIL: <//
- input: "<//"
- actual:   []
- expected: [["Comment","/"]]
-FAIL: </0
- input: "</0"
- actual:   []
- expected: [["Comment","0"]]
-FAIL: </1
- input: "</1"
- actual:   []
- expected: [["Comment","1"]]
-FAIL: </9
- input: "</9"
- actual:   []
- expected: [["Comment","9"]]
-FAIL: </<
- input: "</<"
- actual:   []
- expected: [["Comment","<"]]
-FAIL: </=
- input: "</="
- actual:   []
- expected: [["Comment","="]]
+PASS: </
+PASS: </\u0000
+PASS: </\u0009
+PASS: </\u000A
+PASS: </\u000B
+PASS: </\u000C
+PASS: </ 
+PASS: </ \u0000
+PASS: </!
+PASS: </"
+PASS: </&
+PASS: </'
+PASS: </-
+PASS: <//
+PASS: </0
+PASS: </1
+PASS: </9
+PASS: </<
+PASS: </=
 PASS: </>
-FAIL: </?
- input: "</?"
- actual:   []
- expected: [["Comment","?"]]
-FAIL: </@
- input: "</@"
- actual:   []
- expected: [["Comment","@"]]
+PASS: </?
+PASS: </@
 PASS: </A>
 PASS: </B>
 PASS: </Y>
 PASS: </Z>
-FAIL: </[
- input: "</["
- actual:   []
- expected: [["Comment","["]]
-FAIL: </`
- input: "</`"
- actual:   []
- expected: [["Comment","`"]]
+PASS: </[
+PASS: </`
 PASS: </a>
 PASS: </b>
 PASS: </y>
 PASS: </z>
-FAIL: </{
- input: "</{"
- actual:   []
- expected: [["Comment","{"]]
-FAIL: </\uDBC0\uDC00
- input: "</ô€€€"
- actual:   []
- expected: [["Comment","ô€€€"]]
+PASS: </{
+PASS: </\uDBC0\uDC00
 FAIL: <0
  input: "<0"
  actual:   [["Character","<"],["Character","0"]]
@@ -16836,7 +16748,7 @@ FAIL: <9
  expected: [["Character","<9"]]
 FAIL: <<
  input: "<<"
- actual:   [["Character","<"]]
+ actual:   [["Character","<"],["Character","<"]]
  expected: [["Character","<<"]]
 FAIL: <=
  input: "<="
@@ -16917,7 +16829,7 @@ FAIL: <?9
  expected: [["Comment","?9"]]
 FAIL: <?<
  input: "<?<"
- actual:   [["Character","<"],["Comment","?"]]
+ actual:   [["Character","<"],["Character","?<"]]
  expected: [["Comment","?<"]]
 FAIL: <?=
  input: "<?="
@@ -18081,4 +17993,4 @@ FAIL: CR followed by U+0000
  input: "ý"
  actual:   [["Character","\r\u0000"]]
  expected: [["Character","\n\u0000"]]
-Passed 3059 of 6806 tests
+Passed 3088 of 6806 tests

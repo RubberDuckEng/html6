@@ -61,30 +61,28 @@ class InputManager {
 
   bool get isEndOfFile => pushedChar == null && _nextOffset >= data.length;
 
-  int? getNextCodePoint() {
+  int getNextCodePoint() {
     if (isEndOfFile) {
-      return null;
+      return endOfFile;
     }
     int? maybeChar = pushedChar;
     if (maybeChar != null) {
       pushedChar = null;
       return maybeChar;
     }
-    // FIXME: Pre-cache the runes.
     return data[_nextOffset++];
   }
 
-  // FIXME: This can return EOF once we add EOF codepoints.
-  int? peek(int relativeOffset) {
+  int peek(int relativeOffset) {
     if (pushedChar != null) {
       if (relativeOffset == 0) {
-        return pushedChar;
+        return pushedChar!;
       }
       relativeOffset -= 1;
     }
     final index = _nextOffset + relativeOffset;
     if (index >= data.length) {
-      return null;
+      return endOfFile;
     }
     return data[index];
   }
@@ -104,6 +102,10 @@ class InputManager {
 
   void push(int char) {
     assert(pushedChar == null);
+    if (char == endOfFile) {
+      assert(_nextOffset == data.length);
+      return;
+    }
     pushedChar = char;
   }
 }
@@ -230,6 +232,7 @@ const int hyphenMinus = 0x2D;
 const int lessThanSign = 0x3C;
 const int equalsSign = 0x3D;
 const int greaterThanSign = 0x3E;
+const int endOfFile = -1;
 
 // https://html.spec.whatwg.org/multipage/parsing.html#data-state
 
@@ -318,6 +321,13 @@ class Tokenizer {
 
   Tokenizer(this.input);
 
+  bool get hasPendingCharacterToken => textBuffer != null;
+
+  void bufferCharCode(int codePoint) {
+    textBuffer ??= StringBuffer();
+    textBuffer!.writeCharCode(codePoint);
+  }
+
   CharacterToken emitCharacterToken() {
     final characters = textBuffer.toString();
     textBuffer = null;
@@ -337,6 +347,10 @@ class Tokenizer {
     return CommentToken(data);
   }
 
+  EofToken emitEofToken() {
+    return EofToken();
+  }
+
   // This shouldn't need to take a char?
   void reconsumeIn(int char, TokenizerState newState) {
     state = newState;
@@ -344,8 +358,8 @@ class Tokenizer {
   }
 
   Token getNextToken() {
-    while (!input.isEndOfFile) {
-      int char = input.getNextCodePoint()!;
+    while (true) {
+      int char = input.getNextCodePoint();
       reconsume:
       switch (state) {
         case TokenizerState.data:
@@ -355,10 +369,15 @@ class Tokenizer {
             state = TokenizerState.tagOpen;
             continue;
           }
+          if (char == endOfFile) {
+            if (hasPendingCharacterToken) {
+              return emitCharacterToken();
+            }
+            return emitEofToken();
+          }
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Emit the current input character as a character token.
-          textBuffer ??= StringBuffer();
-          textBuffer!.writeCharCode(char);
+          bufferCharCode(char);
           continue;
 
         case TokenizerState.tagOpen:
@@ -374,23 +393,21 @@ class Tokenizer {
             currentTag =
                 TagTokenBuilder.startTag(firstCodePoint: _toLowerAscii(char));
             state = TokenizerState.tagName;
-            if (textBuffer != null) {
+            if (hasPendingCharacterToken) {
               return emitCharacterToken();
             }
             break reconsume;
           }
 // U+003F QUESTION MARK (?)
 // This is an unexpected-question-mark-instead-of-tag-name parse error. Create a comment token whose data is the empty string. Reconsume in the bogus comment state.
+
 // EOF
-// This is an eof-before-tag-name parse error. Emit a U+003C LESS-THAN SIGN character token and an end-of-file token.
+// This is an eof-before-tag-name parse error.
 
 // Anything else
 // This is an invalid-first-character-of-tag-name parse error.
-// Emit a U+003C LESS-THAN SIGN character token.
-// Reconsume in the data state.
           reconsumeIn(char, TokenizerState.data);
-          textBuffer ??= StringBuffer();
-          textBuffer!.writeCharCode(lessThanSign);
+          bufferCharCode(lessThanSign);
           return emitCharacterToken();
 
         case TokenizerState.tagName:
@@ -414,6 +431,10 @@ class Tokenizer {
             currentTag!.tagName.writeCharCode(replacementCharacter);
             continue;
           }
+          if (char == endOfFile) {
+            // This is an eof-in-tag parse error.
+            return emitEofToken();
+          }
           currentTag!.tagName.writeCharCode(char);
           continue;
 
@@ -422,6 +443,10 @@ class Tokenizer {
             currentTag!.isSelfClosing = true;
             state = TokenizerState.data;
             return emitCurrentTag();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-tag parse error.
+            return emitEofToken();
           }
           reconsumeIn(char, TokenizerState.beforeAttributeName);
           continue;
@@ -432,6 +457,10 @@ class Tokenizer {
           }
           if (char == solidus || char == greaterThanSign) {
             reconsumeIn(char, TokenizerState.afterAttributeName);
+            continue;
+          }
+          if (char == endOfFile) {
+            reconsumeIn(char, TokenizerState.attributeName);
             continue;
           }
 // U+003D EQUALS SIGN (=)
@@ -445,6 +474,10 @@ class Tokenizer {
           if (_isHTMLWhitespace(char) ||
               char == solidus ||
               char == greaterThanSign) {
+            reconsumeIn(char, TokenizerState.afterAttributeName);
+            continue;
+          }
+          if (char == endOfFile) {
             reconsumeIn(char, TokenizerState.afterAttributeName);
             continue;
           }
@@ -474,6 +507,10 @@ class Tokenizer {
           if (char == greaterThanSign) {
             state = TokenizerState.data;
             return emitCurrentTag();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-tag parse error.
+            return emitEofToken();
           }
           currentTag!.startAttributeName("");
           reconsumeIn(char, TokenizerState.attributeName);
@@ -505,6 +542,10 @@ class Tokenizer {
             state = TokenizerState.data;
             return emitCurrentTag();
           }
+          if (char == endOfFile) {
+            // This is an eof-in-tag parse error.
+            return emitEofToken();
+          }
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current attribute's value.
           currentTag!.currentAttribute!.appendToValue(char);
@@ -514,7 +555,7 @@ class Tokenizer {
           if (_isAsciiAlpha(char)) {
             currentTag = TagTokenBuilder.endTag();
             reconsumeIn(char, TokenizerState.tagName);
-            if (textBuffer != null) {
+            if (hasPendingCharacterToken) {
               return emitCharacterToken();
             }
             continue;
@@ -523,11 +564,16 @@ class Tokenizer {
             state = TokenizerState.data;
             continue;
           }
-// EOF
-// This is an eof-before-tag-name parse error. Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS character token and an end-of-file token.
-// Anything else
-// This is an invalid-first-character-of-tag-name parse error. Create a comment token whose data is the empty string. Reconsume in the bogus comment state.
-          state = TokenizerState.data; // Wrong
+          if (char == endOfFile) {
+            bufferCharCode(lessThanSign);
+            bufferCharCode(solidus);
+            reconsumeIn(char, TokenizerState.data);
+            continue;
+          }
+          // This is an invalid-first-character-of-tag-name parse error.
+          assert(textBuffer == null);
+          textBuffer = StringBuffer();
+          reconsumeIn(char, TokenizerState.bogusComment);
           continue;
 
         case TokenizerState.markupDeclarationOpen:
@@ -579,13 +625,15 @@ class Tokenizer {
             state = TokenizerState.data;
             return emitCommentToken();
           }
-// EOF
-// This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
+          if (char == endOfFile) {
+            // This is an eof-in-comment parse error.
+            reconsumeIn(char, TokenizerState.data);
+            return emitCommentToken();
+          }
           textBuffer!.writeCharCode(hyphenMinus);
           reconsumeIn(char, TokenizerState.comment);
           continue;
         case TokenizerState.comment:
-// Consume the next input character:
           if (char == lessThanSign) {
             textBuffer!.writeCharCode(char);
             state = TokenizerState.commentLessThanSign;
@@ -600,8 +648,11 @@ class Tokenizer {
             textBuffer!.writeCharCode(replacementCharacter);
             continue;
           }
-// EOF
-// This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
+          if (char == endOfFile) {
+            // This is an eof-in-comment parse error.
+            reconsumeIn(char, TokenizerState.data);
+            return emitCommentToken();
+          }
           textBuffer!.writeCharCode(char);
           continue;
 
@@ -635,8 +686,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.commentLessThanSignBangDashDash:
-          if (char == greaterThanSign) {
-            // EOF
+          if (char == greaterThanSign || char == endOfFile) {
             reconsumeIn(char, TokenizerState.commentEnd);
             continue;
           }
@@ -649,9 +699,11 @@ class Tokenizer {
             state = TokenizerState.commentEnd;
             continue;
           }
-
-          // EOF
-          // This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
+          if (char == endOfFile) {
+            // This is an eof-in-comment parse error.
+            reconsumeIn(char, TokenizerState.data);
+            return emitCommentToken();
+          }
           textBuffer!.writeCharCode(hyphenMinus);
           reconsumeIn(char, TokenizerState.comment);
           continue;
@@ -669,11 +721,15 @@ class Tokenizer {
             textBuffer!.writeCharCode(hyphenMinus);
             continue;
           }
+          if (char == endOfFile) {
+            // This is an eof-in-comment parse error.
+            reconsumeIn(char, TokenizerState.data);
+            return emitCommentToken();
+          }
           textBuffer!.writeCharCode(hyphenMinus);
           textBuffer!.writeCharCode(hyphenMinus);
           reconsumeIn(char, TokenizerState.comment);
           continue;
-        // EOF
 
         case TokenizerState.commentEndBang:
           if (char == hyphenMinus) {
@@ -684,12 +740,15 @@ class Tokenizer {
             continue;
           }
           if (char == greaterThanSign) {
-// This is an incorrectly-closed-comment parse error.
+            // This is an incorrectly-closed-comment parse error.
             state = TokenizerState.data;
             return emitCommentToken();
           }
-// EOF
-// This is an eof-in-comment parse error. Emit the current comment token. Emit an end-of-file token.
+          if (char == endOfFile) {
+            // This is an eof-in-comment parse error.
+            reconsumeIn(char, TokenizerState.data);
+            return emitCommentToken();
+          }
           textBuffer!.writeCharCode(hyphenMinus);
           textBuffer!.writeCharCode(hyphenMinus);
           textBuffer!.writeCharCode(exclaimationMark);
@@ -701,11 +760,12 @@ class Tokenizer {
             state = TokenizerState.data;
             return emitCommentToken();
           }
-
-// EOF
-// Emit the comment. Emit an end-of-file token.
+          if (char == endOfFile) {
+            reconsumeIn(char, TokenizerState.data);
+            return emitCommentToken();
+          }
           if (char == nullChar) {
-// This is an unexpected-null-character parse error.
+            // This is an unexpected-null-character parse error.
             textBuffer!.writeCharCode(replacementCharacter);
             continue;
           }
@@ -716,14 +776,6 @@ class Tokenizer {
           throw Exception("Reached invalid tokenizer state: $state");
       }
     }
-    // FIXME: move into states.
-    if (textBuffer != null) {
-      if (state == TokenizerState.data) {
-        return emitCharacterToken();
-      }
-      return emitCommentToken();
-    }
-    return EofToken();
   }
 
   Iterable<Token> getTokens() sync* {
