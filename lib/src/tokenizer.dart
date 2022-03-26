@@ -854,7 +854,6 @@ class Tokenizer {
         case TokenizerState.characterReference:
           temporaryBuffer = StringBuffer("");
           temporaryBuffer!.writeCharCode(amperstand);
-          char = consumeNextInputCharacter();
           if (_isAsciiAlphanumeric(char)) {
             reconsumeIn(char, TokenizerState.namedCharacterReference);
             continue;
@@ -867,23 +866,28 @@ class Tokenizer {
           flushCodePointsAsCharacterReference();
           reconsumeInReturnState(char);
           continue;
+
         case TokenizerState.namedCharacterReference:
+          // FIXME: This is not in the spec, but seems necessary?
+          temporaryBuffer!.writeCharCode(char);
+
           if (input.lookAheadForEntityAndConsume(temporaryBuffer!)) {
             //  If the character reference was consumed as part of an attribute, and the last character matched is not a U+003B SEMICOLON character (;), and the next input character is either a U+003D EQUALS SIGN character (=) or an ASCII alphanumeric, then, for historical reasons, flush code points consumed as a character reference and switch to the return state.
             state = takeReturnState();
             return CharacterToken(temporaryBuffer.toString());
           }
           state = TokenizerState.ambiguousAmpersand;
-          return CharacterToken(temporaryBuffer.toString());
+          flushCodePointsAsCharacterReference();
+          continue;
 
         case TokenizerState.ambiguousAmpersand:
-          char = consumeNextInputCharacter();
           if (_isAsciiAlphanumeric(char)) {
             if (referenceIsPartOfAnAttribute()) {
               currentTag!.currentAttribute!.appendToValue(char);
             } else {
               bufferCharCode(char);
             }
+            continue;
           }
           if (char == semicolon) {
             // This is an unknown-named-character-reference parse error.
@@ -895,7 +899,6 @@ class Tokenizer {
 
         case TokenizerState.numericCharacterReference:
           characterReferenceCode = 0;
-          char = consumeNextInputCharacter();
           if (char == latinSmallLetterX || char == latinCapitalLetterX) {
             temporaryBuffer!.writeCharCode(char);
             state = TokenizerState.hexadecimalCharacterReferenceStart;
@@ -905,7 +908,6 @@ class Tokenizer {
           continue;
 
         case TokenizerState.hexadecimalCharacterReferenceStart:
-          char = consumeNextInputCharacter();
           if (_isAsciiDigit(char)) {
             reconsumeIn(char, TokenizerState.decimalCharacterReference);
             continue;
@@ -916,7 +918,6 @@ class Tokenizer {
           continue;
 
         case TokenizerState.decimalCharacterReferenceStart:
-          char = consumeNextInputCharacter();
           if (_isAsciiDigit(char)) {
             reconsumeIn(char, TokenizerState.decimalCharacterReference);
             continue;
@@ -927,7 +928,6 @@ class Tokenizer {
           continue;
 
         case TokenizerState.hexadecimalCharacterReference:
-          char = consumeNextInputCharacter();
           if (_isAsciiDigit(char)) {
             int numeric = char - 0x30;
             characterReferenceCode = characterReferenceCode! * 16 + numeric;
@@ -952,7 +952,6 @@ class Tokenizer {
           continue;
 
         case TokenizerState.decimalCharacterReference:
-          char = consumeNextInputCharacter();
           if (_isAsciiDigit(char)) {
             int numeric = char - 0x30;
             characterReferenceCode = characterReferenceCode! * 10 + numeric;
