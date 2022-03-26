@@ -50,6 +50,18 @@ class EofToken extends Token {
   List toTestJson() => ['EOF'];
 }
 
+class Entity {
+  final String name;
+  final List<int> nameCodepoints;
+  final int value;
+  const Entity(this.name, this.nameCodepoints, this.value);
+}
+
+var entities = const [
+  Entity("&ac;", [amperstand, latinSmallLetterA, latinSmallLetterC, semicolon],
+      0x223E),
+];
+
 class InputManager {
   int? pushedChar;
   final List<int> data;
@@ -101,6 +113,20 @@ class InputManager {
   }
 
   bool lookAheadForEntityAndConsume(int char, StringBuffer buffer) {
+    // var maxEntityLength = 10;
+    // var firstPossible = 0;
+    // var lastPossible = entities.length;
+    // var
+    // for (int codeOffset = 0; codeOffset < maxEntityLength; codeOffset++) {
+    //     var actual = getNextCodePoint();
+    //     // FIXME: Handle EOF?
+    //     buffer.writeCharCode(actual);
+    //   for (int entityIndex = firstPossible; entityIndex < lastPossible; entityIndex++) {
+    //     var entity = entities[entityIndex];
+    //     var expected = entity.nameCodepoints[codeOffset];
+    //   }
+    // }
+
     // Hack in a single entity to test the 'true' codepaths.
     if (char == latinSmallLetterA &&
         peek(0) == latinSmallLetterC &&
