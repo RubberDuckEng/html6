@@ -15,3 +15,4 @@ dev_dependencies:
   path: ^1.8.1
   build_runner: ^2.1.7
   json_serializable: ^6.1.5
+  http: ^0.13.4

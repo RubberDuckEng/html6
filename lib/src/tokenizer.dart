@@ -107,7 +107,9 @@ class InputManager {
     var entity = findMatchingEntity(this, buffer);
     if (entity != null) {
       buffer.clear();
-      buffer.writeCharCode(entity.value);
+      for (int charCode in entity.values) {
+        buffer.writeCharCode(charCode);
+      }
       return true;
     }
 

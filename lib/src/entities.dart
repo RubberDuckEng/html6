@@ -1,17 +1,13 @@
 import 'tokenizer.dart';
 
+part 'entities.g.dart';
+
 class Entity {
   final String name;
   final List<int> nameCodepoints;
-  final int value;
-  const Entity(this.name, this.nameCodepoints, this.value);
+  final List<int> values;
+  const Entity(this.name, this.nameCodepoints, this.values);
 }
-
-var entities = const [
-  Entity("&ac;", [amperstand, latinSmallLetterA, latinSmallLetterC, semicolon],
-      0x223E),
-];
-const int maxEntityLength = 10;
 
 Entity? findMatchingEntity(InputManager input, StringBuffer consumed) {
   var firstPossible = 0;
