@@ -1,4 +1,4 @@
-Passed 5699 of 6806 tests
+Passed 5708 of 6806 tests
 
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
@@ -161,11 +161,11 @@ FAIL: space EOF after doctype
  expected: [["DOCTYPE","html",null,null,false]]
 FAIL: CDATA content
  input: "foo&#32;]]>"
- actual:   [["Character","foo ]>"]]
+ actual:   [["Character","foo ]]>"]]
  expected: [["Character","foo&#32;"]]
 FAIL: CDATA followed by HTML content
  input: "foo&#32;]]>&#32;"
- actual:   [["Character","foo ]> "]]
+ actual:   [["Character","foo ]]> "]]
  expected: [["Character","foo&#32; "]]
 FAIL: CDATA with extra bracket
  input: "foo]]]>"
@@ -179,22 +179,6 @@ FAIL: Semicolonless named entity 'not' followed by 'i;' in body
  input: "&noti;"
  actual:   [["Character","∦"]]
  expected: [["Character","¬i;"]]
-FAIL: Decimal numeric entity followed by hex character a.
- input: "&#97a"
- actual:   [["Character","a"]]
- expected: [["Character","aa"]]
-FAIL: Decimal numeric entity followed by hex character A.
- input: "&#97A"
- actual:   [["Character","a"]]
- expected: [["Character","aA"]]
-FAIL: Decimal numeric entity followed by hex character f.
- input: "&#97f"
- actual:   [["Character","a"]]
- expected: [["Character","af"]]
-FAIL: Decimal numeric entity followed by hex character A.
- input: "&#97F"
- actual:   [["Character","a"]]
- expected: [["Character","aF"]]
 FAIL: Commented close tag in RCDATA or RAWTEXT
  input: "foo<!--</xmp>--></xmp>"
  actual:   [["Character","foo"],["Comment","</xmp>"],["EndTag","xmp"]]
@@ -219,18 +203,6 @@ FAIL: Named entity: zwnj; with a semi-colon
  input: "&zwnj;"
  actual:   [["Character","&zwnj;"]]
  expected: [["Character","‌"]]
-FAIL: Invalid unterminated numeric entity character overflow
- input: "&#11111111111x"
- actual:   [["Character","�"]]
- expected: [["Character","�x"]]
-FAIL: Invalid unterminated numeric entity character overflow
- input: "&#1111111111x"
- actual:   [["Character","�"]]
- expected: [["Character","�x"]]
-FAIL: Invalid unterminated numeric entity character overflow
- input: "&#111111111111x"
- actual:   [["Character","�"]]
- expected: [["Character","�x"]]
 FAIL: Invalid numeric entity character U+1FFFE
  input: "&#x1fffe;"
  actual:   [["Character","�"]]
@@ -647,10 +619,6 @@ FAIL: Incomplete doctype
  input: "<!DOCTYPE html "
  actual:   [["Comment","DOCTYPE html "]]
  expected: [["DOCTYPE","html",null,null,false]]
-FAIL: Hexadecimal entity pair representing a surrogate pair
- input: "&#xD869;&#xDED6;"
- actual:   [["Character","�#xDED6;"]]
- expected: [["Character","��"]]
 FAIL: Simili processing instruction
  input: "<?namespace>"
  actual:   [["Character","<"],["Character","?namespace>"]]
@@ -4393,10 +4361,6 @@ FAIL: 65-bit decimal numeric entity
  input: "&#18446744073709551681;"
  actual:   [["Character","A"]]
  expected: [["Character","�"]]
-FAIL: Surrogate code point edge cases
- input: "&#xD7FF;&#xD800;&#xD801;&#xDFFE;&#xDFFF;&#xE000;"
- actual:   [["Character","퟿#xD800;�#xDFFE;�#xE000;"]]
- expected: [["Character","퟿����"]]
 FAIL: Doctype public case-sensitivity (1)
  input: "<!DoCtYpE HtMl PuBlIc "AbC" "XyZ">"
  actual:   [["Comment","DoCtYpE HtMl PuBlIc \"AbC\" \"XyZ\""]]

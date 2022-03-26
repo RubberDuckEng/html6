@@ -1364,7 +1364,9 @@ class Tokenizer {
           temporaryBuffer = StringBuffer("");
           temporaryBuffer!.writeCharCode(refCode);
           flushCodePointsAsCharacterReference();
-          state = returnState!;
+          // FIXME: spec says "switch to" but tests assume "reconsume in"?
+          reconsumeInReturnState(char);
+          // state = returnState!;
           continue;
 
         default:
