@@ -1674,7 +1674,7 @@ class Tokenizer {
             // This is a null-character-reference parse error.
             refCode = replacementCharacter;
           }
-          if (refCode > 0x10FFF) {
+          if (refCode > 0x10FFFF) {
             // This is a character-reference-outside-unicode-range parse error.
             refCode = replacementCharacter;
           }
