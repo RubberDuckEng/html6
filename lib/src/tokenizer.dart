@@ -406,6 +406,7 @@ const int semicolon = 0x3B;
 const int lessThanSign = 0x3C;
 const int equalsSign = 0x3D;
 const int greaterThanSign = 0x3E;
+const int questionMark = 0x3F;
 const int latinCapitalLetterX = 0x58;
 const int latinSmallLetterA = 0x61;
 const int latinSmallLetterC = 0x63;
@@ -638,6 +639,17 @@ class Tokenizer {
             }
             continue;
           }
+          if (char == questionMark) {
+            // This is an unexpected-question-mark-instead-of-tag-name parse error.
+            // Is this needed?
+            // if (hasPendingCharacterToken) {
+            //   return emitCharacterToken();
+            // }
+            textBuffer = StringBuffer('');
+            reconsumeIn(char, TokenizerState.bogusComment);
+            continue;
+          }
+
 // U+003F QUESTION MARK (?)
 // This is an unexpected-question-mark-instead-of-tag-name parse error. Create a comment token whose data is the empty string. Reconsume in the bogus comment state.
 

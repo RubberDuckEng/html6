@@ -1,4 +1,4 @@
-Passed 6706 of 6806 tests
+Passed 6744 of 6806 tests
 
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
@@ -32,21 +32,6 @@ FAIL: RAWTEXT w/ something looking like an entity
  input: "&foo;"
  actual:   [["Character","âªŒ"]]
  expected: [["Character","&foo;"]]
-FAIL: CR in bogus comment state
- input: "<?"
- actual:   [["Character","<?\n"]]
- expected: [["Comment","?\n"]]
-FAIL: CRLF in bogus comment state
- input: "<?
-"
- actual:   [["Character","<?\n"]]
- expected: [["Comment","?\n"]]
-FAIL: CRLFLF in bogus comment state
- input: "<?
-
-"
- actual:   [["Character","<?\n\n"]]
- expected: [["Comment","?\n\n"]]
 FAIL: Raw NUL replacement
  input: "\u0000"
  actual:   [["Character","\\u0000"]]
@@ -255,147 +240,6 @@ FAIL: Unquoted attribute ending in ampersand
  input: "<s o=& t>"
  actual:   [["StartTag","s",{"t":""}]]
  expected: [["StartTag","s",{"o":"&","t":""}]]
-FAIL: Simili processing instruction
- input: "<?namespace>"
- actual:   [["Character","<?namespace>"]]
- expected: [["Comment","?namespace"]]
-FAIL: A bogus comment stops at >, even if preceeded by two dashes
- input: "<?foo-->"
- actual:   [["Character","<?foo-->"]]
- expected: [["Comment","?foo--"]]
-FAIL: <?
- input: "<?"
- actual:   [["Character","<?"]]
- expected: [["Comment","?"]]
-FAIL: <?\u0000
- input: "<?ý"
- actual:   [["Character","<?\u0000"]]
- expected: [["Comment","?ï¿½"]]
-FAIL: <?\u0009
- input: "<?ý"
- actual:   [["Character","<?\t"]]
- expected: [["Comment","?\t"]]
-FAIL: <?\u000A
- input: "<?
-"
- actual:   [["Character","<?\n"]]
- expected: [["Comment","?\n"]]
-FAIL: <?\u000B
- input: "<?ý"
- actual:   [["Character","<?\u000b"]]
- expected: [["Comment","?\u000b"]]
-FAIL: <?\u000C
- input: "<?ý"
- actual:   [["Character","<?\f"]]
- expected: [["Comment","?\f"]]
-FAIL: <? 
- input: "<? "
- actual:   [["Character","<? "]]
- expected: [["Comment","? "]]
-FAIL: <? \u0000
- input: "<? ý"
- actual:   [["Character","<? \u0000"]]
- expected: [["Comment","? ï¿½"]]
-FAIL: <?!
- input: "<?!"
- actual:   [["Character","<?!"]]
- expected: [["Comment","?!"]]
-FAIL: <?"
- input: "<?""
- actual:   [["Character","<?\""]]
- expected: [["Comment","?\""]]
-FAIL: <?&
- input: "<?&"
- actual:   [["Character","<?&"]]
- expected: [["Comment","?&"]]
-FAIL: <?'
- input: "<?'"
- actual:   [["Character","<?'"]]
- expected: [["Comment","?'"]]
-FAIL: <?-
- input: "<?-"
- actual:   [["Character","<?-"]]
- expected: [["Comment","?-"]]
-FAIL: <?/
- input: "<?/"
- actual:   [["Character","<?/"]]
- expected: [["Comment","?/"]]
-FAIL: <?0
- input: "<?0"
- actual:   [["Character","<?0"]]
- expected: [["Comment","?0"]]
-FAIL: <?1
- input: "<?1"
- actual:   [["Character","<?1"]]
- expected: [["Comment","?1"]]
-FAIL: <?9
- input: "<?9"
- actual:   [["Character","<?9"]]
- expected: [["Comment","?9"]]
-FAIL: <?<
- input: "<?<"
- actual:   [["Character","<?<"]]
- expected: [["Comment","?<"]]
-FAIL: <?=
- input: "<?="
- actual:   [["Character","<?="]]
- expected: [["Comment","?="]]
-FAIL: <?>
- input: "<?>"
- actual:   [["Character","<?>"]]
- expected: [["Comment","?"]]
-FAIL: <??
- input: "<??"
- actual:   [["Character","<??"]]
- expected: [["Comment","??"]]
-FAIL: <?@
- input: "<?@"
- actual:   [["Character","<?@"]]
- expected: [["Comment","?@"]]
-FAIL: <?A
- input: "<?A"
- actual:   [["Character","<?A"]]
- expected: [["Comment","?A"]]
-FAIL: <?B
- input: "<?B"
- actual:   [["Character","<?B"]]
- expected: [["Comment","?B"]]
-FAIL: <?Y
- input: "<?Y"
- actual:   [["Character","<?Y"]]
- expected: [["Comment","?Y"]]
-FAIL: <?Z
- input: "<?Z"
- actual:   [["Character","<?Z"]]
- expected: [["Comment","?Z"]]
-FAIL: <?`
- input: "<?`"
- actual:   [["Character","<?`"]]
- expected: [["Comment","?`"]]
-FAIL: <?a
- input: "<?a"
- actual:   [["Character","<?a"]]
- expected: [["Comment","?a"]]
-FAIL: <?b
- input: "<?b"
- actual:   [["Character","<?b"]]
- expected: [["Comment","?b"]]
-FAIL: <?y
- input: "<?y"
- actual:   [["Character","<?y"]]
- expected: [["Comment","?y"]]
-FAIL: <?z
- input: "<?z"
- actual:   [["Character","<?z"]]
- expected: [["Comment","?z"]]
-FAIL: <?{
- input: "<?{"
- actual:   [["Character","<?{"]]
- expected: [["Comment","?{"]]
-FAIL: <?\uDBC0\uDC00
- input: "<?ô€€€"
- actual:   [["Character","<?ô€€€"]]
- expected: [["Comment","?ô€€€"]]
 FAIL: 65-bit hex numeric entity
  input: "&#x10000000000000041;"
  actual:   [["Character","A"]]
