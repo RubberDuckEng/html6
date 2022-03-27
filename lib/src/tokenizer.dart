@@ -626,6 +626,20 @@ class Tokenizer {
           bufferCharCode(char);
           continue;
 
+        case TokenizerState.plaintext:
+          if (char == nullChar) {
+            bufferCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            if (hasPendingCharacterToken) {
+              return emitCharacterToken();
+            }
+            return emitEofToken();
+          }
+          bufferCharCode(char);
+          continue;
+
         case TokenizerState.tagOpen:
           if (char == exclaimationMark) {
             state = TokenizerState.markupDeclarationOpen;
