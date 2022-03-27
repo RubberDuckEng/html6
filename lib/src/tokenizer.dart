@@ -731,10 +731,14 @@ class Tokenizer {
             state = TokenizerState.beforeAttributeValue;
             continue;
           }
-// ASCII upper alpha
-// Append the lowercase version of the current input character (add 0x0020 to the character's code point) to the current attribute's name.
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current attribute's name.
+          if (_isAsciiUpperAlpha(char)) {
+            currentTag!.currentAttribute!.appendToName(_toLowerAscii(char));
+            continue;
+          }
+          if (char == nullChar) {
+            currentTag!.currentAttribute!.appendToName(replacementCharacter);
+            continue;
+          }
           currentTag!.currentAttribute!.appendToName(char);
           continue;
 
@@ -771,15 +775,58 @@ class Tokenizer {
           if (_isHTMLWhitespace(char)) {
             continue;
           }
-// U+0022 QUOTATION MARK (")
-// Switch to the attribute value (double-quoted) state.
-// U+0027 APOSTROPHE (')
-// Switch to the attribute value (single-quoted) state.
+          if (char == quotationMark) {
+            state = TokenizerState.attributeValueDoubleQuoted;
+            continue;
+          }
+          if (char == apostrophe) {
+            state = TokenizerState.attributeValueSingleQuoted;
+            continue;
+          }
           if (char == greaterThanSign) {
             state = TokenizerState.data;
             return emitCurrentTag();
           }
           reconsumeIn(char, TokenizerState.attributeValueUnquoted);
+          continue;
+        case TokenizerState.attributeValueDoubleQuoted:
+          if (char == quotationMark) {
+            currentTag!.finishAttribute();
+            state = TokenizerState.afterAttributeValueQuoted;
+            continue;
+          }
+// U+0026 AMPERSAND (&)
+// Set the return state to the attribute value (double-quoted) state. Switch to the character reference state.
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            currentTag!.currentAttribute!.appendToValue(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-tag parse error.
+            return emitEofToken();
+          }
+          currentTag!.currentAttribute!.appendToValue(char);
+          continue;
+
+        case TokenizerState.attributeValueSingleQuoted:
+          if (char == apostrophe) {
+            currentTag!.finishAttribute();
+            state = TokenizerState.afterAttributeValueQuoted;
+            continue;
+          }
+// U+0026 AMPERSAND (&)
+// Set the return state to the attribute value (single-quoted) state. Switch to the character reference state.
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            currentTag!.currentAttribute!.appendToValue(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-tag parse error.
+            return emitEofToken();
+          }
+          currentTag!.currentAttribute!.appendToValue(char);
           continue;
 
         case TokenizerState.attributeValueUnquoted:
@@ -787,7 +834,7 @@ class Tokenizer {
             state = TokenizerState.beforeAttributeName;
             continue;
           }
-//           U+0026 AMPERSAND (&)
+// U+0026 AMPERSAND (&)
 // Set the return state to the attribute value (unquoted) state. Switch to the character reference state.
           if (char == greaterThanSign) {
             state = TokenizerState.data;
@@ -797,9 +844,33 @@ class Tokenizer {
             // This is an eof-in-tag parse error.
             return emitEofToken();
           }
-// U+0000 NULL
-// This is an unexpected-null-character parse error. Append a U+FFFD REPLACEMENT CHARACTER character to the current attribute's value.
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            currentTag!.currentAttribute!.appendToValue(replacementCharacter);
+            continue;
+          }
           currentTag!.currentAttribute!.appendToValue(char);
+          continue;
+
+        case TokenizerState.afterAttributeValueQuoted:
+          if (_isHTMLWhitespace(char)) {
+            state = TokenizerState.beforeAttributeName;
+            continue;
+          }
+          if (char == solidus) {
+            state = TokenizerState.selfClosingStartTag;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            return emitCurrentTag();
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-tag parse error.
+            return emitEofToken();
+          }
+          // This is a missing-whitespace-between-attributes parse error.
+          reconsumeIn(char, TokenizerState.beforeAttributeName);
           continue;
 
         case TokenizerState.endTagOpen:

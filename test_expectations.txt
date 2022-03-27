@@ -1,4 +1,4 @@
-Passed 6609 of 6806 tests
+Passed 6642 of 6806 tests
 
 FAIL: PLAINTEXT content model flag
  input: "<head>&body;"
@@ -451,14 +451,6 @@ FAIL: Valid numeric entity character U+10FFFD
  input: "&#x10fffd;"
  actual:   [["Character","ÔøΩ"]]
  expected: [["Character","ÙèøΩ"]]
-FAIL: Multiple atts
- input: "<h a='b' c='d'>"
- actual:   [["StartTag","h",{"c":"'d'"}]]
- expected: [["StartTag","h",{"a":"b","c":"d"}]]
-FAIL: Multiple atts no space
- input: "<h a='b'c='d'>"
- actual:   [["StartTag","h",{"a":"'b'c='d'"}]]
- expected: [["StartTag","h",{"a":"b","c":"d"}]]
 FAIL: < in script data
  input: "<test-->"
  actual:   [["StartTag","test--",{}]]
@@ -656,130 +648,6 @@ FAIL: <?\uDBC0\uDC00
  input: "<?ÙÄÄÄ"
  actual:   [["Character","<?ÙÄÄÄ"]]
  expected: [["Comment","?ÙÄÄÄ"]]
-FAIL: <a a A>
- input: "<a a A>"
- actual:   [["StartTag","a",{"a":"","A":""}]]
- expected: [["StartTag","a",{"a":""}]]
-FAIL: <a a=">">
- input: "<a a=">">"
- actual:   [["StartTag","a",{"a":"\""}],["Character","\">"]]
- expected: [["StartTag","a",{"a":">"}]]
-FAIL: <a a=''\u0000>
- input: "<a a=''˝>"
- actual:   [["StartTag","a",{"a":"''\u0000"}]]
- expected: [["StartTag","a",{"a":"","ÔøΩ":""}]]
-FAIL: <a a=''\u0008>
- input: "<a a=''˝>"
- actual:   [["StartTag","a",{"a":"''\b"}]]
- expected: [["StartTag","a",{"a":"","\b":""}]]
-FAIL: <a a=''\u000B>
- input: "<a a=''˝>"
- actual:   [["StartTag","a",{"a":"''\u000b"}]]
- expected: [["StartTag","a",{"a":"","\u000b":""}]]
-FAIL: <a a=''\u001F>
- input: "<a a=''˝>"
- actual:   [["StartTag","a",{"a":"''\u001f"}]]
- expected: [["StartTag","a",{"a":"","\u001f":""}]]
-FAIL: <a a=''!>
- input: "<a a=''!>"
- actual:   [["StartTag","a",{"a":"''!"}]]
- expected: [["StartTag","a",{"a":"","!":""}]]
-FAIL: <a a=''">
- input: "<a a=''">"
- actual:   [["StartTag","a",{"a":"''\""}]]
- expected: [["StartTag","a",{"a":"","\"":""}]]
-FAIL: <a a=''&>
- input: "<a a=''&>"
- actual:   [["StartTag","a",{"a":"''&"}]]
- expected: [["StartTag","a",{"a":"","&":""}]]
-FAIL: <a a='''>
- input: "<a a='''>"
- actual:   [["StartTag","a",{"a":"'''"}]]
- expected: [["StartTag","a",{"a":"","'":""}]]
-FAIL: <a a=''->
- input: "<a a=''->"
- actual:   [["StartTag","a",{"a":"''-"}]]
- expected: [["StartTag","a",{"a":"","-":""}]]
-FAIL: <a a=''.>
- input: "<a a=''.>"
- actual:   [["StartTag","a",{"a":"''."}]]
- expected: [["StartTag","a",{"a":"",".":""}]]
-FAIL: <a a=''0>
- input: "<a a=''0>"
- actual:   [["StartTag","a",{"a":"''0"}]]
- expected: [["StartTag","a",{"a":"","0":""}]]
-FAIL: <a a=''1>
- input: "<a a=''1>"
- actual:   [["StartTag","a",{"a":"''1"}]]
- expected: [["StartTag","a",{"a":"","1":""}]]
-FAIL: <a a=''9>
- input: "<a a=''9>"
- actual:   [["StartTag","a",{"a":"''9"}]]
- expected: [["StartTag","a",{"a":"","9":""}]]
-FAIL: <a a=''<>
- input: "<a a=''<>"
- actual:   [["StartTag","a",{"a":"''<"}]]
- expected: [["StartTag","a",{"a":"","<":""}]]
-FAIL: <a a=''=>
- input: "<a a=''=>"
- actual:   [["StartTag","a",{"a":"''="}]]
- expected: [["StartTag","a",{"a":"","=":""}]]
-FAIL: <a a=''?>
- input: "<a a=''?>"
- actual:   [["StartTag","a",{"a":"''?"}]]
- expected: [["StartTag","a",{"a":"","?":""}]]
-FAIL: <a a=''@>
- input: "<a a=''@>"
- actual:   [["StartTag","a",{"a":"''@"}]]
- expected: [["StartTag","a",{"a":"","@":""}]]
-FAIL: <a a=''B>
- input: "<a a=''B>"
- actual:   [["StartTag","a",{"a":"''B"}]]
- expected: [["StartTag","a",{"a":"","b":""}]]
-FAIL: <a a=''Y>
- input: "<a a=''Y>"
- actual:   [["StartTag","a",{"a":"''Y"}]]
- expected: [["StartTag","a",{"a":"","y":""}]]
-FAIL: <a a=''Z>
- input: "<a a=''Z>"
- actual:   [["StartTag","a",{"a":"''Z"}]]
- expected: [["StartTag","a",{"a":"","z":""}]]
-FAIL: <a a=''`>
- input: "<a a=''`>"
- actual:   [["StartTag","a",{"a":"''`"}]]
- expected: [["StartTag","a",{"a":"","`":""}]]
-FAIL: <a a=''b>
- input: "<a a=''b>"
- actual:   [["StartTag","a",{"a":"''b"}]]
- expected: [["StartTag","a",{"a":"","b":""}]]
-FAIL: <a a=''y>
- input: "<a a=''y>"
- actual:   [["StartTag","a",{"a":"''y"}]]
- expected: [["StartTag","a",{"a":"","y":""}]]
-FAIL: <a a=''z>
- input: "<a a=''z>"
- actual:   [["StartTag","a",{"a":"''z"}]]
- expected: [["StartTag","a",{"a":"","z":""}]]
-FAIL: <a a=''{>
- input: "<a a=''{>"
- actual:   [["StartTag","a",{"a":"''{"}]]
- expected: [["StartTag","a",{"a":"","{":""}]]
-FAIL: <a a=''\uDBC0\uDC00>
- input: "<a a=''ÙÄÄÄ>"
- actual:   [["StartTag","a",{"a":"''ÙÄÄÄ"}]]
- expected: [["StartTag","a",{"a":"","ÙÄÄÄ":""}]]
-FAIL: <a a='>'>
- input: "<a a='>'>"
- actual:   [["StartTag","a",{"a":"'"}],["Character","'>"]]
- expected: [["StartTag","a",{"a":">"}]]
-FAIL: Double-quoted attribute value not followed by whitespace
- input: "<foo a="b"c>"
- actual:   [["StartTag","foo",{"a":"\"b\"c"}]]
- expected: [["StartTag","foo",{"a":"b","c":""}]]
-FAIL: Single-quoted attribute value not followed by whitespace
- input: "<foo a='b'c>"
- actual:   [["StartTag","foo",{"a":"'b'c"}]]
- expected: [["StartTag","foo",{"a":"b","c":""}]]
 FAIL: Maximum non-BMP numeric entity
  input: "&#X10FFFF;"
  actual:   [["Character","ÔøΩ"]]
