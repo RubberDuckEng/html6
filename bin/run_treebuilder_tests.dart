@@ -128,15 +128,23 @@ String treeToString(Node root) {
 
 // FIXME: How much of this can be shared with the tokenizer tests?
 void main(List<String> arguments) {
-  // var tokenizerDir = p.join('html5lib-tests', 'tree-construction');
-  // var suite = TreeBuilderTestSuite.fromPath(tokenizerDir);
-  // print(suite.groups.first.tests.first.expectedOutput);
+  var tokenizerDir = p.join('html5lib-tests', 'tree-construction');
+  var suite = TreeBuilderTestSuite.fromPath(tokenizerDir);
 
-  // var tree = Document();
-  // var html = Element(htmlQName);
-  // tree.appendChild(html);
-  // html.appendChild(Text("foo"));
+  var resultsString = "";
+  var testCount = 0;
+  var passCount = 0;
 
-  var tree = HTMLParser().parse("<html>");
-  print(treeToString(tree));
+  for (var group in suite.groups) {
+    for (var test in group.tests) {
+      testCount += 1;
+      print(test.data);
+      var tree = HTMLParser().parse(test.data);
+      var actual = treeToString(tree);
+      if (actual == test.expectedOutput) {
+        passCount += 1;
+      }
+    }
+  }
+  print("Passed $passCount of $testCount tree-construction tests.");
 }
