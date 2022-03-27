@@ -408,6 +408,7 @@ const int equalsSign = 0x3D;
 const int greaterThanSign = 0x3E;
 const int questionMark = 0x3F;
 const int latinCapitalLetterX = 0x58;
+const int rightSquareBracket = 0x5D;
 const int latinSmallLetterA = 0x61;
 const int latinSmallLetterC = 0x63;
 const int latinSmallLetterX = 0x78;
@@ -1780,6 +1781,42 @@ class Tokenizer {
             reconsumeIn(char, TokenizerState.data);
             return emitDoctypeToken();
           }
+          continue;
+
+        case TokenizerState.cdataSection:
+          if (char == rightSquareBracket) {
+            state = TokenizerState.cdataSectionBracket;
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-cdata parse error.
+            reconsumeIn(char, TokenizerState.data);
+            continue;
+          }
+          bufferCharCode(char);
+          continue;
+
+        case TokenizerState.cdataSectionBracket:
+          if (char == rightSquareBracket) {
+            state = TokenizerState.cdataSectionEnd;
+            continue;
+          }
+          bufferCharCode(rightSquareBracket);
+          reconsumeIn(char, TokenizerState.cdataSection);
+          continue;
+
+        case TokenizerState.cdataSectionEnd:
+          if (char == rightSquareBracket) {
+            bufferCharCode(rightSquareBracket);
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.data;
+            continue;
+          }
+          bufferCharCode(rightSquareBracket);
+          bufferCharCode(rightSquareBracket);
+          reconsumeIn(char, TokenizerState.cdataSection);
           continue;
 
         case TokenizerState.characterReference:
