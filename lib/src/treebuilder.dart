@@ -214,6 +214,21 @@ class TreeBuilder {
     return Element(document, QName.html(token.tagName));
   }
 
+  void insertText(CharacterToken token) {
+//   Let data be the characters passed to the algorithm, or, if no characters were explicitly specified, the character of the character token being processed.
+
+// Let the adjusted insertion location be the appropriate place for inserting a node.
+
+// If the adjusted insertion location is in a Document node, then return.
+
+// The DOM will not let Document nodes have Text node children, so they are dropped on the floor.
+
+// If there is a Text node immediately before the adjusted insertion location, then append data to that Text node's data.
+
+// Otherwise, create a new Text node whose data is data and whose node document is the same as that of the element in which the adjusted insertion location finds itself, and insert the newly created node at the adjusted insertion location.
+    currentNode!.appendChild(Text(document, token.characters));
+  }
+
   void insertComment(CommentToken token, Node parent) {
     //     When the steps below require the user agent to insert a comment while processing a comment token, optionally with an explicitly insertion position position, the user agent must run the following steps:
 
@@ -347,6 +362,10 @@ class TreeBuilder {
           continue; // reprocess
 
         case InsertionMode.inBody:
+          if (token is CharacterToken) {
+            insertText(token);
+          }
+
           if (token is StartTagToken) {
             // Reconstruct the active formatting elements, if any.
             insertHtmlElement(token);
@@ -369,8 +388,8 @@ class TreeBuilder {
         case InsertionMode.afterAfterBody:
         case InsertionMode.afterAfterFrameset:
       }
-      // This return makes "break" above function as "return".
-      return; // Done after switch.
+      // This return makes "break" calls above function as "return".
+      return; // Done after switch unless explicit "continue" was used.
     }
   }
 }

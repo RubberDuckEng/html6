@@ -68,7 +68,7 @@ void main(List<String> arguments) {
         testCount += 1;
         // NOTE: This toList is important or we'll try to iterate
         // the tokens iterable twice and get confused.
-        var tokens;
+        List<Token> tokens;
         try {
           tokens = tokenizer.getTokensWithoutEOF().toList();
         } catch (e) {

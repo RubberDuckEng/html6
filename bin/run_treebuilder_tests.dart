@@ -1,8 +1,20 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:html6/html6.dart';
 import 'package:html6/src/dom.dart';
 import 'package:path/path.dart' as p;
+
+// This must exist somewhere in Dart?
+void removeBytesGitThinksAreBinary(List<int> bytes, int replacement) {
+  for (var i = 0; i < bytes.length; i++) {
+    var byte = bytes[i];
+    // Control characters other than \n or \m?
+    if (byte < 0x20 && !(byte == 0xA || byte == 0xD)) {
+      bytes[i] = replacement;
+    }
+  }
+}
 
 class TreeBuilderTest {
   final String data;
@@ -30,7 +42,11 @@ class TreeBuilderTest {
         // print unknown mode?
       }
     }
-    return TreeBuilderTest(data.toString(), errors, expectedOutput.toString());
+    return TreeBuilderTest(
+      data.toString().trimRight(),
+      errors,
+      expectedOutput.toString().trimRight(),
+    );
   }
 }
 
@@ -41,13 +57,19 @@ class TestGroup {
   TestGroup(this.name, this.tests);
 
   factory TestGroup.fromPath(String path) {
+    var name = p.basenameWithoutExtension(path);
     var groupString = File(path).readAsStringSync();
-    var tests = groupString
-        .split("\n\n")
-        .map<TreeBuilderTest>(
-            (testString) => TreeBuilderTest.fromString(testString))
-        .toList();
-    return TestGroup(p.basenameWithoutExtension(path), tests);
+    var testStrings = groupString.split("#data");
+    var tests = <TreeBuilderTest>[];
+    // Skip first empty string.
+    for (var testString in testStrings.sublist(1)) {
+      var test = TreeBuilderTest.fromString("#data" + testString);
+      if (test.data.isEmpty && test.expectedOutput.isEmpty) {
+        print("Parse error in $name: $testString");
+      }
+      tests.add(test);
+    }
+    return TestGroup(name, tests);
   }
 }
 
@@ -75,7 +97,7 @@ class TreeBuilderTestSuite {
 }
 
 String treeToString(Node root) {
-  int depth = 0;
+  int depth = -1;
 
   Node node = root;
 
@@ -103,7 +125,7 @@ String treeToString(Node root) {
 
   var buffer = StringBuffer("");
   while (nextNode() != null) {
-    var prefix = "|" + ("  " * depth);
+    var prefix = "| " + ("  " * depth);
     if (node is Element) {
       Element element = node as Element;
       buffer.writeln(prefix + "<${element.tagName.name}>");
@@ -131,20 +153,33 @@ void main(List<String> arguments) {
   var tokenizerDir = p.join('html5lib-tests', 'tree-construction');
   var suite = TreeBuilderTestSuite.fromPath(tokenizerDir);
 
-  var resultsString = "";
+  var results = StringBuffer("");
   var testCount = 0;
   var passCount = 0;
 
   for (var group in suite.groups) {
     for (var test in group.tests) {
       testCount += 1;
-      print(test.data);
       var tree = HTMLParser().parse(test.data);
-      var actual = treeToString(tree);
-      if (actual == test.expectedOutput) {
+      var expected = test.expectedOutput.trim();
+      var actual = treeToString(tree).trim();
+      if (actual == expected) {
+        results.writeln("PASS: ${test.data}");
         passCount += 1;
+      } else {
+        results.writeln("FAIL: ${test.data}");
+        results.writeln("Expected:");
+        results.writeln(expected);
+        results.writeln("Actual:");
+        results.writeln(actual);
       }
     }
   }
-  print("Passed $passCount of $testCount tree-construction tests.");
+  results.writeln("Passed $passCount of $testCount tree-construction tests.");
+
+  var testExpectations = File("treebuilder_expectations.txt");
+  // Hacky to prevent test_expectations being treated as binary.
+  var bytes = utf8.encode(results.toString());
+  removeBytesGitThinksAreBinary(bytes, unicodeReplacementCharacterRune);
+  testExpectations.writeAsBytesSync(bytes);
 }
