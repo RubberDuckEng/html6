@@ -650,9 +650,6 @@ class Tokenizer {
             continue;
           }
 
-// U+003F QUESTION MARK (?)
-// This is an unexpected-question-mark-instead-of-tag-name parse error. Create a comment token whose data is the empty string. Reconsume in the bogus comment state.
-
 // EOF
 // This is an eof-before-tag-name parse error.
 
