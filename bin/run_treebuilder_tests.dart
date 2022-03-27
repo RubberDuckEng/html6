@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:html6/src/dom.dart';
+import 'package:html6/src/tagnames.dart';
 import 'package:path/path.dart' as p;
 
 class TreeBuilderTest {
@@ -72,9 +74,67 @@ class TreeBuilderTestSuite {
   }
 }
 
+String treeToString(Node root) {
+  int depth = 0;
+
+  Node node = root;
+
+  Node? nextNode() {
+    if (node.firstChild != null) {
+      depth += 1;
+      node = node.firstChild!;
+      return node;
+    } else if (node.nextSibling != null) {
+      node = node.nextSibling!;
+      return node;
+    } else {
+      Node candidate = node;
+      while (candidate.nextSibling == null) {
+        depth -= 1;
+        candidate = candidate.parent!;
+        if (candidate == root) {
+          return null;
+        }
+      }
+    }
+    return null;
+  }
+
+  var buffer = StringBuffer("");
+  while (nextNode() != null) {
+    var prefix = "|" + ("  " * depth);
+    if (node is Element) {
+      Element element = node as Element;
+      buffer.writeln(prefix + "<${element.tagName.name}>");
+      if (element.attributes.isNotEmpty) {
+        var names = element.attributes.keys.toList();
+        names.sort();
+        for (var name in names) {
+          var value = element.attributes[name];
+          buffer.writeln(prefix + "  $name=$value");
+        }
+      }
+    } else if (node is Text) {
+      var text = node as Text;
+      buffer.writeln(prefix + '"${text.textContent}"');
+    } else if (node is Comment) {
+      var comment = node as Comment;
+      buffer.writeln(prefix + '<!-- ${comment.textContent} -->');
+    }
+  }
+  return buffer.toString();
+}
+
 // FIXME: How much of this can be shared with the tokenizer tests?
 void main(List<String> arguments) {
   var tokenizerDir = p.join('html5lib-tests', 'tree-construction');
   var suite = TreeBuilderTestSuite.fromPath(tokenizerDir);
   print(suite.groups.first.tests.first.expectedOutput);
+
+  var tree = Document();
+  var html = Element(htmlQName);
+  tree.appendChild(html);
+  html.appendChild(Text("foo"));
+
+  print(treeToString(tree));
 }

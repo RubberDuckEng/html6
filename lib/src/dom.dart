@@ -54,7 +54,11 @@ class Node {
 
 class Doctype extends Node {}
 
-class Comment extends Node {}
+class Comment extends Node {
+  String textContent;
+
+  Comment(this.textContent);
+}
 
 class Text extends Node {
   String textContent;
