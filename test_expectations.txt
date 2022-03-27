@@ -1,35 +1,18 @@
-Passed 6735 of 6742 tests
+Passed 6932 of 7032 tests
 
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
+FAIL: Raw NUL replacement
+ input: "\u0000"
+ actual:   [["Character","\\u0000"]]
+ expected: [["Character","\\uFFFD"]]
+FAIL: Raw NUL replacement
+ input: "\u0000"
+ actual:   [["Character","\\u0000"]]
+ expected: [["Character","\\uFFFD"]]
 FAIL: Raw NUL replacement
  input: "\u0000"
  actual:   [["Character","\\u0000"]]
  expected: [["Character","\\uFFFD"]]
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
@@ -49,50 +32,29 @@ FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
+FAIL: Bad charref in RCDATA
+ input: "&NotEqualTild;"
+ actual:   [["Character","≏̸"]]
+ expected: [["Character","&NotEqualTild;"]]
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: --!NUL in comment 
  input: "<!----!\u0000-->"
  actual:   [["Comment","--!\\u0000"]]
  expected: [["Comment","--!\\uFFFD"]]
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: Semicolonless named entity 'not' followed by 'i;' in body
  input: "&noti;"
  actual:   [["Character","∦"]]
  expected: [["Character","¬i;"]]
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
+FAIL: Commented entities in RCDATA
+ input: " &amp; <!-- &amp; --> &amp; </xmp>"
+ actual:   [["Character"," ⊴ --> & "],["EndTag","xmp"]]
+ expected: [["Character"," & <!-- & --> & "],["EndTag","xmp"]]
 FAIL: Named entity: zwnj; with a semi-colon
  input: "&zwnj;"
  actual:   [["Character","&zwnj;"]]
@@ -114,202 +76,55 @@ FAIL: Unquoted attribute ending in ampersand
  input: "<s o=& t>"
  actual:   [["StartTag","s",{"t":""}]]
  expected: [["StartTag","s",{"o":"&","t":""}]]
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rcdata
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.rawtext
 FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.cdataSection
 FAIL: 65-bit hex numeric entity
  input: "&#x10000000000000041;"
  actual:   [["Character","A"]]

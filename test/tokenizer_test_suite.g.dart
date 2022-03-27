@@ -19,6 +19,7 @@ TokenizerTest _$TokenizerTestFromJson(Map<String, dynamic> json) =>
       (json['initialStates'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      json['lastStartTag'] as String?,
       json['input'] as String,
       outputFromJson(json['output'] as List),
       (json['errors'] as List<dynamic>?)

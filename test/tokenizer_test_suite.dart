@@ -53,6 +53,7 @@ List<TokenExpectation> outputFromJson(List json) {
 class TokenizerTest {
   final String description;
   final List<String>? initialStates;
+  final String? lastStartTag;
   final String input;
 
   @JsonKey(fromJson: outputFromJson)
@@ -60,8 +61,8 @@ class TokenizerTest {
   @JsonKey(defaultValue: [])
   final List<TokenizerError> errors;
 
-  TokenizerTest(this.description, this.initialStates, this.input, this.output,
-      this.errors);
+  TokenizerTest(this.description, this.initialStates, this.lastStartTag,
+      this.input, this.output, this.errors);
 
   factory TokenizerTest.fromJson(Map<String, dynamic> json) =>
       _$TokenizerTestFromJson(json);
