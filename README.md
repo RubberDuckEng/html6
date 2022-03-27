@@ -8,7 +8,6 @@ Next
 
 Failures by first expected token:
 grep expected  test_expectations.txt | awk '{print $2}' | tr ',' ' ' | awk '{print $1}' | sort -r | uniq -c
-     37 [["StartTag"
-    855 [["DOCTYPE"
-     46 [["Comment"
-    522 [["Character"
+     34 [["StartTag"
+     39 [["Comment"
+    124 [["Character"
