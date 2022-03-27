@@ -81,8 +81,12 @@ List<int> normalizeNewlines(String input) {
       }
       data.add(0x0A);
       if (iterator.current == 0x0A) {
+        // This was a \r\n, skip the \n.
         continue;
       } else {
+        // This was \r followed by X, output \n
+        // and then consider X again. This coveres the
+        // \r\r\n case should produce \n\n.
         iterator.movePrevious();
         continue;
       }
