@@ -516,6 +516,10 @@ class Tokenizer {
 
   Tokenizer(this.input);
 
+  void setState(TokenizerState requestedState) {
+    state = requestedState;
+  }
+
   bool get hasPendingCharacterToken => textBuffer != null;
 
 // FIXME: the implicit StringBuffer creation seems dangerous?

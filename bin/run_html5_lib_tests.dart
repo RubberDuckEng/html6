@@ -19,6 +19,24 @@ void removeBytesGitThinksAreBinary(List<int> bytes, int replacement) {
   }
 }
 
+TokenizerState parseInitialState(String state) {
+  switch (state) {
+    case 'RCDATA state':
+      return TokenizerState.rcdata;
+    case 'RAWTEXT state':
+      return TokenizerState.rawtext;
+    case 'CDATA section state':
+      return TokenizerState.cdataSection;
+    case 'PLAINTEXT state':
+      return TokenizerState.plaintext;
+    case 'Script data state':
+      return TokenizerState.scriptData;
+    case 'Data state':
+      return TokenizerState.data;
+  }
+  throw Exception('Unknown state: $state');
+}
+
 void main(List<String> arguments) {
   var tokenizerDir = p.join('html5lib-tests', 'tokenizer');
   var suite = TokenizerTestSuite.fromPath(tokenizerDir);
@@ -39,30 +57,39 @@ void main(List<String> arguments) {
       if (testFilter != null && testFilter != test.description) {
         continue;
       }
-      // print(test.description);
-      var input = InputManager(test.input);
-      var tokenizer = Tokenizer(input);
-      // NOTE: This toList is important or we'll try to iterate
-      // the tokens iterable twice and get confused.
-      var tokens = tokenizer.getTokensWithoutEOF().toList();
-      var expectedTokens =
-          test.output.map((expectation) => matchesToken(expectation));
-      var matcher = orderedEquals(expectedTokens);
-      var result = matcher.matches(tokens, {});
-      testCount += 1;
-      if (result) {
-        // resultsString += "PASS: ${test.description}\n";
-        passCount += 1;
-      } else {
-        // FIXME: Hack around incorrect toJson implementation?
-        var actualJson =
-            json.encode(tokens.map((token) => token.toTestJson()).toList());
-        var expectedJson = json.encode(test.output);
-        // Spacing to make actual/expected align.
-        resultsString += "FAIL: ${test.description}\n";
-        resultsString += " input: \"${test.input}\"\n";
-        resultsString += " actual:   $actualJson\n";
-        resultsString += " expected: $expectedJson\n";
+      for (var initialState in test.initialStates ?? ["Data state"]) {
+        // print(test.description);
+        var input = InputManager(test.input);
+        var tokenizer = Tokenizer(input);
+        tokenizer.setState(parseInitialState(initialState));
+        // NOTE: This toList is important or we'll try to iterate
+        // the tokens iterable twice and get confused.
+        var tokens;
+        try {
+          tokens = tokenizer.getTokensWithoutEOF().toList();
+        } catch (e) {
+          resultsString += 'FAIL: $e\n';
+          continue;
+        }
+        var expectedTokens =
+            test.output.map((expectation) => matchesToken(expectation));
+        var matcher = orderedEquals(expectedTokens);
+        var result = matcher.matches(tokens, {});
+        testCount += 1;
+        if (result) {
+          // resultsString += "PASS: ${test.description}\n";
+          passCount += 1;
+        } else {
+          // FIXME: Hack around incorrect toJson implementation?
+          var actualJson =
+              json.encode(tokens.map((token) => token.toTestJson()).toList());
+          var expectedJson = json.encode(test.output);
+          // Spacing to make actual/expected align.
+          resultsString += "FAIL: ${test.description}\n";
+          resultsString += " input: \"${test.input}\"\n";
+          resultsString += " actual:   $actualJson\n";
+          resultsString += " expected: $expectedJson\n";
+        }
       }
     }
   }
