@@ -62,6 +62,9 @@ void main(List<String> arguments) {
         var input = InputManager(test.input);
         var tokenizer = Tokenizer(input);
         tokenizer.setState(parseInitialState(initialState));
+        if (test.lastStartTag != null) {
+          tokenizer.setLastStartTag(test.lastStartTag!);
+        }
         // NOTE: This toList is important or we'll try to iterate
         // the tokens iterable twice and get confused.
         var tokens;

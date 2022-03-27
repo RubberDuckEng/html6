@@ -513,11 +513,37 @@ class Tokenizer {
   StringBuffer? textBuffer;
   StringBuffer? temporaryBuffer;
   int? characterReferenceCode;
+  String? lastStartTag;
 
   Tokenizer(this.input);
 
   void setState(TokenizerState requestedState) {
     state = requestedState;
+  }
+
+  void setLastStartTag(String tagName) {
+    lastStartTag = tagName;
+  }
+
+  bool _currentTagIsAppropriate() {
+    if (temporaryBuffer == null || lastStartTag == null) {
+      return false;
+    }
+    final bufferedRunes = temporaryBuffer!.toString().runes;
+    final expectedRunes = lastStartTag!.runes;
+    if (bufferedRunes.length != expectedRunes.length) {
+      return false;
+    }
+    final bufferedIterator = bufferedRunes.iterator;
+    final expectedIterator = expectedRunes.iterator;
+    while (bufferedIterator.moveNext() && expectedIterator.moveNext()) {
+      if (_toLowerAscii(bufferedIterator.current) !=
+          _toLowerAscii(expectedIterator.current)) {
+        return false;
+      }
+    }
+    temporaryBuffer = null;
+    return true;
   }
 
   bool get hasPendingCharacterToken => textBuffer != null;
@@ -546,7 +572,11 @@ class Tokenizer {
     assert(currentTag != null);
     final tag = currentTag!;
     currentTag = null;
-    return tag.buildToken();
+    final token = tag.buildToken();
+    if (token is StartTagToken) {
+      lastStartTag = token.tagName;
+    }
+    return token;
   }
 
   void beginDoctypeToken() {
@@ -623,6 +653,30 @@ class Tokenizer {
           }
 // U+0000 NULL
 // This is an unexpected-null-character parse error. Emit the current input character as a character token.
+          bufferCharCode(char);
+          continue;
+
+        case TokenizerState.rcdata:
+          if (char == amperstand) {
+            returnState = TokenizerState.rcdata;
+            state = TokenizerState.characterReference;
+            continue;
+          }
+          if (char == lessThanSign) {
+            state = TokenizerState.rcdataLessThanSign;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            bufferCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            if (hasPendingCharacterToken) {
+              return emitCharacterToken();
+            }
+            return emitEofToken();
+          }
           bufferCharCode(char);
           continue;
 
@@ -704,6 +758,76 @@ class Tokenizer {
           }
           currentTag!.tagName.writeCharCode(char);
           continue;
+
+        case TokenizerState.rcdataLessThanSign:
+          if (char == solidus) {
+            temporaryBuffer = StringBuffer();
+            state = TokenizerState.rcdataEndTagOpen;
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          reconsumeIn(char, TokenizerState.rcdata);
+          continue;
+
+        case TokenizerState.rcdataEndTagOpen:
+          if (_isAsciiAlpha(char)) {
+            currentTag = TagTokenBuilder.endTag();
+            reconsumeIn(char, TokenizerState.rcdataEndTagName);
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          bufferCharCode(solidus);
+          reconsumeIn(char, TokenizerState.rcdata);
+          continue;
+
+        case TokenizerState.rcdataEndTagName:
+          if (_isHTMLWhitespace(char)) {
+            if (_currentTagIsAppropriate()) {
+              state = TokenizerState.beforeAttributeName;
+              if (hasPendingCharacterToken) {
+                return emitCharacterToken();
+              }
+              continue;
+            }
+          } else if (char == solidus) {
+            if (_currentTagIsAppropriate()) {
+              state = TokenizerState.selfClosingStartTag;
+              if (hasPendingCharacterToken) {
+                return emitCharacterToken();
+              }
+              continue;
+            }
+          } else if (char == greaterThanSign) {
+            if (_currentTagIsAppropriate()) {
+              if (hasPendingCharacterToken) {
+                // Put the greaterThanSign back ito the input and move to the
+                // afterAttributeName state so that we'll emitCurrentTag() when
+                // we come back.
+                reconsumeIn(char, TokenizerState.afterAttributeName);
+                return emitCharacterToken();
+              }
+              state = TokenizerState.data;
+              return emitCurrentTag();
+            }
+          } else if (_isAsciiAlpha(char)) {
+            currentTag!.tagName.writeCharCode(_toLowerAscii(char));
+            temporaryBuffer ??= StringBuffer();
+            temporaryBuffer!.writeCharCode(char);
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          bufferCharCode(solidus);
+          if (temporaryBuffer != null) {
+            bufferCharacters(temporaryBuffer!.toString());
+            temporaryBuffer = null;
+          }
+          reconsumeIn(char, TokenizerState.rcdata);
+          continue;
+
+        // case TokenizerState.rawtextLessThanSign:
+        // case TokenizerState.rawtextEndTagOpen:
+        // case TokenizerState.rawtextEndTagName:
+        //   continue;
 
         case TokenizerState.selfClosingStartTag:
           if (char == greaterThanSign) {
