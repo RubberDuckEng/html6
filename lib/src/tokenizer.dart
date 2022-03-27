@@ -205,14 +205,14 @@ enum TokenizerState {
   rawtextEndTagName,
   scriptDataLessThanSign,
   scriptDataEndTagOpen,
-  scriptDataendTagName,
+  scriptDataEndTagName,
   scriptDataEscapeStart,
   scriptDataEscapeStartDash,
   scriptDataEscaped,
   scriptDataEscapedDash,
   scriptDataEscapedDashDash,
   scriptDataEscapedLessThanSign,
-  scriptDataEscapedEndTagPpen,
+  scriptDataEscapedEndTagOpen,
   scriptDataEscapedEndTagName,
   scriptDataDoubleEscapeStart,
   scriptDataDoubleEscaped,
@@ -700,6 +700,24 @@ class Tokenizer {
           bufferCharCode(char);
           continue;
 
+        case TokenizerState.scriptData:
+          if (char == lessThanSign) {
+            state = TokenizerState.scriptDataLessThanSign;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            bufferCharCode(replacementCharacter);
+          }
+          if (char == endOfFile) {
+            if (hasPendingCharacterToken) {
+              return emitCharacterToken();
+            }
+            return emitEofToken();
+          }
+          bufferCharCode(char);
+          continue;
+
         case TokenizerState.plaintext:
           if (char == nullChar) {
             bufferCharCode(replacementCharacter);
@@ -737,16 +755,16 @@ class Tokenizer {
             // if (hasPendingCharacterToken) {
             //   return emitCharacterToken();
             // }
-            textBuffer = StringBuffer('');
+            textBuffer = StringBuffer();
             reconsumeIn(char, TokenizerState.bogusComment);
             continue;
           }
 
-// EOF
-// This is an eof-before-tag-name parse error.
+          // EOF
+          // This is an eof-before-tag-name parse error.
 
-// Anything else
-// This is an invalid-first-character-of-tag-name parse error.
+          // Anything else
+          // This is an invalid-first-character-of-tag-name parse error.
           reconsumeIn(char, TokenizerState.data);
           bufferCharCode(lessThanSign);
           continue;
@@ -820,7 +838,7 @@ class Tokenizer {
           } else if (char == greaterThanSign) {
             if (_currentTagIsAppropriate()) {
               if (hasPendingCharacterToken) {
-                // Put the greaterThanSign back ito the input and move to the
+                // Put the greaterThanSign back into the input and move to the
                 // afterAttributeName state so that we'll emitCurrentTag() when
                 // we come back.
                 reconsumeIn(char, TokenizerState.afterAttributeName);
@@ -885,7 +903,7 @@ class Tokenizer {
           } else if (char == greaterThanSign) {
             if (_currentTagIsAppropriate()) {
               if (hasPendingCharacterToken) {
-                // Put the greaterThanSign back ito the input and move to the
+                // Put the greaterThanSign back into the input and move to the
                 // afterAttributeName state so that we'll emitCurrentTag() when
                 // we come back.
                 reconsumeIn(char, TokenizerState.afterAttributeName);
@@ -907,6 +925,372 @@ class Tokenizer {
             temporaryBuffer = null;
           }
           reconsumeIn(char, TokenizerState.rawtext);
+          continue;
+
+        case TokenizerState.scriptDataLessThanSign:
+          if (char == solidus) {
+            temporaryBuffer = StringBuffer();
+            state = TokenizerState.scriptDataEndTagOpen;
+            continue;
+          }
+          if (char == exclaimationMark) {
+            state = TokenizerState.scriptDataEscapeStart;
+            bufferCharCode(lessThanSign);
+            bufferCharCode(exclaimationMark);
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          reconsumeIn(char, TokenizerState.scriptData);
+          continue;
+
+        case TokenizerState.scriptDataEndTagOpen:
+          if (_isAsciiAlpha(char)) {
+            currentTag = TagTokenBuilder.endTag();
+            reconsumeIn(char, TokenizerState.scriptDataEndTagName);
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          bufferCharCode(solidus);
+          reconsumeIn(char, TokenizerState.scriptData);
+          continue;
+
+        case TokenizerState.scriptDataEndTagName:
+          if (_isHTMLWhitespace(char)) {
+            if (_currentTagIsAppropriate()) {
+              state = TokenizerState.beforeAttributeName;
+              if (hasPendingCharacterToken) {
+                return emitCharacterToken();
+              }
+              continue;
+            }
+          } else if (char == solidus) {
+            if (_currentTagIsAppropriate()) {
+              state = TokenizerState.selfClosingStartTag;
+              if (hasPendingCharacterToken) {
+                return emitCharacterToken();
+              }
+              continue;
+            }
+          } else if (char == greaterThanSign) {
+            if (_currentTagIsAppropriate()) {
+              if (hasPendingCharacterToken) {
+                // Put the greaterThanSign back into the input and move to the
+                // afterAttributeName state so that we'll emitCurrentTag() when
+                // we come back.
+                reconsumeIn(char, TokenizerState.afterAttributeName);
+                return emitCharacterToken();
+              }
+              state = TokenizerState.data;
+              return emitCurrentTag();
+            }
+          } else if (_isAsciiAlpha(char)) {
+            currentTag!.tagName.writeCharCode(_toLowerAscii(char));
+            temporaryBuffer ??= StringBuffer();
+            temporaryBuffer!.writeCharCode(char);
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          bufferCharCode(solidus);
+          if (temporaryBuffer != null) {
+            bufferCharacters(temporaryBuffer!.toString());
+            temporaryBuffer = null;
+          }
+          reconsumeIn(char, TokenizerState.scriptData);
+          continue;
+
+        case TokenizerState.scriptDataEscapeStart:
+          if (char == hyphenMinus) {
+            state = TokenizerState.scriptDataEscapeStartDash;
+            bufferCharCode(hyphenMinus);
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.scriptData);
+          continue;
+
+        case TokenizerState.scriptDataEscapeStartDash:
+          if (char == hyphenMinus) {
+            state = TokenizerState.scriptDataEscapedDashDash;
+            bufferCharCode(hyphenMinus);
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.scriptData);
+          continue;
+
+        case TokenizerState.scriptDataEscaped:
+          if (char == hyphenMinus) {
+            state = TokenizerState.scriptDataEscapedDash;
+            bufferCharCode(hyphenMinus);
+            continue;
+          }
+          if (char == lessThanSign) {
+            state = TokenizerState.scriptDataEscapedLessThanSign;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            bufferCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-script-html-comment-like-text parse error.
+            reconsumeIn(char, TokenizerState.scriptData);
+            continue;
+          }
+          bufferCharCode(char);
+          continue;
+
+        case TokenizerState.scriptDataEscapedDash:
+          if (char == hyphenMinus) {
+            state = TokenizerState.scriptDataEscapedDashDash;
+            bufferCharCode(hyphenMinus);
+            continue;
+          }
+          if (char == lessThanSign) {
+            state = TokenizerState.scriptDataEscapedLessThanSign;
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            state = TokenizerState.scriptDataEscaped;
+            bufferCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-script-html-comment-like-text parse error.
+            reconsumeIn(char, TokenizerState.scriptData);
+            continue;
+          }
+          state = TokenizerState.scriptDataEscaped;
+          bufferCharCode(char);
+          continue;
+
+        case TokenizerState.scriptDataEscapedDashDash:
+          if (char == hyphenMinus) {
+            bufferCharCode(hyphenMinus);
+            continue;
+          }
+          if (char == lessThanSign) {
+            state = TokenizerState.scriptDataEscapedLessThanSign;
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.scriptData;
+            bufferCharCode(greaterThanSign);
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            state = TokenizerState.scriptDataEscaped;
+            bufferCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-script-html-comment-like-text parse error.
+            reconsumeIn(char, TokenizerState.scriptData);
+            continue;
+          }
+          state = TokenizerState.scriptDataEscaped;
+          bufferCharCode(char);
+          continue;
+
+        case TokenizerState.scriptDataEscapedLessThanSign:
+          if (char == solidus) {
+            temporaryBuffer = StringBuffer();
+            state = TokenizerState.scriptDataEscapedEndTagOpen;
+            continue;
+          }
+          if (_isAsciiAlpha(char)) {
+            temporaryBuffer = StringBuffer();
+            bufferCharCode(lessThanSign);
+            reconsumeIn(char, TokenizerState.scriptDataDoubleEscapeStart);
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          reconsumeIn(char, TokenizerState.scriptDataEscaped);
+          continue;
+
+        case TokenizerState.scriptDataEscapedEndTagOpen:
+          if (_isAsciiAlpha(char)) {
+            currentTag = TagTokenBuilder.endTag();
+            reconsumeIn(char, TokenizerState.scriptDataEscapedEndTagName);
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          bufferCharCode(solidus);
+          reconsumeIn(char, TokenizerState.scriptDataEscaped);
+          continue;
+        case TokenizerState.scriptDataEscapedEndTagName:
+          if (_isHTMLWhitespace(char)) {
+            if (_currentTagIsAppropriate()) {
+              state = TokenizerState.beforeAttributeName;
+              if (hasPendingCharacterToken) {
+                return emitCharacterToken();
+              }
+              continue;
+            }
+          } else if (char == solidus) {
+            if (_currentTagIsAppropriate()) {
+              state = TokenizerState.selfClosingStartTag;
+              if (hasPendingCharacterToken) {
+                return emitCharacterToken();
+              }
+              continue;
+            }
+          } else if (char == greaterThanSign) {
+            if (_currentTagIsAppropriate()) {
+              if (hasPendingCharacterToken) {
+                // Put the greaterThanSign back into the input and move to the
+                // afterAttributeName state so that we'll emitCurrentTag() when
+                // we come back.
+                reconsumeIn(char, TokenizerState.afterAttributeName);
+                return emitCharacterToken();
+              }
+              state = TokenizerState.data;
+              return emitCurrentTag();
+            }
+          } else if (_isAsciiAlpha(char)) {
+            currentTag!.tagName.writeCharCode(_toLowerAscii(char));
+            temporaryBuffer ??= StringBuffer();
+            temporaryBuffer!.writeCharCode(char);
+            continue;
+          }
+          bufferCharCode(lessThanSign);
+          bufferCharCode(solidus);
+          if (temporaryBuffer != null) {
+            bufferCharacters(temporaryBuffer!.toString());
+            temporaryBuffer = null;
+          }
+          reconsumeIn(char, TokenizerState.scriptDataEscaped);
+          continue;
+
+        case TokenizerState.scriptDataDoubleEscapeStart:
+          if (_isHTMLWhitespace(char) ||
+              char == solidus ||
+              char == greaterThanSign) {
+            if (temporaryBuffer.toString() == 'script') {
+              state = TokenizerState.scriptDataDoubleEscaped;
+            } else {
+              state = TokenizerState.scriptDataEscaped;
+            }
+            bufferCharCode(char);
+            continue;
+          }
+          if (_isAsciiAlpha(char)) {
+            temporaryBuffer!.writeCharCode(_toLowerAscii(char));
+            bufferCharCode(char);
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.scriptDataEscaped);
+          continue;
+
+        case TokenizerState.scriptDataDoubleEscaped:
+          if (char == hyphenMinus) {
+            state = TokenizerState.scriptDataDoubleEscapedDash;
+            bufferCharCode(hyphenMinus);
+            continue;
+          }
+          if (char == lessThanSign) {
+            state = TokenizerState.scriptDataDoubleEscapedLessThanSign;
+            bufferCharCode(lessThanSign);
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            bufferCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-script-html-comment-like-text parse error.
+            reconsumeIn(char, TokenizerState.scriptData);
+            continue;
+          }
+          bufferCharCode(char);
+          continue;
+
+        case TokenizerState.scriptDataDoubleEscapedDash:
+          if (char == hyphenMinus) {
+            state = TokenizerState.scriptDataDoubleEscapedDashDash;
+            bufferCharCode(hyphenMinus);
+            continue;
+          }
+          if (char == lessThanSign) {
+            state = TokenizerState.scriptDataDoubleEscapedLessThanSign;
+            bufferCharCode(lessThanSign);
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            state = TokenizerState.scriptDataDoubleEscaped;
+            bufferCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-script-html-comment-like-text parse error.
+            reconsumeIn(char, TokenizerState.scriptData);
+            continue;
+          }
+          state = TokenizerState.scriptDataDoubleEscaped;
+          bufferCharCode(char);
+          continue;
+
+        case TokenizerState.scriptDataDoubleEscapedDashDash:
+          if (char == hyphenMinus) {
+            bufferCharCode(hyphenMinus);
+            continue;
+          }
+          if (char == lessThanSign) {
+            state = TokenizerState.scriptDataDoubleEscapedLessThanSign;
+            bufferCharCode(lessThanSign);
+            continue;
+          }
+          if (char == greaterThanSign) {
+            state = TokenizerState.scriptData;
+            bufferCharCode(greaterThanSign);
+            continue;
+          }
+          if (char == nullChar) {
+            // This is an unexpected-null-character parse error.
+            state = TokenizerState.scriptDataDoubleEscaped;
+            bufferCharCode(replacementCharacter);
+            continue;
+          }
+          if (char == endOfFile) {
+            // This is an eof-in-script-html-comment-like-text parse error.
+            reconsumeIn(char, TokenizerState.scriptData);
+            continue;
+          }
+          state = TokenizerState.scriptDataDoubleEscaped;
+          bufferCharCode(char);
+          continue;
+
+        case TokenizerState.scriptDataDoubleEscapedLessThanSign:
+          if (char == solidus) {
+            temporaryBuffer = StringBuffer();
+            state = TokenizerState.scriptDataDoubleEscapeEnd;
+            bufferCharCode(solidus);
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.scriptDataDoubleEscaped);
+          continue;
+
+        case TokenizerState.scriptDataDoubleEscapeEnd:
+          if (_isHTMLWhitespace(char) ||
+              char == solidus ||
+              char == greaterThanSign) {
+            if (temporaryBuffer.toString() == 'script') {
+              state = TokenizerState.scriptDataEscaped;
+            } else {
+              state = TokenizerState.scriptDataDoubleEscaped;
+            }
+            bufferCharCode(char);
+            continue;
+          }
+          if (_isAsciiAlpha(char)) {
+            temporaryBuffer!.writeCharCode(_toLowerAscii(char));
+            bufferCharCode(char);
+            continue;
+          }
+          reconsumeIn(char, TokenizerState.scriptDataDoubleEscaped);
           continue;
 
         case TokenizerState.selfClosingStartTag:
@@ -1820,7 +2204,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.characterReference:
-          temporaryBuffer = StringBuffer("");
+          temporaryBuffer = StringBuffer();
           temporaryBuffer!.writeCharCode(amperstand);
           if (_isAsciiAlphanumeric(char)) {
             reconsumeIn(char, TokenizerState.namedCharacterReference);
@@ -1987,7 +2371,7 @@ class Tokenizer {
                 }[refCode] ??
                 refCode;
           }
-          temporaryBuffer = StringBuffer("");
+          temporaryBuffer = StringBuffer();
           temporaryBuffer!.writeCharCode(refCode);
           flushCodePointsAsCharacterReference();
           // FIXME: spec says "switch to" but tests assume "reconsume in"?

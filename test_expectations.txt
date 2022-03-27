@@ -1,4 +1,4 @@
-Passed 6932 of 7032 tests
+Passed 7018 of 7032 tests
 
 FAIL: Raw NUL replacement
  input: "\u0000"
@@ -12,41 +12,26 @@ FAIL: Raw NUL replacement
  input: "\u0000"
  actual:   [["Character","\\u0000"]]
  expected: [["Character","\\uFFFD"]]
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
+FAIL: Raw NUL replacement
+ input: "\u0000"
+ actual:   [["Character","\\u0000"]]
+ expected: [["Character","\\uFFFD"]]
+FAIL: NUL in script HTML comment
+ input: "<!--test\u0000--><!--test-\u0000--><!--test--\u0000-->"
+ actual:   [["Character","<!--test\\u0000--><!--test-\\u0000--><!--test--\\u0000-->"]]
+ expected: [["Character","<!--test\\uFFFD--><!--test-\\uFFFD--><!--test--\\uFFFD-->"]]
+FAIL: NUL in script HTML comment - double escaped
+ input: "<!--<script>\u0000--><!--<script>-\u0000--><!--<script>--\u0000-->"
+ actual:   [["Character","<!--<script>\\u0000--><!--<script>-\\u0000--><!--<script>--\\u0000-->"]]
+ expected: [["Character","<!--<script>\\uFFFD--><!--<script>-\\uFFFD--><!--<script>--\\uFFFD-->"]]
 FAIL: Bad charref in RCDATA
  input: "&NotEqualTild;"
  actual:   [["Character","≏̸"]]
  expected: [["Character","&NotEqualTild;"]]
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: --!NUL in comment 
  input: "<!----!\u0000-->"
  actual:   [["Comment","--!\\u0000"]]
  expected: [["Comment","--!\\uFFFD"]]
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: Semicolonless named entity 'not' followed by 'i;' in body
  input: "&noti;"
  actual:   [["Character","∦"]]
@@ -59,72 +44,10 @@ FAIL: Named entity: zwnj; with a semi-colon
  input: "&zwnj;"
  actual:   [["Character","&zwnj;"]]
  expected: [["Character","‌"]]
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: Unquoted attribute ending in ampersand
  input: "<s o=& t>"
  actual:   [["StartTag","s",{"t":""}]]
  expected: [["StartTag","s",{"o":"&","t":""}]]
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
-FAIL: Exception: Reached invalid tokenizer state: TokenizerState.scriptData
 FAIL: 65-bit hex numeric entity
  input: "&#x10000000000000041;"
  actual:   [["Character","A"]]
