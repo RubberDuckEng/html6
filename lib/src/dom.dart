@@ -93,6 +93,8 @@ class QName {
   final String namespace;
   final String name;
 
+  const QName({required this.name, required this.namespace});
+
   const QName.html(this.name) : namespace = htmlNamespace;
 }
 

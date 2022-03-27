@@ -134,7 +134,7 @@ class TreeBuilder {
     return openElements.last;
   }
 
-  Element insertForeignElement(QName name) {
+  Element insertForeignElement(StartTagToken token, String namespace) {
     //     Let the adjusted insertion location be the appropriate place for inserting a node.
 
     // Let element be the result of creating an element for the token in the given namespace, with the intended parent being the element in which the adjusted insertion location finds itself.
@@ -149,14 +149,18 @@ class TreeBuilder {
 
     // If the adjusted insertion location cannot accept more elements, e.g. because it's a Document that already has an element child, then element is dropped on the floor.
 
-    var element = Element(document, name);
+    var qName = QName(name: token.tagName, namespace: namespace);
+    var element = Element(document, qName);
+    for (var entry in token.attributes.entries) {
+      element.setAttribute(entry.key, entry.value);
+    }
     currentNode!.appendChild(element);
     openElements.add(element);
     return element;
   }
 
   Element insertHtmlElement(StartTagToken token) {
-    return insertForeignElement(QName.html(token.tagName));
+    return insertForeignElement(token, htmlNamespace);
   }
 
   Element createElementForToken(StartTagToken token) {
@@ -211,7 +215,11 @@ class TreeBuilder {
     // Return element.
 
     // FIXME: This is wrong.
-    return Element(document, QName.html(token.tagName));
+    var element = Element(document, QName.html(token.tagName));
+    for (var entry in token.attributes.entries) {
+      element.setAttribute(entry.key, entry.value);
+    }
+    return element;
   }
 
   void insertText(CharacterToken token) {
