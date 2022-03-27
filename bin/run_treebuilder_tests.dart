@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:html6/html6.dart';
 import 'package:html6/src/dom.dart';
-import 'package:html6/src/tagnames.dart';
 import 'package:path/path.dart' as p;
 
 class TreeBuilderTest {
@@ -89,12 +89,13 @@ String treeToString(Node root) {
       return node;
     } else {
       Node candidate = node;
-      while (candidate.nextSibling == null) {
+      while (candidate != root) {
+        if (candidate.nextSibling != null) {
+          node = candidate.nextSibling!;
+          return node;
+        }
         depth -= 1;
         candidate = candidate.parent!;
-        if (candidate == root) {
-          return null;
-        }
       }
     }
     return null;
@@ -127,14 +128,15 @@ String treeToString(Node root) {
 
 // FIXME: How much of this can be shared with the tokenizer tests?
 void main(List<String> arguments) {
-  var tokenizerDir = p.join('html5lib-tests', 'tree-construction');
-  var suite = TreeBuilderTestSuite.fromPath(tokenizerDir);
-  print(suite.groups.first.tests.first.expectedOutput);
+  // var tokenizerDir = p.join('html5lib-tests', 'tree-construction');
+  // var suite = TreeBuilderTestSuite.fromPath(tokenizerDir);
+  // print(suite.groups.first.tests.first.expectedOutput);
 
-  var tree = Document();
-  var html = Element(htmlQName);
-  tree.appendChild(html);
-  html.appendChild(Text("foo"));
+  // var tree = Document();
+  // var html = Element(htmlQName);
+  // tree.appendChild(html);
+  // html.appendChild(Text("foo"));
 
+  var tree = HTMLParser().parse("<html>");
   print(treeToString(tree));
 }
