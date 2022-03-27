@@ -1,7 +1,7 @@
 name: html6
-description: A sample command-line application.
+description: This time with feeling.
 version: 1.0.0
-# homepage: https://www.example.com
+homepage: http://rubberduckeng.com
 
 environment:
   sdk: '>=2.17.0-69.2.beta <3.0.0'
@@ -10,9 +10,9 @@ dependencies:
   json_annotation: ^4.4.0
 
 dev_dependencies:
-  lints: ^1.0.0
-  test: ^1.16.0
-  path: ^1.8.1
   build_runner: ^2.1.7
-  json_serializable: ^6.1.5
   http: ^0.13.4
+  json_serializable: ^6.1.5
+  lints: ^1.0.1
+  path: ^1.8.1
+  test: ^1.16.0
