@@ -1,4 +1,4 @@
-Passed 6876 of 6887 tests
+Passed 6876 of 7032 tests
 
 FAIL: Raw NUL replacement
  input: "\u0000"

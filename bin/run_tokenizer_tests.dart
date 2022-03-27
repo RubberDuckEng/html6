@@ -65,6 +65,7 @@ void main(List<String> arguments) {
         if (test.lastStartTag != null) {
           tokenizer.setLastStartTag(test.lastStartTag!);
         }
+        testCount += 1;
         // NOTE: This toList is important or we'll try to iterate
         // the tokens iterable twice and get confused.
         var tokens;
@@ -78,7 +79,6 @@ void main(List<String> arguments) {
             test.output.map((expectation) => matchesToken(expectation));
         var matcher = orderedEquals(expectedTokens);
         var result = matcher.matches(tokens, {});
-        testCount += 1;
         if (result) {
           // resultsString += "PASS: ${test.description}\n";
           passCount += 1;
