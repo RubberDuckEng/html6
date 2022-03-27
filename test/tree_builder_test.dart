@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('basic empty', () {
-    var empty = parse('');
+    var empty = HTMLParser().parse('');
     expect(empty.firstChild, isNull);
     expect(empty.lastChild, isNull);
     expect(empty.parent, isNull);

@@ -1,9 +1,22 @@
 class Node {
+  // FIXME: These all need to be read-only!
+  final Document? _document;
   Node? parent;
   Node? firstChild;
   Node? lastChild;
   Node? nextSibling;
   Node? previousSibling;
+
+  Node(Document document) : _document = document;
+
+  Node._documentSuperconstructor() : _document = null;
+
+  Document get document {
+    if (_document != null) {
+      return _document!;
+    }
+    return this as Document;
+  }
 
   bool isDecendantOf(Node node) {
     Node? current = node;
@@ -52,18 +65,20 @@ class Node {
   }
 }
 
-class Doctype extends Node {}
+class Doctype extends Node {
+  Doctype(Document document) : super(document);
+}
 
 class Comment extends Node {
   String textContent;
 
-  Comment(this.textContent);
+  Comment(Document document, this.textContent) : super(document);
 }
 
 class Text extends Node {
   String textContent;
 
-  Text(this.textContent);
+  Text(Document document, this.textContent) : super(document);
 }
 
 const String htmlNamespace = "http://www.w3.org/1999/xhtml";
@@ -85,7 +100,7 @@ class Element extends Node {
   QName tagName;
   Map<String, String> attributes = {};
 
-  Element(this.tagName);
+  Element(Document document, this.tagName) : super(document);
 
   String? getAttribute(String name) => attributes[name];
   void setAttribute(String name, String value) {
@@ -93,4 +108,14 @@ class Element extends Node {
   }
 }
 
-class Document extends Node {}
+enum QuirksMode {
+  limted,
+  quirks,
+  strict,
+}
+
+class Document extends Node {
+  QuirksMode quirskMode = QuirksMode.strict;
+
+  Document() : super._documentSuperconstructor();
+}

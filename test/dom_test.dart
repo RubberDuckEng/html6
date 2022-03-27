@@ -3,14 +3,15 @@ import 'package:test/test.dart';
 
 void main() {
   test('basic', () {
-    var parent = Node();
+    var doc = Document();
+    var parent = Node(doc);
     expect(parent.parent, isNull);
     expect(parent.firstChild, isNull);
     expect(parent.lastChild, isNull);
     expect(parent.nextSibling, isNull);
     expect(parent.previousSibling, isNull);
 
-    var child1 = Node();
+    var child1 = Node(doc);
     parent.appendChild(child1);
     expect(parent.parent, isNull);
     expect(parent.firstChild, equals(child1));
@@ -23,7 +24,7 @@ void main() {
     expect(child1.nextSibling, isNull);
     expect(child1.previousSibling, isNull);
 
-    var child2 = Node();
+    var child2 = Node(doc);
     parent.appendChild(child2);
     expect(parent.parent, isNull);
     expect(parent.firstChild, equals(child1));
@@ -41,7 +42,7 @@ void main() {
     expect(child2.nextSibling, isNull);
     expect(child2.previousSibling, child1);
 
-    var parent2 = Node();
+    var parent2 = Node(doc);
     parent2.appendChild(child1);
     expect(parent2.parent, isNull);
     expect(parent2.firstChild, equals(child1));
@@ -66,13 +67,14 @@ void main() {
   });
 
   test('cycles disallowed', () {
+    var doc = Document();
     expect(() {
-      var parent = Node();
+      var parent = Node(doc);
       parent.appendChild(parent);
     }, throwsException);
 
-    var parent = Node();
-    var child = Node();
+    var parent = Node(doc);
+    var child = Node(doc);
     parent.appendChild(child);
     expect(() {
       child.appendChild(parent);
