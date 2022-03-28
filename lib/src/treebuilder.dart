@@ -1,4 +1,4 @@
-import 'package:html6/src/tagnames.dart';
+import 'package:html6/src/html_names.dart';
 import 'package:html6/src/tokenizer.dart';
 
 import 'dom.dart';
@@ -415,6 +415,22 @@ class TreeBuilder {
           }
 
           if (token is StartTagToken) {
+            final name = token.tagName;
+            if (name == captionTag ||
+                name == colTag ||
+                name == colgroupTag ||
+                name == frameTag ||
+                name == headTag ||
+                name == tbodyTag ||
+                name == tdTag ||
+                name == tfootTag ||
+                name == thTag ||
+                name == theadTag ||
+                name == trTag) {
+              // Parse error. Ignore the token.
+              break;
+            }
+            // Any other start tag:
             // Reconstruct the active formatting elements, if any.
             insertHtmlElement(token);
             break;
