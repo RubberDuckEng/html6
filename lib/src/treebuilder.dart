@@ -2,6 +2,7 @@ import 'package:html6/src/tagnames.dart';
 import 'package:html6/src/tokenizer.dart';
 
 import 'dom.dart';
+import 'namespaces.dart';
 
 enum InsertionMode {
   initial,
