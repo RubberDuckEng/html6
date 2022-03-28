@@ -237,7 +237,7 @@ class TreeBuilder {
     currentNode!.appendChild(Text(document, token.characters));
   }
 
-  void insertComment(CommentToken token, Node parent) {
+  void insertComment(CommentToken token, {Node? explicitParent}) {
     //     When the steps below require the user agent to insert a comment while processing a comment token, optionally with an explicitly insertion position position, the user agent must run the following steps:
 
     // Let data be the data given in the comment token being processed.
@@ -247,7 +247,7 @@ class TreeBuilder {
     // Create a Comment node whose data attribute is set to data and whose node document is the same as that of the node in which the adjusted insertion location finds itself.
 
     // Insert the newly created node at the adjusted insertion location.
-
+    Node parent = explicitParent ?? currentNode!;
     parent.appendChild(Comment(document, token.data));
   }
 
@@ -259,7 +259,7 @@ class TreeBuilder {
 // Ignore the token.
 
           if (token is CommentToken) {
-            insertComment(token, document);
+            insertComment(token, explicitParent: document);
             break; // Not covered in tests.
           }
 
@@ -301,7 +301,7 @@ class TreeBuilder {
             break;
           }
           if (token is CommentToken) {
-            insertComment(token, document);
+            insertComment(token, explicitParent: document);
             break;
           }
 
@@ -337,8 +337,8 @@ class TreeBuilder {
 // A character token that is one of U+0009 CHARACTER TABULATION, U+000A LINE FEED (LF), U+000C FORM FEED (FF), U+000D CARRIAGE RETURN (CR), or U+0020 SPACE
 // Ignore the token.
           if (token is CommentToken) {
-            insertComment(token, document);
-            // break;
+            insertComment(token);
+            break;
           }
           if (token is DoctypeToken) {
             // Parse error. Ignore the token.

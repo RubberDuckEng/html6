@@ -1654,11 +1654,11 @@ Expected:
 |   <body>
 Actual:
 | <html>
+|   <!--  comment  -->
 |   <head>
 |   <body>
 |     <title>
 |       "Comment before head"
-| <!--  comment  -->
 PASS: <!DOCTYPE html>Hello
 PASS: <!dOctYpE HtMl>Hello
 PASS: <!DOCTYPEhtml>Hello
@@ -15629,9 +15629,7 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <html>
-|   <head>
-|   <body>
-| <!-- foo -->
+|   <!-- foo -->
 FAIL: <!doctype html><head></head></p><!--foo-->
 Expected:
 | <!DOCTYPE html>
