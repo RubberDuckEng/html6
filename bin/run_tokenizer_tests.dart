@@ -98,7 +98,7 @@ void main(List<String> arguments) {
   }
   resultsString = "Passed $passCount of $testCount tests\n\n" + resultsString;
 
-  var testExpectations = File("test_expectations.txt");
+  var testExpectations = File("tokenizer_expectations.txt");
   // Hacky to prevent test_expectations being treated as binary.
   var bytes = utf8.encode(resultsString);
   removeBytesGitThinksAreBinary(bytes, unicodeReplacementCharacterRune);
