@@ -206,10 +206,10 @@ Actual:
 |     <p>
 |       "1"
 |       <s>
-|         id=A
+|         id="A"
 |         "2"
 |         <b>
-|           id=B
+|           id="B"
 |           "3"
 |           "4"
 |           "5"
@@ -1956,7 +1956,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--fooý</script>
 Expected:
 | <html>
@@ -1970,7 +1970,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!-- foo-ý</script>
 Expected:
 | <html>
@@ -1984,7 +1984,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!-- foo--ý</script>
 Expected:
 | <html>
@@ -1998,7 +1998,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!-- foo-
 Expected:
 | <html>
@@ -2012,7 +2012,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!-- foo-<</script>
 Expected:
 | <html>
@@ -2026,7 +2026,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!-- foo-<S
 Expected:
 | <html>
@@ -2040,7 +2040,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!-- foo-</SCRIPT>
 Expected:
 | <html>
@@ -2054,7 +2054,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<p></script>
 Expected:
 | <html>
@@ -2068,7 +2068,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<script></script></script>
 Expected:
 | <html>
@@ -2082,7 +2082,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<script>ý</script></script>
 Expected:
 | <html>
@@ -2096,7 +2096,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<script>-ý</script></script>
 Expected:
 | <html>
@@ -2110,7 +2110,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<script>--ý</script></script>
 Expected:
 | <html>
@@ -2124,7 +2124,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<script>---</script></script>
 Expected:
 | <html>
@@ -2138,7 +2138,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<script></scrip></SCRIPT></script>
 Expected:
 | <html>
@@ -2152,7 +2152,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<script></scrip </SCRIPT></script>
 Expected:
 | <html>
@@ -2166,7 +2166,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--<script></scrip/</SCRIPT></script>
 Expected:
 | <html>
@@ -2180,7 +2180,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"></scrip/></script>
 Expected:
 | <html>
@@ -2194,7 +2194,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"></scrip ></script>
 Expected:
 | <html>
@@ -2208,7 +2208,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--</scrip></script>
 Expected:
 | <html>
@@ -2222,7 +2222,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--</scrip </script>
 Expected:
 | <html>
@@ -2236,7 +2236,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <script type="data"><!--</scrip/</script>
 Expected:
 | <html>
@@ -2250,7 +2250,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=data
+|       type="data"
 FAIL: <!DOCTYPE html><!DOCTYPE html>
 Expected:
 | <!DOCTYPE html>
@@ -2457,7 +2457,7 @@ Actual:
 |   <body>
 |     <svg>
 |       <font>
-|         id=foo
+|         id="foo"
 FAIL: <svg><font size=4></font></svg>
 Expected:
 | <html>
@@ -2472,7 +2472,7 @@ Actual:
 |   <body>
 |     <svg>
 |       <font>
-|         size=4
+|         size="4"
 FAIL: <svg><font color=red></font></svg>
 Expected:
 | <html>
@@ -2487,7 +2487,7 @@ Actual:
 |   <body>
 |     <svg>
 |       <font>
-|         color=red
+|         color="red"
 FAIL: <svg><font font=sans></font></svg>
 Expected:
 | <html>
@@ -2502,7 +2502,7 @@ Actual:
 |   <body>
 |     <svg>
 |       <font>
-|         font=sans
+|         font="sans"
 PASS: FOO&gt;BAR
 PASS: FOO&gtBAR
 PASS: FOO&gt BAR
@@ -2620,111 +2620,15 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       bar=ZZ&gt;YY
-FAIL: <div bar="ZZ&"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&
-FAIL: <div bar='ZZ&'></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&
-FAIL: <div bar=ZZ&></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&
-FAIL: <div bar="ZZ&gt=YY"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&gt=YY"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&gt=YY
-FAIL: <div bar="ZZ&gt0YY"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&gt0YY"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&gt0YY
-FAIL: <div bar="ZZ&gt9YY"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&gt9YY"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&gt9YY
-FAIL: <div bar="ZZ&gtaYY"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&gtaYY"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&gtaYY
-FAIL: <div bar="ZZ&gtZYY"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&gtZYY"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&gtZYY
+|       bar="ZZ&gt;YY"
+PASS: <div bar="ZZ&"></div>
+PASS: <div bar='ZZ&'></div>
+PASS: <div bar=ZZ&></div>
+PASS: <div bar="ZZ&gt=YY"></div>
+PASS: <div bar="ZZ&gt0YY"></div>
+PASS: <div bar="ZZ&gt9YY"></div>
+PASS: <div bar="ZZ&gtaYY"></div>
+PASS: <div bar="ZZ&gtZYY"></div>
 FAIL: <div bar="ZZ&gt YY"></div>
 Expected:
 | <html>
@@ -2737,7 +2641,7 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       bar=ZZ&gt YY
+|       bar="ZZ&gt YY"
 FAIL: <div bar="ZZ&gt"></div>
 Expected:
 | <html>
@@ -2750,7 +2654,7 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       bar=ZZ&gt
+|       bar="ZZ&gt"
 FAIL: <div bar='ZZ&gt'></div>
 Expected:
 | <html>
@@ -2763,7 +2667,7 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       bar=ZZ&gt
+|       bar="ZZ&gt"
 FAIL: <div bar=ZZ&gt></div>
 Expected:
 | <html>
@@ -2776,7 +2680,7 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       bar=ZZ&gt
+|       bar="ZZ&gt"
 FAIL: <div bar="ZZ&pound_id=23"></div>
 Expected:
 | <html>
@@ -2789,20 +2693,8 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       bar=ZZ&pound_id=23
-FAIL: <div bar="ZZ&prod_id=23"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&prod_id=23"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&prod_id=23
+|       bar="ZZ&pound_id=23"
+PASS: <div bar="ZZ&prod_id=23"></div>
 FAIL: <div bar="ZZ&pound;_id=23"></div>
 Expected:
 | <html>
@@ -2815,7 +2707,7 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       bar=ZZ&pound;_id=23
+|       bar="ZZ&pound;_id=23"
 FAIL: <div bar="ZZ&prod;_id=23"></div>
 Expected:
 | <html>
@@ -2828,33 +2720,9 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       bar=ZZ&prod;_id=23
-FAIL: <div bar="ZZ&pound=23"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&pound=23"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&pound=23
-FAIL: <div bar="ZZ&prod=23"></div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar="ZZ&prod=23"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       bar=ZZ&prod=23
+|       bar="ZZ&prod;_id=23"
+PASS: <div bar="ZZ&pound=23"></div>
+PASS: <div bar="ZZ&prod=23"></div>
 PASS: <div>ZZ&pound_id=23</div>
 PASS: <div>ZZ&prod_id=23</div>
 PASS: <div>ZZ&pound;_id=23</div>
@@ -2882,7 +2750,7 @@ Actual:
 |   <head>
 |   <body>
 |     <font>
-|       color=
+|       color=""
 |       "X"
 FAIL: <font></font>X
 Expected:
@@ -3397,12 +3265,12 @@ Expected:
 | "X"
 Actual:
 | <html>
-|   class=foo
+|   class="foo"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       class=foo
+|       class="foo"
 |       "X"
 FAIL: <body class="foo">X
 Expected:
@@ -3412,7 +3280,7 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       class=foo
+|       class="foo"
 |       "X"
 FAIL: <svg><p>
 Expected:
@@ -3502,58 +3370,10 @@ Actual:
 |     <p>
 |       <foo>
 PASS: <div<div>
-FAIL: <div foo<bar=''>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       foo<bar=""
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       foo<bar=
-FAIL: <div foo=`bar`>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       foo="`bar`"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       foo=`bar`
-FAIL: <div \"foo=''>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       \"foo=""
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       \"foo=
-FAIL: <a href='\nbar'></a>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <a>
-|       href="\nbar"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <a>
-|       href=\nbar
+PASS: <div foo<bar=''>
+PASS: <div foo=`bar`>
+PASS: <div \"foo=''>
+PASS: <a href='\nbar'></a>
 FAIL: <!DOCTYPE html>
 Expected:
 | <!DOCTYPE html>
@@ -3707,7 +3527,7 @@ Actual:
 |     <table>
 |       <form>
 |         <input>
-|           type=hidden
+|           type="hidden"
 |           <input>
 |             <div>
 FAIL: <i>A<b>B<p></i>C</b>D
@@ -3764,25 +3584,7 @@ PASS: <foo>1<p>2</foo>
 PASS: <dd>1</foo>
 PASS: <foo>1<dd>2</foo>
 PASS: <isindex>
-FAIL: <isindex name="A" action="B" prompt="C" foo="D">
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <isindex>
-|       action="B"
-|       foo="D"
-|       name="A"
-|       prompt="C"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <isindex>
-|       action=B
-|       foo=D
-|       name=A
-|       prompt=C
+PASS: <isindex name="A" action="B" prompt="C" foo="D">
 PASS: <form><isindex>
 FAIL: <!doctype html><isindex>x</isindex>x
 Expected:
@@ -4221,7 +4023,7 @@ Actual:
 |       <head>
 |         <noscript>
 |           <html>
-|             class=foo
+|             class="foo"
 FAIL: <head><noscript></noscript>
 Expected:
 | <html>
@@ -4392,7 +4194,7 @@ Actual:
 |       <head>
 |         <noscript>
 |           <head>
-|             class=foo
+|             class="foo"
 FAIL: <head><noscript><noscript class="foo"><!--foo--></noscript>
 Expected:
 | <html>
@@ -4408,7 +4210,7 @@ Actual:
 |       <head>
 |         <noscript>
 |           <noscript>
-|             class=foo
+|             class="foo"
 FAIL: <head><noscript></p><!--foo--></noscript>
 Expected:
 | <html>
@@ -4492,7 +4294,7 @@ Actual:
 |   <head>
 |   <body>
 |     <input>
-|       type=hidden
+|       type="hidden"
 |       <frameset>
 FAIL: <!DOCTYPE html><table><caption><svg>foo</table>bar
 Expected:
@@ -5556,7 +5358,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "BAR"
 FAIL: FOO<script></script foo=">" dd>BAR
 Expected:
@@ -5737,7 +5539,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 FAIL: FOO<script type="text/plain">'<!-- <sCrIpt> -'</script>BAR
 Expected:
@@ -5754,7 +5556,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 FAIL: FOO<script type="text/plain">'<!-- <sCrIpt> --'</script>BAR
 Expected:
@@ -5771,7 +5573,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 FAIL: FOO<script>'<!-- <sCrIpt> -->'</script>BAR
 Expected:
@@ -5806,7 +5608,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 |       "'"
 |       "BAR"
@@ -5825,7 +5627,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 FAIL: FOO<script type="text/plain">'<!-- <sCrIpt '</script>BAR
 Expected:
@@ -5842,7 +5644,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 FAIL: FOO<script type="text/plain">'<!-- <sCrIpt/'</script>BAR
 Expected:
@@ -5859,7 +5661,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 FAIL: FOO<script type="text/plain">'<!-- <sCrIpt\'</script>BAR
 Expected:
@@ -5877,7 +5679,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 FAIL: FOO<script type="text/plain">'<!-- <sCrIpt/'</script>BAR</script>QUX
 Expected:
@@ -5895,7 +5697,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     <script>
-|       type=text/plain
+|       type="text/plain"
 |       "'"
 FAIL: FOO<script><!--<script>-></script>--></script>QUX
 Expected:
@@ -6130,7 +5932,7 @@ Actual:
 |   <body>
 |     <table>
 |       <col>
-|         foo=bar
+|         foo="bar"
 FAIL: <table><colgroup></html>foo
 Expected:
 | <html>
@@ -7449,11 +7251,11 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       a=b
+|       a="b"
 |       <template>
 |         <div>
 |           <body>
-|             c=d
+|             c="d"
 |             <div>
 FAIL: <html a=b><template><div><html b=c><span></template>
 Expected:
@@ -7467,16 +7269,16 @@ Expected:
 |   <body>
 Actual:
 | <html>
-|   a=b
+|   a="b"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       a=b
+|       a="b"
 |       <template>
 |         <div>
 |           <html>
-|             b=c
+|             b="c"
 |             <span>
 FAIL: <html a=b><template><col></col><html b=c><col></col></template>
 Expected:
@@ -7490,16 +7292,16 @@ Expected:
 |   <body>
 Actual:
 | <html>
-|   a=b
+|   a="b"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       a=b
+|       a="b"
 |       <template>
 |         <col>
 |           <html>
-|             b=c
+|             b="c"
 |             <col>
 FAIL: <html a=b><template><frame></frame><html b=c><frame></frame></template>
 Expected:
@@ -7511,16 +7313,16 @@ Expected:
 |   <body>
 Actual:
 | <html>
-|   a=b
+|   a="b"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       a=b
+|       a="b"
 |       <template>
 |         <frame>
 |           <html>
-|             b=c
+|             b="c"
 |             <frame>
 FAIL: <body><template><tr></tr><template></template><td></td></template>
 Expected:
@@ -8265,7 +8067,7 @@ Actual:
 |     <template>
 |       <form>
 |         <input>
-|           name=q
+|           name="q"
 |           <div>
 |             "second"
 PASS: Test
@@ -8728,12 +8530,12 @@ Actual:
 |   <head>
 |   <body>
 |     <a>
-|       x=
+|       x=""
 |       "0"
 |       <b>
 |         "1"
 |         <a>
-|           y=
+|           y=""
 |           "2"
 FAIL: <!-----><font><div>hello<table>excite!<b>me!<th><i>please!</tr><!--X-->
 Expected:
@@ -9038,10 +8840,10 @@ Actual:
 |   <head>
 |   <body>
 |     <p>
-|       id=a
+|       id="a"
 |       <b>
 |         <p>
-|           id=b
+|           id="b"
 |           "TEST"
 FAIL: <b id=a><p><b id=b></p></b>TEST
 Expected:
@@ -9059,10 +8861,10 @@ Actual:
 |   <head>
 |   <body>
 |     <b>
-|       id=a
+|       id="a"
 |       <p>
 |         <b>
-|           id=b
+|           id="b"
 |           "TEST"
 FAIL: <!DOCTYPE html><title>U-test</title><body><div><p>Test<u></p></div></body>
 Expected:
@@ -9372,19 +9174,7 @@ Actual:
 |             " mno "
 |             " pqr "
 |             " stu"
-FAIL: <test attribute---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <test>
-|       attribute----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------=""
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <test>
-|       attribute----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------=
+PASS: <test attribute---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 FAIL: <a href="blah">aba<table><a href="foo">br<tr><td></td></tr>x</table>aoe
 Expected:
 | <html>
@@ -9411,11 +9201,11 @@ Actual:
 |   <head>
 |   <body>
 |     <a>
-|       href=blah
+|       href="blah"
 |       "aba"
 |       <table>
 |         <a>
-|           href=foo
+|           href="foo"
 |           "br"
 |           <tr>
 |             <td>
@@ -9442,13 +9232,13 @@ Actual:
 |   <head>
 |   <body>
 |     <a>
-|       href=blah
+|       href="blah"
 |       "aba"
 |       <table>
 |         <tr>
 |           <td>
 |             <a>
-|               href=foo
+|               href="foo"
 |               "br"
 |               "x"
 |               "aoe"
@@ -9479,12 +9269,12 @@ Actual:
 |   <body>
 |     <table>
 |       <a>
-|         href=blah
+|         href="blah"
 |         "aba"
 |         <tr>
 |           <td>
 |             <a>
-|               href=foo
+|               href="foo"
 |               "br"
 |               "x"
 |               "aoe"
@@ -9507,12 +9297,12 @@ Actual:
 |   <head>
 |   <body>
 |     <a>
-|       href=a
+|       href="a"
 |       "aa"
 |       <marquee>
 |         "aa"
 |         <a>
-|           href=b
+|           href="b"
 |           "bb"
 |           "aa"
 FAIL: <wbr><strike><code></strike><code><strike></code>
@@ -10659,9 +10449,9 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       xlink:href=foo
+|       xlink:href="foo"
 |       <svg>
-|         xlink:href=foo
+|         xlink:href="foo"
 FAIL: <!DOCTYPE html><body xlink:href=foo xml:lang=en><svg><g xml:lang=en xlink:href=foo></g></svg>
 Expected:
 | <!DOCTYPE html>
@@ -10680,10 +10470,10 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       xml:lang=en
+|       xml:lang="en"
 |       <svg>
 |         <g>
-|           xlink:href=foo
+|           xlink:href="foo"
 FAIL: <!DOCTYPE html><body xlink:href=foo xml:lang=en><svg><g xml:lang=en xlink:href=foo /></svg>
 Expected:
 | <!DOCTYPE html>
@@ -10702,10 +10492,10 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       xml:lang=en
+|       xml:lang="en"
 |       <svg>
 |         <g>
-|           xlink:href=foo
+|           xlink:href="foo"
 FAIL: <!DOCTYPE html><body xlink:href=foo xml:lang=en><svg><g xml:lang=en xlink:href=foo />bar</svg>
 Expected:
 | <!DOCTYPE html>
@@ -10725,10 +10515,10 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       xml:lang=en
+|       xml:lang="en"
 |       <svg>
 |         <g>
-|           xlink:href=foo
+|           xlink:href="foo"
 |           "bar"
 FAIL: <svg></path>
 Expected:
@@ -11311,64 +11101,64 @@ Actual:
 |   <body>
 |     <body>
 |       <svg>
-|         attributename=
-|         attributetype=
-|         basefrequency=
-|         baseprofile=
-|         calcmode=
-|         clippathunits=
-|         diffuseconstant=
-|         edgemode=
-|         filterunits=
-|         glyphref=
-|         gradienttransform=
-|         gradientunits=
-|         kernelmatrix=
-|         kernelunitlength=
-|         keypoints=
-|         keysplines=
-|         keytimes=
-|         lengthadjust=
-|         limitingconeangle=
-|         markerheight=
-|         markerunits=
-|         markerwidth=
-|         maskcontentunits=
-|         maskunits=
-|         numoctaves=
-|         pathlength=
-|         patterncontentunits=
-|         patterntransform=
-|         patternunits=
-|         pointsatx=
-|         pointsaty=
-|         pointsatz=
-|         preservealpha=
-|         preserveaspectratio=
-|         primitiveunits=
-|         refx=
-|         refy=
-|         repeatcount=
-|         repeatdur=
-|         requiredextensions=
-|         requiredfeatures=
-|         specularconstant=
-|         specularexponent=
-|         spreadmethod=
-|         startoffset=
-|         stddeviation=
-|         stitchtiles=
-|         surfacescale=
-|         systemlanguage=
-|         tablevalues=
-|         targetx=
-|         targety=
-|         textlength=
-|         viewbox=
-|         viewtarget=
-|         xchannelselector=
-|         ychannelselector=
-|         zoomandpan=
+|         attributename=""
+|         attributetype=""
+|         basefrequency=""
+|         baseprofile=""
+|         calcmode=""
+|         clippathunits=""
+|         diffuseconstant=""
+|         edgemode=""
+|         filterunits=""
+|         glyphref=""
+|         gradienttransform=""
+|         gradientunits=""
+|         kernelmatrix=""
+|         kernelunitlength=""
+|         keypoints=""
+|         keysplines=""
+|         keytimes=""
+|         lengthadjust=""
+|         limitingconeangle=""
+|         markerheight=""
+|         markerunits=""
+|         markerwidth=""
+|         maskcontentunits=""
+|         maskunits=""
+|         numoctaves=""
+|         pathlength=""
+|         patterncontentunits=""
+|         patterntransform=""
+|         patternunits=""
+|         pointsatx=""
+|         pointsaty=""
+|         pointsatz=""
+|         preservealpha=""
+|         preserveaspectratio=""
+|         primitiveunits=""
+|         refx=""
+|         refy=""
+|         repeatcount=""
+|         repeatdur=""
+|         requiredextensions=""
+|         requiredfeatures=""
+|         specularconstant=""
+|         specularexponent=""
+|         spreadmethod=""
+|         startoffset=""
+|         stddeviation=""
+|         stitchtiles=""
+|         surfacescale=""
+|         systemlanguage=""
+|         tablevalues=""
+|         targetx=""
+|         targety=""
+|         textlength=""
+|         viewbox=""
+|         viewtarget=""
+|         xchannelselector=""
+|         ychannelselector=""
+|         zoomandpan=""
 FAIL: <!DOCTYPE html><BODY><SVG ATTRIBUTENAME='' ATTRIBUTETYPE='' BASEFREQUENCY='' BASEPROFILE='' CALCMODE='' CLIPPATHUNITS='' DIFFUSECONSTANT='' EDGEMODE='' FILTERUNITS='' GLYPHREF='' GRADIENTTRANSFORM='' GRADIENTUNITS='' KERNELMATRIX='' KERNELUNITLENGTH='' KEYPOINTS='' KEYSPLINES='' KEYTIMES='' LENGTHADJUST='' LIMITINGCONEANGLE='' MARKERHEIGHT='' MARKERUNITS='' MARKERWIDTH='' MASKCONTENTUNITS='' MASKUNITS='' NUMOCTAVES='' PATHLENGTH='' PATTERNCONTENTUNITS='' PATTERNTRANSFORM='' PATTERNUNITS='' POINTSATX='' POINTSATY='' POINTSATZ='' PRESERVEALPHA='' PRESERVEASPECTRATIO='' PRIMITIVEUNITS='' REFX='' REFY='' REPEATCOUNT='' REPEATDUR='' REQUIREDEXTENSIONS='' REQUIREDFEATURES='' SPECULARCONSTANT='' SPECULAREXPONENT='' SPREADMETHOD='' STARTOFFSET='' STDDEVIATION='' STITCHTILES='' SURFACESCALE='' SYSTEMLANGUAGE='' TABLEVALUES='' TARGETX='' TARGETY='' TEXTLENGTH='' VIEWBOX='' VIEWTARGET='' XCHANNELSELECTOR='' YCHANNELSELECTOR='' ZOOMANDPAN=''></SVG>
 Expected:
 | <!DOCTYPE html>
@@ -11441,64 +11231,64 @@ Actual:
 |   <body>
 |     <body>
 |       <svg>
-|         attributename=
-|         attributetype=
-|         basefrequency=
-|         baseprofile=
-|         calcmode=
-|         clippathunits=
-|         diffuseconstant=
-|         edgemode=
-|         filterunits=
-|         glyphref=
-|         gradienttransform=
-|         gradientunits=
-|         kernelmatrix=
-|         kernelunitlength=
-|         keypoints=
-|         keysplines=
-|         keytimes=
-|         lengthadjust=
-|         limitingconeangle=
-|         markerheight=
-|         markerunits=
-|         markerwidth=
-|         maskcontentunits=
-|         maskunits=
-|         numoctaves=
-|         pathlength=
-|         patterncontentunits=
-|         patterntransform=
-|         patternunits=
-|         pointsatx=
-|         pointsaty=
-|         pointsatz=
-|         preservealpha=
-|         preserveaspectratio=
-|         primitiveunits=
-|         refx=
-|         refy=
-|         repeatcount=
-|         repeatdur=
-|         requiredextensions=
-|         requiredfeatures=
-|         specularconstant=
-|         specularexponent=
-|         spreadmethod=
-|         startoffset=
-|         stddeviation=
-|         stitchtiles=
-|         surfacescale=
-|         systemlanguage=
-|         tablevalues=
-|         targetx=
-|         targety=
-|         textlength=
-|         viewbox=
-|         viewtarget=
-|         xchannelselector=
-|         ychannelselector=
-|         zoomandpan=
+|         attributename=""
+|         attributetype=""
+|         basefrequency=""
+|         baseprofile=""
+|         calcmode=""
+|         clippathunits=""
+|         diffuseconstant=""
+|         edgemode=""
+|         filterunits=""
+|         glyphref=""
+|         gradienttransform=""
+|         gradientunits=""
+|         kernelmatrix=""
+|         kernelunitlength=""
+|         keypoints=""
+|         keysplines=""
+|         keytimes=""
+|         lengthadjust=""
+|         limitingconeangle=""
+|         markerheight=""
+|         markerunits=""
+|         markerwidth=""
+|         maskcontentunits=""
+|         maskunits=""
+|         numoctaves=""
+|         pathlength=""
+|         patterncontentunits=""
+|         patterntransform=""
+|         patternunits=""
+|         pointsatx=""
+|         pointsaty=""
+|         pointsatz=""
+|         preservealpha=""
+|         preserveaspectratio=""
+|         primitiveunits=""
+|         refx=""
+|         refy=""
+|         repeatcount=""
+|         repeatdur=""
+|         requiredextensions=""
+|         requiredfeatures=""
+|         specularconstant=""
+|         specularexponent=""
+|         spreadmethod=""
+|         startoffset=""
+|         stddeviation=""
+|         stitchtiles=""
+|         surfacescale=""
+|         systemlanguage=""
+|         tablevalues=""
+|         targetx=""
+|         targety=""
+|         textlength=""
+|         viewbox=""
+|         viewtarget=""
+|         xchannelselector=""
+|         ychannelselector=""
+|         zoomandpan=""
 FAIL: <!DOCTYPE html><body><svg attributename='' attributetype='' basefrequency='' baseprofile='' calcmode='' clippathunits='' diffuseconstant='' edgemode='' filterunits='' filterres='' glyphref='' gradienttransform='' gradientunits='' kernelmatrix='' kernelunitlength='' keypoints='' keysplines='' keytimes='' lengthadjust='' limitingconeangle='' markerheight='' markerunits='' markerwidth='' maskcontentunits='' maskunits='' numoctaves='' pathlength='' patterncontentunits='' patterntransform='' patternunits='' pointsatx='' pointsaty='' pointsatz='' preservealpha='' preserveaspectratio='' primitiveunits='' refx='' refy='' repeatcount='' repeatdur='' requiredextensions='' requiredfeatures='' specularconstant='' specularexponent='' spreadmethod='' startoffset='' stddeviation='' stitchtiles='' surfacescale='' systemlanguage='' tablevalues='' targetx='' targety='' textlength='' viewbox='' viewtarget='' xchannelselector='' ychannelselector='' zoomandpan=''></svg>
 Expected:
 | <!DOCTYPE html>
@@ -11572,65 +11362,65 @@ Actual:
 |   <body>
 |     <body>
 |       <svg>
-|         attributename=
-|         attributetype=
-|         basefrequency=
-|         baseprofile=
-|         calcmode=
-|         clippathunits=
-|         diffuseconstant=
-|         edgemode=
-|         filterres=
-|         filterunits=
-|         glyphref=
-|         gradienttransform=
-|         gradientunits=
-|         kernelmatrix=
-|         kernelunitlength=
-|         keypoints=
-|         keysplines=
-|         keytimes=
-|         lengthadjust=
-|         limitingconeangle=
-|         markerheight=
-|         markerunits=
-|         markerwidth=
-|         maskcontentunits=
-|         maskunits=
-|         numoctaves=
-|         pathlength=
-|         patterncontentunits=
-|         patterntransform=
-|         patternunits=
-|         pointsatx=
-|         pointsaty=
-|         pointsatz=
-|         preservealpha=
-|         preserveaspectratio=
-|         primitiveunits=
-|         refx=
-|         refy=
-|         repeatcount=
-|         repeatdur=
-|         requiredextensions=
-|         requiredfeatures=
-|         specularconstant=
-|         specularexponent=
-|         spreadmethod=
-|         startoffset=
-|         stddeviation=
-|         stitchtiles=
-|         surfacescale=
-|         systemlanguage=
-|         tablevalues=
-|         targetx=
-|         targety=
-|         textlength=
-|         viewbox=
-|         viewtarget=
-|         xchannelselector=
-|         ychannelselector=
-|         zoomandpan=
+|         attributename=""
+|         attributetype=""
+|         basefrequency=""
+|         baseprofile=""
+|         calcmode=""
+|         clippathunits=""
+|         diffuseconstant=""
+|         edgemode=""
+|         filterres=""
+|         filterunits=""
+|         glyphref=""
+|         gradienttransform=""
+|         gradientunits=""
+|         kernelmatrix=""
+|         kernelunitlength=""
+|         keypoints=""
+|         keysplines=""
+|         keytimes=""
+|         lengthadjust=""
+|         limitingconeangle=""
+|         markerheight=""
+|         markerunits=""
+|         markerwidth=""
+|         maskcontentunits=""
+|         maskunits=""
+|         numoctaves=""
+|         pathlength=""
+|         patterncontentunits=""
+|         patterntransform=""
+|         patternunits=""
+|         pointsatx=""
+|         pointsaty=""
+|         pointsatz=""
+|         preservealpha=""
+|         preserveaspectratio=""
+|         primitiveunits=""
+|         refx=""
+|         refy=""
+|         repeatcount=""
+|         repeatdur=""
+|         requiredextensions=""
+|         requiredfeatures=""
+|         specularconstant=""
+|         specularexponent=""
+|         spreadmethod=""
+|         startoffset=""
+|         stddeviation=""
+|         stitchtiles=""
+|         surfacescale=""
+|         systemlanguage=""
+|         tablevalues=""
+|         targetx=""
+|         targety=""
+|         textlength=""
+|         viewbox=""
+|         viewtarget=""
+|         xchannelselector=""
+|         ychannelselector=""
+|         zoomandpan=""
 FAIL: <!DOCTYPE html><body><math attributeName='' attributeType='' baseFrequency='' baseProfile='' calcMode='' clipPathUnits='' diffuseConstant='' edgeMode='' filterUnits='' glyphRef='' gradientTransform='' gradientUnits='' kernelMatrix='' kernelUnitLength='' keyPoints='' keySplines='' keyTimes='' lengthAdjust='' limitingConeAngle='' markerHeight='' markerUnits='' markerWidth='' maskContentUnits='' maskUnits='' numOctaves='' pathLength='' patternContentUnits='' patternTransform='' patternUnits='' pointsAtX='' pointsAtY='' pointsAtZ='' preserveAlpha='' preserveAspectRatio='' primitiveUnits='' refX='' refY='' repeatCount='' repeatDur='' requiredExtensions='' requiredFeatures='' specularConstant='' specularExponent='' spreadMethod='' startOffset='' stdDeviation='' stitchTiles='' surfaceScale='' systemLanguage='' tableValues='' targetX='' targetY='' textLength='' viewBox='' viewTarget='' xChannelSelector='' yChannelSelector='' zoomAndPan=''></math>
 Expected:
 | <!DOCTYPE html>
@@ -11703,64 +11493,64 @@ Actual:
 |   <body>
 |     <body>
 |       <math>
-|         attributename=
-|         attributetype=
-|         basefrequency=
-|         baseprofile=
-|         calcmode=
-|         clippathunits=
-|         diffuseconstant=
-|         edgemode=
-|         filterunits=
-|         glyphref=
-|         gradienttransform=
-|         gradientunits=
-|         kernelmatrix=
-|         kernelunitlength=
-|         keypoints=
-|         keysplines=
-|         keytimes=
-|         lengthadjust=
-|         limitingconeangle=
-|         markerheight=
-|         markerunits=
-|         markerwidth=
-|         maskcontentunits=
-|         maskunits=
-|         numoctaves=
-|         pathlength=
-|         patterncontentunits=
-|         patterntransform=
-|         patternunits=
-|         pointsatx=
-|         pointsaty=
-|         pointsatz=
-|         preservealpha=
-|         preserveaspectratio=
-|         primitiveunits=
-|         refx=
-|         refy=
-|         repeatcount=
-|         repeatdur=
-|         requiredextensions=
-|         requiredfeatures=
-|         specularconstant=
-|         specularexponent=
-|         spreadmethod=
-|         startoffset=
-|         stddeviation=
-|         stitchtiles=
-|         surfacescale=
-|         systemlanguage=
-|         tablevalues=
-|         targetx=
-|         targety=
-|         textlength=
-|         viewbox=
-|         viewtarget=
-|         xchannelselector=
-|         ychannelselector=
-|         zoomandpan=
+|         attributename=""
+|         attributetype=""
+|         basefrequency=""
+|         baseprofile=""
+|         calcmode=""
+|         clippathunits=""
+|         diffuseconstant=""
+|         edgemode=""
+|         filterunits=""
+|         glyphref=""
+|         gradienttransform=""
+|         gradientunits=""
+|         kernelmatrix=""
+|         kernelunitlength=""
+|         keypoints=""
+|         keysplines=""
+|         keytimes=""
+|         lengthadjust=""
+|         limitingconeangle=""
+|         markerheight=""
+|         markerunits=""
+|         markerwidth=""
+|         maskcontentunits=""
+|         maskunits=""
+|         numoctaves=""
+|         pathlength=""
+|         patterncontentunits=""
+|         patterntransform=""
+|         patternunits=""
+|         pointsatx=""
+|         pointsaty=""
+|         pointsatz=""
+|         preservealpha=""
+|         preserveaspectratio=""
+|         primitiveunits=""
+|         refx=""
+|         refy=""
+|         repeatcount=""
+|         repeatdur=""
+|         requiredextensions=""
+|         requiredfeatures=""
+|         specularconstant=""
+|         specularexponent=""
+|         spreadmethod=""
+|         startoffset=""
+|         stddeviation=""
+|         stitchtiles=""
+|         surfacescale=""
+|         systemlanguage=""
+|         tablevalues=""
+|         targetx=""
+|         targety=""
+|         textlength=""
+|         viewbox=""
+|         viewtarget=""
+|         xchannelselector=""
+|         ychannelselector=""
+|         zoomandpan=""
 FAIL: <!DOCTYPE html><body><svg contentScriptType='' contentStyleType='' externalResourcesRequired='' filterRes=''></svg>
 Expected:
 | <!DOCTYPE html>
@@ -11779,10 +11569,10 @@ Actual:
 |   <body>
 |     <body>
 |       <svg>
-|         contentscripttype=
-|         contentstyletype=
-|         externalresourcesrequired=
-|         filterres=
+|         contentscripttype=""
+|         contentstyletype=""
+|         externalresourcesrequired=""
+|         filterres=""
 FAIL: <!DOCTYPE html><body><svg CONTENTSCRIPTTYPE='' CONTENTSTYLETYPE='' EXTERNALRESOURCESREQUIRED='' FILTERRES=''></svg>
 Expected:
 | <!DOCTYPE html>
@@ -11801,10 +11591,10 @@ Actual:
 |   <body>
 |     <body>
 |       <svg>
-|         contentscripttype=
-|         contentstyletype=
-|         externalresourcesrequired=
-|         filterres=
+|         contentscripttype=""
+|         contentstyletype=""
+|         externalresourcesrequired=""
+|         filterres=""
 FAIL: <!DOCTYPE html><body><svg contentscripttype='' contentstyletype='' externalresourcesrequired='' filterres=''></svg>
 Expected:
 | <!DOCTYPE html>
@@ -11823,10 +11613,10 @@ Actual:
 |   <body>
 |     <body>
 |       <svg>
-|         contentscripttype=
-|         contentstyletype=
-|         externalresourcesrequired=
-|         filterres=
+|         contentscripttype=""
+|         contentstyletype=""
+|         externalresourcesrequired=""
+|         filterres=""
 FAIL: <!DOCTYPE html><body><math contentScriptType='' contentStyleType='' externalResourcesRequired='' filterRes=''></math>
 Expected:
 | <!DOCTYPE html>
@@ -11845,10 +11635,10 @@ Actual:
 |   <body>
 |     <body>
 |       <math>
-|         contentscripttype=
-|         contentstyletype=
-|         externalresourcesrequired=
-|         filterres=
+|         contentscripttype=""
+|         contentstyletype=""
+|         externalresourcesrequired=""
+|         filterres=""
 FAIL: <!DOCTYPE html><body><svg><altGlyph /><altGlyphDef /><altGlyphItem /><animateColor /><animateMotion /><animateTransform /><clipPath /><feBlend /><feColorMatrix /><feComponentTransfer /><feComposite /><feConvolveMatrix /><feDiffuseLighting /><feDisplacementMap /><feDistantLight /><feFlood /><feFuncA /><feFuncB /><feFuncG /><feFuncR /><feGaussianBlur /><feImage /><feMerge /><feMergeNode /><feMorphology /><feOffset /><fePointLight /><feSpecularLighting /><feSpotLight /><feTile /><feTurbulence /><foreignObject /><glyphRef /><linearGradient /><radialGradient /><textPath /></svg>
 Expected:
 | <!DOCTYPE html>
@@ -12371,7 +12161,7 @@ Actual:
 |   <body>
 |     <html>
 |       <html>
-|         abc:def=gh
+|         abc:def="gh"
 |         <xyz:abc>
 FAIL: <!DOCTYPE html><html xml:lang=bar><html xml:lang=foo>
 Expected:
@@ -12383,14 +12173,14 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <html>
-|   xml:lang=bar
+|   xml:lang="bar"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       xml:lang=bar
+|       xml:lang="bar"
 |       <html>
-|         xml:lang=foo
+|         xml:lang="foo"
 FAIL: <!DOCTYPE html><html 123=456>
 Expected:
 | <!DOCTYPE html>
@@ -12401,12 +12191,12 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <html>
-|   123=456
+|   123="456"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       123=456
+|       123="456"
 FAIL: <!DOCTYPE html><html 123=456><html 789=012>
 Expected:
 | <!DOCTYPE html>
@@ -12418,14 +12208,14 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <html>
-|   123=456
+|   123="456"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       123=456
+|       123="456"
 |       <html>
-|         789=012
+|         789="012"
 FAIL: <!DOCTYPE html><html><body 789=012>
 Expected:
 | <!DOCTYPE html>
@@ -12441,7 +12231,7 @@ Actual:
 |   <body>
 |     <html>
 |       <body>
-|         789=012
+|         789="012"
 FAIL: <!DOCTYPE html><p><b><i><u></p> <p>X
 Expected:
 | <!DOCTYPE html>
@@ -16138,7 +15928,7 @@ Actual:
 |   <body>
 |     <math>
 |       <mn>
-|         definitionurl=foo
+|         definitionurl="foo"
 FAIL: <!doctype html><html></p><!--foo-->
 Expected:
 | <!DOCTYPE html>
@@ -16229,21 +16019,7 @@ Actual:
 |   <body>
 |     <p>
 |       <h1>
-FAIL: <!doctype html><isindex type="hidden">
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <isindex>
-|       type="hidden"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <isindex>
-|       type=hidden
+PASS: <!doctype html><isindex type="hidden">
 FAIL: <!doctype html><ruby><p><rp>
 Expected:
 | <!DOCTYPE html>
@@ -16705,15 +16481,15 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <html>
-|   c=d
+|   c="d"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       c=d
+|       c="d"
 |       <body>
 |         <html>
-|           a=b
+|           a="b"
 FAIL: <!doctype html><html c=d><frameset></frameset></html><html a=b>
 Expected:
 | <!DOCTYPE html>
@@ -16725,15 +16501,15 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <html>
-|   c=d
+|   c="d"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       c=d
+|       c="d"
 |       <frameset>
 |         <html>
-|           a=b
+|           a="b"
 FAIL: <!doctype html><html><frameset></frameset></html><!--foo-->
 Expected:
 | <!DOCTYPE html>
@@ -17419,7 +17195,7 @@ Actual:
 |   <head>
 |   <body>
 |     <meta>
-|       charset=ascii
+|       charset="ascii"
 FAIL: <!doctype html><meta http-equiv="content-type" content="text/html;charset=ascii">
 Expected:
 | <!DOCTYPE html>
@@ -17435,8 +17211,8 @@ Actual:
 |   <head>
 |   <body>
 |     <meta>
-|       content=text/html;charset=ascii
-|       http-equiv=content-type
+|       content="text/html;charset=ascii"
+|       http-equiv="content-type"
 FAIL: <!doctype html><head><!--aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa--><meta charset="utf8">
 Expected:
 | <!DOCTYPE html>
@@ -17454,7 +17230,7 @@ Actual:
 |     <body>
 |       <head>
 |         <meta>
-|           charset=utf8
+|           charset="utf8"
 FAIL: <!doctype html><html a=b><head></head><html c=d>
 Expected:
 | <!DOCTYPE html>
@@ -17466,15 +17242,15 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <html>
-|   a=b
+|   a="b"
 | <html>
 |   <head>
 |   <body>
 |     <html>
-|       a=b
+|       a="b"
 |       <head>
 |         <html>
-|           c=d
+|           c="d"
 FAIL: <!doctype html><image/>
 Expected:
 | <!DOCTYPE html>
@@ -18087,11 +17863,11 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       t1=1
+|       t1="1"
 |       <body>
-|         t2=2
+|         t2="2"
 |         <body>
-|           t4=4
+|           t4="4"
 FAIL: </b test
 Expected:
 | <html>
@@ -18115,7 +17891,7 @@ Actual:
 |   <head>
 |   <body>
 |     <script>
-|       type=text/x-foobar;baz
+|       type="text/x-foobar;baz"
 |       "X"
 PASS: &
 PASS: &#
@@ -18457,9 +18233,9 @@ Actual:
 |       <title>
 |         "X"
 |         <meta>
-|           name=z
+|           name="z"
 |           <link>
-|             rel=foo
+|             rel="foo"
 |             <style>
 |               "
 x { content:""
@@ -18526,7 +18302,7 @@ Actual:
 |     <html>
 |       <body>
 |         <html>
-|           id=x
+|           id="x"
 FAIL: <!DOCTYPE html>X</body><html id="x">
 Expected:
 | <!DOCTYPE html>
@@ -18542,7 +18318,7 @@ Actual:
 |   <body>
 |     "X"
 |     <html>
-|       id=x
+|       id="x"
 FAIL: <!DOCTYPE html><head><html id=x>
 Expected:
 | <!DOCTYPE html>
@@ -18558,7 +18334,7 @@ Actual:
 |     <body>
 |       <head>
 |         <html>
-|           id=x
+|           id="x"
 FAIL: <!DOCTYPE html>X</html>X
 Expected:
 | <!DOCTYPE html>
@@ -18605,7 +18381,7 @@ Actual:
 |   <body>
 |     "X"
 |     <p>
-|       z=
+|       z=""
 FAIL: <!DOCTYPE html><!--x--
 Expected:
 | <!DOCTYPE html>
@@ -18959,7 +18735,7 @@ Actual:
 |   <body>
 |     <math>
 |       <annotation-xml>
-|         encoding=application/svg+xml
+|         encoding="application/svg+xml"
 |         <div>
 FAIL: <math><annotation-xml encoding="application/xhtml+xml"><div>
 Expected:
@@ -18976,7 +18752,7 @@ Actual:
 |   <body>
 |     <math>
 |       <annotation-xml>
-|         encoding=application/xhtml+xml
+|         encoding="application/xhtml+xml"
 |         <div>
 FAIL: <math><annotation-xml encoding="aPPlication/xhtmL+xMl"><div>
 Expected:
@@ -18993,7 +18769,7 @@ Actual:
 |   <body>
 |     <math>
 |       <annotation-xml>
-|         encoding=aPPlication/xhtmL+xMl
+|         encoding="aPPlication/xhtmL+xMl"
 |         <div>
 FAIL: <math><annotation-xml encoding="text/html"><div>
 Expected:
@@ -19010,7 +18786,7 @@ Actual:
 |   <body>
 |     <math>
 |       <annotation-xml>
-|         encoding=text/html
+|         encoding="text/html"
 |         <div>
 FAIL: <math><annotation-xml encoding="Text/htmL"><div>
 Expected:
@@ -19027,7 +18803,7 @@ Actual:
 |   <body>
 |     <math>
 |       <annotation-xml>
-|         encoding=Text/htmL
+|         encoding="Text/htmL"
 |         <div>
 FAIL: <math><annotation-xml encoding=" text/html "><div>
 Expected:
@@ -19044,7 +18820,7 @@ Actual:
 |   <body>
 |     <math>
 |       <annotation-xml>
-|         encoding= text/html 
+|         encoding=" text/html "
 |         <div>
 FAIL: <math><annotation-xml> </annotation-xml>
 Expected:
@@ -19512,21 +19288,21 @@ Actual:
 |     <a>
 |       <b>
 |         <div>
-|           id=1
+|           id="1"
 |           <div>
-|             id=2
+|             id="2"
 |             <div>
-|               id=3
+|               id="3"
 |               <div>
-|                 id=4
+|                 id="4"
 |                 <div>
-|                   id=5
+|                   id="5"
 |                   <div>
-|                     id=6
+|                     id="6"
 |                     <div>
-|                       id=7
+|                       id="7"
 |                       <div>
-|                         id=8
+|                         id="8"
 |                         "A"
 FAIL: <a><b><div id=1><div id=2><div id=3><div id=4><div id=5><div id=6><div id=7><div id=8><div id=9>A</a>
 Expected:
@@ -19570,23 +19346,23 @@ Actual:
 |     <a>
 |       <b>
 |         <div>
-|           id=1
+|           id="1"
 |           <div>
-|             id=2
+|             id="2"
 |             <div>
-|               id=3
+|               id="3"
 |               <div>
-|                 id=4
+|                 id="4"
 |                 <div>
-|                   id=5
+|                   id="5"
 |                   <div>
-|                     id=6
+|                     id="6"
 |                     <div>
-|                       id=7
+|                       id="7"
 |                       <div>
-|                         id=8
+|                         id="8"
 |                         <div>
-|                           id=9
+|                           id="9"
 |                           "A"
 FAIL: <a><b><div id=1><div id=2><div id=3><div id=4><div id=5><div id=6><div id=7><div id=8><div id=9><div id=10>A</a>
 Expected:
@@ -19632,25 +19408,25 @@ Actual:
 |     <a>
 |       <b>
 |         <div>
-|           id=1
+|           id="1"
 |           <div>
-|             id=2
+|             id="2"
 |             <div>
-|               id=3
+|               id="3"
 |               <div>
-|                 id=4
+|                 id="4"
 |                 <div>
-|                   id=5
+|                   id="5"
 |                   <div>
-|                     id=6
+|                     id="6"
 |                     <div>
-|                       id=7
+|                       id="7"
 |                       <div>
-|                         id=8
+|                         id="8"
 |                         <div>
-|                           id=9
+|                           id="9"
 |                           <div>
-|                             id=10
+|                             id="10"
 |                             "A"
 FAIL: <cite><b><cite><i><cite><i><cite><i><div>X</b>TEST
 Expected:
@@ -19726,21 +19502,21 @@ Actual:
 |   <body>
 |     <p>
 |       <font>
-|         size=4
+|         size="4"
 |         <font>
-|           color=red
+|           color="red"
 |           <font>
-|             size=4
+|             size="4"
 |             <font>
-|               size=4
+|               size="4"
 |               <font>
-|                 size=4
+|                 size="4"
 |                 <font>
-|                   size=4
+|                   size="4"
 |                   <font>
-|                     size=4
+|                     size="4"
 |                     <font>
-|                       color=red
+|                       color="red"
 |                       <p>
 |                         "X"
 FAIL: <p><font size=4><font size=4><font size=4><font size=4><p>X
@@ -19771,13 +19547,13 @@ Actual:
 |   <body>
 |     <p>
 |       <font>
-|         size=4
+|         size="4"
 |         <font>
-|           size=4
+|           size="4"
 |           <font>
-|             size=4
+|             size="4"
 |             <font>
-|               size=4
+|               size="4"
 |               <p>
 |                 "X"
 FAIL: <p><font size=4><font size=4><font size=4><font size="5"><font size=4><p>X
@@ -19812,15 +19588,15 @@ Actual:
 |   <body>
 |     <p>
 |       <font>
-|         size=4
+|         size="4"
 |         <font>
-|           size=4
+|           size="4"
 |           <font>
-|             size=4
+|             size="4"
 |             <font>
-|               size=5
+|               size="5"
 |               <font>
-|                 size=4
+|                 size="4"
 |                 <p>
 |                   "X"
 FAIL: <p><font size=4 id=a><font size=4 id=b><font size=4><font size=4><p>X
@@ -19857,13 +19633,13 @@ Actual:
 |   <body>
 |     <p>
 |       <font>
-|         id=a
+|         id="a"
 |         <font>
-|           id=b
+|           id="b"
 |           <font>
-|             size=4
+|             size="4"
 |             <font>
-|               size=4
+|               size="4"
 |               <p>
 |                 "X"
 FAIL: <p><b id=a><b id=a><b id=a><b><object><b id=a><b id=a>X</object><p>Y
@@ -19900,17 +19676,17 @@ Actual:
 |   <body>
 |     <p>
 |       <b>
-|         id=a
+|         id="a"
 |         <b>
-|           id=a
+|           id="a"
 |           <b>
-|             id=a
+|             id="a"
 |             <b>
 |               <object>
 |                 <b>
-|                   id=a
+|                   id="a"
 |                   <b>
-|                     id=a
+|                     id="a"
 |                     "X"
 |                     <p>
 |                       "Y"
@@ -20338,19 +20114,19 @@ Actual:
 |   <body>
 |     <body>
 |       <a>
-|         href=#1
+|         href="#1"
 |         <nobr>
 |           "1"
 |           <nobr>
 |             <br>
 |               <a>
-|                 href=#2
+|                 href="#2"
 |                 <nobr>
 |                   "2"
 |                   <nobr>
 |                     <br>
 |                       <a>
-|                         href=#3
+|                         href="#3"
 |                         <nobr>
 |                           "3"
 |                           <nobr>
@@ -20633,7 +20409,7 @@ Actual:
 |   <body>
 |     <p>
 |       <code>
-|         code=
+|         code=""
 FAIL: <!DOCTYPE html><svg><foreignObject><p><i></p>a
 Expected:
 | <!DOCTYPE html>
@@ -22262,27 +22038,7 @@ Actual:
 |             "x "
 |             " "
 PASS: <!doctype html><p><applet><p>X</p></applet>
-FAIL: <!doctype html><p><object type="application/x-non-existant-plugin"><p>X</p></object>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <object>
-|         type="application/x-non-existant-plugin"
-|         <p>
-|           "X"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <object>
-|         type=application/x-non-existant-plugin
-|         <p>
-|           "X"
+PASS: <!doctype html><p><object type="application/x-non-existant-plugin"><p>X</p></object>
 FAIL: <!doctype html><listing>
 X</listing>
 Expected:
@@ -22333,23 +22089,7 @@ Actual:
 |     <select>
 |       <select>
 |         "X"
-FAIL: <!doctype html><table><input type=hidDEN></table>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <table>
-|       <input>
-|         type="hidDEN"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <table>
-|       <input>
-|         type=hidDEN
+PASS: <!doctype html><table><input type=hidDEN></table>
 FAIL: <!doctype html><table>X<input type=hidDEN></table>
 Expected:
 | <!DOCTYPE html>
@@ -22368,45 +22108,9 @@ Actual:
 |     <table>
 |       "X"
 |       <input>
-|         type=hidDEN
-FAIL: <!doctype html><table>  <input type=hidDEN></table>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <table>
-|       "  "
-|       <input>
 |         type="hidDEN"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <table>
-|       "  "
-|       <input>
-|         type=hidDEN
-FAIL: <!doctype html><table>  <input type='hidDEN'></table>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <table>
-|       "  "
-|       <input>
-|         type="hidDEN"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <table>
-|       "  "
-|       <input>
-|         type=hidDEN
+PASS: <!doctype html><table>  <input type=hidDEN></table>
+PASS: <!doctype html><table>  <input type='hidDEN'></table>
 FAIL: <!doctype html><table><input type=" hidden"><input type=hidDEN></table>
 Expected:
 | <!DOCTYPE html>
@@ -22425,9 +22129,9 @@ Actual:
 |   <body>
 |     <table>
 |       <input>
-|         type= hidden
+|         type=" hidden"
 |         <input>
-|           type=hidDEN
+|           type="hidDEN"
 FAIL: <!doctype html><table><select>X<tr>
 Expected:
 | <!DOCTYPE html>
@@ -23346,9 +23050,9 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       xlink:href=foo
+|       xlink:href="foo"
 |       <math>
-|         xlink:href=foo
+|         xlink:href="foo"
 FAIL: <!DOCTYPE html><body xlink:href=foo xml:lang=en><math><mi xml:lang=en xlink:href=foo></mi></math>
 Expected:
 | <!DOCTYPE html>
@@ -23367,10 +23071,10 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       xml:lang=en
+|       xml:lang="en"
 |       <math>
 |         <mi>
-|           xlink:href=foo
+|           xlink:href="foo"
 FAIL: <!DOCTYPE html><body xlink:href=foo xml:lang=en><math><mi xml:lang=en xlink:href=foo /></math>
 Expected:
 | <!DOCTYPE html>
@@ -23389,10 +23093,10 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       xml:lang=en
+|       xml:lang="en"
 |       <math>
 |         <mi>
-|           xlink:href=foo
+|           xlink:href="foo"
 FAIL: <!DOCTYPE html><body xlink:href=foo xml:lang=en><math><mi xml:lang=en xlink:href=foo />bar</math>
 Expected:
 | <!DOCTYPE html>
@@ -23412,10 +23116,10 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       xml:lang=en
+|       xml:lang="en"
 |       <math>
 |         <mi>
-|           xlink:href=foo
+|           xlink:href="foo"
 |           "bar"
 FAIL: <body><span>
 Expected:
@@ -24326,7 +24030,7 @@ Actual:
 |       "
 "
 |       <font>
-|         color=red
+|         color="red"
 |         <i>
 |           "Italic and Red"
 |           <p>
@@ -24338,7 +24042,7 @@ Actual:
 |             <p>
 |               "I should not be red. "
 |               <font>
-|                 color=red
+|                 color="red"
 |                 "Red. "
 |                 <i>
 |                   "Italic and red."
@@ -24396,7 +24100,7 @@ Actual:
 "
 |         <p>
 |           <font>
-|             size=7
+|             size="7"
 |             "First paragraph."
 |             "
 "
@@ -24715,21 +24419,7 @@ console.log("PASS");
 "
 |         <div>
 |           "Bye"
-FAIL: <div foo="bar">Hello</div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       foo="bar"
-|       "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <div>
-|       foo=bar
-|       "Hello"
+PASS: <div foo="bar">Hello</div>
 FAIL: <div>Hello</div>
 <script>
 console.log("FOO<span>BAR</span>BAZ");
@@ -24784,26 +24474,10 @@ Actual:
 |   <head>
 |   <body>
 |     <foo>
-|       bar=baz
-|       <potato>
-|         quack=duck
-FAIL: <foo bar="baz"><potato quack="duck"></potato></foo>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <foo>
 |       bar="baz"
 |       <potato>
 |         quack="duck"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <foo>
-|       bar=baz
-|       <potato>
-|         quack=duck
+PASS: <foo bar="baz"><potato quack="duck"></potato></foo>
 FAIL: <foo></foo bar="baz"><potato></potato quack="duck">
 Expected:
 | <html>
@@ -24844,7 +24518,7 @@ Actual:
 |   <head>
 |   <body>
 |     <div>
-|       foo=
+|       foo=""
 |       <img>
 |         <img>
 FAIL: <p>Test</p<p>Test2</p>
@@ -24874,7 +24548,7 @@ Actual:
 |   <head>
 |   <body>
 |     <rdar:>
-|       6869687=
+|       6869687=""
 PASS: <A>test< /A>
 PASS: &lt;
 FAIL: <body foo='bar'><body foo='baz' yo='mama'>
@@ -24889,10 +24563,10 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-|       foo=bar
+|       foo="bar"
 |       <body>
-|         foo=baz
-|         yo=mama
+|         foo="baz"
+|         yo="mama"
 FAIL: <body></br foo="bar"></body>
 Expected:
 | <html>
@@ -24904,21 +24578,7 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-FAIL: <bdy><br foo="bar"></body>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <bdy>
-|       <br>
-|         foo="bar"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <bdy>
-|       <br>
-|         foo=bar
+PASS: <bdy><br foo="bar"></body>
 FAIL: <body></body></br foo="bar">
 Expected:
 | <html>
@@ -24930,21 +24590,7 @@ Actual:
 |   <head>
 |   <body>
 |     <body>
-FAIL: <bdy></body><br foo="bar">
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <bdy>
-|       <br>
-|         foo="bar"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <bdy>
-|       <br>
-|         foo=bar
+PASS: <bdy></body><br foo="bar">
 FAIL: <html><body></body></html><!-- Hi there -->
 Expected:
 | <html>
@@ -25368,21 +25014,7 @@ Actual:
 |       <title>
 |         <svg>
 |           <div>
-FAIL: <img <="" FAIL>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <img>
-|       <=""
-|       fail=""
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <img>
-|       <=
-|       fail=
+PASS: <img <="" FAIL>
 FAIL: <ul><li><div id='foo'/>A</li><li>B<div>C</div></li></ul>
 Expected:
 | <html>
@@ -25404,7 +25036,7 @@ Actual:
 |     <ul>
 |       <li>
 |         <div>
-|           id=foo
+|           id="foo"
 |           "A"
 |           <li>
 |             "B"
@@ -25499,7 +25131,7 @@ Actual:
 |   <head>
 |   <body>
 |     <input>
-|       type=hidden
+|       type="hidden"
 |       <frameset>
 FAIL: <!doctype html><input type="button"><frameset>
 Expected:
@@ -25515,21 +25147,9 @@ Actual:
 |   <head>
 |   <body>
 |     <input>
-|       type=button
+|       type="button"
 |       <frameset>
-FAIL: <foo bar=qux/>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <foo>
-|       bar="qux/"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <foo>
-|       bar=qux/
+PASS: <foo bar=qux/>
 FAIL: <p id="status"><noscript><strong>A</strong></noscript><span>B</span></p>
 Expected:
 | <html>
@@ -25546,7 +25166,7 @@ Actual:
 |   <head>
 |   <body>
 |     <p>
-|       id=status
+|       id="status"
 |       <noscript>
 |         <strong>
 |           "A"
@@ -25569,7 +25189,7 @@ Actual:
 |   <head>
 |   <body>
 |     <p>
-|       id=status
+|       id="status"
 |       <noscript>
 |         <strong>
 |           "A"
@@ -25886,4 +25506,4 @@ Actual:
 |     <plaintext>
 |       <div>
 |         "foo"
-Passed 238 of 1745 tree-construction tests.
+Passed 266 of 1745 tree-construction tests.

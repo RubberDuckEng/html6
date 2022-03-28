@@ -134,7 +134,7 @@ String treeToString(Node root) {
         names.sort();
         for (var name in names) {
           var value = element.attributes[name];
-          buffer.writeln(prefix + "  $name=$value");
+          buffer.writeln(prefix + '  $name="$value"');
         }
       }
     } else if (node is Text) {
