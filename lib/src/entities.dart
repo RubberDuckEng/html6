@@ -31,7 +31,7 @@ Entity? peekForMatchingEntity(InputManager input) {
   for (int codeOffset = 0; codeOffset < maxEntityLength; codeOffset++) {
     // 1 accounts for the amperstand.
     var offsetInEntity = 1 + codeOffset;
-    bool foundMatch = false;
+    bool foundFirstPrefixMatch = false;
     var actual = input.peek(codeOffset);
     if (actual == endOfFile) {
       return foundEntity;
@@ -42,28 +42,27 @@ Entity? peekForMatchingEntity(InputManager input) {
       var entity = entities[entityIndex];
       if (offsetInEntity < entity.nameCodepoints.length &&
           entity.nameCodepoints[offsetInEntity] == actual) {
-        if (!foundMatch) {
+        if (!foundFirstPrefixMatch) {
           // Ignore any entities before this one as they don't prefix match.
           firstPossible = entityIndex;
         }
-        foundMatch = true;
-        // We found a longer entity:
+        foundFirstPrefixMatch = true;
+        // We found a longer entity.
         if (offsetInEntity == entity.nameCodepoints.length - 1) {
           foundEntity = entity;
         }
         // Not yet matched all chars, keep looking.
-        break;
       } else {
-        entityIndex += 1;
-        if (foundMatch) {
+        if (foundFirstPrefixMatch) {
           // Ignore entities after, they've started failing to match prefix.
           oneAfterLastPossible = entityIndex;
-          break;
+          break; // No need to keep searching after leaving the match window.
         }
         // Still haven't found first match, keep looking.
       }
+      entityIndex += 1;
     }
-    if (oneAfterLastPossible - firstPossible <= 1) {
+    if (oneAfterLastPossible - firstPossible == 0) {
       // Ran out of entities to possibly match.
       return foundEntity;
     }

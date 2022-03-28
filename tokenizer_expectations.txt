@@ -1,4 +1,4 @@
-Passed 7018 of 7032 tests
+Passed 7022 of 7032 tests
 
 FAIL: Raw NUL replacement
  input: "\u0000"
@@ -24,26 +24,10 @@ FAIL: NUL in script HTML comment - double escaped
  input: "<!--<script>\u0000--><!--<script>-\u0000--><!--<script>--\u0000-->"
  actual:   [["Character","<!--<script>\\u0000--><!--<script>-\\u0000--><!--<script>--\\u0000-->"]]
  expected: [["Character","<!--<script>\\uFFFD--><!--<script>-\\uFFFD--><!--<script>--\\uFFFD-->"]]
-FAIL: Bad charref in RCDATA
- input: "&NotEqualTild;"
- actual:   [["Character","≏̸"]]
- expected: [["Character","&NotEqualTild;"]]
 FAIL: --!NUL in comment 
  input: "<!----!\u0000-->"
  actual:   [["Comment","--!\\u0000"]]
  expected: [["Comment","--!\\uFFFD"]]
-FAIL: Semicolonless named entity 'not' followed by 'i;' in body
- input: "&noti;"
- actual:   [["Character","∦"]]
- expected: [["Character","¬i;"]]
-FAIL: Commented entities in RCDATA
- input: " &amp; <!-- &amp; --> &amp; </xmp>"
- actual:   [["Character"," ⊴ --> & "],["EndTag","xmp"]]
- expected: [["Character"," & <!-- & --> & "],["EndTag","xmp"]]
-FAIL: Named entity: zwnj; with a semi-colon
- input: "&zwnj;"
- actual:   [["Character","&zwnj;"]]
- expected: [["Character","‌"]]
 FAIL: Unquoted attribute ending in ampersand
  input: "<s o=& t>"
  actual:   [["StartTag","s",{"t":""}]]

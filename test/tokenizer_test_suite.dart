@@ -52,17 +52,24 @@ List<TokenExpectation> outputFromJson(List json) {
 @JsonSerializable(createToJson: false)
 class TokenizerTest {
   final String description;
-  final List<String>? initialStates;
+
+  @JsonKey(defaultValue: ["Data state"])
+  final List<String> initialStates;
+
   final String? lastStartTag;
   final String input;
 
+  @JsonKey(defaultValue: false)
+  final bool doubleEscaped;
+
   @JsonKey(fromJson: outputFromJson)
   final List<TokenExpectation> output;
+
   @JsonKey(defaultValue: [])
   final List<TokenizerError> errors;
 
   TokenizerTest(this.description, this.initialStates, this.lastStartTag,
-      this.input, this.output, this.errors);
+      this.doubleEscaped, this.input, this.output, this.errors);
 
   factory TokenizerTest.fromJson(Map<String, dynamic> json) =>
       _$TokenizerTestFromJson(json);

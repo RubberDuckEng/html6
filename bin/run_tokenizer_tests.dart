@@ -57,7 +57,9 @@ void main(List<String> arguments) {
       if (testFilter != null && testFilter != test.description) {
         continue;
       }
-      for (var initialState in test.initialStates ?? ["Data state"]) {
+      for (var initialState in test.initialStates) {
+        // FIXME: This does not yet handle "doubleEscaped"
+
         // print(test.description);
         var input = InputManager(test.input);
         var tokenizer = Tokenizer(input);
