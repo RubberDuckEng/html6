@@ -237,6 +237,16 @@ class TreeBuilder {
     currentNode!.appendChild(Text(document, token.characters));
   }
 
+  // Shared between inHead and inBody.
+  void htmlStartTokenInBody(StartTagToken token) {
+    assert(token.tagName == htmlTag);
+//     Parse error.
+
+// If there is a template element on the stack of open elements, then ignore the token.
+
+// Otherwise, for each attribute on the token, check to see if the attribute is already present on the top element of the stack of open elements. If it is not, add the attribute and its corresponding value to that element.
+  }
+
   void insertComment(CommentToken token, {Node? explicitParent}) {
     //     When the steps below require the user agent to insert a comment while processing a comment token, optionally with an explicitly insertion position position, the user agent must run the following steps:
 
@@ -347,13 +357,14 @@ class TreeBuilder {
 
           if (token is StartTagToken) {
             if (token.tagName == htmlTag) {
-// A start tag whose tag name is "html"
-// Process the token using the rules for the "in body" insertion mode.
+              htmlStartTokenInBody(token);
+              break;
             } else if (token.tagName == headTag) {
               head = insertHtmlElement(token);
               mode = InsertionMode.inHead;
+              break;
             }
-            // break;
+            // Other start tags fall through to "anything else".
           }
 
           if (token is EndTagToken &&
