@@ -313,7 +313,7 @@ class TreeBuilder {
             document.appendChild(element);
             openElements.add(element);
             mode = InsertionMode.beforeHead;
-            // break;
+            break;
           }
           if (token is EndTagToken &&
               (token.tagName != headTag &&
