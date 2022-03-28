@@ -399,24 +399,24 @@ class TreeBuilder {
         case InsertionMode.inBody:
           if (token is CharacterToken) {
             insertText(token);
-            // break;
+            break;
           }
 
-          // FIXME: Missing Test.
-          // if (token is DoctypeToken) {
-          //   // Parse error.  Ignore the token.
-          //   break;
-          // }
+          // FIXME: Doctype in body missing test.
+          if (token is DoctypeToken) {
+            // Parse error.  Ignore the token.
+            break;
+          }
 
-          // if (token is CommentToken) {
-          //   insertComment(token, document);
-          //   break;
-          // }
+          if (token is CommentToken) {
+            insertComment(token);
+            break;
+          }
 
           if (token is StartTagToken) {
             // Reconstruct the active formatting elements, if any.
             insertHtmlElement(token);
-            // break;
+            break;
           }
           break;
         case InsertionMode.text:
