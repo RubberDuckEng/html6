@@ -262,18 +262,29 @@ class TreeBuilder {
             insertComment(token, document);
           }
 
-// A DOCTYPE token
-// If the DOCTYPE token's name is not "html", or the token's public identifier is not missing, or the token's system identifier is neither missing nor "about:legacy-compat", then there is a parse error.
+          if (token is DoctypeToken) {
+            // A DOCTYPE token
+            if (token.name != "html" ||
+                token.publicIdentifier == null ||
+                (token.systemIdentifier != null ||
+                    token.systemIdentifier == "about:legacy-compat")) {
+              // parse error.
+            }
+            var doctype = Doctype(
+              document,
+              token.name ?? "",
+              publicId: token.publicIdentifier ?? "",
+              systemId: token.systemIdentifier ?? "",
+            );
+            document.appendChild(doctype);
 
-// Append a DocumentType node to the Document node, with its name set to the name given in the DOCTYPE token, or the empty string if the name was missing; its public ID set to the public identifier given in the DOCTYPE token, or the empty string if the public identifier was missing; and its system ID set to the system identifier given in the DOCTYPE token, or the empty string if the system identifier was missing.
+            // Then, if the document is not an iframe srcdoc document, and the parser cannot change the mode flag is false, and the DOCTYPE token matches one of the conditions in the following list, then set the Document to quirks mode:
 
-// This also ensures that the DocumentType node is returned as the value of the doctype attribute of the Document object.
+            // FIXME: Handle quirks mode.
 
-// Then, if the document is not an iframe srcdoc document, and the parser cannot change the mode flag is false, and the DOCTYPE token matches one of the conditions in the following list, then set the Document to quirks mode:
-
-// FIXME: Handle quirks mode.
-
-// Then, switch the insertion mode to "before html".
+            mode = InsertionMode.beforeHtml;
+            break;
+          }
 
 // Anything else
 // If the document is not an iframe srcdoc document, then this is a parse error; if the parser cannot change the mode flag is false, set the Document to quirks mode.

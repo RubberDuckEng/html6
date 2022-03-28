@@ -143,6 +143,16 @@ String treeToString(Node root) {
     } else if (node is Comment) {
       var comment = node as Comment;
       buffer.writeln(prefix + '<!-- ${comment.textContent} -->');
+    } else if (node is Doctype) {
+      var doctype = node as Doctype;
+      buffer.write(prefix + "<!DOCTYPE ${doctype.name}");
+      if (doctype.publicId.isNotEmpty) {
+        buffer.write(' "${doctype.publicId}"');
+      }
+      if (doctype.systemId.isNotEmpty) {
+        buffer.write(' "${doctype.systemId}"');
+      }
+      buffer.writeln(">");
     }
   }
   return buffer.toString();

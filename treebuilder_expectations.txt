@@ -470,6 +470,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -490,6 +491,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -510,6 +512,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -530,6 +533,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -550,6 +554,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -570,6 +575,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -590,6 +596,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -610,6 +617,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -630,6 +638,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -650,6 +659,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -670,6 +680,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -690,6 +701,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -710,6 +722,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -730,6 +743,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -750,6 +764,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -770,6 +785,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -790,6 +806,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -810,6 +827,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -830,6 +848,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -850,6 +869,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -870,6 +890,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -890,6 +911,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -910,6 +932,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -930,6 +953,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -950,6 +974,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -970,6 +995,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -990,6 +1016,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1010,6 +1037,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1030,6 +1058,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1050,6 +1079,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1070,6 +1100,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1090,6 +1121,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1110,6 +1142,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1130,6 +1163,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1150,6 +1184,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1170,6 +1205,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1190,6 +1226,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1210,6 +1247,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1230,6 +1268,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1250,6 +1289,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1270,6 +1310,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1290,6 +1331,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1310,6 +1352,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1330,6 +1373,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1350,6 +1394,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1370,6 +1415,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1390,6 +1436,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1410,6 +1457,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -1636,162 +1684,19 @@ Actual:
 |     <html>
 |       <title>
 |         "Comment before head"
-FAIL: <!DOCTYPE html>Hello
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!dOctYpE HtMl>Hello
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPEhtml>Hello
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE>Hello
-Expected:
-| <!DOCTYPE >
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE >Hello
-Expected:
-| <!DOCTYPE >
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato >Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato taco>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato taco "ddd>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato sYstEM>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato sYstEM    >Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE   potato       sYstEM  ggg>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato SYSTEM taco  >Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
+PASS: <!DOCTYPE html>Hello
+PASS: <!dOctYpE HtMl>Hello
+PASS: <!DOCTYPEhtml>Hello
+PASS: <!DOCTYPE>Hello
+PASS: <!DOCTYPE >Hello
+PASS: <!DOCTYPE potato>Hello
+PASS: <!DOCTYPE potato >Hello
+PASS: <!DOCTYPE potato taco>Hello
+PASS: <!DOCTYPE potato taco "ddd>Hello
+PASS: <!DOCTYPE potato sYstEM>Hello
+PASS: <!DOCTYPE potato sYstEM    >Hello
+PASS: <!DOCTYPE   potato       sYstEM  ggg>Hello
+PASS: <!DOCTYPE potato SYSTEM taco  >Hello
 FAIL: <!DOCTYPE potato SYSTEM 'taco"'>Hello
 Expected:
 | <!DOCTYPE potato "" "taco"">
@@ -1800,6 +1705,7 @@ Expected:
 |   <body>
 |     "Hello"
 Actual:
+| <!DOCTYPE potato "taco"">
 | <html>
 |   <head>
 |   <body>
@@ -1812,6 +1718,7 @@ Expected:
 |   <body>
 |     "Hello"
 Actual:
+| <!DOCTYPE potato "taco">
 | <html>
 |   <head>
 |   <body>
@@ -1824,82 +1731,17 @@ Expected:
 |   <body>
 |     "Hello"
 Actual:
+| <!DOCTYPE potato "tai'co">
 | <html>
 |   <head>
 |   <body>
 |     "Hello"
-FAIL: <!DOCTYPE potato SYSTEMtaco "ddd">Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato grass SYSTEM taco>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato pUbLIc>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato pUbLIc >Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato pUbLIcgoof>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE potato PUBLIC goof>Hello
-Expected:
-| <!DOCTYPE potato>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
+PASS: <!DOCTYPE potato SYSTEMtaco "ddd">Hello
+PASS: <!DOCTYPE potato grass SYSTEM taco>Hello
+PASS: <!DOCTYPE potato pUbLIc>Hello
+PASS: <!DOCTYPE potato pUbLIc >Hello
+PASS: <!DOCTYPE potato pUbLIcgoof>Hello
+PASS: <!DOCTYPE potato PUBLIC goof>Hello
 FAIL: <!DOCTYPE potato PUBLIC "go'of">Hello
 Expected:
 | <!DOCTYPE potato "go'of" "">
@@ -1908,6 +1750,7 @@ Expected:
 |   <body>
 |     "Hello"
 Actual:
+| <!DOCTYPE potato "go'of">
 | <html>
 |   <head>
 |   <body>
@@ -1920,6 +1763,7 @@ Expected:
 |   <body>
 |     "Hello"
 Actual:
+| <!DOCTYPE potato "go">
 | <html>
 |   <head>
 |   <body>
@@ -1932,6 +1776,7 @@ Expected:
 |   <body>
 |     "Hello"
 Actual:
+| <!DOCTYPE potato "go:hh   of">
 | <html>
 |   <head>
 |   <body>
@@ -1944,35 +1789,14 @@ Expected:
 |   <body>
 |     "Hello"
 Actual:
+| <!DOCTYPE potato "W3C-//dfdf">
 | <html>
 |   <head>
 |   <body>
 |     "Hello"
-FAIL: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+PASS: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">Hello
-Expected:
-| <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-FAIL: <!DOCTYPE ...>Hello
-Expected:
-| <!DOCTYPE ...>
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Hello"
+PASS: <!DOCTYPE ...>Hello
 FAIL: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 Expected:
@@ -1981,7 +1805,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 FAIL: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 Expected:
@@ -1990,7 +1814,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 FAIL: <!DOCTYPE root-element [SYSTEM OR PUBLIC FPI] "uri" [ 
 <!-- internal declarations -->
 ]>
@@ -2001,6 +1825,7 @@ Expected:
 |   <body>
 |     "]>"
 Actual:
+| <!DOCTYPE root-element>
 | <html>
 |   <head>
 |   <body>
@@ -2015,7 +1840,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 FAIL: <!DOCTYPE HTML SYSTEM "http://www.w3.org/DTD/HTML4-strict.dtd"><body><b>Mine!</b></body>
 Expected:
 | <!DOCTYPE html "" "http://www.w3.org/DTD/HTML4-strict.dtd">
@@ -2025,6 +1850,7 @@ Expected:
 |     <b>
 |       "Mine!"
 Actual:
+| <!DOCTYPE html "http://www.w3.org/DTD/HTML4-strict.dtd">
 | <html>
 |   <head>
 |   <body>
@@ -2038,7 +1864,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 FAIL: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"'http://www.w3.org/TR/html4/strict.dtd'>
 Expected:
 | <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -2046,7 +1872,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 FAIL: <!DOCTYPE HTML PUBLIC"-//W3C//DTD HTML 4.01//EN"'http://www.w3.org/TR/html4/strict.dtd'>
 Expected:
 | <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -2054,7 +1880,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 FAIL: <!DOCTYPE HTML PUBLIC'-//W3C//DTD HTML 4.01//EN''http://www.w3.org/TR/html4/strict.dtd'>
 Expected:
 | <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -2062,7 +1888,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 FAIL: <svg><![CDATA[foo
 bar]]>
 Expected:
@@ -2432,7 +2258,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html>
 FAIL: <html><!DOCTYPE html>
 Expected:
 | <html>
@@ -3735,7 +3561,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html>
 FAIL: &lang;&rang;
 Expected:
 | <html>
@@ -3968,6 +3794,7 @@ Expected:
 |       "x"
 |     "x"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -3987,6 +3814,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4007,6 +3835,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4028,6 +3857,7 @@ Expected:
 |             <svg main>
 |     <b>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4160,6 +3990,7 @@ Expected:
 |     <menuitem>
 |       "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4177,6 +4008,7 @@ Expected:
 |       <menuitem>
 |         "B"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4196,6 +4028,7 @@ Expected:
 |       <menu>
 |         "B"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4215,6 +4048,7 @@ Expected:
 |       <hr>
 |       "B"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4233,28 +4067,14 @@ Expected:
 |       <menuitem>
 |     <li>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     <li>
 |       <menuitem>
 |         <li>
-FAIL: <!DOCTYPE html><menuitem><p></menuitem>x
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-|       <p>
-|         "x"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-|       <p>
-|         "x"
+PASS: <!DOCTYPE html><menuitem><p></menuitem>x
 FAIL: <!DOCTYPE html><p><b></p><menuitem>
 Expected:
 | <!DOCTYPE html>
@@ -4266,6 +4086,7 @@ Expected:
 |     <b>
 |       <menuitem>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4282,6 +4103,7 @@ Expected:
 |       <asdf>
 |     "x"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -4295,7 +4117,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE html>
 FAIL: <!DOCTYPE html><html></menuitem>
 Expected:
 | <!DOCTYPE html>
@@ -4303,6 +4125,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -4315,6 +4138,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |     <head>
@@ -4328,91 +4152,18 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     <select>
 |       <menuitem>
-FAIL: <!DOCTYPE html><option><menuitem>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <option>
-|       <menuitem>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <option>
-|       <menuitem>
-FAIL: <!DOCTYPE html><menuitem><option>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-|       <option>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-|       <option>
-FAIL: <!DOCTYPE html><menuitem></body>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-FAIL: <!DOCTYPE html><menuitem></html>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-FAIL: <!DOCTYPE html><menuitem><p>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-|       <p>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-|       <p>
-FAIL: <!DOCTYPE html><menuitem><li>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-|       <li>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <menuitem>
-|       <li>
+PASS: <!DOCTYPE html><option><menuitem>
+PASS: <!DOCTYPE html><menuitem><option>
+PASS: <!DOCTYPE html><menuitem></body>
+PASS: <!DOCTYPE html><menuitem></html>
+PASS: <!DOCTYPE html><menuitem><p>
+PASS: <!DOCTYPE html><menuitem><li>
 FAIL: <body><table><tr><td><svg><td><foreignObject><span></td>Foo
 Expected:
 | <html>
@@ -4755,6 +4506,7 @@ Expected:
 |           "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5086,6 +4838,7 @@ Expected:
 |       "
 A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5103,6 +4856,7 @@ Expected:
 |       "
 A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5119,6 +4873,7 @@ Expected:
 |     <pre>
 |       "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5139,6 +4894,7 @@ Expected:
 |               <math mtext>
 |                 "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5162,6 +4918,7 @@ Expected:
 |               <svg foreignObject>
 |                 "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5181,6 +4938,7 @@ Expected:
 |       <math mi>
 |         "ab"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5197,6 +4955,7 @@ Expected:
 |       <math mo>
 |         "ab"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5213,6 +4972,7 @@ Expected:
 |       <math mn>
 |         "ab"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5229,6 +4989,7 @@ Expected:
 |       <math ms>
 |         "ab"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -5245,6 +5006,7 @@ Expected:
 |       <math mtext>
 |         "ab"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -6164,6 +5926,7 @@ Expected:
 |       <p>
 |         "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -6184,6 +5947,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -6205,6 +5969,7 @@ Expected:
 |             <svg search>
 |     <b>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -8455,6 +8220,7 @@ Expected:
 |                   <table>
 |                     <script>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -8806,6 +8572,7 @@ Expected:
 |       <button>
 |         "foobar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -9020,6 +8787,7 @@ Expected:
 |       "you"
 |   <!-- do -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -9046,6 +8814,7 @@ Expected:
 |       <select>
 |         "DE"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -9212,6 +8981,7 @@ Expected:
 |       " EOF"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -9228,6 +8998,7 @@ Expected:
 |   <body>
 |     "-->  EOF"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -9306,6 +9077,7 @@ Expected:
 |         "Test"
 |         <u>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -9316,20 +9088,7 @@ Actual:
 |           <p>
 |             "Test"
 |             <u>
-FAIL: <!DOCTYPE html><font><table></font></table></font>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <font>
-|       <table>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <font>
-|       <table>
+PASS: <!DOCTYPE html><font><table></font></table></font>
 FAIL: <font><p>hello<b>cruel</font>world
 Expected:
 | <html>
@@ -9776,20 +9535,7 @@ Actual:
 |         <code>
 |           <code>
 |             <strike>
-FAIL: <!DOCTYPE html><spacer>foo
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <spacer>
-|       "foo"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <spacer>
-|       "foo"
+PASS: <!DOCTYPE html><spacer>foo
 FAIL: <title><meta></title><link><title><meta></title>
 Expected:
 | <html>
@@ -10378,6 +10124,7 @@ Expected:
 |   <body>
 |     <svg svg>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10391,6 +10138,7 @@ Expected:
 |     <svg svg>
 |     <!-- [CDATA[a]] -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10403,6 +10151,7 @@ Expected:
 |   <body>
 |     <svg svg>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10416,6 +10165,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10431,6 +10181,7 @@ Expected:
 |     <select>
 |       <option>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10447,6 +10198,7 @@ Expected:
 |     <svg svg>
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10464,6 +10216,7 @@ Expected:
 |         "foo"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10485,6 +10238,7 @@ Expected:
 |         "bar"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10509,6 +10263,7 @@ Expected:
 |     <table>
 |       <tbody>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10535,6 +10290,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10563,6 +10319,7 @@ Expected:
 |               <svg g>
 |                 "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10594,6 +10351,7 @@ Expected:
 |             <p>
 |               "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10625,6 +10383,7 @@ Expected:
 |         <p>
 |           "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10656,6 +10415,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10688,6 +10448,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10720,6 +10481,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10750,6 +10512,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10779,6 +10542,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10808,6 +10572,7 @@ Expected:
 |     <p>
 |       "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10833,6 +10598,7 @@ Expected:
 |     <p>
 |       "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10851,6 +10617,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10867,6 +10634,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10886,6 +10654,7 @@ Expected:
 |     <svg svg>
 |       xlink href="foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10906,6 +10675,7 @@ Expected:
 |         xlink href="foo"
 |         xml lang="en"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10927,6 +10697,7 @@ Expected:
 |         xlink href="foo"
 |         xml lang="en"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -10949,6 +10720,7 @@ Expected:
 |         xml lang="en"
 |       "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11073,6 +10845,7 @@ Expected:
 |           <ul>
 |             "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11094,6 +10867,7 @@ Expected:
 |         <ul>
 |           "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11113,6 +10887,7 @@ Expected:
 |         <svg desc>
 |           <p>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11131,6 +10906,7 @@ Expected:
 |         <svg title>
 |           <p>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11529,6 +11305,7 @@ Expected:
 |       yChannelSelector=""
 |       zoomAndPan=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11658,6 +11435,7 @@ Expected:
 |       yChannelSelector=""
 |       zoomAndPan=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11788,6 +11566,7 @@ Expected:
 |       yChannelSelector=""
 |       zoomAndPan=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11918,6 +11697,7 @@ Expected:
 |       ychannelselector=""
 |       zoomandpan=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -11993,6 +11773,7 @@ Expected:
 |       externalresourcesrequired=""
 |       filterres=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12014,6 +11795,7 @@ Expected:
 |       externalresourcesrequired=""
 |       filterres=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12035,6 +11817,7 @@ Expected:
 |       externalresourcesrequired=""
 |       filterres=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12056,6 +11839,7 @@ Expected:
 |       externalresourcesrequired=""
 |       filterres=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12109,6 +11893,7 @@ Expected:
 |       <svg radialGradient>
 |       <svg textPath>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12194,6 +11979,7 @@ Expected:
 |       <svg radialGradient>
 |       <svg textPath>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12279,6 +12065,7 @@ Expected:
 |       <svg radialGradient>
 |       <svg textPath>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12364,6 +12151,7 @@ Expected:
 |       <math radialgradient>
 |       <math textpath>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12414,6 +12202,7 @@ Expected:
 |     <svg svg>
 |       <svg solidcolor>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12450,6 +12239,7 @@ Expected:
 |               "quux"
 |       "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12505,6 +12295,7 @@ Expected:
 |             "quux"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12538,6 +12329,7 @@ Expected:
 |   <body>
 |     <xyz:abc>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -12554,6 +12346,7 @@ Expected:
 |     <xyz:abc>
 |     <span>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -12571,6 +12364,7 @@ Expected:
 |   <body>
 |     <xyz:abc>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -12587,6 +12381,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   xml:lang=bar
 | <html>
@@ -12604,6 +12399,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   123=456
 | <html>
@@ -12620,6 +12416,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   123=456
 | <html>
@@ -12637,6 +12434,7 @@ Expected:
 |   <body>
 |     789="012"
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -12661,6 +12459,7 @@ Expected:
 |           <p>
 |             "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12708,23 +12507,13 @@ Expected:
 |   <body>
 |     " "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     " "
 |     <head>
-FAIL: <!doctype html></body><meta>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <meta>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <meta>
+PASS: <!doctype html></body><meta>
 FAIL: <html></html><!-- foo -->
 Expected:
 | <html>
@@ -12737,20 +12526,7 @@ Actual:
 |   <head>
 |   <body>
 |     <html>
-FAIL: <!doctype html></body><title>X</title>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <title>
-|       "X"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <title>
-|       "X"
+PASS: <!doctype html></body><title>X</title>
 FAIL: <!doctype html><table> X<meta></table>
 Expected:
 | <!DOCTYPE html>
@@ -12761,6 +12537,7 @@ Expected:
 |     <meta>
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12776,6 +12553,7 @@ Expected:
 |     " x"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12790,6 +12568,7 @@ Expected:
 |     " x "
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12806,6 +12585,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12824,6 +12604,7 @@ Expected:
 |         " <tr>x "
 |       " "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12851,6 +12632,7 @@ Expected:
 |               "bar"
 |             " "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12884,18 +12666,7 @@ Actual:
 |             <frame>
 |               <noframes>
 |                 <noframes>
-FAIL: <!DOCTYPE html><object></html>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <object>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <object>
+PASS: <!DOCTYPE html><object></html>
 FAIL: <!doctype html><script>
 Expected:
 | <!DOCTYPE html>
@@ -12904,6 +12675,7 @@ Expected:
 |     <script>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12917,6 +12689,7 @@ Expected:
 |       "a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12931,6 +12704,7 @@ Expected:
 |       "<"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12945,6 +12719,7 @@ Expected:
 |       "</"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12959,6 +12734,7 @@ Expected:
 |       "</S"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12972,6 +12748,7 @@ Expected:
 |       "</SC"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12985,6 +12762,7 @@ Expected:
 |       "</SCR"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -12998,6 +12776,7 @@ Expected:
 |       "</SCRI"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13011,6 +12790,7 @@ Expected:
 |       "</SCRIP"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13024,6 +12804,7 @@ Expected:
 |       "</SCRIPT"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13036,6 +12817,7 @@ Expected:
 |     <script>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13049,6 +12831,7 @@ Expected:
 |       "</s"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13062,6 +12845,7 @@ Expected:
 |       "</sc"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13075,6 +12859,7 @@ Expected:
 |       "</scr"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13088,6 +12873,7 @@ Expected:
 |       "</scri"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13101,6 +12887,7 @@ Expected:
 |       "</scrip"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13114,6 +12901,7 @@ Expected:
 |       "</script"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13126,6 +12914,7 @@ Expected:
 |     <script>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13139,6 +12928,7 @@ Expected:
 |       "<!"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13152,6 +12942,7 @@ Expected:
 |       "<!a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13165,6 +12956,7 @@ Expected:
 |       "<!-"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13178,6 +12970,7 @@ Expected:
 |       "<!-a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13191,6 +12984,7 @@ Expected:
 |       "<!--"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13204,6 +12998,7 @@ Expected:
 |       "<!--a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13217,6 +13012,7 @@ Expected:
 |       "<!--<"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13230,6 +13026,7 @@ Expected:
 |       "<!--<a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13243,6 +13040,7 @@ Expected:
 |       "<!--</"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13256,6 +13054,7 @@ Expected:
 |       "<!--</script"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13269,6 +13068,7 @@ Expected:
 |       "<!--"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13282,6 +13082,7 @@ Expected:
 |       "<!--<s"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13295,6 +13096,7 @@ Expected:
 |       "<!--<script"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13308,6 +13110,7 @@ Expected:
 |       "<!--<script "
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13321,6 +13124,7 @@ Expected:
 |       "<!--<script <"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13334,6 +13138,7 @@ Expected:
 |       "<!--<script <a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13347,6 +13152,7 @@ Expected:
 |       "<!--<script </"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13360,6 +13166,7 @@ Expected:
 |       "<!--<script </s"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13373,6 +13180,7 @@ Expected:
 |       "<!--<script </script"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13386,6 +13194,7 @@ Expected:
 |       "<!--<script </scripta"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13399,6 +13208,7 @@ Expected:
 |       "<!--<script </script "
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13412,6 +13222,7 @@ Expected:
 |       "<!--<script </script>"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13425,6 +13236,7 @@ Expected:
 |       "<!--<script </script/"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13438,6 +13250,7 @@ Expected:
 |       "<!--<script </script <"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13451,6 +13264,7 @@ Expected:
 |       "<!--<script </script <a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13464,6 +13278,7 @@ Expected:
 |       "<!--<script </script </"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13477,6 +13292,7 @@ Expected:
 |       "<!--<script </script </script"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13490,6 +13306,7 @@ Expected:
 |       "<!--<script </script "
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13503,6 +13320,7 @@ Expected:
 |       "<!--<script </script "
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13516,6 +13334,7 @@ Expected:
 |       "<!--<script </script "
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13529,6 +13348,7 @@ Expected:
 |       "<!--<script -"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13542,6 +13362,7 @@ Expected:
 |       "<!--<script -a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13555,6 +13376,7 @@ Expected:
 |       "<!--<script -<"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13568,6 +13390,7 @@ Expected:
 |       "<!--<script --"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13581,6 +13404,7 @@ Expected:
 |       "<!--<script --a"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13594,6 +13418,7 @@ Expected:
 |       "<!--<script --<"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13607,6 +13432,7 @@ Expected:
 |       "<!--<script -->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13620,6 +13446,7 @@ Expected:
 |       "<!--<script --><"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13634,6 +13461,7 @@ Expected:
 |       "<!--<script --></"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13648,6 +13476,7 @@ Expected:
 |       "<!--<script --></script"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13661,6 +13490,7 @@ Expected:
 |       "<!--<script -->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13674,6 +13504,7 @@ Expected:
 |       "<!--<script -->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13687,6 +13518,7 @@ Expected:
 |       "<!--<script -->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13700,6 +13532,7 @@ Expected:
 |       "<!--<script><\/script>-->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13713,6 +13546,7 @@ Expected:
 |       "<!--<script></scr'+'ipt>-->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13726,6 +13560,7 @@ Expected:
 |       "<!--<script></script><script></script>"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13739,6 +13574,7 @@ Expected:
 |       "<!--<script></script><script></script>--><!--"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13752,6 +13588,7 @@ Expected:
 |       "<!--<script></script><script></script>-- >"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13765,6 +13602,7 @@ Expected:
 |       "<!--<script></script><script></script>- ->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13778,6 +13616,7 @@ Expected:
 |       "<!--<script></script><script></script>- - >"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13791,6 +13630,7 @@ Expected:
 |       "<!--<script></script><script></script>->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13804,6 +13644,7 @@ Expected:
 |       "<!--<script>--!></script>X"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13819,6 +13660,7 @@ Expected:
 |   <body>
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13832,6 +13674,7 @@ Expected:
 |       "<!--<script></scr'+'ipt></script>X"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13846,6 +13689,7 @@ Expected:
 |   <body>
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13860,6 +13704,7 @@ Expected:
 |   <body>
 |     "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13874,6 +13719,7 @@ Expected:
 |   <body>
 |     "...-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13888,6 +13734,7 @@ Expected:
 |   <body>
 |     "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13902,6 +13749,7 @@ Expected:
 |   <body>
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13919,6 +13767,7 @@ Expected:
 |       "@import ..."
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13935,6 +13784,7 @@ Expected:
 |     <!--   -->
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13951,6 +13801,7 @@ Expected:
 |   <body>
 |     "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13966,6 +13817,7 @@ Expected:
 |   <body>
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13979,6 +13831,7 @@ Expected:
 |       "</title>"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -13993,6 +13846,7 @@ Expected:
 |       "foo/title><link></head><body>X"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14011,6 +13865,7 @@ Expected:
 |   <body>
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14024,6 +13879,7 @@ Expected:
 |       <!-- <noscript></noscript> -->
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14040,6 +13896,7 @@ Expected:
 |     <noscript>
 |       "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14053,6 +13910,7 @@ Expected:
 |       <!-- </noscript>X<noscript> -->
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14067,6 +13925,7 @@ Expected:
 |   <body>
 |     "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14083,6 +13942,7 @@ Expected:
 |     <iframe>
 |       "</noscript>X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14099,6 +13959,7 @@ Expected:
 |   <body>
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14112,6 +13973,7 @@ Expected:
 |       "<body><script><!--...</script></body>"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14128,52 +13990,14 @@ Expected:
 |       "<!--<textarea>"
 |     "-->"
 Actual:
-| <html>
-|   <head>
-|   <body>
-|     <textarea>
-FAIL: <!doctype html><textarea>&lt;/textarea></textarea>
-Expected:
 | <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     <textarea>
-|       "</textarea>"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <textarea>
-|       "</textarea>"
-FAIL: <!doctype html><textarea>&lt;</textarea>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <textarea>
-|       "<"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <textarea>
-|       "<"
-FAIL: <!doctype html><textarea>a&lt;b</textarea>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <textarea>
-|       "a<b"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <textarea>
-|       "a<b"
+PASS: <!doctype html><textarea>&lt;/textarea></textarea>
+PASS: <!doctype html><textarea>&lt;</textarea>
+PASS: <!doctype html><textarea>a&lt;b</textarea>
 FAIL: <!doctype html><iframe><!--<iframe></iframe>--></iframe>
 Expected:
 | <!DOCTYPE html>
@@ -14184,6 +14008,7 @@ Expected:
 |       "<!--<iframe>"
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14197,6 +14022,7 @@ Expected:
 |     <iframe>
 |       "...<!--X->...<!--/X->..."
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14212,6 +14038,7 @@ Expected:
 |       "<!--<xmp>"
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -14226,6 +14053,7 @@ Expected:
 |       "<!--<noembed>"
 |     "-->"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15413,6 +15241,7 @@ Expected:
 |       "
 "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15432,6 +15261,7 @@ Expected:
 |             <font>
 |               <span>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15440,22 +15270,7 @@ Actual:
 |         <span>
 |           <font>
 |             <span>
-FAIL: <!doctype html><form><table></form><form></table></form>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <form>
-|       <table>
-|         <form>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <form>
-|       <table>
-|         <form>
+PASS: <!doctype html><form><table></form><form></table></form>
 FAIL: <!doctype html><table><tbody><select><tr>
 Expected:
 | <!DOCTYPE html>
@@ -15467,6 +15282,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15486,6 +15302,7 @@ Expected:
 |         <tr>
 |           <td>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15506,6 +15323,7 @@ Expected:
 |             <select>
 |           <td>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15527,6 +15345,7 @@ Expected:
 |             <select>
 |           <td>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15547,6 +15366,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15562,6 +15382,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15575,6 +15396,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15588,6 +15410,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15601,6 +15424,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15614,6 +15438,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15627,6 +15452,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15640,6 +15466,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15656,6 +15483,7 @@ Expected:
 |         <tr>
 |     "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15683,6 +15511,7 @@ Expected:
 |     <plaintext>
 |       "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15696,6 +15525,7 @@ Expected:
 |     <plaintext>
 |       "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -15711,6 +15541,7 @@ Expected:
 |     <plaintext>
 |       "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |     <head>
@@ -15727,6 +15558,7 @@ Expected:
 |     <plaintext>
 |       "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -15743,6 +15575,7 @@ Expected:
 |     <plaintext>
 |       "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15756,6 +15589,7 @@ Expected:
 |     <plaintext>
 |       "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15771,6 +15605,7 @@ Expected:
 |       "</plaintext>"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15787,6 +15622,7 @@ Expected:
 |     <table>
 |       <tbody>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15805,6 +15641,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15825,6 +15662,7 @@ Expected:
 |             <plaintext>
 |               "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15842,6 +15680,7 @@ Expected:
 |         <plaintext>
 |           "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15859,6 +15698,7 @@ Expected:
 |     <table>
 |       <colgroup>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15874,6 +15714,7 @@ Expected:
 |     <select>
 |       "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15892,6 +15733,7 @@ Expected:
 |       <caption>
 |         "b"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15912,6 +15754,7 @@ Expected:
 |           "a</template>b"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15928,6 +15771,7 @@ Expected:
 |     <plaintext>
 |       "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15940,6 +15784,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15952,6 +15797,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15966,6 +15812,7 @@ Expected:
 |     <plaintext>
 |       "</plaintext>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15978,6 +15825,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -15994,6 +15842,7 @@ Expected:
 |         "a"
 |       "b"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16012,6 +15861,7 @@ Expected:
 |         <plaintext>
 |           "a</plaintext>b"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16033,6 +15883,7 @@ Expected:
 |           <style>
 |             "</script>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16053,6 +15904,7 @@ Expected:
 |           <script>
 |             "</style>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16072,6 +15924,7 @@ Expected:
 |           "</script>"
 |         "abc"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16093,6 +15946,7 @@ Expected:
 |               "</script>"
 |             "abc"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16111,6 +15965,7 @@ Expected:
 |         "</style>"
 |       "abc"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16129,6 +15984,7 @@ Expected:
 |       "abc"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16150,6 +16006,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16167,6 +16024,7 @@ Expected:
 |   <noframes>
 |     "abc"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16183,6 +16041,7 @@ Expected:
 |     "abc"
 |   <!-- abc -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16198,6 +16057,7 @@ Expected:
 |   <noframes>
 |     "abc"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16214,6 +16074,7 @@ Expected:
 |     "abc"
 | <!-- abc -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16231,6 +16092,7 @@ Expected:
 |         <tr>
 |       <tfoot>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16251,6 +16113,7 @@ Expected:
 |             "abc"
 |           <td>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16269,6 +16132,7 @@ Expected:
 |       <math mn>
 |         definitionURL="foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16283,6 +16147,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -16296,6 +16161,7 @@ Expected:
 |   <!-- foo -->
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |     <head>
@@ -16310,6 +16176,7 @@ Expected:
 |     <p>
 |     <pre>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16325,6 +16192,7 @@ Expected:
 |     <p>
 |     <listing>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16340,6 +16208,7 @@ Expected:
 |     <p>
 |     <plaintext>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16354,6 +16223,7 @@ Expected:
 |     <p>
 |     <h1>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16368,6 +16238,7 @@ Expected:
 |     <isindex>
 |       type="hidden"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16383,30 +16254,14 @@ Expected:
 |       <p>
 |       <rp>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     <ruby>
 |       <p>
 |         <rp>
-FAIL: <!doctype html><ruby><div><span><rp>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <ruby>
-|       <div>
-|         <span>
-|           <rp>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <ruby>
-|       <div>
-|         <span>
-|           <rp>
+PASS: <!doctype html><ruby><div><span><rp>
 FAIL: <!doctype html><ruby><div><p><rp>
 Expected:
 | <!DOCTYPE html>
@@ -16418,6 +16273,7 @@ Expected:
 |         <p>
 |         <rp>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16435,30 +16291,14 @@ Expected:
 |       <p>
 |       <rt>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     <ruby>
 |       <p>
 |         <rt>
-FAIL: <!doctype html><ruby><div><span><rt>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <ruby>
-|       <div>
-|         <span>
-|           <rt>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <ruby>
-|       <div>
-|         <span>
-|           <rt>
+PASS: <!doctype html><ruby><div><span><rt>
 FAIL: <!doctype html><ruby><div><p><rt>
 Expected:
 | <!DOCTYPE html>
@@ -16470,6 +16310,7 @@ Expected:
 |         <p>
 |         <rt>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16576,6 +16417,7 @@ Expected:
 |     <math math>
 |     <foo>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16590,6 +16432,7 @@ Expected:
 |     <svg svg>
 |     <foo>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16604,6 +16447,7 @@ Expected:
 |     <div>
 |   <!-- foo -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16620,6 +16464,7 @@ Expected:
 |           <span>
 |         "foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16628,20 +16473,7 @@ Actual:
 |         <h3>
 |           <span>
 |             "foo"
-FAIL: <!doctype html><p></h3>foo
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
+PASS: <!doctype html><p></h3>foo
 FAIL: <!doctype html><h3><li>abc</h2>foo
 Expected:
 | <!DOCTYPE html>
@@ -16653,6 +16485,7 @@ Expected:
 |         "abc"
 |     "foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16670,6 +16503,7 @@ Expected:
 |     <table>
 |       <!-- foo -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16685,6 +16519,7 @@ Expected:
 |       "  "
 |       <!-- foo -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16700,6 +16535,7 @@ Expected:
 |     <table>
 |       <!-- foo -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16715,40 +16551,15 @@ Expected:
 |       <option>
 |       <option>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     <select>
 |       <option>
 |         <option>
-FAIL: <!doctype html><select><option></optgroup>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <option>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <option>
-FAIL: <!doctype html><select><option></optgroup>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <option>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <option>
+PASS: <!doctype html><select><option></optgroup>
+PASS: <!doctype html><select><option></optgroup>
 FAIL: <!doctype html><dd><optgroup><dd>
 Expected:
 | <!DOCTYPE html>
@@ -16759,6 +16570,7 @@ Expected:
 |       <optgroup>
 |     <dd>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16777,6 +16589,7 @@ Expected:
 |           <p>
 |           <h1>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16797,6 +16610,7 @@ Expected:
 |           <p>
 |           <h1>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16817,6 +16631,7 @@ Expected:
 |           <p>
 |           <h1>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16837,6 +16652,7 @@ Expected:
 |           <p>
 |           <h1>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16857,6 +16673,7 @@ Expected:
 |           <p>
 |           <h1>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16872,6 +16689,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -16885,6 +16703,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   c=d
 | <html>
@@ -16904,6 +16723,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   c=d
 | <html>
@@ -16922,6 +16742,7 @@ Expected:
 |   <frameset>
 | <!-- foo -->
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -16936,6 +16757,7 @@ Expected:
 |   <frameset>
 |   "  "
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -16949,6 +16771,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -16963,6 +16786,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -16977,6 +16801,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -17002,6 +16827,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17015,6 +16841,7 @@ Expected:
 |   <frameset>
 |     <frame>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17030,6 +16857,7 @@ Expected:
 |     <p>
 |       "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17044,6 +16872,7 @@ Expected:
 |   <frameset>
 |     <frame>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17059,6 +16888,7 @@ Expected:
 |   <body>
 |     <pre>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17072,6 +16902,7 @@ Expected:
 |   <body>
 |     <listing>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17085,6 +16916,7 @@ Expected:
 |   <body>
 |     <li>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17098,6 +16930,7 @@ Expected:
 |   <body>
 |     <dd>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17111,6 +16944,7 @@ Expected:
 |   <body>
 |     <dt>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17124,6 +16958,7 @@ Expected:
 |   <body>
 |     <button>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17137,6 +16972,7 @@ Expected:
 |   <body>
 |     <applet>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17150,6 +16986,7 @@ Expected:
 |   <body>
 |     <marquee>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17163,6 +17000,7 @@ Expected:
 |   <body>
 |     <object>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17176,6 +17014,7 @@ Expected:
 |   <body>
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17189,6 +17028,7 @@ Expected:
 |   <body>
 |     <area>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17202,6 +17042,7 @@ Expected:
 |     <basefont>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17215,6 +17056,7 @@ Expected:
 |     <bgsound>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17228,6 +17070,7 @@ Expected:
 |   <body>
 |     <br>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17241,6 +17084,7 @@ Expected:
 |   <body>
 |     <embed>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17254,6 +17098,7 @@ Expected:
 |   <body>
 |     <img>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17267,6 +17112,7 @@ Expected:
 |   <body>
 |     <input>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17280,6 +17126,7 @@ Expected:
 |   <body>
 |     <keygen>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17293,6 +17140,7 @@ Expected:
 |   <body>
 |     <wbr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17306,6 +17154,7 @@ Expected:
 |   <body>
 |     <hr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17319,6 +17168,7 @@ Expected:
 |   <body>
 |     <textarea>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17332,6 +17182,7 @@ Expected:
 |   <body>
 |     <xmp>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17345,6 +17196,7 @@ Expected:
 |   <body>
 |     <iframe>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17358,6 +17210,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17371,6 +17224,7 @@ Expected:
 |   <frameset>
 |     <frame>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17385,6 +17239,7 @@ Expected:
 |   <frameset>
 |     <frame>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17399,6 +17254,7 @@ Expected:
 |   <frameset>
 |     <frame>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17417,6 +17273,7 @@ Expected:
 |     <svg svg>
 |       "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17432,6 +17289,7 @@ Expected:
 |   <frameset>
 |     <frame>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17474,6 +17332,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17487,6 +17346,7 @@ Expected:
 |   <body>
 |     <div>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17503,6 +17363,7 @@ Expected:
 |       <math math>
 |     "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17522,6 +17383,7 @@ Expected:
 |             <p>
 |             "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17538,6 +17400,7 @@ Expected:
 |   <body>
 |     <math math>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17551,6 +17414,7 @@ Expected:
 |       charset="ascii"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17566,6 +17430,7 @@ Expected:
 |       http-equiv="content-type"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17582,6 +17447,7 @@ Expected:
 |       charset="utf8"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |     <head>
@@ -17598,6 +17464,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   a=b
 | <html>
@@ -17616,6 +17483,7 @@ Expected:
 |   <body>
 |     <img>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17634,6 +17502,7 @@ Expected:
 |       "f"
 |       <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17669,6 +17538,7 @@ Expected:
 |         "f"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17705,6 +17575,7 @@ Expected:
 |       <a>
 |         "f"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17734,6 +17605,7 @@ Expected:
 |           "c"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17767,6 +17639,7 @@ Expected:
 |         "f"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17801,6 +17674,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17835,6 +17709,7 @@ Expected:
 |                 "d"
 |             <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17856,6 +17731,7 @@ Expected:
 |   <body>
 |     <bgsound>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17869,6 +17745,7 @@ Expected:
 |   <body>
 |     <basefont>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17884,6 +17761,7 @@ Expected:
 |       <b>
 |     <basefont>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17900,6 +17778,7 @@ Expected:
 |       <b>
 |     <bgsound>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17916,6 +17795,7 @@ Expected:
 |       <article>
 |     "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17932,6 +17812,7 @@ Expected:
 |       <article>
 |     "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17950,6 +17831,7 @@ Expected:
 |       <a>
 |         "b"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17972,6 +17854,7 @@ Expected:
 |         "c"
 |       "d"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -17982,18 +17865,7 @@ Actual:
 |         <p>
 |           "c"
 |           "d"
-FAIL: <!DOCTYPE html>Test
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "Test"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "Test"
+PASS: <!DOCTYPE html>Test
 FAIL: <textarea>test</div>test
 Expected:
 | <html>
@@ -18059,6 +17931,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18072,6 +17945,7 @@ Expected:
 |   <frameset>
 |     "  "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18085,6 +17959,7 @@ Expected:
 |   <frameset>
 |   "  "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18097,6 +17972,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18113,6 +17989,7 @@ Expected:
 |         <b>
 |           "test"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18130,6 +18007,7 @@ Expected:
 |       <div>
 |     <dd>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18186,6 +18064,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18203,6 +18082,7 @@ Expected:
 |     t3="3"
 |     t4="4"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18219,18 +18099,7 @@ Expected:
 |   <body>
 Actual:
 
-FAIL: <!DOCTYPE html></b test<b &=&amp>X
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "X"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "X"
+PASS: <!DOCTYPE html></b test<b &=&amp>X
 FAIL: <!doctypehtml><scrIPt type=text/x-foobar;baz>X</SCRipt
 Expected:
 | <!DOCTYPE html>
@@ -18241,6 +18110,7 @@ Expected:
 |       "X</SCRipt"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18262,6 +18132,7 @@ Expected:
 |     <p>
 |     <li>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18276,6 +18147,7 @@ Expected:
 |     <p>
 |     <dt>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18290,6 +18162,7 @@ Expected:
 |     <p>
 |     <dd>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18304,6 +18177,7 @@ Expected:
 |     <p>
 |     <form>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18318,6 +18192,7 @@ Expected:
 |     <p>
 |     "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18343,6 +18218,7 @@ Expected:
 |   <body>
 |     <thisisasillytestelementnametomakesurecrazytagnamesareparsedcorrectly>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -18359,6 +18235,7 @@ Expected:
 |   <body>
 |     "XX"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18372,6 +18249,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <!--  X -->
 | <html>
 |   <head>
@@ -18391,6 +18269,7 @@ Expected:
 |           <td>
 |             "test"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18409,6 +18288,7 @@ Expected:
 |       <option>
 |       <optgroup>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18427,6 +18307,7 @@ Expected:
 |       <option>
 |     <option>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18447,6 +18328,7 @@ Expected:
 |         <option>
 |       <optgroup>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18465,6 +18347,7 @@ Expected:
 |         "foo"
 |     "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18482,6 +18365,7 @@ Expected:
 |       <input>
 |       <input>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18496,6 +18380,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <!--  XXX - XXX  -->
 | <html>
 |   <head>
@@ -18509,6 +18394,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <!--  XXX - XXX -->
 | <html>
 |   <head>
@@ -18522,6 +18408,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <!--  XXX - XXX - XXX  -->
 | <html>
 |   <head>
@@ -18538,6 +18425,7 @@ Expected:
 |     <title>
 |       "test</body>"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18561,6 +18449,7 @@ Expected:
 |       "
 x { content:"</style" } "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18574,20 +18463,7 @@ Actual:
 |             <style>
 |               "
 x { content:""
-FAIL: <!DOCTYPE html><select><optgroup></optgroup></select>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <optgroup>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <optgroup>
+PASS: <!DOCTYPE html><select><optgroup></optgroup></select>
 FAIL: 
 Expected:
 | <html>
@@ -18602,6 +18478,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18622,6 +18499,7 @@ Expected:
 |     "  "
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18640,6 +18518,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -18657,6 +18536,7 @@ Expected:
 |   <body>
 |     "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18671,6 +18551,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |     <head>
@@ -18686,6 +18567,7 @@ Expected:
 |   <body>
 |     "XX"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18699,26 +18581,12 @@ Expected:
 |   <body>
 |     "X "
 Actual:
-| <html>
-|   <head>
-|   <body>
-|     "X"
-FAIL: <!DOCTYPE html>X</html><p>X
-Expected:
 | <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     "X"
-|     <p>
-|       "X"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "X"
-|     <p>
-|       "X"
+PASS: <!DOCTYPE html>X</html><p>X
 FAIL: <!DOCTYPE html>X<p/x/y/z>
 Expected:
 | <!DOCTYPE html>
@@ -18731,6 +18599,7 @@ Expected:
 |       y=""
 |       z=""
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18745,6 +18614,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <!-- x -->
 | <html>
 |   <head>
@@ -18762,6 +18632,7 @@ Expected:
 |           <td>
 |             <p>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18778,6 +18649,7 @@ Expected:
 |     <!-- <!--x -->
 |     "-->"
 Actual:
+| <!DOCTYPE <!doctype>
 | <html>
 |   <head>
 |   <body>
@@ -18793,6 +18665,7 @@ Expected:
 |       <form>
 |       <div>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -18809,604 +18682,50 @@ Expected:
 |       <button>
 |       <button>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     <p>
 |       <button>
 |         <button>
-FAIL: <!doctype html><p><button><address>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <address>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <address>
-FAIL: <!doctype html><p><button><article>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <article>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <article>
-FAIL: <!doctype html><p><button><aside>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <aside>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <aside>
-FAIL: <!doctype html><p><button><blockquote>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <blockquote>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <blockquote>
-FAIL: <!doctype html><p><button><center>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <center>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <center>
-FAIL: <!doctype html><p><button><details>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <details>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <details>
-FAIL: <!doctype html><p><button><dialog>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dialog>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dialog>
-FAIL: <!doctype html><p><button><dir>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dir>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dir>
-FAIL: <!doctype html><p><button><div>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <div>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <div>
-FAIL: <!doctype html><p><button><dl>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dl>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dl>
-FAIL: <!doctype html><p><button><fieldset>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <fieldset>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <fieldset>
-FAIL: <!doctype html><p><button><figcaption>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <figcaption>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <figcaption>
-FAIL: <!doctype html><p><button><figure>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <figure>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <figure>
-FAIL: <!doctype html><p><button><footer>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <footer>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <footer>
-FAIL: <!doctype html><p><button><header>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <header>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <header>
-FAIL: <!doctype html><p><button><hgroup>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <hgroup>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <hgroup>
-FAIL: <!doctype html><p><button><main>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <main>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <main>
-FAIL: <!doctype html><p><button><menu>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <menu>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <menu>
-FAIL: <!doctype html><p><button><nav>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <nav>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <nav>
-FAIL: <!doctype html><p><button><ol>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <ol>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <ol>
-FAIL: <!doctype html><p><button><p>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <p>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <p>
-FAIL: <!doctype html><p><button><search>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <search>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <search>
-FAIL: <!doctype html><p><button><section>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <section>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <section>
-FAIL: <!doctype html><p><button><summary>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <summary>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <summary>
-FAIL: <!doctype html><p><button><ul>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <ul>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <ul>
-FAIL: <!doctype html><p><button><h1>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <h1>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <h1>
-FAIL: <!doctype html><p><button><h6>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <h6>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <h6>
-FAIL: <!doctype html><p><button><listing>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <listing>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <listing>
-FAIL: <!doctype html><p><button><pre>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <pre>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <pre>
-FAIL: <!doctype html><p><button><form>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <form>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <form>
-FAIL: <!doctype html><p><button><li>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <li>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <li>
-FAIL: <!doctype html><p><button><dd>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dd>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dd>
-FAIL: <!doctype html><p><button><dt>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dt>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <dt>
-FAIL: <!doctype html><p><button><plaintext>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <plaintext>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <plaintext>
-FAIL: <!doctype html><p><button><table>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <table>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <table>
-FAIL: <!doctype html><p><button><hr>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <hr>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <hr>
-FAIL: <!doctype html><p><button><xmp>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <xmp>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <xmp>
+PASS: <!doctype html><p><button><address>
+PASS: <!doctype html><p><button><article>
+PASS: <!doctype html><p><button><aside>
+PASS: <!doctype html><p><button><blockquote>
+PASS: <!doctype html><p><button><center>
+PASS: <!doctype html><p><button><details>
+PASS: <!doctype html><p><button><dialog>
+PASS: <!doctype html><p><button><dir>
+PASS: <!doctype html><p><button><div>
+PASS: <!doctype html><p><button><dl>
+PASS: <!doctype html><p><button><fieldset>
+PASS: <!doctype html><p><button><figcaption>
+PASS: <!doctype html><p><button><figure>
+PASS: <!doctype html><p><button><footer>
+PASS: <!doctype html><p><button><header>
+PASS: <!doctype html><p><button><hgroup>
+PASS: <!doctype html><p><button><main>
+PASS: <!doctype html><p><button><menu>
+PASS: <!doctype html><p><button><nav>
+PASS: <!doctype html><p><button><ol>
+PASS: <!doctype html><p><button><p>
+PASS: <!doctype html><p><button><search>
+PASS: <!doctype html><p><button><section>
+PASS: <!doctype html><p><button><summary>
+PASS: <!doctype html><p><button><ul>
+PASS: <!doctype html><p><button><h1>
+PASS: <!doctype html><p><button><h6>
+PASS: <!doctype html><p><button><listing>
+PASS: <!doctype html><p><button><pre>
+PASS: <!doctype html><p><button><form>
+PASS: <!doctype html><p><button><li>
+PASS: <!doctype html><p><button><dd>
+PASS: <!doctype html><p><button><dt>
+PASS: <!doctype html><p><button><plaintext>
+PASS: <!doctype html><p><button><table>
+PASS: <!doctype html><p><button><hr>
+PASS: <!doctype html><p><button><xmp>
 FAIL: <!doctype html><p><button></p>
 Expected:
 | <!DOCTYPE html>
@@ -19417,6 +18736,7 @@ Expected:
 |       <button>
 |         <p>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19432,6 +18752,7 @@ Expected:
 |       <button>
 |     "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19448,6 +18769,7 @@ Expected:
 |       <button>
 |     "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19476,6 +18798,7 @@ Expected:
 |   <body>
 |     <svg svg>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19489,6 +18812,7 @@ Expected:
 |     <p>
 |     <figcaption>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19503,6 +18827,7 @@ Expected:
 |     <p>
 |     <summary>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19517,6 +18842,7 @@ Expected:
 |     <form>
 |       <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19532,6 +18858,7 @@ Expected:
 |     <table>
 |       <form>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19547,6 +18874,7 @@ Expected:
 |     <table>
 |       <form>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19563,6 +18891,7 @@ Expected:
 |       <svg foreignObject>
 |         <p>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19579,6 +18908,7 @@ Expected:
 |       <svg title>
 |         "abc"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19946,6 +19276,7 @@ Expected:
 |     <svg svg>
 |       "foo]"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19959,6 +19290,7 @@ Expected:
 |     <svg svg>
 |       "foo]]"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -19972,6 +19304,7 @@ Expected:
 |     <svg svg>
 |       "foo]]]"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20581,102 +19914,14 @@ Actual:
 |                     "X"
 |                     <p>
 |                       "Y"
-FAIL: <!DOCTYPE html>&NotEqualTilde;
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "≂̸"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "≂̸"
-FAIL: <!DOCTYPE html>&NotEqualTilde;A
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "≂̸A"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "≂̸A"
-FAIL: <!DOCTYPE html>&ThickSpace;
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "  "
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "  "
-FAIL: <!DOCTYPE html>&ThickSpace;A
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "  A"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "  A"
-FAIL: <!DOCTYPE html>&NotSubset;
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "⊂⃒"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "⊂⃒"
-FAIL: <!DOCTYPE html>&NotSubset;A
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "⊂⃒A"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "⊂⃒A"
-FAIL: <!DOCTYPE html>&Gopf;
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "𝔾"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "𝔾"
-FAIL: <!DOCTYPE html>&Gopf;A
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "𝔾A"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "𝔾A"
+PASS: <!DOCTYPE html>&NotEqualTilde;
+PASS: <!DOCTYPE html>&NotEqualTilde;A
+PASS: <!DOCTYPE html>&ThickSpace;
+PASS: <!DOCTYPE html>&ThickSpace;A
+PASS: <!DOCTYPE html>&NotSubset;
+PASS: <!DOCTYPE html>&NotSubset;A
+PASS: <!DOCTYPE html>&Gopf;
+PASS: <!DOCTYPE html>&Gopf;A
 FAIL: <!DOCTYPE html><body><foo>A
 Expected:
 | <!DOCTYPE html>
@@ -20686,6 +19931,7 @@ Expected:
 |     <foo>
 |       "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20701,6 +19947,7 @@ Expected:
 |     <area>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20716,6 +19963,7 @@ Expected:
 |     <base>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20731,6 +19979,7 @@ Expected:
 |     <basefont>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20746,6 +19995,7 @@ Expected:
 |     <bgsound>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20761,6 +20011,7 @@ Expected:
 |     <br>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20775,6 +20026,7 @@ Expected:
 |   <body>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20790,6 +20042,7 @@ Expected:
 |     <command>
 |       "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20805,6 +20058,7 @@ Expected:
 |     <embed>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20819,6 +20073,7 @@ Expected:
 |   <body>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20834,6 +20089,7 @@ Expected:
 |     <hr>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20849,6 +20105,7 @@ Expected:
 |     <img>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20864,6 +20121,7 @@ Expected:
 |     <input>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20879,6 +20137,7 @@ Expected:
 |     <keygen>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20894,6 +20153,7 @@ Expected:
 |     <keygen>
 |     "AB"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20901,18 +20161,7 @@ Actual:
 |       "A"
 |       "B"
 PASS: </keygen>A
-FAIL: <!DOCTYPE html></keygen>A
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     "A"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "A"
+PASS: <!DOCTYPE html></keygen>A
 FAIL: <!DOCTYPE html><head></keygen>A
 Expected:
 | <!DOCTYPE html>
@@ -20921,6 +20170,7 @@ Expected:
 |   <body>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |     <head>
@@ -20935,6 +20185,7 @@ Expected:
 |   <body>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |     <head>
@@ -20949,6 +20200,7 @@ Expected:
 |   <body>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20963,6 +20215,7 @@ Expected:
 |     <link>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20978,6 +20231,7 @@ Expected:
 |     <meta>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -20993,6 +20247,7 @@ Expected:
 |     <param>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21008,6 +20263,7 @@ Expected:
 |     <source>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21023,6 +20279,7 @@ Expected:
 |     <track>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21038,6 +20295,7 @@ Expected:
 |     <wbr>
 |     "A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21074,6 +20332,7 @@ Expected:
 |         "3"
 |       <nobr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21114,6 +20373,7 @@ Expected:
 |     <nobr>
 |       "3"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21146,6 +20406,7 @@ Expected:
 |           "3"
 |         <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21182,6 +20443,7 @@ Expected:
 |                 <nobr>
 |                   "3"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21220,6 +20482,7 @@ Expected:
 |       <nobr>
 |         "3"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21254,6 +20517,7 @@ Expected:
 |       <nobr>
 |         "3"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21284,6 +20548,7 @@ Expected:
 |     <i>
 |       <nobr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21310,6 +20575,7 @@ Expected:
 |       <i>
 |         "2"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21336,6 +20602,7 @@ Expected:
 |       <nobr>
 |         "2"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21380,6 +20647,7 @@ Expected:
 |         <i>
 |           "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21405,6 +20673,7 @@ Expected:
 |                 <i>
 |                   "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21429,6 +20698,7 @@ Expected:
 |         <i>
 |           "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21454,6 +20724,7 @@ Expected:
 |                 <i>
 |                   "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21475,6 +20746,7 @@ Expected:
 |       <!-- /div -->
 |       "a"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21623,6 +20895,7 @@ Expected:
 |   <body>
 |     <pre>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21643,6 +20916,7 @@ Expected:
 |     <pre>
 |       "foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21665,6 +20939,7 @@ Expected:
 |       "
 foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21688,6 +20963,7 @@ Expected:
 |       "foo
 "
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21712,6 +20988,7 @@ Expected:
 |       "
 "
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21735,6 +21012,7 @@ Expected:
 |       "x
 y"
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21758,6 +21036,7 @@ Expected:
 |         "
 y"
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21780,6 +21059,7 @@ Expected:
 |       "
 A"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21795,6 +21075,7 @@ Expected:
 |     <meta>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21809,6 +21090,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21859,6 +21141,7 @@ Expected:
 |   <body>
 |     <textarea>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21875,6 +21158,7 @@ Expected:
 |     <textarea>
 |       "foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21893,6 +21177,7 @@ Expected:
 |       "
 foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21912,6 +21197,7 @@ Expected:
 |           <p>
 |       <li>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -21934,6 +21220,7 @@ Expected:
 |     <nobr>
 |     <nobr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21950,6 +21237,7 @@ Expected:
 |     <nobr>
 |     <nobr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -21965,6 +21253,7 @@ Expected:
 |     <p>
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -22294,27 +21583,13 @@ Expected:
 |   " "
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
 |     " "
 |     <head>
-FAIL: <!doctype html><form><div></form><div>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <form>
-|       <div>
-|         <div>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <form>
-|       <div>
-|         <div>
+PASS: <!doctype html><form><div></form><div>
 FAIL: <!doctype html><title>&amp;</title>
 Expected:
 | <!DOCTYPE html>
@@ -22324,6 +21599,7 @@ Expected:
 |       "&"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22338,6 +21614,7 @@ Expected:
 |       "<!--&-->"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22349,7 +21626,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-
+| <!DOCTYPE >
 FAIL: <!---x
 Expected:
 | <!-- -x -->
@@ -22747,6 +22024,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html "-//W3C//DTD HTML 4.01//EN">
 | <html>
 | <html>
 |   <head>
@@ -22814,6 +22092,7 @@ Expected:
 |     <title>
 |       "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22830,6 +22109,7 @@ Expected:
 |       "X"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22845,6 +22125,7 @@ Expected:
 |       "X"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |     <head>
@@ -22861,6 +22142,7 @@ Expected:
 |       "X"
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22875,6 +22157,7 @@ Expected:
 |     <meta>
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22895,6 +22178,7 @@ Expected:
 |             <table>
 |               " "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22912,6 +22196,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -22926,6 +22211,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22942,6 +22228,7 @@ Expected:
 |         " <tr>x "
 |       " "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22963,6 +22250,7 @@ Expected:
 |           " <tr>x "
 |         " "
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -22973,24 +22261,7 @@ Actual:
 |           <tr>
 |             "x "
 |             " "
-FAIL: <!doctype html><p><applet><p>X</p></applet>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <applet>
-|         <p>
-|           "X"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <applet>
-|         <p>
-|           "X"
+PASS: <!doctype html><p><applet><p>X</p></applet>
 FAIL: <!doctype html><p><object type="application/x-non-existant-plugin"><p>X</p></object>
 Expected:
 | <!DOCTYPE html>
@@ -23003,6 +22274,7 @@ Expected:
 |         <p>
 |           "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23021,6 +22293,7 @@ Expected:
 |     <listing>
 |       "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23037,6 +22310,7 @@ Expected:
 |     <input>
 |     "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23052,6 +22326,7 @@ Expected:
 |     <select>
 |     "X"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23068,6 +22343,7 @@ Expected:
 |       <input>
 |         type="hidDEN"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23085,6 +22361,7 @@ Expected:
 |       <input>
 |         type="hidDEN"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23103,6 +22380,7 @@ Expected:
 |       <input>
 |         type="hidDEN"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23121,6 +22399,7 @@ Expected:
 |       <input>
 |         type="hidDEN"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23140,6 +22419,7 @@ Expected:
 |       <input>
 |         type="hidDEN"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23160,6 +22440,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23167,20 +22448,7 @@ Actual:
 |       <select>
 |         "X"
 |         <tr>
-FAIL: <!doctype html><select>X</select>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       "X"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       "X"
+PASS: <!doctype html><select>X</select>
 FAIL: <!DOCTYPE hTmL><html></html>
 Expected:
 | <!DOCTYPE html>
@@ -23188,6 +22456,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -23200,6 +22469,7 @@ Expected:
 |   <head>
 |   <body>
 Actual:
+| <!DOCTYPE html>
 | <html>
 | <html>
 |   <head>
@@ -23521,6 +22791,7 @@ Expected:
 |   <body>
 |     <math math>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23533,6 +22804,7 @@ Expected:
 |   <body>
 |     <math math>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23547,6 +22819,7 @@ Expected:
 |     <math math>
 |       <math mi>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23563,6 +22836,7 @@ Expected:
 |         <svg svg>
 |     <u>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23578,6 +22852,7 @@ Expected:
 |   <body>
 |     <select>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23593,6 +22868,7 @@ Expected:
 |     <select>
 |       <option>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23609,6 +22885,7 @@ Expected:
 |     <math math>
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23626,6 +22903,7 @@ Expected:
 |         "foo"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23647,6 +22925,7 @@ Expected:
 |         "bar"
 |     <table>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23671,6 +22950,7 @@ Expected:
 |     <table>
 |       <tbody>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23697,6 +22977,7 @@ Expected:
 |       <tbody>
 |         <tr>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23725,6 +23006,7 @@ Expected:
 |               <math mi>
 |                 "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23756,6 +23038,7 @@ Expected:
 |             <p>
 |               "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23787,6 +23070,7 @@ Expected:
 |         <p>
 |           "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23818,6 +23102,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23850,6 +23135,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23882,6 +23168,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23912,6 +23199,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23941,6 +23229,7 @@ Expected:
 |     <p>
 |       "quux"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23970,6 +23259,7 @@ Expected:
 |     <p>
 |       "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -23995,6 +23285,7 @@ Expected:
 |     <p>
 |       "baz"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -24013,6 +23304,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -24029,6 +23321,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -24048,6 +23341,7 @@ Expected:
 |     <math math>
 |       xlink href="foo"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -24068,6 +23362,7 @@ Expected:
 |         xlink href="foo"
 |         xml lang="en"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -24089,6 +23384,7 @@ Expected:
 |         xlink href="foo"
 |         xml lang="en"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -24111,6 +23407,7 @@ Expected:
 |         xml lang="en"
 |       "bar"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -26197,6 +25494,7 @@ Expected:
 |   <head>
 |   <frameset>
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -26212,6 +25510,7 @@ Expected:
 |     <input>
 |       type="button"
 Actual:
+| <!DOCTYPE html>
 | <html>
 |   <head>
 |   <body>
@@ -26587,4 +25886,4 @@ Actual:
 |     <plaintext>
 |       <div>
 |         "foo"
-Passed 143 of 1745 tree-construction tests.
+Passed 238 of 1745 tree-construction tests.

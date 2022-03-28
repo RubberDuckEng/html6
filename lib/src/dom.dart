@@ -66,7 +66,13 @@ class Node {
 }
 
 class Doctype extends Node {
-  Doctype(Document document) : super(document);
+  String name;
+  String publicId;
+  String systemId;
+
+  Doctype(Document document, this.name,
+      {this.publicId = "", this.systemId = ""})
+      : super(document);
 }
 
 class Comment extends Node {
