@@ -1,13 +1,7 @@
 Implementing an HTML parser in Dart.
 
-Next
-* DocTypes
-* Comments
-* Entities
+All remaining tokenizer failures are lack of doubleEscaped=true
+support in the test harness.
 
-
-Failures by first expected token:
-grep expected  test_expectations.txt | awk '{print $2}' | tr ',' ' ' | awk '{print $1}' | sort -r | uniq -c
-      1 [["StartTag"
-     39 [["Comment"
-     60 [["Character"
+Tests to upstream
+* Entities in Attributes (no tests yet)
