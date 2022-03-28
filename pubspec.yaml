@@ -4,7 +4,7 @@ version: 1.0.0
 homepage: http://rubberduckeng.com
 
 environment:
-  sdk: '>=2.17.0-69.2.beta <3.0.0'
+  sdk: ">=2.17.0-69.2.beta <3.0.0"
 
 dependencies:
   json_annotation: ^4.4.0

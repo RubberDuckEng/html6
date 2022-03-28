@@ -1,3 +1,5 @@
+import 'namespaces.dart';
+
 class Node {
   // FIXME: These all need to be read-only!
   final Document? _document;
@@ -86,13 +88,6 @@ class Text extends Node {
 
   Text(Document document, this.textContent) : super(document);
 }
-
-const String htmlNamespace = "http://www.w3.org/1999/xhtml";
-const String mthmlNamespace = "http://www.w3.org/1998/Math/MathML";
-const String svgNamespace = "http://www.w3.org/2000/svg";
-const String xlinkNamespace = "http://www.w3.org/1999/xlink";
-const String xmlNamespace = "http://www.w3.org/XML/1998/namespace";
-const String xmlnsNamespace = "http://www.w3.org/2000/xmlns/";
 
 // QualifiedName
 class QName {
