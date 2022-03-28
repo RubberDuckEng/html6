@@ -260,6 +260,7 @@ class TreeBuilder {
 
           if (token is CommentToken) {
             insertComment(token, document);
+            break; // Not covered in tests.
           }
 
           if (token is DoctypeToken) {
@@ -301,6 +302,7 @@ class TreeBuilder {
           }
           if (token is CommentToken) {
             insertComment(token, document);
+            break;
           }
 
 // A character token that is one of U+0009 CHARACTER TABULATION, U+000A LINE FEED (LF), U+000C FORM FEED (FF), U+000D CARRIAGE RETURN (CR), or U+0020 SPACE
@@ -311,6 +313,7 @@ class TreeBuilder {
             document.appendChild(element);
             openElements.add(element);
             mode = InsertionMode.beforeHead;
+            // break;
           }
           if (token is EndTagToken &&
               (token.tagName != headTag &&
@@ -335,6 +338,7 @@ class TreeBuilder {
 // Ignore the token.
           if (token is CommentToken) {
             insertComment(token, document);
+            // break;
           }
           if (token is DoctypeToken) {
             // Parse error. Ignore the token.
@@ -349,6 +353,7 @@ class TreeBuilder {
               head = insertHtmlElement(token);
               mode = InsertionMode.inHead;
             }
+            // break;
           }
 
           if (token is EndTagToken &&
@@ -383,13 +388,26 @@ class TreeBuilder {
         case InsertionMode.inBody:
           if (token is CharacterToken) {
             insertText(token);
+            // break;
           }
+
+          // FIXME: Missing Test.
+          // if (token is DoctypeToken) {
+          //   // Parse error.  Ignore the token.
+          //   break;
+          // }
+
+          // if (token is CommentToken) {
+          //   insertComment(token, document);
+          //   break;
+          // }
 
           if (token is StartTagToken) {
             // Reconstruct the active formatting elements, if any.
             insertHtmlElement(token);
+            // break;
           }
-          return; // Done with token.
+          break;
         case InsertionMode.text:
         case InsertionMode.inTable:
         case InsertionMode.inTableText:

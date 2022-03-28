@@ -1613,21 +1613,7 @@ Actual:
 |   <body>
 |     "FOO"
 |     "BAZ"
-FAIL: <?xml version="1.0">Hi
-Expected:
-| <!-- ?xml version="1.0" -->
-| <html>
-|   <head>
-|   <body>
-|     "Hi"
-Actual:
-| <!-- ?xml version="1.0" -->
-| <!-- ?xml version="1.0" -->
-| <html>
-|   <head>
-|   <body>
-|     "Hi"
-| <!-- ?xml version="1.0" -->
+PASS: <?xml version="1.0">Hi
 FAIL: <?xml version="1.0">
 Expected:
 | <!-- ?xml version="1.0" -->
@@ -1636,11 +1622,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- ?xml version="1.0" -->
-| <!-- ?xml version="1.0" -->
-| <html>
-|   <head>
-|   <body>
-| <!-- ?xml version="1.0" -->
 FAIL: <?xml version
 Expected:
 | <!-- ?xml version -->
@@ -1648,11 +1629,6 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-| <!-- ?xml version -->
-| <!-- ?xml version -->
-| <html>
-|   <head>
-|   <body>
 | <!-- ?xml version -->
 FAIL: FOO<!----->BAZ
 Expected:
@@ -3405,11 +3381,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- ?import namespace="foo" implementation="#bar" -->
-| <!-- ?import namespace="foo" implementation="#bar" -->
-| <html>
-|   <head>
-|   <body>
-| <!-- ?import namespace="foo" implementation="#bar" -->
 FAIL: <!--foo--bar-->
 Expected:
 | <!-- foo--bar -->
@@ -3418,11 +3389,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- foo--bar -->
-| <!-- foo--bar -->
-| <html>
-|   <head>
-|   <body>
-| <!-- foo--bar -->
 FAIL: <![CDATA[x]]>
 Expected:
 | <!-- [CDATA[x]] -->
@@ -3430,11 +3396,6 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-| <!-- [CDATA[x]] -->
-| <!-- [CDATA[x]] -->
-| <html>
-|   <head>
-|   <body>
 | <!-- [CDATA[x]] -->
 FAIL: <textarea><!--</textarea>--></textarea>
 Expected:
@@ -8435,13 +8396,11 @@ Expected:
 |       <!--  -->
 Actual:
 | <!--  -->
-| <!--  -->
 | <html>
 |   <head>
 |   <body>
 |     <div>
 |       "--"
-| <!--  -->
 FAIL: <p><hr></p>
 Expected:
 | <html>
@@ -8557,7 +8516,6 @@ Expected:
 |             <!-- X -->
 Actual:
 | <!-- - -->
-| <!-- - -->
 | <html>
 |   <head>
 |   <body>
@@ -8571,7 +8529,6 @@ Actual:
 |             <th>
 |               <i>
 |                 "please!"
-| <!-- - -->
 FAIL: <!DOCTYPE html><li>hello<li>world<ul>how<li>do</ul>you</body><!--do-->
 Expected:
 | <!DOCTYPE html>
@@ -8639,11 +8596,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- # -->
-| <!-- # -->
-| <html>
-|   <head>
-|   <body>
-| <!-- # -->
 FAIL: <?
 Expected:
 | <!-- ? -->
@@ -8651,11 +8603,6 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-| <!-- ? -->
-| <!-- ? -->
-| <html>
-|   <head>
-|   <body>
 | <!-- ? -->
 FAIL: <?#
 Expected:
@@ -8665,11 +8612,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- ?# -->
-| <!-- ?# -->
-| <html>
-|   <head>
-|   <body>
-| <!-- ?# -->
 FAIL: <!
 Expected:
 | <!--  -->
@@ -8677,11 +8619,6 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-| <!--  -->
-| <!--  -->
-| <html>
-|   <head>
-|   <body>
 | <!--  -->
 FAIL: <!#
 Expected:
@@ -8691,11 +8628,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- # -->
-| <!-- # -->
-| <html>
-|   <head>
-|   <body>
-| <!-- # -->
 FAIL: <?COMMENT?>
 Expected:
 | <!-- ?COMMENT? -->
@@ -8703,11 +8635,6 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-| <!-- ?COMMENT? -->
-| <!-- ?COMMENT? -->
-| <html>
-|   <head>
-|   <body>
 | <!-- ?COMMENT? -->
 FAIL: <!COMMENT>
 Expected:
@@ -8717,11 +8644,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- COMMENT -->
-| <!-- COMMENT -->
-| <html>
-|   <head>
-|   <body>
-| <!-- COMMENT -->
 FAIL: </ COMMENT >
 Expected:
 | <!--  COMMENT  -->
@@ -8729,11 +8651,6 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-| <!--  COMMENT  -->
-| <!--  COMMENT  -->
-| <html>
-|   <head>
-|   <body>
 | <!--  COMMENT  -->
 FAIL: <?COM--MENT?>
 Expected:
@@ -8743,11 +8660,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- ?COM--MENT? -->
-| <!-- ?COM--MENT? -->
-| <html>
-|   <head>
-|   <body>
-| <!-- ?COM--MENT? -->
 FAIL: <!COM--MENT>
 Expected:
 | <!-- COM--MENT -->
@@ -8756,11 +8668,6 @@ Expected:
 |   <body>
 Actual:
 | <!-- COM--MENT -->
-| <!-- COM--MENT -->
-| <html>
-|   <head>
-|   <body>
-| <!-- COM--MENT -->
 FAIL: </ COM--MENT >
 Expected:
 | <!--  COM--MENT  -->
@@ -8768,11 +8675,6 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-| <!--  COM--MENT  -->
-| <!--  COM--MENT  -->
-| <html>
-|   <head>
-|   <body>
 | <!--  COM--MENT  -->
 FAIL: <!DOCTYPE html><style> EOF
 Expected:
@@ -18027,10 +17929,6 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <!--  X -->
-| <html>
-|   <head>
-|   <body>
-| <!--  X -->
 FAIL: <!DOCTYPE html><table><caption>test TEST</caption><td>test
 Expected:
 | <!DOCTYPE html>
@@ -18158,10 +18056,6 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <!--  XXX - XXX  -->
-| <html>
-|   <head>
-|   <body>
-| <!--  XXX - XXX  -->
 FAIL: <!DOCTYPE html><!-- XXX - XXX
 Expected:
 | <!DOCTYPE html>
@@ -18172,10 +18066,6 @@ Expected:
 Actual:
 | <!DOCTYPE html>
 | <!--  XXX - XXX -->
-| <html>
-|   <head>
-|   <body>
-| <!--  XXX - XXX -->
 FAIL: <!DOCTYPE html><!-- XXX - XXX - XXX -->
 Expected:
 | <!DOCTYPE html>
@@ -18185,10 +18075,6 @@ Expected:
 |   <body>
 Actual:
 | <!DOCTYPE html>
-| <!--  XXX - XXX - XXX  -->
-| <html>
-|   <head>
-|   <body>
 | <!--  XXX - XXX - XXX  -->
 PASS: test
 test
@@ -18391,10 +18277,6 @@ Expected:
 |   <body>
 Actual:
 | <!DOCTYPE html>
-| <!-- x -->
-| <html>
-|   <head>
-|   <body>
 | <!-- x -->
 FAIL: <!DOCTYPE html><table><tr><td></p></table>
 Expected:
@@ -21410,11 +21292,6 @@ Expected:
 |   <head>
 |   <body>
 Actual:
-| <!-- -x -->
-| <!-- -x -->
-| <html>
-|   <head>
-|   <body>
 | <!-- -x -->
 FAIL: <body>
 <div>
@@ -24499,11 +24376,6 @@ Expected:
 |   <body>
 Actual:
 | <!--  tttt -->
-| <!--  tttt -->
-| <html>
-|   <head>
-|   <body>
-| <!--  tttt -->
 FAIL: <div FOO ><img><img></div>
 Expected:
 | <html>
@@ -25506,4 +25378,4 @@ Actual:
 |     <plaintext>
 |       <div>
 |         "foo"
-Passed 266 of 1745 tree-construction tests.
+Passed 267 of 1745 tree-construction tests.
