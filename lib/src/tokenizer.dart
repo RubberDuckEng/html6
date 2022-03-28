@@ -503,6 +503,38 @@ class DoctypeTokenBuilder {
   }
 }
 
+class CharacterReferenceCode {
+  int value = 0;
+  bool overflowed = false;
+
+  void _checkedAdd(int rhs) {
+    assert(rhs > 0);
+    var oldValue = value;
+    value += rhs;
+    if (oldValue > value) {
+      overflowed = true;
+    }
+  }
+
+  void _checkedMultiply(int rhs) {
+    var oldValue = value;
+    value *= rhs;
+    if (oldValue > value) {
+      overflowed = true;
+    }
+  }
+
+  void addHexDigit(int digit) {
+    _checkedMultiply(16);
+    _checkedAdd(digit);
+  }
+
+  void addDecimalDigit(int digit) {
+    _checkedMultiply(10);
+    _checkedAdd(digit);
+  }
+}
+
 class Tokenizer {
   final InputManager input;
   TokenizerState state = TokenizerState.data;
@@ -513,7 +545,7 @@ class Tokenizer {
   // TokenBuilder?
   StringBuffer? textBuffer;
   StringBuffer? temporaryBuffer;
-  int? characterReferenceCode;
+  CharacterReferenceCode? characterReferenceCode;
   String? lastStartTag;
 
   Tokenizer(this.input);
@@ -2252,7 +2284,7 @@ class Tokenizer {
           continue;
 
         case TokenizerState.numericCharacterReference:
-          characterReferenceCode = 0;
+          characterReferenceCode = CharacterReferenceCode();
           if (char == latinSmallLetterX || char == latinCapitalLetterX) {
             temporaryBuffer!.writeCharCode(char);
             state = TokenizerState.hexadecimalCharacterReferenceStart;
@@ -2283,18 +2315,15 @@ class Tokenizer {
 
         case TokenizerState.hexadecimalCharacterReference:
           if (_isAsciiDigit(char)) {
-            int numeric = char - 0x30;
-            characterReferenceCode = characterReferenceCode! * 16 + numeric;
+            characterReferenceCode!.addHexDigit(char - 0x30);
             continue;
           }
           if (_isAsciiUpperHexDigit(char)) {
-            int numeric = char - 0x37;
-            characterReferenceCode = characterReferenceCode! * 16 + numeric;
+            characterReferenceCode!.addHexDigit(char - 0x37);
             continue;
           }
           if (_isAsciiLowerHexDigit(char)) {
-            int numeric = char - 0x57;
-            characterReferenceCode = characterReferenceCode! * 16 + numeric;
+            characterReferenceCode!.addHexDigit(char - 0x57);
             continue;
           }
           if (char == semicolon) {
@@ -2307,8 +2336,7 @@ class Tokenizer {
 
         case TokenizerState.decimalCharacterReference:
           if (_isAsciiDigit(char)) {
-            int numeric = char - 0x30;
-            characterReferenceCode = characterReferenceCode! * 10 + numeric;
+            characterReferenceCode!.addDecimalDigit(char - 0x30);
             continue;
           }
           if (char == semicolon) {
@@ -2320,12 +2348,12 @@ class Tokenizer {
           continue;
 
         case TokenizerState.numericCharacterReferenceEnd:
-          int refCode = characterReferenceCode!;
+          int refCode = characterReferenceCode!.value;
           if (refCode == 0x00) {
             // This is a null-character-reference parse error.
             refCode = replacementCharacter;
           }
-          if (refCode > 0x10FFFF) {
+          if (refCode > 0x10FFFF || characterReferenceCode!.overflowed) {
             // This is a character-reference-outside-unicode-range parse error.
             refCode = replacementCharacter;
           }

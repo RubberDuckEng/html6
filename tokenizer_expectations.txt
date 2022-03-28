@@ -1,4 +1,4 @@
-Passed 7022 of 7032 tests
+Passed 7024 of 7032 tests
 
 FAIL: Raw NUL replacement
  input: "\u0000"
@@ -32,11 +32,3 @@ FAIL: Unquoted attribute ending in ampersand
  input: "<s o=& t>"
  actual:   [["StartTag","s",{"t":""}]]
  expected: [["StartTag","s",{"o":"&","t":""}]]
-FAIL: 65-bit hex numeric entity
- input: "&#x10000000000000041;"
- actual:   [["Character","A"]]
- expected: [["Character","�"]]
-FAIL: 65-bit decimal numeric entity
- input: "&#18446744073709551681;"
- actual:   [["Character","A"]]
- expected: [["Character","�"]]
