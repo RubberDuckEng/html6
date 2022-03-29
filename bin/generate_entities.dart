@@ -50,12 +50,15 @@ part of 'entities.dart';
 }
 
 void main() async {
-  var response = await http.get(Uri.parse(jsonUrl));
-  var map = json.decode(response.body).map<String, EntityEntry>(
-      (String key, value) => MapEntry(key, EntityEntry.fromJson(value)));
-
   var scriptPath = p.canonicalize(Platform.script.toFilePath());
   var scriptName = p.basename(scriptPath);
+  var inputDir = p.dirname(scriptPath);
+  var entitiesFile = File(p.join(inputDir, 'entities.json'));
+
+  var map = json
+      .decode(entitiesFile.readAsStringSync())
+      .map<String, EntityEntry>(
+          (String key, value) => MapEntry(key, EntityEntry.fromJson(value)));
 
   var rootPath = p.dirname(p.dirname(scriptPath));
   var outputPath = p.join(rootPath, 'lib', 'src', 'entities.g.dart');
