@@ -782,6 +782,25 @@ class TreeBuilder {
           mode = InsertionMode.inBody;
           continue;
         case InsertionMode.inTable:
+          // FIXME: Does not change any tests.
+          // if (token is EndTagToken &&
+          //     const <String>[
+          //       bodyTag,
+          //       captionTag,
+          //       colTag,
+          //       colgroupTag,
+          //       htmlTag,
+          //       tbodyTag,
+          //       tdTag,
+          //       tfootTag,
+          //       thTag,
+          //       theadTag,
+          //       trTag
+          //     ].contains(token.tagName)) {
+          //   // parse error. Ignore the token.
+          //   break;
+          // }
+
           mode = InsertionMode.inBody;
           continue;
         case InsertionMode.inTableText:
