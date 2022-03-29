@@ -5725,7 +5725,7 @@ Actual:
 |   <body>
 |     <template>
 |       <option>
-|         <option>
+|       <option>
 FAIL: <select><template></template><option></select>
 Expected:
 | <html>
@@ -7676,11 +7676,11 @@ Actual:
 |     "A"
 |     <option>
 |       "B"
-|       <optgroup>
-|         "C"
-|         <select>
-|           "D"
-|           "E"
+|     <optgroup>
+|       "C"
+|       <select>
+|         "D"
+|         "E"
 PASS: <
 PASS: <#
 PASS: </
@@ -14978,23 +14978,7 @@ Actual:
 |     <table>
 |       " b "
 |       <!-- foo -->
-FAIL: <!doctype html><select><option><option>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <option>
-|       <option>
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <option>
-|         <option>
+PASS: <!doctype html><select><option><option>
 PASS: <!doctype html><select><option></optgroup>
 PASS: <!doctype html><select><option></optgroup>
 FAIL: <!doctype html><dd><optgroup><dd>
@@ -16646,23 +16630,7 @@ Actual:
 |     <table>
 |       "test TEST"
 |       "test"
-FAIL: <!DOCTYPE html><select><option><optgroup>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <option>
-|       <optgroup>
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <select>
-|       <option>
-|         <optgroup>
+PASS: <!DOCTYPE html><select><option><optgroup>
 FAIL: <!DOCTYPE html><select><optgroup><option></optgroup><option><select><option>
 Expected:
 | <!DOCTYPE html>
@@ -16682,9 +16650,9 @@ Actual:
 |     <select>
 |       <optgroup>
 |         <option>
-|           <option>
-|             <select>
-|               <option>
+|         <option>
+|           <select>
+|             <option>
 FAIL: <!DOCTYPE html><select><optgroup><option><optgroup>
 Expected:
 | <!DOCTYPE html>
@@ -16703,7 +16671,7 @@ Actual:
 |     <select>
 |       <optgroup>
 |         <option>
-|           <optgroup>
+|         <optgroup>
 FAIL: <!DOCTYPE html><datalist><option>foo</datalist>bar
 Expected:
 | <!DOCTYPE html>
@@ -17247,19 +17215,7 @@ Actual:
 |       <title>
 |         "abc"
 PASS: <option><span><option>
-FAIL: <option><option>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <option>
-|     <option>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <option>
-|       <option>
+PASS: <option><option>
 FAIL: <math><annotation-xml><div>
 Expected:
 | <html>
@@ -23872,4 +23828,4 @@ Actual:
 |         <title>
 |           "foo"
 PASS: </foreignObject><plaintext><div>foo</div>
-Passed 336 of 1745 tree-construction tests.
+Passed 339 of 1745 tree-construction tests.

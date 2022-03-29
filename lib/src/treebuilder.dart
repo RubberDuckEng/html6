@@ -573,6 +573,16 @@ class TreeBuilder {
           }
 
           if (token is StartTagToken &&
+              <String>[optgroupTag, optionTag].contains(token.tagName)) {
+            if (currentNode!.tagName == optionTag) {
+              openElements.removeLast();
+            }
+            reconstructActiveFormattingElements();
+            insertHtmlElement(token);
+            break;
+          }
+
+          if (token is StartTagToken &&
               <String>[rbTag, rtcTag].contains(token.tagName)) {
             if (inScope(rubyTag)) {
               generateImpliedEndTags();
