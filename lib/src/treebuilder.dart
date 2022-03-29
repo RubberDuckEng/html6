@@ -564,7 +564,7 @@ class TreeBuilder {
           // missing tags...
 
           if (token is StartTagToken &&
-              <String>[
+              const <String>[
                 addressTag,
                 articleTag,
                 asideTag,
@@ -622,7 +622,7 @@ class TreeBuilder {
           // Doesn't actually change anything yet, probably due to lack of
           // activeFormattingElements implementation.
           // if (token is StartTagToken &&
-          //     <String>[
+          //     const <String>[
           //       bTag,
           //       bigTag,
           //       codeTag,
@@ -645,7 +645,7 @@ class TreeBuilder {
           // missing tags...
 
           if (token is EndTagToken &&
-              <String>[appletTag, marqueeTag, objectTag]
+              const <String>[appletTag, marqueeTag, objectTag]
                   .contains(token.tagName)) {
             if (!inScope(token.tagName)) {
               // parse error. ignore the token.
@@ -709,7 +709,7 @@ class TreeBuilder {
           // missing tags...
 
           if (token is StartTagToken &&
-              <String>[optgroupTag, optionTag].contains(token.tagName)) {
+              const <String>[optgroupTag, optionTag].contains(token.tagName)) {
             if (currentNode!.tagName == optionTag) {
               openElements.removeLast();
             }
@@ -719,7 +719,7 @@ class TreeBuilder {
           }
 
           if (token is StartTagToken &&
-              <String>[rbTag, rtcTag].contains(token.tagName)) {
+              const <String>[rbTag, rtcTag].contains(token.tagName)) {
             if (inScope(rubyTag)) {
               generateImpliedEndTags();
               if (currentNode!.tagName != rubyTag) {
@@ -731,7 +731,7 @@ class TreeBuilder {
           }
 
           if (token is StartTagToken &&
-              <String>[rpTag, rtTag].contains(token.tagName)) {
+              const <String>[rpTag, rtTag].contains(token.tagName)) {
             if (inScope(rubyTag)) {
               generateImpliedEndTags(exceptTag: rtcTag);
               if (currentNode!.tagName != rubyTag &&
@@ -743,24 +743,26 @@ class TreeBuilder {
             break;
           }
 
+          if (token is StartTagToken &&
+              const <String>[
+                captionTag,
+                colTag,
+                colgroupTag,
+                frameTag,
+                headTag,
+                tbodyTag,
+                tdTag,
+                tfootTag,
+                thTag,
+                theadTag,
+                trTag
+              ].contains(token.tagName)) {
+            // Parse error. Ignore the token.
+            break;
+          }
+
           if (token is StartTagToken) {
-            final name = token.tagName;
-            if (name == captionTag ||
-                name == colTag ||
-                name == colgroupTag ||
-                name == frameTag ||
-                name == headTag ||
-                name == tbodyTag ||
-                name == tdTag ||
-                name == tfootTag ||
-                name == thTag ||
-                name == theadTag ||
-                name == trTag) {
-              // Parse error. Ignore the token.
-              break;
-            }
-            // Any other start tag:
-            // Reconstruct the active formatting elements, if any.
+            reconstructActiveFormattingElements();
             insertHtmlElement(token);
             break;
           }
