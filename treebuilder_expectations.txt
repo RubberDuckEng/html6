@@ -7676,33 +7676,7 @@ Actual:
 |           "br"
 |           "x"
 |           "aoe"
-FAIL: <a href=a>aa<marquee>aa<a href=b>bb</marquee>aa
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <a>
-|       href="a"
-|       "aa"
-|       <marquee>
-|         "aa"
-|         <a>
-|           href="b"
-|           "bb"
-|       "aa"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <a>
-|       href="a"
-|       "aa"
-|       <marquee>
-|         "aa"
-|         <a>
-|           href="b"
-|           "bb"
-|           "aa"
+PASS: <a href=a>aa<marquee>aa<a href=b>bb</marquee>aa
 FAIL: <wbr><strike><code></strike><code><strike></code>
 Expected:
 | <html>
@@ -9075,7 +9049,7 @@ Actual:
 |           <object>
 |             <div>
 |               <span>
-|                 <mi>
+|           <mi>
 FAIL: <math><mi><svg><foreignObject><div><div></div></div></foreignObject></svg></mi><mi>
 Expected:
 | <html>
@@ -17544,8 +17518,8 @@ Actual:
 |                   <b>
 |                     id="a"
 |                     "X"
-|                     <p>
-|                       "Y"
+|     <p>
+|       "Y"
 PASS: <!DOCTYPE html>&NotEqualTilde;
 PASS: <!DOCTYPE html>&NotEqualTilde;A
 PASS: <!DOCTYPE html>&ThickSpace;
@@ -23136,4 +23110,4 @@ Actual:
 |         <title>
 |           "foo"
 PASS: </foreignObject><plaintext><div>foo</div>
-Passed 374 of 1745 tree-construction tests.
+Passed 375 of 1745 tree-construction tests.

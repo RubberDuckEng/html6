@@ -199,6 +199,10 @@ class TreeBuilder {
     // If the entry for new element in the list of active formatting elements is not the last entry in the list, return to the step labeled advance.
   }
 
+  void clearActiveFormattingElementsToLastMarker() {
+    // FIXME: implement.
+  }
+
   bool inScope(String targetTagName, {List<String>? scopeBoundaries}) {
     var boundaries = scopeBoundaries ?? defaultScopeBoundaries;
     for (var element in openElements.reversed) {
@@ -610,6 +614,49 @@ class TreeBuilder {
               openElements.removeLast();
             }
             insertHtmlElement(token);
+            break;
+          }
+
+          // missing tags...
+
+          // Doesn't actually change anything yet, probably due to lack of
+          // activeFormattingElements implementation.
+          // if (token is StartTagToken &&
+          //     <String>[
+          //       bTag,
+          //       bigTag,
+          //       codeTag,
+          //       emTag,
+          //       fontTag,
+          //       iTag,
+          //       sTag,
+          //       smallTag,
+          //       strikeTag,
+          //       strongTag,
+          //       ttTag,
+          //       uTag,
+          //     ].contains(token.tagName)) {
+          //   reconstructActiveFormattingElements();
+          //   var element = insertHtmlElement(token);
+          //   _activeFormattingElements.add(element);
+          //   break;
+          // }
+
+          // missing tags...
+
+          if (token is EndTagToken &&
+              <String>[appletTag, marqueeTag, objectTag]
+                  .contains(token.tagName)) {
+            if (!inScope(token.tagName)) {
+              // parse error. ignore the token.
+              break;
+            }
+            generateImpliedEndTags();
+            if (currentNode!.tagName != token.tagName) {
+              // parse error.
+            }
+            popUntil(token.tagName);
+            clearActiveFormattingElementsToLastMarker();
             break;
           }
 
