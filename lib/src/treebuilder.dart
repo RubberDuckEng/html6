@@ -572,6 +572,19 @@ class TreeBuilder {
             break;
           }
 
+          // missing tags...
+
+          if (token is EndTagToken && token.tagName == pTag) {
+            if (!inButtonScope(pTag)) {
+              // parse error.
+              insertHtmlElement(StartTagToken(pTag));
+            }
+            closePElement();
+            break;
+          }
+
+          // missing tags...
+
           if (token is StartTagToken &&
               <String>[optgroupTag, optionTag].contains(token.tagName)) {
             if (currentNode!.tagName == optionTag) {

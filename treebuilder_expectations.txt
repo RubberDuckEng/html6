@@ -211,8 +211,8 @@ Actual:
 |         <b>
 |           id="B"
 |           "3"
-|           "4"
-|           "5"
+|     "4"
+|     "5"
 FAIL: <table><a>1<td>2</td>3</table>
 Expected:
 | <html>
@@ -3112,6 +3112,7 @@ Actual:
 |   <head>
 |   <body>
 |     <svg>
+|       <p>
 |       <foo>
 FAIL: <svg></br><foo>
 Expected:
@@ -3170,7 +3171,7 @@ Actual:
 |   <head>
 |   <body>
 |     <p>
-|       <foo>
+|     <foo>
 PASS: <div<div>
 PASS: <div foo<bar=''>
 PASS: <div foo=`bar`>
@@ -3660,7 +3661,7 @@ Actual:
 |   <body>
 |     <p>
 |       <b>
-|         <menuitem>
+|     <menuitem>
 FAIL: <!DOCTYPE html><menuitem><asdf></menuitem>x
 Expected:
 | <!DOCTYPE html>
@@ -3950,6 +3951,7 @@ Actual:
 |   <head>
 |   <body>
 |     <noscript>
+|       <p>
 |       <!-- foo -->
 FAIL: <head><noscript><p><!--foo--></noscript>
 Expected:
@@ -7474,6 +7476,7 @@ Actual:
 |       <b>
 |         <div>
 |           <marquee>
+|             <p>
 |             "X"
 FAIL: <script><div></script></div><title><p></title><p><p>
 Expected:
@@ -7844,27 +7847,7 @@ Actual:
 |         <p>
 |           id="b"
 |           "TEST"
-FAIL: <b id=a><p><b id=b></p></b>TEST
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <b>
-|       id="a"
-|       <p>
-|         <b>
-|           id="b"
-|       "TEST"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <b>
-|       id="a"
-|       <p>
-|         <b>
-|           id="b"
-|           "TEST"
+PASS: <b id=a><p><b id=b></p></b>TEST
 FAIL: <!DOCTYPE html><title>U-test</title><body><div><p>Test<u></p></div></body>
 Expected:
 | <!DOCTYPE html>
@@ -8172,7 +8155,7 @@ Actual:
 |             " jkl "
 |             " mno "
 |             " pqr "
-|             " stu"
+|           " stu"
 PASS: <test attribute---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 FAIL: <a href="blah">aba<table><a href="foo">br<tr><td></td></tr>x</table>aoe
 Expected:
@@ -8475,6 +8458,7 @@ Actual:
 | <html>
 |   <head>
 |   <body>
+|     <p>
 |     <meta>
 |       <p>
 FAIL: <head></html><meta><p>
@@ -8588,6 +8572,7 @@ Actual:
 |       <b>
 |         <div>
 |           <marquee>
+|             <p>
 FAIL: <script></script></div><title></title><p><p>
 Expected:
 | <html>
@@ -8826,6 +8811,7 @@ Actual:
 | <html>
 |   <head>
 |   <body>
+|     <p>
 FAIL: <table><tr></strong></b></em></i></u></strike></s></blink></tt></pre></big></small></font></select></h1></h2></h3></h4></h5></h6></body></br></a></img></title></span></style></script></table></th></td></tr></frame></area></link></param></hr></input></col></base></meta></basefont></bgsound></embed></spacer></p></dd></dt></caption></colgroup></tbody></tfoot></thead></address></blockquote></center></dir></div></dl></fieldset></listing></menu></ol></ul></li></nobr></wbr></form></button></marquee></object></html></frameset></head></iframe></image></isindex></noembed></noframes></noscript></optgroup></option></plaintext></textarea>
 Expected:
 | <html>
@@ -8841,6 +8827,7 @@ Actual:
 |   <head>
 |   <body>
 |     <table>
+|       <p>
 FAIL: <frameset>
 Expected:
 | <html>
@@ -11154,9 +11141,9 @@ Actual:
 |       <b>
 |         <i>
 |           <u>
-|             " "
-|             <p>
-|               "X"
+|     " "
+|     <p>
+|       "X"
 FAIL: <p><b><i><u></p>
 <p>X
 Expected:
@@ -11182,10 +11169,10 @@ Actual:
 |       <b>
 |         <i>
 |           <u>
-|             "
+|     "
 "
-|             <p>
-|               "X"
+|     <p>
+|       "X"
 PASS: <!doctype html></html> <head>
 PASS: <!doctype html></body><meta>
 FAIL: <html></html><!-- foo -->
@@ -14797,6 +14784,7 @@ Actual:
 | <html>
 |   <head>
 |   <body>
+|     <p>
 |     <!-- foo -->
 FAIL: <!doctype html><body><p><pre>
 Expected:
@@ -15214,6 +15202,7 @@ Actual:
 |   <head>
 |   <body>
 |     <frameset>
+|       <p>
 FAIL: <html><frameset></frameset></html><!doctype html>
 Expected:
 | <html>
@@ -15762,7 +15751,7 @@ Actual:
 |   <body>
 |     <p>
 |       <math>
-|         "a"
+|     "a"
 FAIL: <!doctype html><p><math><mn><span></p>a
 Expected:
 | <!DOCTYPE html>
@@ -15784,7 +15773,7 @@ Actual:
 |       <math>
 |         <mn>
 |           <span>
-|             "a"
+|     "a"
 FAIL: <!doctype html><math></html>
 Expected:
 | <!DOCTYPE html>
@@ -16250,7 +16239,7 @@ Actual:
 |         "b"
 |         <p>
 |           "c"
-|           "d"
+|         "d"
 PASS: <!DOCTYPE html>Test
 FAIL: <textarea>test</div>test
 Expected:
@@ -16544,21 +16533,7 @@ Actual:
 |   <body>
 |     <p>
 |       <form>
-FAIL: <!DOCTYPE html><p></P>X
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|     "X"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "X"
+PASS: <!DOCTYPE html><p></P>X
 PASS: &AMP
 FAIL: &AMp;
 Expected:
@@ -16953,6 +16928,7 @@ Actual:
 |   <head>
 |   <body>
 |     <table>
+|       <p>
 PASS: <!DOCTYPE <!DOCTYPE HTML>><!--<!--x-->-->
 FAIL: <!doctype html><div><form></form><div></div></div>
 Expected:
@@ -17025,22 +17001,7 @@ Actual:
 PASS: <!doctype html><p><button><table>
 PASS: <!doctype html><p><button><hr>
 PASS: <!doctype html><p><button><xmp>
-FAIL: <!doctype html><p><button></p>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <p>
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
+PASS: <!doctype html><p><button></p>
 FAIL: <!doctype html><address><button></address>a
 Expected:
 | <!DOCTYPE html>
@@ -17089,6 +17050,7 @@ Actual:
 |   <body>
 |     <p>
 |       <table>
+|         <p>
 FAIL: <!doctype html><svg>
 Expected:
 | <!DOCTYPE html>
@@ -18925,7 +18887,7 @@ Actual:
 |       <foreignobject>
 |         <p>
 |           <i>
-|             "a"
+|         "a"
 FAIL: <!DOCTYPE html><table><tr><td><svg><foreignObject><p><i></p>a
 Expected:
 | <!DOCTYPE html>
@@ -18952,7 +18914,7 @@ Actual:
 |         <foreignobject>
 |           <p>
 |             <i>
-|               "a"
+|           "a"
 FAIL: <!DOCTYPE html><math><mtext><p><i></p>a
 Expected:
 | <!DOCTYPE html>
@@ -18974,7 +18936,7 @@ Actual:
 |       <mtext>
 |         <p>
 |           <i>
-|             "a"
+|         "a"
 FAIL: <!DOCTYPE html><table><tr><td><math><mtext><p><i></p>a
 Expected:
 | <!DOCTYPE html>
@@ -19001,7 +18963,7 @@ Actual:
 |         <mtext>
 |           <p>
 |             <i>
-|               "a"
+|           "a"
 FAIL: <!DOCTYPE html><body><div><!/div>a
 Expected:
 | <!DOCTYPE html>
@@ -19034,6 +18996,7 @@ Actual:
 |   <head>
 |   <body>
 |     <svg>
+|       <p>
 |       <foo>
 FAIL: <svg></br><foo>
 Expected:
@@ -19062,6 +19025,7 @@ Actual:
 |   <head>
 |   <body>
 |     <math>
+|       <p>
 |       <foo>
 FAIL: <math></br><foo>
 Expected:
@@ -22346,7 +22310,7 @@ Actual:
 |       <p>
 |         "Bold "
 |         " Not bold"
-|         "
+|       "
 Also not bold."
 FAIL: <html>
 <font color=red><i>Italic and Red<p>Italic and Red </font> Just italic.</p> Italic only.</i> Plain
@@ -22411,30 +22375,30 @@ Actual:
 |         <p>
 |           "Italic and Red "
 |           " Just italic."
-|           " Italic only."
-|           " Plain
+|         " Italic only."
+|         " Plain
 "
-|           <p>
-|             "I should not be red. "
-|             <font>
-|               color="red"
-|               "Red. "
-|               <i>
-|                 "Italic and red."
-|                 "
+|         <p>
+|           "I should not be red. "
+|           <font>
+|             color="red"
+|             "Red. "
+|             <i>
+|               "Italic and red."
+|         "
 "
-|                 <p>
-|                   "Italic and red. "
-|                   " Red."
-|                   " I should not be red."
-|                   "
+|         <p>
+|           "Italic and red. "
+|           " Red."
+|           " I should not be red."
+|         "
 "
-|                   <b>
-|                     "Bold "
-|                     <i>
-|                       "Bold and italic"
-|                       " Only Italic "
-|                       " Plain"
+|         <b>
+|           "Bold "
+|           <i>
+|             "Bold and italic"
+|             " Only Italic "
+|             " Plain"
 FAIL: <html><body>
 <p><font size="7">First paragraph.</p>
 <p>Second paragraph.</p></font>
@@ -22475,17 +22439,17 @@ Actual:
 |         <font>
 |           size="7"
 |           "First paragraph."
-|           "
+|       "
 "
-|           <p>
-|             "Second paragraph."
-|             "
+|       <p>
+|         "Second paragraph."
+|       "
 "
-|             <b>
-|               <p>
-|                 <i>
-|                   "Bold and Italic"
-|                   " Italic"
+|       <b>
+|         <p>
+|           <i>
+|             "Bold and Italic"
+|             " Italic"
 FAIL: <html>
 <dl>
 <dt><b>Boo
@@ -22680,6 +22644,7 @@ Actual:
 |             <table>
 |               "
 "
+|               <p>
 |               "
 "
 |               <a>
@@ -23293,6 +23258,7 @@ Actual:
 |   <body>
 |     <font>
 |       <p>
+|       <p>
 |         <meta>
 |           <title>
 FAIL: <a><center><title></title><a>
@@ -23828,4 +23794,4 @@ Actual:
 |         <title>
 |           "foo"
 PASS: </foreignObject><plaintext><div>foo</div>
-Passed 339 of 1745 tree-construction tests.
+Passed 342 of 1745 tree-construction tests.
