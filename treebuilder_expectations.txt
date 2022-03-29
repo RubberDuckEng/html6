@@ -2325,17 +2325,7 @@ Actual:
 PASS: FOO&gt;BAR
 PASS: FOO&gtBAR
 PASS: FOO&gt BAR
-FAIL: FOO&gt;;;BAR
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     "FOO>;;BAR"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "FOO𝕙BAR"
+PASS: FOO&gt;;;BAR
 FAIL: I'm &notit; I tell you
 Expected:
 | <html>
@@ -2346,7 +2336,7 @@ Actual:
 | <html>
 |   <head>
 |   <body>
-|     "I'm ∂̸ I tell you"
+|     "I'm ∉ I tell you"
 PASS: I'm &notin; I tell you
 FAIL: &ammmp;
 Expected:
@@ -2358,7 +2348,7 @@ Actual:
 | <html>
 |   <head>
 |   <body>
-|     "≩"
+|     "⨿"
 PASS: &ammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmp;
 PASS: FOO& BAR
 PASS: FOO&<BAR>
@@ -3194,17 +3184,7 @@ Expected:
 |   <body>
 Actual:
 | <!DOCTYPE html>
-FAIL: &lang;&rang;
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     "⟨⟩"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     "∅"
+PASS: &lang;&rang;
 PASS: &apos;
 PASS: &ImaginaryI;
 PASS: &Kopf;
@@ -17140,7 +17120,7 @@ Actual:
 | <html>
 |   <head>
 |   <body>
-|     "⩓"
+|     "&"
 FAIL: <!DOCTYPE html><html><head></head><body><thisISasillyTESTelementNameToMakeSureCrazyTagNamesArePARSEDcorrectLY>
 Expected:
 | <!DOCTYPE html>
@@ -24466,4 +24446,4 @@ Actual:
 |     <plaintext>
 |       <div>
 |         "foo"
-Passed 299 of 1745 tree-construction tests.
+Passed 301 of 1745 tree-construction tests.
