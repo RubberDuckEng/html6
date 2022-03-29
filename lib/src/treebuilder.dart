@@ -45,6 +45,9 @@ const List<String> defaultScopeBoundaries = <String>[
 
 final List<String> buttonScopeBoundaries = defaultScopeBoundaries + [buttonTag];
 
+final List<String> listItemScopeBoundaries =
+    defaultScopeBoundaries + [olTag, ulTag];
+
 class TreeBuilder {
   Document document;
   Element? head;
@@ -212,6 +215,9 @@ class TreeBuilder {
 
   bool inButtonScope(String targetTagName) =>
       inScope(targetTagName, scopeBoundaries: buttonScopeBoundaries);
+
+  bool inListItemScope(String targetTagName) =>
+      inScope(targetTagName, scopeBoundaries: listItemScopeBoundaries);
 
   void popUntil(String targetTagName) {
     while (true) {
@@ -639,6 +645,18 @@ class TreeBuilder {
             }
             closePElement();
             break;
+          }
+
+          if (token is EndTagToken && token.tagName == liTag) {
+            if (!inListItemScope(liTag)) {
+              // parse error. ignore the token.
+              break;
+            }
+            generateImpliedEndTags(exceptTag: liTag);
+            if (currentNode!.tagName != liTag) {
+              // parse error.
+            }
+            popUntil(liTag);
           }
 
           // missing tags...

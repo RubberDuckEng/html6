@@ -2786,27 +2786,7 @@ Actual:
 |   <body>
 |     <style>
 |       <!-- </style> -->
-FAIL: <ul><li>A </li> <li>B</li></ul>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <ul>
-|       <li>
-|         "A "
-|       " "
-|       <li>
-|         "B"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <ul>
-|       <li>
-|         "A "
-|         " "
-|         <li>
-|           "B"
+PASS: <ul><li>A </li> <li>B</li></ul>
 FAIL: <table><form><input type=hidden><input></form><div></div></table>
 Expected:
 | <html>
@@ -8113,17 +8093,17 @@ Actual:
 |   <body>
 |     <ul>
 |       <li>
-|         <div>
+|       <div>
+|         <li>
 |           <li>
 |             <li>
-|               <li>
-|                 <div>
-|                   <li>
-|                     <address>
-|                       <li>
-|                         <b>
-|                           <em>
-|                             <li>
+|               <div>
+|                 <li>
+|                   <address>
+|                     <li>
+|                       <b>
+|                         <em>
+|                           <li>
 PASS: <ul><li><ul></li><li>a</li></ul></li></ul>
 FAIL: <frameset><frame><frameset><frame></frameset><noframes></noframes></frameset>
 Expected:
@@ -22717,33 +22697,7 @@ Actual:
 |         <svg>
 |           <div>
 PASS: <img <="" FAIL>
-FAIL: <ul><li><div id='foo'/>A</li><li>B<div>C</div></li></ul>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <ul>
-|       <li>
-|         <div>
-|           id="foo"
-|           "A"
-|       <li>
-|         "B"
-|         <div>
-|           "C"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <ul>
-|       <li>
-|         <div>
-|           id="foo"
-|           "A"
-|           <li>
-|             "B"
-|             <div>
-|               "C"
+PASS: <ul><li><div id='foo'/>A</li><li>B<div>C</div></li></ul>
 FAIL: <svg><em><desc></em>
 Expected:
 | <html>
@@ -23182,4 +23136,4 @@ Actual:
 |         <title>
 |           "foo"
 PASS: </foreignObject><plaintext><div>foo</div>
-Passed 372 of 1745 tree-construction tests.
+Passed 374 of 1745 tree-construction tests.
