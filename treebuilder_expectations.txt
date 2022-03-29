@@ -3030,7 +3030,7 @@ Actual:
 |   <head>
 |   <body>
 |     <plaintext>
-|       <foo>
+|       "<foo>"
 FAIL: <frameset>X
 Expected:
 | "X"
@@ -4151,19 +4151,7 @@ Actual:
 |   <body>
 |     <body>
 |       "ý"
-FAIL: <plaintext>ýfillerýtextý
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "ï¿½fillerï¿½textï¿½"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "ýfillerýtextý"
+PASS: <plaintext>ýfillerýtextý
 FAIL: <svg><![CDATA[ýfillerýtextý]]>
 Expected:
 | <html>
@@ -14509,60 +14497,10 @@ Actual:
 |   <body>
 |     <table>
 |       "a"
-FAIL: <plaintext></plaintext>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "</plaintext>"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-FAIL: <!doctype html><plaintext></plaintext>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "</plaintext>"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-FAIL: <!doctype html><html><plaintext></plaintext>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "</plaintext>"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-FAIL: <!doctype html><head><plaintext></plaintext>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "</plaintext>"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
+PASS: <plaintext></plaintext>
+PASS: <!doctype html><plaintext></plaintext>
+PASS: <!doctype html><html><plaintext></plaintext>
+PASS: <!doctype html><head><plaintext></plaintext>
 FAIL: <!doctype html><html><noscript><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14579,20 +14517,8 @@ Actual:
 |   <body>
 |     <noscript>
 |       <plaintext>
-FAIL: <!doctype html></head><plaintext></plaintext>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "</plaintext>"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
+|         "</plaintext>"
+PASS: <!doctype html></head><plaintext></plaintext>
 FAIL: <!doctype html><body><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14608,6 +14534,7 @@ Actual:
 |   <body>
 |     <body>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><table><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14624,6 +14551,7 @@ Actual:
 |   <body>
 |     <table>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><table><tbody><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14641,6 +14569,7 @@ Actual:
 |   <body>
 |     <table>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><table><tbody><tr><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14659,6 +14588,7 @@ Actual:
 |   <body>
 |     <table>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><table><td><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14678,6 +14608,7 @@ Actual:
 |   <body>
 |     <table>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><table><caption><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14695,6 +14626,7 @@ Actual:
 |   <body>
 |     <table>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><table><colgroup><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14712,6 +14644,7 @@ Actual:
 |   <body>
 |     <table>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><select><plaintext></plaintext>X
 Expected:
 | <!DOCTYPE html>
@@ -14727,7 +14660,7 @@ Actual:
 |   <body>
 |     <select>
 |       <plaintext>
-|         "X"
+|         "</plaintext>X"
 FAIL: <!doctype html><table><select><plaintext>a<caption>b
 Expected:
 | <!DOCTYPE html>
@@ -14747,8 +14680,7 @@ Actual:
 |     <table>
 |       <select>
 |         <plaintext>
-|           "a"
-|           "b"
+|           "a<caption>b"
 FAIL: <!doctype html><template><plaintext>a</template>b
 Expected:
 | <!DOCTYPE html>
@@ -14766,8 +14698,7 @@ Actual:
 |   <body>
 |     <template>
 |       <plaintext>
-|         "a"
-|         "b"
+|         "a</template>b"
 FAIL: <!doctype html><body></body><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14783,6 +14714,7 @@ Actual:
 |   <body>
 |     <body>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><frameset><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14796,6 +14728,7 @@ Actual:
 |   <body>
 |     <frameset>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><frameset></frameset><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14809,6 +14742,7 @@ Actual:
 |   <body>
 |     <frameset>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><body></body></html><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14824,6 +14758,7 @@ Actual:
 |   <body>
 |     <body>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><frameset></frameset></html><plaintext></plaintext>
 Expected:
 | <!DOCTYPE html>
@@ -14837,6 +14772,7 @@ Actual:
 |   <body>
 |     <frameset>
 |       <plaintext>
+|         "</plaintext>"
 FAIL: <!doctype html><svg><plaintext>a</plaintext>b
 Expected:
 | <!DOCTYPE html>
@@ -14854,8 +14790,7 @@ Actual:
 |   <body>
 |     <svg>
 |       <plaintext>
-|         "a"
-|         "b"
+|         "a</plaintext>b"
 FAIL: <!doctype html><svg><title><plaintext>a</plaintext>b
 Expected:
 | <!DOCTYPE html>
@@ -14874,8 +14809,7 @@ Actual:
 |     <svg>
 |       <title>
 |         <plaintext>
-|           "a"
-|           "b"
+|           "a</plaintext>b"
 FAIL: <!doctype html><table><tr><style></script></style>abc
 Expected:
 | <!DOCTYPE html>
@@ -15194,21 +15128,7 @@ Actual:
 |     <body>
 |       <p>
 |         <listing>
-FAIL: <!doctype html><p><plaintext>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|     <plaintext>
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <plaintext>
+PASS: <!doctype html><p><plaintext>
 FAIL: <!doctype html><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -16763,8 +16683,8 @@ Actual:
 |   <body>
 |     <p>
 |       <a>
-|         <plaintext>
-|           "b"
+|     <plaintext>
+|       "b"
 FAIL: <!DOCTYPE html><div>a<a></div>b<p>c</p>d
 Expected:
 | <!DOCTYPE html>
@@ -16953,18 +16873,8 @@ Actual:
 |   <body>
 |     <table>
 |       <plaintext>
-FAIL: <plaintext></plaintext>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "</plaintext>"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
+|         "<td>"
+PASS: <plaintext></plaintext>
 FAIL: <!DOCTYPE html><table><tr>TEST
 Expected:
 | <!DOCTYPE html>
@@ -17571,7 +17481,23 @@ PASS: <!doctype html><p><button><form>
 PASS: <!doctype html><p><button><li>
 PASS: <!doctype html><p><button><dd>
 PASS: <!doctype html><p><button><dt>
-PASS: <!doctype html><p><button><plaintext>
+FAIL: <!doctype html><p><button><plaintext>
+Expected:
+| <!DOCTYPE html>
+| <html>
+|   <head>
+|   <body>
+|     <p>
+|       <button>
+|         <plaintext>
+Actual:
+| <!DOCTYPE html>
+| <html>
+|   <head>
+|   <body>
+|     <p>
+|       <button>
+|     <plaintext>
 PASS: <!doctype html><p><button><table>
 PASS: <!doctype html><p><button><hr>
 PASS: <!doctype html><p><button><xmp>
@@ -24371,8 +24297,7 @@ Actual:
 |         <div>
 |           "foo"
 |           <plaintext>
-|             <div>
-|               "bar"
+|             "</foreignObject></svg><div>bar</div>"
 FAIL: <svg><foreignObject></foreignObject><title></svg>foo
 Expected:
 | <html>
@@ -24390,18 +24315,5 @@ Actual:
 |       <foreignobject>
 |         <title>
 |           "foo"
-FAIL: </foreignObject><plaintext><div>foo</div>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       "<div>foo</div>"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <plaintext>
-|       <div>
-|         "foo"
-Passed 304 of 1745 tree-construction tests.
+PASS: </foreignObject><plaintext><div>foo</div>
+Passed 312 of 1745 tree-construction tests.
