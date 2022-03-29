@@ -587,6 +587,28 @@ class TreeBuilder {
             break;
           }
 
+          const List<String> headerTags = [
+            h1Tag,
+            h2Tag,
+            h3Tag,
+            h4Tag,
+            h5Tag,
+            h6Tag
+          ];
+          if (token is StartTagToken && headerTags.contains(token.tagName)) {
+            if (inButtonScope(pTag)) {
+              closePElement();
+            }
+            if (headerTags.contains(currentNode!.tagName)) {
+              // parse error.
+              openElements.removeLast();
+            }
+            insertHtmlElement(token);
+            break;
+          }
+
+          // missing tags...
+
           if (token is StartTagToken && token.tagName == plaintextTag) {
             if (inScope(pTag)) {
               closePElement();

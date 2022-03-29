@@ -6859,23 +6859,7 @@ Actual:
 |       <table>
 |         <i>
 |           "X"
-FAIL: <h1>Hello<h2>World
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <h1>
-|       "Hello"
-|     <h2>
-|       "World"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <h1>
-|       "Hello"
-|       <h2>
-|         "World"
+PASS: <h1>Hello<h2>World
 FAIL: <a><p>X<a>Y</a>Z</p></a>
 Expected:
 | <html>
@@ -7968,19 +7952,7 @@ Actual:
 |     <b>
 |       <table>
 |         <i>
-FAIL: <h1><h2>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <h1>
-|     <h2>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <h1>
-|       <h2>
+PASS: <h1><h2>
 FAIL: <a><p><a></a></p></a>
 Expected:
 | <html>
@@ -8188,7 +8160,7 @@ Actual:
 |     <h1>
 |       <table>
 |         <h3>
-|           <h3>
+|         <h3>
 FAIL: <table><colgroup><col><colgroup><col><col><col><colgroup><col><col><thead><tr><td></table>
 Expected:
 | <html>
@@ -14277,21 +14249,7 @@ Actual:
 |       <p>
 |         <listing>
 PASS: <!doctype html><p><plaintext>
-FAIL: <!doctype html><p><h1>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|     <h1>
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <h1>
+PASS: <!doctype html><p><h1>
 PASS: <!doctype html><isindex type="hidden">
 PASS: <!doctype html><ruby><p><rp>
 PASS: <!doctype html><ruby><div><span><rp>
@@ -14464,7 +14422,7 @@ Actual:
 |       <math>
 |         <mi>
 |     <p>
-|       <h1>
+|     <h1>
 FAIL: <!doctype html><p><math><mo><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -14485,7 +14443,7 @@ Actual:
 |       <math>
 |         <mo>
 |     <p>
-|       <h1>
+|     <h1>
 FAIL: <!doctype html><p><math><mn><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -14506,7 +14464,7 @@ Actual:
 |       <math>
 |         <mn>
 |     <p>
-|       <h1>
+|     <h1>
 FAIL: <!doctype html><p><math><ms><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -14527,7 +14485,7 @@ Actual:
 |       <math>
 |         <ms>
 |     <p>
-|       <h1>
+|     <h1>
 FAIL: <!doctype html><p><math><mtext><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -14548,7 +14506,7 @@ Actual:
 |       <math>
 |         <mtext>
 |     <p>
-|       <h1>
+|     <h1>
 FAIL: <!doctype html><frameset></noframes>
 Expected:
 | <!DOCTYPE html>
@@ -23224,4 +23182,4 @@ Actual:
 |         <title>
 |           "foo"
 PASS: </foreignObject><plaintext><div>foo</div>
-Passed 369 of 1745 tree-construction tests.
+Passed 372 of 1745 tree-construction tests.
