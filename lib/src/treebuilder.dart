@@ -572,6 +572,31 @@ class TreeBuilder {
             break;
           }
 
+          if (token is StartTagToken &&
+              <String>[rbTag, rtcTag].contains(token.tagName)) {
+            if (inScope(rubyTag)) {
+              generateImpliedEndTags();
+              if (currentNode!.tagName != rubyTag) {
+                // parse error.
+              }
+            }
+            insertHtmlElement(token);
+            break;
+          }
+
+          if (token is StartTagToken &&
+              <String>[rpTag, rtTag].contains(token.tagName)) {
+            if (inScope(rubyTag)) {
+              generateImpliedEndTags(exceptTag: rtcTag);
+              if (currentNode!.tagName != rubyTag &&
+                  currentNode!.tagName != rtcTag) {
+                // parse error.
+              }
+            }
+            insertHtmlElement(token);
+            break;
+          }
+
           if (token is StartTagToken) {
             final name = token.tagName;
             if (name == captionTag ||
