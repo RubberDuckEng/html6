@@ -128,7 +128,7 @@ String treeToString(Node root) {
     var prefix = "| " + ("  " * depth);
     if (node is Element) {
       Element element = node as Element;
-      buffer.writeln(prefix + "<${element.tagName.name}>");
+      buffer.writeln(prefix + "<${element.tagName}>");
       if (element.attributes.isNotEmpty) {
         var names = element.attributes.keys.toList();
         names.sort();

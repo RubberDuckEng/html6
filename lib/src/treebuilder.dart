@@ -177,7 +177,7 @@ class TreeBuilder {
       captionTag
     ];
     var last = _activeFormattingElements.last;
-    if (markerTags.contains(last.tagName.name) || openElements.contains(last)) {
+    if (markerTags.contains(last.tagName) || openElements.contains(last)) {
       return;
     }
 
@@ -199,10 +199,10 @@ class TreeBuilder {
   bool inScope(String targetTagName, {List<String>? scopeBoundaries}) {
     var boundaries = scopeBoundaries ?? defaultScopeBoundaries;
     for (var element in openElements.reversed) {
-      if (element.tagName.name == targetTagName) {
+      if (element.tagName == targetTagName) {
         return true;
       }
-      if (boundaries.contains(element.tagName.name)) {
+      if (boundaries.contains(element.tagName)) {
         return false;
       }
     }
@@ -216,7 +216,7 @@ class TreeBuilder {
   void popUntil(String targetTagName) {
     while (true) {
       var popped = openElements.removeLast();
-      if (popped.tagName.name == targetTagName) {
+      if (popped.tagName == targetTagName) {
         return;
       }
     }
@@ -236,15 +236,15 @@ class TreeBuilder {
       rtcTag,
     ];
 
-    while (tagsToClose.contains(currentNode!.tagName.name) &&
-        currentNode!.tagName.name != exceptTag) {
+    while (tagsToClose.contains(currentNode!.tagName) &&
+        currentNode!.tagName != exceptTag) {
       openElements.removeLast();
     }
   }
 
   void closePElement() {
     generateImpliedEndTags(exceptTag: pTag);
-    if (currentNode!.tagName.name != pTag) {
+    if (currentNode!.tagName != pTag) {
       // parse error.
     }
     popUntil(pTag);

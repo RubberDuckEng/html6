@@ -100,10 +100,12 @@ class QName {
 }
 
 class Element extends Node {
-  QName tagName;
+  final QName qName;
   Map<String, String> attributes = {};
 
-  Element(Document document, this.tagName) : super(document);
+  Element(Document document, this.qName) : super(document);
+
+  String get tagName => qName.name;
 
   String? getAttribute(String name) => attributes[name];
   void setAttribute(String name, String value) {
