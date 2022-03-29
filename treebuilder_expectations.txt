@@ -17537,23 +17537,7 @@ Actual:
 |     <div>
 |       <form>
 |         <div>
-FAIL: <!doctype html><p><button><button>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|       <button>
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <button>
-|         <button>
+PASS: <!doctype html><p><button><button>
 PASS: <!doctype html><p><button><address>
 PASS: <!doctype html><p><button><article>
 PASS: <!doctype html><p><button><aside>
@@ -19598,21 +19582,7 @@ Actual:
 |       <div>
 |         <!-- /div -->
 |         "a"
-FAIL: <button><p><button>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <button>
-|       <p>
-|     <button>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <button>
-|       <p>
-|         <button>
+PASS: <button><p><button>
 FAIL: <svg></p><foo>
 Expected:
 | <html>
@@ -20552,19 +20522,7 @@ Actual:
 |   <body>
 |     <form>
 |       <form>
-FAIL: <button><button>
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <button>
-|     <button>
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <button>
-|       <button>
+PASS: <button><button>
 FAIL: <table><tr><td></th>
 Expected:
 | <html>
@@ -24446,4 +24404,4 @@ Actual:
 |     <plaintext>
 |       <div>
 |         "foo"
-Passed 301 of 1745 tree-construction tests.
+Passed 304 of 1745 tree-construction tests.

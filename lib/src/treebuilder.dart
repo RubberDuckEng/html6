@@ -30,9 +30,26 @@ enum InsertionMode {
   afterAfterFrameset,
 }
 
+const List<String> defaultScopeBoundaries = <String>[
+  appletTag,
+  captionTag,
+  htmlTag,
+  tableTag,
+  tdTag,
+  thTag,
+  marqueeTag,
+  objectTag,
+  templateTag,
+  // FIXME: Missing mathml and svg tags.
+];
+
+final List<String> buttonScopeBoundaries = defaultScopeBoundaries + [buttonTag];
+
 class TreeBuilder {
   Document document;
   Element? head;
+
+  bool framesetOk = true;
 
   InsertionMode mode = InsertionMode.initial;
   InsertionMode originalMode = InsertionMode.initial;
@@ -40,6 +57,7 @@ class TreeBuilder {
 
   // FIXME: Are these actually Nodes?
   List<Element> openElements = [];
+  List<Element> _activeFormattingElements = [];
 
   Tokenizer tokenizer;
 
@@ -128,11 +146,108 @@ class TreeBuilder {
     }
   }
 
-  Node? get currentNode {
+  Element? get currentNode {
     if (openElements.isEmpty) {
       return null;
     }
     return openElements.last;
+  }
+
+  // FIXME: Support fragment parsing.
+  Element? get adjustedCurrentNode => currentNode;
+
+  void pushActiveFormattingElement(Element element) {
+    // If there are already three elements in the list of active formatting elements after the last marker, if any, or anywhere in the list if there are no markers, that have the same tag name, namespace, and attributes as element, then remove the earliest such element from the list of active formatting elements. For these purposes, the attributes must be compared as they were when the elements were created by the parser; two elements have the same attributes if all their parsed attributes can be paired such that the two attributes in each pair have identical names, namespaces, and values (the order of the attributes does not matter).
+    _activeFormattingElements.add(element);
+  }
+
+  void reconstructActiveFormattingElements() {
+    if (_activeFormattingElements.isEmpty) {
+      return;
+    }
+
+    // FIXME: Pull out and share.
+    final markerTags = const <String>[
+      appletTag,
+      objectTag,
+      marqueeTag,
+      templateTag,
+      tdTag,
+      thTag,
+      captionTag
+    ];
+    var last = _activeFormattingElements.last;
+    if (markerTags.contains(last.tagName.name) || openElements.contains(last)) {
+      return;
+    }
+
+    // Rewind: If there are no entries before entry in the list of active formatting elements, then jump to the step labeled create.
+
+    // Let entry be the entry one earlier than entry in the list of active formatting elements.
+
+    // If entry is neither a marker nor an element that is also in the stack of open elements, go to the step labeled rewind.
+
+    // Advance: Let entry be the element one later than entry in the list of active formatting elements.
+
+    // Create: Insert an HTML element for the token for which the element entry was created, to obtain new element.
+
+    // Replace the entry for entry in the list with an entry for new element.
+
+    // If the entry for new element in the list of active formatting elements is not the last entry in the list, return to the step labeled advance.
+  }
+
+  bool inScope(String targetTagName, {List<String>? scopeBoundaries}) {
+    var boundaries = scopeBoundaries ?? defaultScopeBoundaries;
+    for (var element in openElements.reversed) {
+      if (element.tagName.name == targetTagName) {
+        return true;
+      }
+      if (boundaries.contains(element.tagName.name)) {
+        return false;
+      }
+    }
+    assert(false); // Should never be reached.
+    return false;
+  }
+
+  bool inButtonScope(String targetTagName) =>
+      inScope(targetTagName, scopeBoundaries: buttonScopeBoundaries);
+
+  void popUntil(String targetTagName) {
+    while (true) {
+      var popped = openElements.removeLast();
+      if (popped.tagName.name == targetTagName) {
+        return;
+      }
+    }
+  }
+
+  void generateImpliedEndTags({String? exceptTag}) {
+    final tagsToClose = const <String>[
+      ddTag,
+      dtTag,
+      liTag,
+      optgroupTag,
+      optionTag,
+      pTag,
+      rbTag,
+      rpTag,
+      rtTag,
+      rtcTag,
+    ];
+
+    while (tagsToClose.contains(currentNode!.tagName.name) &&
+        currentNode!.tagName.name != exceptTag) {
+      openElements.removeLast();
+    }
+  }
+
+  void closePElement() {
+    generateImpliedEndTags(exceptTag: pTag);
+    if (currentNode!.tagName.name != pTag) {
+      // parse error.
+    }
+    popUntil(pTag);
   }
 
   Element insertForeignElement(StartTagToken token, String namespace) {
@@ -398,19 +513,53 @@ class TreeBuilder {
           continue; // reprocess
 
         case InsertionMode.inBody:
+          // A character token that is U+0000 NULL
+          // Parse error. Ignore the token.
+
+          // A character token that is one of U+0009 CHARACTER TABULATION, U+000A LINE FEED (LF), U+000C FORM FEED (FF), U+000D CARRIAGE RETURN (CR), or U+0020 SPACE
+          // Reconstruct the active formatting elements, if any.
+
+          // Insert the token's character.
+
           if (token is CharacterToken) {
+            // Reconstruct the active formatting elements, if any.
             insertText(token);
+            framesetOk = false;
             break;
           }
-
+          if (token is CommentToken) {
+            insertComment(token);
+            break;
+          }
           // FIXME: Doctype in body missing test.
           if (token is DoctypeToken) {
             // Parse error.  Ignore the token.
             break;
           }
 
-          if (token is CommentToken) {
-            insertComment(token);
+          // A start tag whose tag name is "html"
+          // Parse error.
+          // If there is a template element on the stack of open elements, then ignore the token.
+          // Otherwise, for each attribute on the token, check to see if the attribute is already present on the top element of the stack of open elements. If it is not, add the attribute and its corresponding value to that element.
+
+          // A start tag whose tag name is one of: "base", "basefont", "bgsound", "link", "meta", "noframes", "script", "style", "template", "title"
+          // An end tag whose tag name is "template"
+          // Process the token using the rules for the "in head" insertion mode.
+
+          // A start tag whose tag name is "body"
+          // Parse error.
+          // If the second element on the stack of open elements is not a body element, if the stack of open elements has only one node on it, or if there is a template element on the stack of open elements, then ignore the token. (fragment case)
+          // Otherwise, set the frameset-ok flag to "not ok"; then, for each attribute on the token, check to see if the attribute is already present on the body element (the second element) on the stack of open elements, and if it is not, add the attribute and its corresponding value to that element.
+
+          if (token is StartTagToken && token.tagName == buttonTag) {
+            if (inScope(buttonTag)) {
+              // Parse error.
+              generateImpliedEndTags();
+              popUntil(buttonTag);
+            }
+            reconstructActiveFormattingElements();
+            insertHtmlElement(token);
+            framesetOk = false;
             break;
           }
 
