@@ -10350,11 +10350,11 @@ Actual:
 |                         <foreignobject>
 |       <p>
 |         "spam"
-|         <table>
-|           <img>
-|             <g>
-|               "quux"
-|               "bar"
+|       <table>
+|         <img>
+|           <g>
+|             "quux"
+|             "bar"
 FAIL: <!DOCTYPE html><body>foo<math><mtext><i>baz</i></mtext><annotation-xml><svg><desc><b>eggs</b></desc><g><foreignObject><P>spam<TABLE><tr><td><img></td></table></foreignObject></g><g>quux</g></svg></annotation-xml></math>bar
 Expected:
 | <!DOCTYPE html>
@@ -10403,11 +10403,11 @@ Actual:
 |                       <foreignobject>
 |                         <p>
 |                           "spam"
-|                           <table>
-|                             <img>
-|                               <g>
-|                                 "quux"
-|                                 "bar"
+|                         <table>
+|                           <img>
+|                             <g>
+|                               "quux"
+|                               "bar"
 FAIL: <!DOCTYPE html><html><body><xyz:abc></xyz:abc>
 Expected:
 | <!DOCTYPE html>
@@ -18773,7 +18773,7 @@ Actual:
 |   <body>
 |     <body>
 |       <p>
-|         <table>
+|       <table>
 PASS: <p><table></table>
 FAIL: direct div content
 Expected:

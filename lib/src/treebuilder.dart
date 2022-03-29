@@ -660,6 +660,17 @@ class TreeBuilder {
             break;
           }
 
+          if (token is StartTagToken && token.tagName == tableTag) {
+            if (document.quirskMode != QuirksMode.quirks &&
+                inButtonScope(pTag)) {
+              closePElement();
+            }
+            insertHtmlElement(token);
+            framesetOk = false;
+            mode = InsertionMode.inTable;
+            break;
+          }
+
           // missing tags...
 
           if (token is StartTagToken && token.tagName == plaintextTag) {
@@ -768,7 +779,11 @@ class TreeBuilder {
           }
           break;
         case InsertionMode.text:
+          mode = InsertionMode.inBody;
+          continue;
         case InsertionMode.inTable:
+          mode = InsertionMode.inBody;
+          continue;
         case InsertionMode.inTableText:
         case InsertionMode.inCaption:
         case InsertionMode.inColumnGroup:
