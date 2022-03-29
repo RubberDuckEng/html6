@@ -551,6 +551,42 @@ class TreeBuilder {
           // If the second element on the stack of open elements is not a body element, if the stack of open elements has only one node on it, or if there is a template element on the stack of open elements, then ignore the token. (fragment case)
           // Otherwise, set the frameset-ok flag to "not ok"; then, for each attribute on the token, check to see if the attribute is already present on the body element (the second element) on the stack of open elements, and if it is not, add the attribute and its corresponding value to that element.
 
+          // missing tags...
+
+          if (token is StartTagToken &&
+              <String>[
+                addressTag,
+                articleTag,
+                asideTag,
+                blockquoteTag,
+                centerTag,
+                detailsTag,
+                dialogTag,
+                dirTag,
+                divTag,
+                dlTag,
+                fieldsetTag,
+                figcaptionTag,
+                figureTag,
+                footerTag,
+                headerTag,
+                hgroupTag,
+                mainTag,
+                menuTag,
+                navTag,
+                olTag,
+                pTag,
+                sectionTag,
+                summaryTag,
+                ulTag
+              ].contains(token.tagName)) {
+            if (inButtonScope(pTag)) {
+              closePElement();
+            }
+            insertHtmlElement(token);
+            break;
+          }
+
           if (token is StartTagToken && token.tagName == plaintextTag) {
             if (inScope(pTag)) {
               closePElement();

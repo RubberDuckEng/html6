@@ -387,8 +387,8 @@ Actual:
 |         <b>
 |           <b>
 |             <b>
-|               <p>
-|                 "x"
+|     <p>
+|       "x"
 FAIL: <b><em><foo><foob><fooc><aside></b></em>
 Expected:
 | <b>
@@ -454,29 +454,7 @@ Actual:
 |         <style>
 |           <address>
 |             <a>
-FAIL: <!doctype html><p>foo<address>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <address>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <address>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<address>bar<p>baz
 FAIL: <!doctype html><address><p>foo</address>bar
 Expected:
 | <!DOCTYPE html>
@@ -496,29 +474,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<article>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <article>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <article>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<article>bar<p>baz
 FAIL: <!doctype html><article><p>foo</article>bar
 Expected:
 | <!DOCTYPE html>
@@ -538,29 +494,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<aside>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <aside>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <aside>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<aside>bar<p>baz
 FAIL: <!doctype html><aside><p>foo</aside>bar
 Expected:
 | <!DOCTYPE html>
@@ -580,29 +514,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<blockquote>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <blockquote>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <blockquote>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<blockquote>bar<p>baz
 FAIL: <!doctype html><blockquote><p>foo</blockquote>bar
 Expected:
 | <!DOCTYPE html>
@@ -622,29 +534,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<center>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <center>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <center>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<center>bar<p>baz
 FAIL: <!doctype html><center><p>foo</center>bar
 Expected:
 | <!DOCTYPE html>
@@ -664,29 +554,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<details>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <details>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <details>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<details>bar<p>baz
 FAIL: <!doctype html><details><p>foo</details>bar
 Expected:
 | <!DOCTYPE html>
@@ -706,29 +574,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<dialog>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <dialog>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <dialog>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<dialog>bar<p>baz
 FAIL: <!doctype html><dialog><p>foo</dialog>bar
 Expected:
 | <!DOCTYPE html>
@@ -748,29 +594,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<dir>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <dir>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <dir>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<dir>bar<p>baz
 FAIL: <!doctype html><dir><p>foo</dir>bar
 Expected:
 | <!DOCTYPE html>
@@ -790,29 +614,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<div>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <div>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <div>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<div>bar<p>baz
 FAIL: <!doctype html><div><p>foo</div>bar
 Expected:
 | <!DOCTYPE html>
@@ -832,29 +634,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<dl>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <dl>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <dl>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<dl>bar<p>baz
 FAIL: <!doctype html><dl><p>foo</dl>bar
 Expected:
 | <!DOCTYPE html>
@@ -874,29 +654,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<fieldset>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <fieldset>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <fieldset>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<fieldset>bar<p>baz
 FAIL: <!doctype html><fieldset><p>foo</fieldset>bar
 Expected:
 | <!DOCTYPE html>
@@ -916,29 +674,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<figcaption>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <figcaption>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <figcaption>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<figcaption>bar<p>baz
 FAIL: <!doctype html><figcaption><p>foo</figcaption>bar
 Expected:
 | <!DOCTYPE html>
@@ -958,29 +694,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<figure>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <figure>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <figure>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<figure>bar<p>baz
 FAIL: <!doctype html><figure><p>foo</figure>bar
 Expected:
 | <!DOCTYPE html>
@@ -1000,29 +714,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<footer>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <footer>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <footer>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<footer>bar<p>baz
 FAIL: <!doctype html><footer><p>foo</footer>bar
 Expected:
 | <!DOCTYPE html>
@@ -1042,29 +734,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<header>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <header>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <header>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<header>bar<p>baz
 FAIL: <!doctype html><header><p>foo</header>bar
 Expected:
 | <!DOCTYPE html>
@@ -1084,29 +754,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<hgroup>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <hgroup>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <hgroup>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<hgroup>bar<p>baz
 FAIL: <!doctype html><hgroup><p>foo</hgroup>bar
 Expected:
 | <!DOCTYPE html>
@@ -1147,8 +795,8 @@ Actual:
 |       "foo"
 |       <listing>
 |         "bar"
-|         <p>
-|           "baz"
+|     <p>
+|       "baz"
 FAIL: <!doctype html><listing><p>foo</listing>bar
 Expected:
 | <!DOCTYPE html>
@@ -1168,29 +816,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<menu>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <menu>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <menu>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<menu>bar<p>baz
 FAIL: <!doctype html><menu><p>foo</menu>bar
 Expected:
 | <!DOCTYPE html>
@@ -1210,29 +836,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<nav>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <nav>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <nav>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<nav>bar<p>baz
 FAIL: <!doctype html><nav><p>foo</nav>bar
 Expected:
 | <!DOCTYPE html>
@@ -1252,29 +856,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<ol>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <ol>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <ol>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<ol>bar<p>baz
 FAIL: <!doctype html><ol><p>foo</ol>bar
 Expected:
 | <!DOCTYPE html>
@@ -1315,8 +897,8 @@ Actual:
 |       "foo"
 |       <pre>
 |         "bar"
-|         <p>
-|           "baz"
+|     <p>
+|       "baz"
 FAIL: <!doctype html><pre><p>foo</pre>bar
 Expected:
 | <!DOCTYPE html>
@@ -1336,29 +918,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<section>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <section>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <section>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<section>bar<p>baz
 FAIL: <!doctype html><section><p>foo</section>bar
 Expected:
 | <!DOCTYPE html>
@@ -1378,29 +938,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<summary>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <summary>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <summary>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<summary>bar<p>baz
 FAIL: <!doctype html><summary><p>foo</summary>bar
 Expected:
 | <!DOCTYPE html>
@@ -1420,29 +958,7 @@ Actual:
 |       <p>
 |         "foo"
 |         "bar"
-FAIL: <!doctype html><p>foo<ul>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <ul>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <ul>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<ul>bar<p>baz
 FAIL: <!doctype html><ul><p>foo</ul>bar
 Expected:
 | <!DOCTYPE html>
@@ -3385,29 +2901,7 @@ Actual:
 |     <isindex>
 |       "x"
 |       "x"
-FAIL: <!doctype html><p>foo<main>bar<p>baz
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|     <main>
-|       "bar"
-|       <p>
-|         "baz"
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "foo"
-|       <main>
-|         "bar"
-|         <p>
-|           "baz"
+PASS: <!doctype html><p>foo<main>bar<p>baz
 FAIL: <!doctype html><main><p>foo</main>bar
 Expected:
 | <!DOCTYPE html>
@@ -5020,8 +4514,8 @@ Actual:
 |       "foo"
 |       <search>
 |         "bar"
-|         <p>
-|           "baz"
+|     <p>
+|       "baz"
 FAIL: <!doctype html><search><p>foo</search>bar
 Expected:
 | <!DOCTYPE html>
@@ -7204,23 +6698,7 @@ Actual:
 |           <div>
 |             "second"
 PASS: Test
-FAIL: <p>One<p>Two
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "One"
-|     <p>
-|       "Two"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       "One"
-|       <p>
-|         "Two"
+PASS: <p>One<p>Two
 FAIL: Line1<br>Line2<br>Line3<br>Line4
 Expected:
 | <html>
@@ -7474,10 +6952,10 @@ Actual:
 |   <body>
 |     <p>
 |       <b>
-|         <div>
-|           <marquee>
-|             <p>
-|             "X"
+|     <div>
+|       <marquee>
+|         <p>
+|         "X"
 FAIL: <script><div></script></div><title><p></title><p><p>
 Expected:
 | <html>
@@ -7497,8 +6975,8 @@ Actual:
 |       <div>
 |         <title>
 |           <p>
-|             <p>
-|               <p>
+|           <p>
+|           <p>
 PASS: <!--><div>--<!-->
 FAIL: <p><hr></p>
 Expected:
@@ -7826,27 +7304,7 @@ Actual:
 |     <b>
 |       <p>
 |         "TEST"
-FAIL: <p id=a><b><p id=b></b>TEST
-Expected:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       id="a"
-|       <b>
-|     <p>
-|       id="b"
-|       "TEST"
-Actual:
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       id="a"
-|       <b>
-|         <p>
-|           id="b"
-|           "TEST"
+PASS: <p id=a><b><p id=b></b>TEST
 PASS: <b id=a><p><b id=b></p></b>TEST
 FAIL: <!DOCTYPE html><title>U-test</title><body><div><p>Test<u></p></div></body>
 Expected:
@@ -8397,7 +7855,7 @@ Actual:
 |               <title>
 |                 <p>
 |                   <body>
-|                     <p>
+|                 <p>
 FAIL: <textarea><p></textarea>
 Expected:
 | <html>
@@ -8445,8 +7903,8 @@ Actual:
 |         <a>
 |           <p>
 |             <a>
-|               <div>
-|                 <a>
+|           <div>
+|             <a>
 FAIL: <head></p><meta><p>
 Expected:
 | <html>
@@ -8570,9 +8028,9 @@ Actual:
 |   <body>
 |     <p>
 |       <b>
-|         <div>
-|           <marquee>
-|             <p>
+|     <div>
+|       <marquee>
+|         <p>
 FAIL: <script></script></div><title></title><p><p>
 Expected:
 | <html>
@@ -8589,7 +8047,7 @@ Actual:
 |     <script>
 |       <title>
 |         <p>
-|           <p>
+|         <p>
 FAIL: <p><hr></p>
 Expected:
 | <html>
@@ -9141,8 +8599,8 @@ Actual:
 |               "bar"
 |               <p>
 |                 "baz"
-|                 <p>
-|                   "quux"
+|               <p>
+|                 "quux"
 FAIL: <!DOCTYPE html><body><table><caption><svg><g>foo</g><g>bar</g>baz</table><p>quux
 Expected:
 | <!DOCTYPE html>
@@ -9205,8 +8663,8 @@ Actual:
 |               "bar"
 |               <p>
 |                 "baz"
-|                 <p>
-|                   "quux"
+|               <p>
+|                 "quux"
 FAIL: <!DOCTYPE html><body><table><tr><td><select><svg><g>foo</g><g>bar</g><p>baz</table><p>quux
 Expected:
 | <!DOCTYPE html>
@@ -9236,8 +8694,8 @@ Actual:
 |                 "bar"
 |                 <p>
 |                   "baz"
-|                   <p>
-|                     "quux"
+|                 <p>
+|                   "quux"
 FAIL: <!DOCTYPE html><body><table><select><svg><g>foo</g><g>bar</g><p>baz</table><p>quux
 Expected:
 | <!DOCTYPE html>
@@ -9264,8 +8722,8 @@ Actual:
 |                 "bar"
 |                 <p>
 |                   "baz"
-|                   <p>
-|                     "quux"
+|                 <p>
+|                   "quux"
 FAIL: <!DOCTYPE html><body></body></html><svg><g>foo</g><g>bar</g><p>baz
 Expected:
 | <!DOCTYPE html>
@@ -9602,7 +9060,7 @@ Actual:
 |     <p>
 |       <svg>
 |         <desc>
-|           <p>
+|     <p>
 FAIL: <!DOCTYPE html><p><svg><title><p>
 Expected:
 | <!DOCTYPE html>
@@ -9621,7 +9079,7 @@ Actual:
 |     <p>
 |       <svg>
 |         <title>
-|           <p>
+|     <p>
 FAIL: <div><svg><path><foreignObject><p></foreignObject><p>
 Expected:
 | <html>
@@ -9642,7 +9100,7 @@ Actual:
 |         <path>
 |           <foreignobject>
 |             <p>
-|               <p>
+|             <p>
 FAIL: <math><mi><div><object><div><span></span></div></object></div></mi><mi>
 Expected:
 | <html>
@@ -10964,13 +10422,13 @@ Actual:
 |                       "eggs"
 |                       <g>
 |                         <foreignobject>
-|                           <p>
-|                             "spam"
-|                             <table>
-|                               <img>
-|                                 <g>
-|                                   "quux"
-|                                   "bar"
+|       <p>
+|         "spam"
+|         <table>
+|           <img>
+|             <g>
+|               "quux"
+|               "bar"
 FAIL: <!DOCTYPE html><body>foo<math><mtext><i>baz</i></mtext><annotation-xml><svg><desc><b>eggs</b></desc><g><foreignObject><P>spam<TABLE><tr><td><img></td></table></foreignObject></g><g>quux</g></svg></annotation-xml></math>bar
 Expected:
 | <!DOCTYPE html>
@@ -15005,8 +14463,8 @@ Actual:
 |     <p>
 |       <math>
 |         <mi>
-|           <p>
-|             <h1>
+|     <p>
+|       <h1>
 FAIL: <!doctype html><p><math><mo><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -15026,8 +14484,8 @@ Actual:
 |     <p>
 |       <math>
 |         <mo>
-|           <p>
-|             <h1>
+|     <p>
+|       <h1>
 FAIL: <!doctype html><p><math><mn><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -15047,8 +14505,8 @@ Actual:
 |     <p>
 |       <math>
 |         <mn>
-|           <p>
-|             <h1>
+|     <p>
+|       <h1>
 FAIL: <!doctype html><p><math><ms><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -15068,8 +14526,8 @@ Actual:
 |     <p>
 |       <math>
 |         <ms>
-|           <p>
-|             <h1>
+|     <p>
+|       <h1>
 FAIL: <!doctype html><p><math><mtext><p><h1>
 Expected:
 | <!DOCTYPE html>
@@ -15089,8 +14547,8 @@ Actual:
 |     <p>
 |       <math>
 |         <mtext>
-|           <p>
-|             <h1>
+|     <p>
+|       <h1>
 FAIL: <!doctype html><frameset></noframes>
 Expected:
 | <!DOCTYPE html>
@@ -17064,36 +16522,8 @@ Actual:
 |   <head>
 |   <body>
 |     <svg>
-FAIL: <!doctype html><p><figcaption>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|     <figcaption>
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <figcaption>
-FAIL: <!doctype html><p><summary>
-Expected:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|     <summary>
-Actual:
-| <!DOCTYPE html>
-| <html>
-|   <head>
-|   <body>
-|     <p>
-|       <summary>
+PASS: <!doctype html><p><figcaption>
+PASS: <!doctype html><p><summary>
 FAIL: <!doctype html><form><table><form>
 Expected:
 | <!DOCTYPE html>
@@ -18005,8 +17435,8 @@ Actual:
 |                     size="4"
 |                     <font>
 |                       color="red"
-|                       <p>
-|                         "X"
+|     <p>
+|       "X"
 FAIL: <p><font size=4><font size=4><font size=4><font size=4><p>X
 Expected:
 | <html>
@@ -18042,8 +17472,8 @@ Actual:
 |             size="4"
 |             <font>
 |               size="4"
-|               <p>
-|                 "X"
+|     <p>
+|       "X"
 FAIL: <p><font size=4><font size=4><font size=4><font size="5"><font size=4><p>X
 Expected:
 | <html>
@@ -18085,8 +17515,8 @@ Actual:
 |               size="5"
 |               <font>
 |                 size="4"
-|                 <p>
-|                   "X"
+|     <p>
+|       "X"
 FAIL: <p><font size=4 id=a><font size=4 id=b><font size=4><font size=4><p>X
 Expected:
 | <html>
@@ -18128,8 +17558,8 @@ Actual:
 |             size="4"
 |             <font>
 |               size="4"
-|               <p>
-|                 "X"
+|     <p>
+|       "X"
 FAIL: <p><b id=a><b id=a><b id=a><b><object><b id=a><b id=a>X</object><p>Y
 Expected:
 | <html>
@@ -21237,8 +20667,8 @@ Actual:
 |               "bar"
 |               <p>
 |                 "baz"
-|                 <p>
-|                   "quux"
+|               <p>
+|                 "quux"
 FAIL: <!DOCTYPE html><body><table><caption><math><mi>foo</mi><mi>bar</mi>baz</table><p>quux
 Expected:
 | <!DOCTYPE html>
@@ -21301,8 +20731,8 @@ Actual:
 |               "bar"
 |               <p>
 |                 "baz"
-|                 <p>
-|                   "quux"
+|               <p>
+|                 "quux"
 FAIL: <!DOCTYPE html><body><table><tr><td><select><math><mi>foo</mi><mi>bar</mi><p>baz</table><p>quux
 Expected:
 | <!DOCTYPE html>
@@ -21332,8 +20762,8 @@ Actual:
 |                 "bar"
 |                 <p>
 |                   "baz"
-|                   <p>
-|                     "quux"
+|                 <p>
+|                   "quux"
 FAIL: <!DOCTYPE html><body><table><select><math><mi>foo</mi><mi>bar</mi><p>baz</table><p>quux
 Expected:
 | <!DOCTYPE html>
@@ -21360,8 +20790,8 @@ Actual:
 |                 "bar"
 |                 <p>
 |                   "baz"
-|                   <p>
-|                     "quux"
+|                 <p>
+|                   "quux"
 FAIL: <!DOCTYPE html><body></body></html><math><mi>foo</mi><mi>bar</mi><p>baz
 Expected:
 | <!DOCTYPE html>
@@ -22580,8 +22010,8 @@ Actual:
 |     <table>
 |       <p>
 |         <a>
-|           <p>
-|             "You should see this text."
+|       <p>
+|         "You should see this text."
 FAIL: <TABLE>
 <TR>
 <CENTER><CENTER><TD></TD></TR><TR>
@@ -23794,4 +23224,4 @@ Actual:
 |         <title>
 |           "foo"
 PASS: </foreignObject><plaintext><div>foo</div>
-Passed 342 of 1745 tree-construction tests.
+Passed 369 of 1745 tree-construction tests.
