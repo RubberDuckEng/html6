@@ -159,6 +159,183 @@ class TreeBuilder {
   // FIXME: Support fragment parsing.
   Element? get adjustedCurrentNode => currentNode;
 
+  Element? shallowestFormattingElementWithName(String name) {
+    // is between the end of the list and the last marker in the list, if any, or the start of the list otherwise, and
+// has the tag name subject.
+  }
+
+  Element? findFurthestedBlock(Element formatingElement) {
+    // Let furthest block be the topmost node in the stack of open elements that is lower in the stack than formatting element, and is an element in the special category. There might not be one.
+  }
+
+  Element parentOpenElement(Element formatingElement) {
+// Let common ancestor be the element immediately above formatting element in the stack of open elements.
+    var index = openElements.indexOf(formatingElement);
+    return openElements[index - 1];
+  }
+
+  StartTagToken tokenForNode(Element element) {
+    // FIXME: This whole method is a hack.
+    // FIXME: No attribute support yet.
+    return StartTagToken(element.tagName);
+  }
+
+  void insertAtTheAppropriatePlace(Node node, {Element? overrideTarget}) {
+    // FIXME: Incomplete
+    // https://html.spec.whatwg.org/multipage/parsing.html#appropriate-place-for-inserting-a-node
+    var parent = overrideTarget ?? currentNode!;
+    parent.appendChild(node);
+  }
+
+  void adoptionAgency(StartTagToken token) {
+    // 1.
+    final String subject = token.tagName;
+    // 2.
+    if (currentNode!.isHTMLElement &&
+        currentNode!.tagName == subject &&
+        !_activeFormattingElements.contains(currentNode)) {
+      openElements.removeLast();
+      return;
+    }
+    // 3.
+    var outerLoopCounter = 0;
+    // 4.
+    while (true) {
+      //4.1
+      if (outerLoopCounter >= 8) {
+        return;
+      }
+      // 4.2
+      ++outerLoopCounter;
+
+      // 4.3
+      final formatingElement = shallowestFormattingElementWithName(subject);
+      if (formatingElement == null) {
+        // then return and instead act as described in the "any other end tag" entry above.
+        return;
+      }
+      // 4.4
+      if (!openElements.contains(formatingElement)) {
+        // This is a parse error
+        _activeFormattingElements.remove(formatingElement);
+        return;
+      }
+      // 4.5
+      if (inScope(formatingElement.tagName)) {
+        // This is a parse error
+        return;
+      }
+
+      // 4.6
+      if (formatingElement != openElements) {
+        // This is a parse error.
+      }
+
+      // 4.7
+      final furthestBlock = findFurthestedBlock(formatingElement);
+
+      // 4.8
+      if (furthestBlock == null) {
+        popUntilPopped(formatingElement);
+        _activeFormattingElements.remove(formatingElement);
+        return;
+      }
+
+      // 4.9
+      final commonAncestor = parentOpenElement(formatingElement);
+
+      // 4.10
+      // Let a bookmark note the position of formatting element in the list of active
+      // formatting elements relative to the elements on either side of it in the list.
+
+      // 4.11
+      var node = furthestBlock;
+      var lastNode = furthestBlock;
+
+      // 4.12
+      var innerLoopCounter = 0;
+
+      // 4.13
+      while (true) {
+        // 4.13.1
+        ++innerLoopCounter;
+
+        // 4.13.2
+        // Let node be the element immediately above node in the stack of open elements,
+        // or if node is no longer in the stack of open elements (e.g. because it got
+        // removed by this algorithm), the element that was immediately above node in
+        // the stack of open elements before node was removed.
+        node = parentOpenElement(node);
+
+        // 4.13.3
+        if (node == formatingElement) {
+          break;
+        }
+
+        final indexInActiveFormatingElements =
+            _activeFormattingElements.indexOf(node);
+
+        // 4.13.4
+        if (innerLoopCounter > 3 && indexInActiveFormatingElements != null) {
+          _activeFormattingElements.removeAt(indexInActiveFormatingElements);
+        }
+
+        // 4.13.5
+        if (indexInActiveFormatingElements == null) {
+          openElements.remove(node);
+          continue;
+        }
+
+        // 4.13.6
+        var newNode = createElementForToken(tokenForNode(node),
+            intendedParent: commonAncestor);
+
+        _activeFormattingElements[indexInActiveFormatingElements] = newNode;
+
+        final indexInOpenElements = openElements.indexOf(node);
+        openElements[indexInOpenElements] = newNode;
+
+        node = newNode;
+
+        // 4.13.7
+        if (lastNode == furthestBlock) {
+          // then move the aforementioned bookmark to be immediately after the new
+          // node in the list of active formatting elements.
+        }
+
+        // 4.13.8
+        node.appendChild(lastNode);
+
+        // 4.13.9
+        lastNode = node;
+      }
+
+      // 4.14
+      insertAtTheAppropriatePlace(lastNode, overrideTarget: commonAncestor);
+
+      final element = createElementForToken(tokenForNode(formatingElement),
+          intendedParent: furthestBlock);
+
+      while (furthestBlock.firstChild != null) {
+        element.appendChild(furthestBlock.firstChild!);
+      }
+
+      furthestBlock.appendChild(element);
+
+      _activeFormattingElements.remove(formatingElement);
+
+      // 4.18
+      // Remove formatting element from the list of active formatting elements, and insert
+      // the new element into the list of active formatting elements at the position of
+      // the aforementioned bookmark.
+
+      // 4.19
+      openElements.remove(formatingElement);
+      final indexOfFurthestBlock = openElements.indexOf(furthestBlock);
+      openElements.insert(indexOfFurthestBlock + 1, element);
+    }
+  }
+
   void pushActiveFormattingElement(Element element) {
     // If there are already three elements in the list of active formatting elements after the last marker, if any, or anywhere in the list if there are no markers, that have the same tag name, namespace, and attributes as element, then remove the earliest such element from the list of active formatting elements. For these purposes, the attributes must be compared as they were when the elements were created by the parser; two elements have the same attributes if all their parsed attributes can be paired such that the two attributes in each pair have identical names, namespaces, and values (the order of the attributes does not matter).
     _activeFormattingElements.add(element);
@@ -232,6 +409,15 @@ class TreeBuilder {
     }
   }
 
+  void popUntilPopped(Element targetElement) {
+    while (true) {
+      var popped = openElements.removeLast();
+      if (popped == targetElement) {
+        return;
+      }
+    }
+  }
+
   void generateImpliedEndTags({String? exceptTag}) {
     final tagsToClose = const <String>[
       ddTag,
@@ -289,7 +475,8 @@ class TreeBuilder {
     return insertForeignElement(token, htmlNamespace);
   }
 
-  Element createElementForToken(StartTagToken token) {
+  Element createElementForToken(StartTagToken token,
+      {Element? intendedParent}) {
     //     If the active speculative HTML parser is not null, then return the result of creating a speculative mock element given given namespace, the tag name of the given token, and the attributes of the given token.
 
     // Otherwise, optionally create a speculative mock element given given namespace, the tag name of the given token, and the attributes of the given token.

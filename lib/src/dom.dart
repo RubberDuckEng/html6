@@ -103,6 +103,8 @@ class Element extends Node {
   final QName qName;
   Map<String, String> attributes = {};
 
+  bool get isHTMLElement => qName.namespace == htmlNamespace;
+
   Element(Document document, this.qName) : super(document);
 
   String get tagName => qName.name;
